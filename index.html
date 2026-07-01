@@ -459,22 +459,25 @@
       }
 
       if (motRow >= 0) {
-        var labels = ['Não atendeu/Não retornou','Contatos Efetivo','Baixado/Outros','Ativo por temporada','Conversão / Venda RCA Externo','Telefone incorreto','Problema Financeiro'];
         var profNames = result.painelGeral.recuperacao.profissionais.map(function(p){return p.profissional;});
-        for (var i = 0; i < labels.length; i++) {
-          var row = grid[motRow + 2 + i];
-          if (!row) continue;
-          var vals = {label:labels[i]};
+        var mi = motRow + 2;
+        while (mi < grid.length) {
+          var row = grid[mi];
+          if (!row || !row[0]) { mi++; continue; }
+          var label = String(row[0]).trim();
+          if (!label) { mi++; continue; }
+          if (label === 'Total') {
+            var tv = {label:'Total'};
+            for (var j = 0; j < profNames.length && j+1 < row.length; j++) tv[profNames[j]] = parseNum(row[j+1]);
+            tv.Total = parseNum(row[profNames.length+1]);
+            result.painelGeral.motivos.push(tv);
+            break;
+          }
+          var vals = {label:label};
           for (var j = 0; j < profNames.length && j+1 < row.length; j++) vals[profNames[j]] = parseNum(row[j+1]);
           vals.Total = parseNum(row[profNames.length+1]);
           result.painelGeral.motivos.push(vals);
-        }
-        var totalRow = grid[motRow + 2 + labels.length];
-        if (totalRow) {
-          var tv = {label:'Total'};
-          for (var j = 0; j < profNames.length && j+1 < totalRow.length; j++) tv[profNames[j]] = parseNum(totalRow[j+1]);
-          tv.Total = parseNum(totalRow[profNames.length+1]);
-          result.painelGeral.motivos.push(tv);
+          mi++;
         }
       }
 

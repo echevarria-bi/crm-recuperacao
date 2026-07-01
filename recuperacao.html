@@ -6,167 +6,292 @@
   <title>Painel de Recuperação - Tele Vendas</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0b0d14;color:#e1e7ef}
     header{background:linear-gradient(135deg,#11131c,#1a1d27);border-bottom:1px solid #1e1b4b;padding:20px 32px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
     header h1{font-size:22px;font-weight:700;background:linear-gradient(135deg,#f59e0b,#fb923c,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.5px}
-    .container{max-width:1400px;margin:0 auto;padding:24px 32px}
-    .upload-area{border:2px dashed #1e1b4b;border-radius:16px;padding:56px;text-align:center;background:linear-gradient(135deg,#11131c,#1a1d27);cursor:pointer;transition:.3s}
+    .container{max-width:1200px;margin:0 auto;padding:24px 32px}
+    .upload-area{display:block;border:2px dashed #1e1b4b;border-radius:16px;padding:56px;text-align:center;background:linear-gradient(135deg,#11131c,#1a1d27);cursor:pointer;transition:.3s}
     .upload-area:hover{border-color:#f59e0b;background:linear-gradient(135deg,#151830,#1e2030)}
     .top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px}
-    .top-bar button{background:#11131c;border:1px solid #1e1b4b;border-radius:10px;padding:9px 18px;cursor:pointer;font-size:14px;color:#9ca3af;transition:.2s}
-    .top-bar button:hover{border-color:#f59e0b;color:#fb923c;background:#151830}
     .top-bar .info{font-size:13px;color:#4a4d6e}
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:24px}
-    .card{background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:14px;padding:24px;transition:.3s}
-    .card:hover{border-color:#f59e0b;transform:translateY(-2px);box-shadow:0 8px 32px rgba(245,158,11,.1)}
-    .card-label{font-size:12px;color:#6b7280;font-weight:600;text-transform:uppercase;letter-spacing:.6px;display:flex;align-items:center}
-    .card-value{font-size:28px;font-weight:800;margin-top:4px;color:#f0f2f8;line-height:1.2}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
-    .chart-box{background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:14px;padding:24px;transition:.2s}
-    .chart-box:hover{border-color:#78350f}
-    .chart-box h2{font-size:13px;font-weight:800;margin-bottom:16px;color:#fcd34d;text-transform:uppercase;letter-spacing:.8px;padding-left:12px;border-left:3px solid #f59e0b}
-    table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
-    th{padding:11px 14px;text-align:left;font-weight:600;color:#f59e0b;font-size:11px;text-transform:uppercase;letter-spacing:.5px;background:linear-gradient(180deg,#151830,#11131c);border-bottom:1px solid #1e1b4b}
-    td{padding:10px 14px;text-align:left;border-bottom:1px solid #11131c;color:#c4c9d4}
-    tbody tr{transition:.1s}
-    tbody tr:hover{background:#151830!important}
-    .text-right{text-align:right}
-    .text-green{color:#34d399}
-    .text-blue{color:#60a5fa}
-    .text-orange{color:#fb923c}
-    .tot-row{font-weight:700}
-    .tot-row td{background:#151830!important;border-top:2px solid #f59e0b;color:#f0f2f8}
-    .prof-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:24px}
-    .prof-card{background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:14px;padding:20px;transition:.3s;text-align:center}
-    .prof-card:hover{border-color:#f59e0b;transform:translateY(-2px)}
-    .prof-card .name{font-size:13px;font-weight:700;color:#fcd34d;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:8px}
-    .prof-card .big-num{font-size:36px;font-weight:800;color:#f0f2f8;line-height:1}
-    .prof-card .meta-label{font-size:11px;color:#6b7280;margin-top:4px}
-    .prof-card .pct{font-size:24px;font-weight:700;margin-top:4px}
-    .pct-bar{height:8px;background:#1e1b4b;border-radius:4px;overflow:hidden;margin-top:8px}
-    .pct-bar-fill{height:100%;border-radius:4px;transition:.3s;min-width:2px}
-    .tab-bar{display:flex;gap:4px;margin-bottom:20px;background:#11131c;border:1px solid #1e1b4b;border-radius:12px;padding:4px;overflow-x:auto}
+    .top-bar label{color:#9ca3af;font-size:13px;font-weight:500}
+    .tabs{display:flex;gap:4px;margin-bottom:20px;background:#11131c;border:1px solid #1e1b4b;border-radius:12px;padding:4px;overflow-x:auto}
     .tab-btn{padding:10px 20px;border:none;border-radius:8px;background:transparent;color:#6b7280;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:6px;white-space:nowrap}
     .tab-btn:hover{color:#fcd34d;background:#1a1d27}
     .tab-btn.active{background:linear-gradient(135deg,#78350f,#451a03);color:#fcd34d;border:1px solid #f59e0b}
-    .daily-pct-bar{height:20px;background:#1e1b4b;border-radius:4px;overflow:hidden;position:relative}
-    .daily-pct-fill{height:100%;border-radius:4px;transition:.3s;min-width:2px}
-    .daily-pct-label{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+    .card{background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:14px;padding:20px 24px;transition:.2s}
+    .card:hover{border-color:#f59e0b;transform:translateY(-1px);box-shadow:0 4px 20px rgba(245,158,11,.08)}
+    .card .label{font-size:11px;color:#6b7280;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:5px}
+    .card .value{font-size:26px;font-weight:800;margin-top:3px;color:#f0f2f8;line-height:1.2}
+    .card .sub{font-size:11px;color:#d1d5db;margin-top:5px}
+    .var-up{color:#34d399}
+    .var-down{color:#f87171}
+    .meta-color{color:#fcd34d}
+    .realizado-color{color:#34d399}
+    .col-ranking{width:48px;text-align:center;color:#4a4d6e}
+    .col-gap{width:80px;text-align:right}
+    .badge-sm{padding:1px 8px;border-radius:3px;font-size:10px;font-weight:700;display:inline-block;white-space:nowrap}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+    .grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px}
+    .grid-5 .card,.cards .card{display:flex;flex-direction:column;justify-content:center}
+    .grid-5 .card .value,.cards .card .value{margin-top:0}
+    @media(max-width:768px){.grid-2,.grid-4,.grid-5,.cards{grid-template-columns:1fr}.container{padding:16px}}
+    .chart-box{background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:14px;padding:20px;margin-bottom:20px;transition:.2s}
+    .chart-box:hover{border-color:#78350f}
+    .chart-box h2{font-size:12px;font-weight:700;margin-bottom:14px;color:#fcd34d;text-transform:uppercase;letter-spacing:.7px;padding-left:10px;border-left:3px solid #f59e0b}
+    .chart-box h2 .sub{font-size:11px;color:#d1d5db;font-weight:400;text-transform:none;letter-spacing:0}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th{padding:10px 12px;text-align:left;font-weight:600;color:#f59e0b;font-size:10px;text-transform:uppercase;letter-spacing:.5px;background:#11131c;border-bottom:1px solid #1e1b4b}
+    td{padding:9px 12px;text-align:left;border-bottom:1px solid #11131c;color:#c4c9d4;font-variant-numeric:tabular-nums}
+    tbody tr:hover{background:#151830!important}
+    tbody tr:nth-child(even){background:#0f1119}
+    .table-wrap{max-height:400px;overflow-y:auto;overflow-x:auto;border:1px solid #1e1b4b;border-radius:10px}
+    .text-right{text-align:right}
+    .text-center{text-align:center}
+    .tot-row td{background:#151830!important;border-top:2px solid #f59e0b;font-weight:700}
     .badge{padding:2px 10px;border-radius:4px;font-size:10px;font-weight:700;display:inline-block}
     .badge-green{background:rgba(52,211,153,.15);color:#34d399}
     .badge-red{background:rgba(239,68,68,.15);color:#f87171}
     .badge-yellow{background:rgba(245,158,11,.15);color:#fbbf24}
-    @media(max-width:768px){.grid-2{grid-template-columns:1fr}.container{padding:16px}}
-    @media print{body{background:#fff!important}header{display:none!important}.top-bar button{display:none!important}.tab-bar{display:none!important}.container{max-width:100%!important;padding:0!important}.chart-box{border:1px solid #ddd!important;background:#fff!important;break-inside:avoid}.chart-box h2{color:#333!important;border-left-color:#f59e0b!important}.card{background:#f8f8f8!important;border:1px solid #ccc!important}.card-label{color:#666!important}.card-value{color:#000!important!important}table{font-size:11px!important}th{color:#000!important!important;background:#f0f0f0!important}td{color:#333!important;border-color:#ddd!important}.tot-row td{background:#e8e8e8!important}.badge,.prof-card{background:#f0f0f0!important}}
+    .pct-bar{height:8px;background:#1e1b4b;border-radius:4px;overflow:hidden;margin-top:6px}
+    .pct-bar-fill{height:100%;border-radius:4px;min-width:2px}
+    .spinner{display:inline-block;width:16px;height:16px;border:2px solid #1e1b4b;border-top-color:#f59e0b;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    footer{text-align:center;padding:16px 20px;font-size:11px;color:#4a4d6e;border-top:1px solid #1e1b4b;margin-top:24px}
+    footer strong{color:#6b7280}
+    @media print{body{background:#fff!important;color:#000!important}header,nav,.top-bar,.tabs,.upload-area,#inputArquivo,footer{display:none!important}.container{max-width:100%!important;padding:0!important}.chart-box{background:#fff!important;border:1px solid #ddd!important;break-inside:avoid}.chart-box h2{color:#333!important;border-left-color:#f59e0b!important}.card{background:#f8f8f8!important;border:1px solid #ccc!important}.card .label{color:#666!important}.card .value{color:#000!important}th{color:#000!important;background:#f0f0f0!important}td{color:#333!important;border-color:#ddd!important}.tot-row td{background:#e8e8e8!important}@page{size:landscape;margin:8mm}}
   </style>
 </head>
 <body>
   <header>
-    <h1><i data-lucide="phone-call" style="display:inline-block;width:22px;height:22px;vertical-align:middle;stroke:#f59e0b;stroke-width:2;margin-right:6px"></i> Painel de Recuperação — Tele Vendas</h1>
-    <span style="font-size:11px;color:#f59e0b;background:#78350f;padding:3px 10px;border-radius:4px;margin-left:12px;font-weight:600">PERÍODO: JUNHO/2026</span>
+    <h1>&#128222; Painel de Recuperação — Tele Vendas</h1>
   </header>
   <div class="container" id="app">
-    <div class="upload-area" id="areaInicial" onclick="abrirArquivo()" ondragover="this.classList.add('dragover');event.preventDefault()" ondragleave="this.classList.remove('dragover')" ondrop="event.preventDefault();this.classList.remove('dragover');if(event.dataTransfer.files[0])processFile(event.dataTransfer.files[0])">
-      <div class="upload-icon" style="font-size:48px;margin-bottom:12px;opacity:.5">📂</div>
-      <div class="upload-text" style="font-size:16px;color:#9ca3af;font-weight:500">Clique para selecionar o arquivo Excel</div>
-      <div class="upload-hint" style="font-size:13px;color:#4a4d6e;margin-top:4px">ou arraste e solte o arquivo Painel CRM - Junho.xlsx aqui</div>
+    <div style="position:relative;width:100%">
+      <input type="file" id="inputArquivo" accept=".xlsx,.xls" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:5;font-size:0" onchange="if(this.files&&this.files[0])processFile(this.files[0])">
+      <div class="upload-area" id="areaInicial" ondragover="this.classList.add('dragover');event.preventDefault()" ondragleave="this.classList.remove('dragover')" ondrop="event.preventDefault();this.classList.remove('dragover');if(event.dataTransfer.files[0])processFile(event.dataTransfer.files[0])">
+        <div style="font-size:48px;margin-bottom:12px;opacity:.5">📂</div>
+        <div style="font-size:16px;color:#9ca3af;font-weight:500">Clique para selecionar o arquivo Excel</div>
+        <div style="font-size:13px;color:#4a4d6e;margin-top:4px">Painel CRM - Junho.xlsx (com aba EVOLUCAO DOS MESES)</div>
+      </div>
     </div>
   </div>
-  <input type="file" id="inputArquivo" accept=".xlsx,.xls" style="display:none">
+  <div id="tabsContainer"></div>
+  <div id="dashContent"></div>
+  <footer id="footer" style="display:none"></footer>
+
   <script>
+    if (typeof Chart !== 'undefined' && typeof ChartDataLabels !== 'undefined') Chart.register(ChartDataLabels);
     var app = document.getElementById('app');
     var inputArquivo = document.getElementById('inputArquivo');
+    var allData = null;
+    var activeTab = 'resumo';
 
-    inputArquivo.addEventListener('change', function(e) {
-      if (e.target.files && e.target.files[0]) {
-        processFile(e.target.files[0]);
-      }
-    });
+    // change handled via inline onchange on the input
 
-    function abrirArquivo() {
-      inputArquivo.click();
-    }
+    function abrirArquivo() { inputArquivo.click(); }
 
     function processFile(file) {
-      app.innerHTML = '<div class="upload-area" style="border-color:#f59e0b;background:#1e1b4b"><div style="font-size:16px;color:#f59e0b">⏳</div><div style="color:#fcd34d;margin-top:8px">Processando arquivo... (' + file.name + ' - ' + (file.size/1024).toFixed(0) + ' KB)</div></div>';
+      inputArquivo.value = '';
+      document.getElementById('areaInicial').innerHTML = '<div style="color:#f59e0b;margin-bottom:6px"><span class="spinner"></span></div><div style="color:#fcd34d;font-size:14px">Processando ' + file.name + '...</div>';
       var reader = new FileReader();
       reader.onload = function(ev) {
         try {
           var data = new Uint8Array(ev.target.result);
           var wb = XLSX.read(data, {type:'array'});
           allData = parseAllSheets(wb);
-          render();
+          document.getElementById('areaInicial').innerHTML = '<div style="font-size:40px;margin-bottom:8px">✅</div><div style="color:#34d399;font-size:15px;font-weight:600">' + file.name + '</div><div style="color:#6b7280;font-size:12px;margin-top:2px">Carregado com sucesso</div>';
+          var now = new Date();
+          document.getElementById('footer').style.display = 'block';
+          document.getElementById('footer').innerHTML = '<strong>' + file.name + '</strong> &middot; ' + now.toLocaleDateString('pt-BR') + ' &agrave;s ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recupera\u00E7\u00E3o';
+          initTabs();
+          switchTab('resumo');
         } catch(err) {
-          app.innerHTML = '<div class="upload-area" style="border-color:#ef444440;background:#1f1010;cursor:pointer" onclick="abrirArquivo()"><div style="font-size:16px;color:#f87171">⚠</div><div style="color:#fca5a5;margin-top:8px">Erro: ' + err.message + '</div><div style="color:#4a4d6e;margin-top:4px;font-size:13px">' + err.stack + '</div></div>';
+          document.getElementById('areaInicial').innerHTML = '<div style="font-size:40px;margin-bottom:8px">⚠</div><div style="color:#f87171;font-size:14px">Erro: ' + err.message + '</div><div style="color:#4a4d6e;font-size:12px;margin-top:4px;cursor:pointer" onclick="abrirArquivo()">Clique para tentar novamente</div>';
         }
-      };
-      reader.onerror = function() {
-        app.innerHTML = '<div class="upload-area" style="border-color:#ef444440;background:#1f1010;cursor:pointer" onclick="abrirArquivo()"><div style="font-size:16px;color:#f87171">⚠</div><div style="color:#fca5a5;margin-top:8px">Erro ao ler o arquivo</div></div>';
       };
       reader.readAsArrayBuffer(file);
     }
 
-    var allData = null;
-
     function parseAllSheets(wb) {
-      var result = {};
-      var pgKey = 'painel geral'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-      var pgSheet = null;
-      for (var si = 0; si < wb.SheetNames.length; si++) {
-        var sn = wb.SheetNames[si];
-        if (sn.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'') == pgKey) { pgSheet = wb.Sheets[sn]; break; }
-      }
-      if (!pgSheet) {
-        throw new Error('Planilha "Painel Geral" nao encontrada. Abas disponiveis: ' + wb.SheetNames.join(', '));
-      }
-      var pg = XLSX.utils.sheet_to_json(pgSheet, {header:1, defval:''});
-      result.painelGeral = parsePainelGeral(pg);
-      var profs = ['Ariane','Camila','Cristielen','Natália','Tatiana'];
-      result.profissionais = {};
+      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, profissionais:{}, faturamentoTotal:0};
       var sheetMap = {};
       for (var si = 0; si < wb.SheetNames.length; si++) {
         var sn = wb.SheetNames[si];
         sheetMap[sn.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')] = wb.Sheets[sn];
       }
-      for (var i = 0; i < profs.length; i++) {
-        var name = profs[i];
+
+      // EVOLUCAO DOS MESES
+      var evolKey = 'evolucao dos meses'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      if (sheetMap[evolKey]) {
+        var grid = XLSX.utils.sheet_to_json(sheetMap[evolKey], {header:1, defval:''});
+        parseEvolucaoMeses(grid, result);
+      }
+
+      // PAINEL GERAL
+      var pgKey = 'painel geral'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      if (sheetMap[pgKey]) {
+        var pg = XLSX.utils.sheet_to_json(sheetMap[pgKey], {header:1, defval:''});
+        parsePainelGeral(pg, result);
+      }
+
+      // PROFISSIONAIS
+      var profNames = ['Ariane','Camila','Cristielen','Natália','Tatiana'];
+      for (var i = 0; i < profNames.length; i++) {
+        var name = profNames[i];
         var key = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-        var ws = sheetMap[key];
-        if (ws) {
-          var grid = XLSX.utils.sheet_to_json(ws, {header:1, defval:''});
+        if (sheetMap[key]) {
+          var grid = XLSX.utils.sheet_to_json(sheetMap[key], {header:1, defval:''});
           var parsed = parseProfessionalSheet(name, grid);
           result.profissionais[name] = parsed;
-          var nameKey = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
           for (var j = 0; j < result.painelGeral.recuperacao.profissionais.length; j++) {
             var pk = result.painelGeral.recuperacao.profissionais[j].profissional.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-            if (pk === nameKey) {
+            if (pk === key) {
               result.painelGeral.recuperacao.profissionais[j].faturamento = parsed.faturamento;
               break;
             }
           }
         }
       }
-      result.faturamentoTotal = profs.reduce(function(s,name){
+      result.faturamentoTotal = profNames.reduce(function(s,name){
         var p = result.profissionais[name];
         return s + (p ? p.faturamento : 0);
       }, 0);
+
       return result;
     }
 
-    function parsePainelGeral(grid) {
-      var data = {recuperacao:{profissionais:[],total:null}, inatividade:[], motivos:[], metaContatos:{profissionais:[],total:null}};
-      var recRow=-1, inatRow=-1, motRow=-1, contRow=-1;
+    function parseEvolucaoMeses(grid, result) {
       for (var r = 0; r < grid.length; r++) {
         var row = grid[r];
         if (!row || !row[0]) continue;
-        var c = String(row[0]).trim().toUpperCase();
-        if (c === 'META RECUPERAÇÃO' || c === 'META RECUPERACAO') recRow = r;
-        if (c === 'FAIXA DE INATIVIDADE') inatRow = r;
-        if (c === 'MOTIVOS') motRow = r;
-        if (c === 'META CONTATOS') contRow = r;
+        var label = String(row[0]).trim();
+        if (label === 'Indicador') {
+          for (var ri = r+1; ri < grid.length; ri++) {
+            var r2 = grid[ri];
+            if (!r2 || !r2[0] || String(r2[0]).trim() === '') break;
+            if (r2[3] === undefined || r2[3] === '') break;
+            var indLabel = String(r2[0]).trim();
+            var isPct = indLabel.indexOf('%') >= 0;
+            result.evolucaoMeses.indicadores.push({
+              label: indLabel,
+              Abril: isPct ? parsePct(r2[1]) : parseNum(r2[1]),
+              Maio: isPct ? parsePct(r2[2]) : parseNum(r2[2]),
+              Junho: isPct ? parsePct(r2[3]) : parseNum(r2[3])
+            });
+          }
+          continue;
+        }
+        if (label === 'Mês' && String(row[1]||'').trim() === 'Conversões') {
+          for (var ri = r+1; ri < grid.length; ri++) {
+            var r2 = grid[ri];
+            if (!r2 || !r2[0] || String(r2[0]).trim() === '') break;
+          }
+          continue;
+        }
+        if (label === 'Mês' && String(row[1]||'').trim() === 'Meta' && String(row[2]||'').trim() === 'Realizado') {
+          for (var ri = r+1; ri < grid.length; ri++) {
+            var r2 = grid[ri];
+            if (!r2 || !r2[0]) break;
+          }
+          continue;
+        }
+        if (label === 'Profissional' && String(row[1]||'').trim() === 'Abril') {
+          var colNames = [];
+          for (var ci = 1; ci < row.length; ci++) { colNames.push(String(row[ci]).trim()); }
+          for (var ri = r+1; ri < grid.length; ri++) {
+            var r2 = grid[ri];
+            if (!r2 || !r2[0] || String(r2[0]).trim() === '') break;
+            var profName = String(r2[0]).trim();
+            var dup = false;
+            for (var di = 0; di < result.evolucaoMeses.valorPorProf.length; di++) {
+              if (result.evolucaoMeses.valorPorProf[di].profissional === profName) { dup = true; break; }
+            }
+            if (dup || profName.toLowerCase() === 'equipe') continue;
+            var entry = {profissional: profName};
+            for (var ci = 0; ci < colNames.length; ci++) {
+              var cv = parseNum(r2[ci+1]);
+              if (cv > 0) entry[colNames[ci]] = cv;
+            }
+            if (colNames.indexOf('Total') >= 0) entry.Total = parseNum(r2[colNames.indexOf('Total')+1]);
+            result.evolucaoMeses.valorPorProf.push(entry);
+          }
+          continue;
+        }
+        if (label === 'RECUPERADOS POR RCA' || label === 'RECUPERADOS POR RAC') {
+          // Extract month labels from title row
+          var rcaMonths = [];
+          var titleRow = grid[r] || [];
+          for (var ci = 1; ci < titleRow.length; ci++) {
+            var tv = String(titleRow[ci]).trim();
+            if (tv.indexOf('Painel ') >= 0) {
+              var m = tv.replace(/.*?Painel\s*(?:CRM\s*)?-?\s*/i,'').trim();
+              if (m) rcaMonths.push(m);
+            }
+          }
+          // Find actual header row (skip empty rows)
+          var hdrRow = r + 1;
+          while (hdrRow < grid.length) {
+            var hr = grid[hdrRow];
+            if (hr && String(hr[0]).trim() !== '' && hr[1] !== undefined && hr[1] !== null && String(hr[1]).trim() !== '') break;
+            hdrRow++;
+          }
+          if (hdrRow < grid.length) {
+            var hdr = grid[hdrRow];
+            // First column is month label, extract it
+            var firstMonth = String(hdr[0]).trim().replace(/.*?Painel\s*(?:CRM\s*)?-?\s*/i,'').trim() || 'Mês';
+            var allMonths = [firstMonth].concat(rcaMonths);
+            var rcaCols = [];
+            var midx = 0;
+            for (var ci = 1; ci < (hdr||[]).length; ci++) {
+              var cn = String(hdr[ci]).trim();
+              if (!cn) continue;
+              var cu = cn.toUpperCase();
+              if (cu === 'META') {
+                rcaCols.push((allMonths[midx]||'Mês') + ' ' + cn);
+                midx++;
+              } else if (cu === 'REAL' || cu === 'REALIZADO') {
+                rcaCols.push((allMonths[midx-1]||'Mês') + ' ' + cn);
+              } else if (cn.indexOf('%') >= 0) {
+                rcaCols.push((allMonths[midx-1]||'Mês') + ' ' + cn);
+              } else {
+                rcaCols.push(cn);
+              }
+            }
+            for (var ri = hdrRow + 1; ri < grid.length; ri++) {
+              var r2 = grid[ri];
+              if (!r2 || !r2[0] || String(r2[0]).trim() === '') break;
+              var profName = String(r2[0]).trim();
+              if (profName.toLowerCase() === 'equipe' || profName.toLowerCase() === 'total') continue;
+              var entry = {profissional: profName};
+              for (var ci = 0; ci < rcaCols.length; ci++) {
+                var cv = rcaCols[ci].indexOf('%') >= 0 ? parsePct(r2[ci+1]) : parseNum(r2[ci+1]);
+                if (cv > 0) entry[rcaCols[ci]] = cv;
+              }
+              result.evolucaoMeses.recuperadosPorProf.push(entry);
+            }
+          }
+          continue;
+        }
+      }
+    }
+
+    function parsePainelGeral(grid, result) {
+      var recRow = -1, motRow = -1, contRow = -1;
+      for (var r = 0; r < grid.length; r++) {
+        var row = grid[r];
+        if (!row || !row[0]) continue;
+        var c = String(row[0]).trim();
+        var cu = c.toUpperCase();
+        if (cu === 'META RECUPERAÇÃO' || cu === 'META RECUPERACAO') recRow = r;
+        if (cu === 'MOTIVOS') motRow = r;
+        if (cu === 'META CONTATOS') contRow = r;
       }
 
       if (recRow >= 0) {
@@ -175,53 +300,32 @@
           var row = grid[r];
           if (!row || !row[0]) { r++; continue; }
           var name = String(row[0]).trim();
-          if (!name || name === 'Total' || name === '' || name === 'Conversão Total') {
-            if (name === 'Total') {
-              data.recuperacao.total = {profissional:'Total', meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4)};
-              r++;
-            }
+          if (!name || name === 'Total' || name === '') {
+            if (name === 'Total') result.painelGeral.recuperacao.total = {profissional:'Total', meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4)};
             break;
           }
-          data.recuperacao.profissionais.push({profissional:name, meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4)});
+          result.painelGeral.recuperacao.profissionais.push({profissional:name, meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4)});
           r++;
-        }
-        for (; r < grid.length; r++) {
-          var row = grid[r];
-          if (!row || !row[0]) continue;
-          var c = String(row[0]).trim().toUpperCase();
-        }
-      }
-
-      if (inatRow >= 0) {
-        var labels = ['45 a 59 Risco','60 a 74 Atenção','75 a 84 Crítico','85 a 90 Urgente'];
-        var profNames = data.recuperacao.profissionais.map(function(p){return p.profissional;});
-        for (var i = 0; i < labels.length; i++) {
-          var row = grid[inatRow + 2 + i];
-          if (!row) continue;
-          var vals = {label:labels[i]};
-          for (var j = 0; j < profNames.length && j+1 < row.length; j++) vals[profNames[j]] = parseNum(row[j+1]);
-          vals.Total = parseNum(row[profNames.length+1]);
-          data.inatividade.push(vals);
         }
       }
 
       if (motRow >= 0) {
         var labels = ['Não atendeu/Não retornou','Contatos Efetivo','Baixado/Outros','Ativo por temporada','Conversão / Venda RCA Externo','Telefone incorreto','Problema Financeiro'];
-        var profNames = data.recuperacao.profissionais.map(function(p){return p.profissional;});
+        var profNames = result.painelGeral.recuperacao.profissionais.map(function(p){return p.profissional;});
         for (var i = 0; i < labels.length; i++) {
           var row = grid[motRow + 2 + i];
           if (!row) continue;
           var vals = {label:labels[i]};
           for (var j = 0; j < profNames.length && j+1 < row.length; j++) vals[profNames[j]] = parseNum(row[j+1]);
           vals.Total = parseNum(row[profNames.length+1]);
-          data.motivos.push(vals);
+          result.painelGeral.motivos.push(vals);
         }
         var totalRow = grid[motRow + 2 + labels.length];
         if (totalRow) {
           var tv = {label:'Total'};
           for (var j = 0; j < profNames.length && j+1 < totalRow.length; j++) tv[profNames[j]] = parseNum(totalRow[j+1]);
           tv.Total = parseNum(totalRow[profNames.length+1]);
-          data.motivos.push(tv);
+          result.painelGeral.motivos.push(tv);
         }
       }
 
@@ -232,16 +336,13 @@
           if (!row || !row[0]) { r++; continue; }
           var name = String(row[0]).trim();
           if (!name || name === 'Total') {
-            if (name === 'Total') {
-              data.metaContatos.total = {profissional:'Total', meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4)};
-            }
+            if (name === 'Total') result.painelGeral.metaContatos.total = {profissional:'Total', meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4)};
             break;
           }
-          data.metaContatos.profissionais.push({profissional:name, meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4)});
+          result.painelGeral.metaContatos.profissionais.push({profissional:name, meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4)});
           r++;
         }
       }
-      return data;
     }
 
     function parseProfessionalSheet(name, grid) {
@@ -265,24 +366,6 @@
           }
           data.conversao.dias = dias;
         }
-        for (var r = convRow + 5; r < Math.min(grid.length, 50); r++) {
-          var row = grid[r];
-          if (!row || !row[0]) continue;
-          var label = String(row[0]).trim();
-          if (label.indexOf('Nao atendeu') >= 0 || label.indexOf('Não atendeu') >= 0) { if (!data.motivos) data.motivos={}; data.motivos['Nao atendeu'] = parseNum(row[1]); }
-          if (label.indexOf('Contato Efetivo') >= 0) { if (!data.motivos) data.motivos={}; data.motivos['Contato Efetivo'] = parseNum(row[1]); }
-          if (label.indexOf('Conversão') >= 0 || label.indexOf('Conversao') >= 0) { if (!data.motivos) data.motivos={}; data.motivos['Conversao'] = parseNum(row[1]); }
-          if (label === 'Qtdade' || label === 'QTDADE') {
-            for (var r2 = r+1; r2 < grid.length; r2++) {
-              var row2 = grid[r2];
-              if (!row2 || !row2[0]) continue;
-              var id = parseInt(row2[0]);
-              if (isNaN(id) || id <= 0) break;
-              data.clientes.push({id:id, nome:String(row2[1]||'').trim(), dataVenda:String(row2[2]||''), valor:parseCurrency(row2[3]), penultimaVenda:String(row2[4]||''), rca:String(row2[5]||''), prazo:parseInt(row2[6])});
-            }
-            break;
-          }
-        }
       }
       if (contRow >= 0) {
         var metaRow = grid[contRow + 1];
@@ -300,360 +383,487 @@
     function parsePct(v) { if (v===''||v===undefined||v===null) return 0; if (typeof v==='number') return Math.round(v*10000)/100; var s=String(v).trim().replace('%','').replace(',','.'); var n=parseFloat(s); return isNaN(n)?0:n; }
     function parseCurrency(v) { if (v===''||v===undefined||v===null) return 0; if (typeof v==='number') return v; return parseFloat(String(v).replace(/R\$\s*/gi,'').replace(/\./g,'').replace(',','.').trim())||0; }
     function parseDias(row, startCol) { var dias=[]; for (var c=startCol; c+1<row.length; c+=2) dias.push({meta:parseNum(row[c]), realizado:parseNum(row[c+1])}); return dias; }
-    function fmtCurr(v) { return 'R$ '+v.toFixed(2).replace('.',',').replace(/(\d)(?=(\d{3})+(?!\d))/g,'$1.'); }
-    var icn = function(n,s){s=s||16;return '<i data-lucide="'+n+'" style="display:inline-block;width:'+s+'px;height:'+s+'px;vertical-align:middle;stroke:currentColor;stroke-width:2;flex-shrink:0;margin-right:4px"></i>';};
+    function fmtCurr(v) { if (v==null||isNaN(v)) return '-'; return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    var icn = function(n,s){s=s||14; return '<i data-lucide="'+n+'" style="display:inline-block;width:'+s+'px;height:'+s+'px;vertical-align:middle;stroke:currentColor;stroke-width:2;flex-shrink:0;margin-right:4px"></i>';};
 
-    var activeTab = 'geral';
-    function render() {
-      var d = allData.painelGeral;
-      var profs = d.recuperacao.profissionais;
-      var days = [1,2,3,5,8,9,10,11,12,15,16,17,18,19,22,23,24,25,26,29,30];
-      app.innerHTML =
-        '<div class="top-bar"><div><span class="info">'+profs.length+' profissionais · Meta: '+(d.recuperacao.total?d.recuperacao.total.meta:'-')+' · Real: '+(d.recuperacao.total?d.recuperacao.total.realizado:'-')+'</span></div><button onclick="window.print()" style="background:#11131c;border:1px solid #1e1b4b;border-radius:10px;padding:9px 18px;cursor:pointer;font-size:13px;color:#9ca3af;transition:.2s;display:flex;align-items:center;gap:6px" onmouseover="this.style.borderColor=\'#f59e0b\';this.style.color=\'#fb923c\';this.style.background=\'#151830\'" onmouseout="this.style.borderColor=\'#1e1b4b\';this.style.color=\'#9ca3af\';this.style.background=\'#11131c\'">'+icn('printer',14)+' Exportar</button></div>' +
-        '<div class="tab-bar">' +
-          '<button class="tab-btn'+(activeTab==='resumo'?' active':'')+'" onclick="switchTab(\'resumo\')">'+icn('layout-dashboard',14)+' Resumo</button>' +
-          '<button class="tab-btn'+(activeTab==='geral'?' active':'')+'" onclick="switchTab(\'geral\')">'+icn('bar-chart-3',14)+' Painel Geral</button>' +
-          '<button class="tab-btn'+(activeTab==='diario'?' active':'')+'" onclick="switchTab(\'diario\')">'+icn('calendar-check',14)+' Diário</button>' +
-          
-          '<button class="tab-btn'+(activeTab==='motivos'?' active':'')+'" onclick="switchTab(\'motivos\')">'+icn('clipboard-list',14)+' Motivos</button>' +
-          
-          
-        '</div>' +
-        '<div id="dashContent"></div>';
-      renderTabContent();
+    function initTabs() {
+      var tabs = ['resumo','geral','diario','motivos'];
+      var labels = ['Resumo','Junho','Diário','Motivos'];
+      var icons = ['layout-dashboard','bar-chart-3','calendar-check','clipboard-list'];
+      var h = '<div class="tabs">';
+      for (var i = 0; i < tabs.length; i++) {
+        h += '<button class="tab-btn' + (tabs[i] === activeTab ? ' active' : '') + '" data-tab="' + tabs[i] + '">' + icn(icons[i],14) + ' ' + labels[i] + '</button>';
+      }
+      h += '</div>';
+      var tc = document.getElementById('tabsContainer');
+      if (tc) tc.innerHTML = h;
+      var btns = document.querySelectorAll('.tab-btn');
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function() {
+          document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+          this.classList.add('active');
+          switchTab(this.getAttribute('data-tab'));
+        });
+      }
+    }
+
+    function switchTab(tab) {
+      activeTab = tab;
+      if (tab === 'resumo') renderResumo();
+      else if (tab === 'geral') renderGeral();
+      else if (tab === 'diario') renderDiario();
+      else if (tab === 'motivos') renderMotivos();
+    }
+
+    function getFilteredProfs() {
+      return allData.painelGeral.recuperacao.profissionais;
+    }
+
+    function criarChartsResumo(evo, mesesArr) {
+      try {
+        var labels = mesesArr;
+        var convData = [], contMeta = [], recupMeta = [], recupReal = [], valorData = [];
+        for (var mi = 0; mi < mesesArr.length; mi++) {
+          var mk = mesesArr[mi];
+          var conv = 0, mc = 0, mr = 0, rr = 0, vr = 0;
+          for (var ii = 0; ii < evo.indicadores.length; ii++) {
+            if (evo.indicadores[ii].label === 'Contatos Realizados') conv = evo.indicadores[ii][mk] || 0;
+            if (evo.indicadores[ii].label === 'Meta de Contatos') mc = evo.indicadores[ii][mk] || 0;
+            if (evo.indicadores[ii].label === 'Meta de Clientes Recuperados') mr = evo.indicadores[ii][mk] || 0;
+            if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' && evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) rr = evo.indicadores[ii][mk] || 0;
+            if (evo.indicadores[ii].label === 'Valor Recuperado' && evo.indicadores[ii].label.indexOf('%') < 0) vr = evo.indicadores[ii][mk] || 0;
+          }
+          convData.push(conv);
+          contMeta.push(mc);
+          recupMeta.push(mr);
+          recupReal.push(rr);
+          valorData.push(vr);
+        }
+        var c1 = document.getElementById('chartEvolucao1');
+        var c2 = document.getElementById('chartEvolucao2');
+        if (c1 && typeof Chart !== 'undefined') new Chart(c1, {
+          type:'bar', data:{labels:labels, datasets:[
+            {label:'Contatos Realizados',data:convData,backgroundColor:'#a78bfa',borderRadius:4},
+            {label:'Meta Contatos',data:contMeta,backgroundColor:'#78350f',borderRadius:4}
+          ]},
+          options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{anchor:'end',align:'end',color:'#9ca3af',font:{size:10,weight:'bold'},offset:0},legend:{position:'bottom',labels:{color:'#9ca3af',padding:10,boxWidth:10,font:{size:11}}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}
+        });
+        if (c2 && typeof Chart !== 'undefined') new Chart(c2, {
+          type:'bar', data:{labels:labels, datasets:[
+            {label:'Meta Recuperados',data:recupMeta,backgroundColor:'#78350f',borderRadius:4},
+            {label:'Realizado Recuperados',data:recupReal,backgroundColor:'#34d399',borderRadius:4},
+            {label:'Valor (R$)',type:'line',data:valorData,borderColor:'#fcd34d',backgroundColor:'transparent',borderWidth:3,pointRadius:5,pointBackgroundColor:'#fcd34d',tension:.2,yAxisID:'y1'}
+          ]},
+          options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{color:function(ctx){return ctx.dataset.type==='line'?'#fcd34d':'#9ca3af';},font:{size:9,weight:'bold'},offset:0,formatter:function(v,ctx){if(ctx.dataset.type==='line')return'R$ '+(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2});return v;},anchor:function(ctx){return ctx.dataset.type==='line'?'end':'end';},align:function(ctx){return ctx.dataset.type==='line'?'top':'end';}},legend:{position:'bottom',labels:{color:'#9ca3af',padding:10,boxWidth:10,font:{size:11}}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,position:'left',ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'},title:{display:true,text:'Clientes',color:'#6b7280'}},y1:{position:'right',beginAtZero:true,ticks:{color:'#6b7280'},grid:{display:false},title:{display:true,text:'Valor (R$)',color:'#6b7280'}}}}
+        });
+      } catch(e) { console.error(e); }
       try { lucide.createIcons(); } catch(e) {}
     }
 
-    function switchTab(tab) { activeTab = tab; render(); }
-
-    function renderTabContent() {
-      var el = document.getElementById('dashContent');
-      if (!el) return;
-      if (activeTab === 'resumo') renderResumo();
-      else if (activeTab === 'geral') renderGeral();
-      else if (activeTab === 'diario') renderDiario();
-      
-      else if (activeTab === 'motivos') renderMotivos();
-
-
-    }
-
     function renderResumo() {
-      var d = allData.painelGeral;
-      var profs = d.recuperacao.profissionais;
-      var total = d.recuperacao.total;
-      var totalPct = total ? total.pct : (profs.reduce(function(s,p){return s+p.realizado;},0) / Math.max(profs.reduce(function(s,p){return s+p.meta;},0),1) * 100);
-      var fatTotal = profs.reduce(function(s,p){return s+(p.faturamento||0);},0);
-      var totalClientes = 0, totalContReal = 0;
-      var profKeys = Object.keys(allData.profissionais);
-      for (var i = 0; i < profKeys.length; i++) {
-        var pd = allData.profissionais[profKeys[i]];
-        if (pd && pd.clientes) totalClientes += pd.clientes.length;
-        if (pd && pd.contatos) totalContReal += pd.contatos.realizado || 0;
-      }
+      var evo = allData.evolucaoMeses;
+      var pg = allData.painelGeral;
+      var profs = pg.recuperacao.profissionais;
+      var mesesArr = ['Abril','Maio','Junho'];
       var html = '';
-      html += '<div class="cards">' +
-        '<div class="card" style="border-color:#f59e0b" title="Meta de recuperação do período"><div class="card-label">Meta Total</div><div class="card-value" style="color:#fbbf24">'+(total?total.meta:0)+'</div></div>' +
-        '<div class="card" style="border-color:#34d399" title="Total de recuperações realizadas"><div class="card-label">Realizado</div><div class="card-value" style="color:#34d399">'+(total?total.realizado:0)+'</div></div>' +
-        '<div class="card" title="Percentual de atingimento da meta"><div class="card-label">% Atingido</div><div class="card-value" style="color:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+'">'+totalPct.toFixed(1)+'%</div></div>' +
-        '<div class="card" style="border-color:#10b981" title="Valor total faturado com recuperação"><div class="card-label">Total Recuperado</div><div class="card-value" style="color:#34d399">'+fmtCurr(fatTotal)+'</div></div>' +
-        '<div class="card" style="border-color:#a78bfa" title="Total de clientes que compraram"><div class="card-label">Clientes</div><div class="card-value" style="color:#a78bfa">'+totalClientes+'</div></div>' +
-      '</div>';
-      html += '<div style="text-align:center;padding:12px;color:#4a4d6e;font-size:12px">Dados consolidados de todas as vendedoras · Período: Junho/2026</div>';
+
+      var contatoData = [], recupData = [], fatData = [];
+      for (var mi = 0; mi < mesesArr.length; mi++) {
+        var mk = mesesArr[mi];
+        var c = 0, r = 0, f = 0;
+        for (var ii = 0; ii < evo.indicadores.length; ii++) {
+          if (evo.indicadores[ii].label === 'Contatos Realizados') c = evo.indicadores[ii][mk] || 0;
+          if ((evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' || evo.indicadores[ii].label === 'Clientes Recuperados') && evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) r = evo.indicadores[ii][mk] || 0;
+          if (evo.indicadores[ii].label === 'Valor Recuperado' && evo.indicadores[ii].label.indexOf('%') < 0) f = evo.indicadores[ii][mk] || 0;
+        }
+        contatoData.push(c);
+        recupData.push(r);
+        fatData.push(f);
+      }
+
+      // Get "Realizado de Clientes Recuperados" total for card
+      var recupTotal = 0;
+      for (var ii = 0; ii < evo.indicadores.length; ii++) {
+        if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' || evo.indicadores[ii].label === 'Clientes Recuperados') {
+          if (evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) {
+            recupTotal = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0);
+          }
+        }
+      }
+
+      var totalFaturamento = 0;
+      for (var mi = 0; mi < mesesArr.length; mi++) { totalFaturamento += fatData[mi]; }
+      var totalConv = 0;
+      for (var ii = 0; ii < evo.indicadores.length; ii++) {
+        if (evo.indicadores[ii].label === 'Convers\u00F5es Totais' || evo.indicadores[ii].label === 'Conversões Totais' || evo.indicadores[ii].label === 'Conversoes Totais') {
+          totalConv = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0);
+        }
+      }
+
+      // CARDS
+      html += '<div class="cards">';
+      html += '<div class="card"><div class="label">' + icn('phone',12) + ' Conversões Totais (RCA Externo + Televendas)</div><div class="value">' + totalConv + '</div></div>';
+      html += '<div class="card"><div class="label">' + icn('users',12) + ' Clientes Recuperados (Televendas)</div><div class="value">' + recupTotal + '</div></div>';
+      html += '<div class="card"><div class="label">' + icn('dollar-sign',12) + ' Faturamento Total</div><div class="value">' + fmtCurr(totalFaturamento) + '</div></div>';
+      html += '</div>';
+
+      // CHARTS
+      html += '<div class="grid-2">';
+      html += '<div class="chart-box"><h2>Contatos Realizados <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal de contatos vs meta</span></h2><canvas id="chartEvolucao1" style="max-height:220px"></canvas></div>';
+      html += '<div class="chart-box"><h2>Recuperados &amp; Valor <span class="sub">&rarr; Meta, realizado e valor recuperado por m\u00EAs</span></h2><canvas id="chartEvolucao2" style="max-height:220px"></canvas></div>';
+      html += '</div>';
+
+      // VALOR POR PROFISSIONAL
+      if (evo.valorPorProf.length > 0) {
+        var vpSorted = evo.valorPorProf.slice().sort(function(a,b){return (b.Total||0)-(a.Total||0);});
+        var vpRows = '';
+        for (var i = 0; i < vpSorted.length; i++) {
+          var p = vpSorted[i];
+          var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
+          vpRows += '<tr><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600">' + p.profissional + '</td><td class="text-right realizado-color">' + (p.Abril ? fmtCurr(p.Abril) : '-') + '</td><td class="text-right realizado-color">' + (p.Maio ? fmtCurr(p.Maio) : '-') + '</td><td class="text-right realizado-color">' + (p.Junho ? fmtCurr(p.Junho) : '-') + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + (p.Total ? fmtCurr(p.Total) : '-') + '</td></tr>';
+        }
+        html += '<div class="chart-box"><h2>Valor Recuperado por Mês <span class="sub">&rarr; Faturamento por televendedora em cada mês</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th class="text-right" title="Valor recuperado em Abril">Abril</th><th class="text-right" title="Valor recuperado em Maio">Maio</th><th class="text-right" title="Valor recuperado em Junho">Junho</th><th class="text-right" title="Valor total recuperado">Total</th></tr></thead><tbody>' + vpRows + '</tbody></table></div></div>';
+      }
+
+      // RECUPERADOS POR PROFISSIONAL (from RECUPERADOS POR RCA)
+      if (evo.recuperadosPorProf.length > 0) {
+        var rpCols = [];
+        var colSeen = {};
+        for (var ei = 0; ei < evo.recuperadosPorProf.length; ei++) {
+          for (var rk in evo.recuperadosPorProf[ei]) {
+            if (rk !== 'profissional' && !colSeen[rk] && rk.indexOf('%') < 0) { colSeen[rk] = true; rpCols.push(rk); }
+          }
+        }
+        // Group columns as (META, REAL) pairs
+        var rpPairs = [];
+        for (var rci = 0; rci + 1 < rpCols.length; rci += 2) {
+          rpPairs.push({meta: rpCols[rci], real: rpCols[rci+1]});
+        }
+        var rpSorted = evo.recuperadosPorProf.slice().sort(function(a,b){
+          var av = rpCols.length > 0 ? (a[rpCols[0]]||0) : 0;
+          var bv = rpCols.length > 0 ? (b[rpCols[0]]||0) : 0;
+          return bv - av;
+        });
+        var rpRows = '';
+        for (var i = 0; i < rpSorted.length; i++) {
+          var p = rpSorted[i];
+          var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
+          rpRows += '<tr><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600">' + p.profissional + '</td>';
+          for (var pi = 0; pi < rpPairs.length; pi++) {
+            var mv = p[rpPairs[pi].meta];
+            var rv = p[rpPairs[pi].real];
+            var gap = (rv||0) - (mv||0);
+            var gapColor = gap >= 0 ? '#34d399' : '#f87171';
+            rpRows += '<td class="text-right meta-color">'+(mv!==undefined?mv:'')+'</td><td class="text-right realizado-color">'+(rv!==undefined?rv:'')+'</td><td class="text-right col-gap" style="color:'+gapColor+'">'+(gap>0?'+':'')+gap+'</td>';
+          }
+          rpRows += '</tr>';
+        }
+        var rpHtml = '<div class="chart-box"><h2>Recuperados por Televendedora <span class="sub">&rarr; Qtdade de clientes recuperados</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th>';
+        for (var pi = 0; pi < rpPairs.length; pi++) {
+          rpHtml += '<th class="text-right meta-color" title="Meta de clientes recuperados">'+rpPairs[pi].meta+'</th><th class="text-right realizado-color" title="Clientes efetivamente recuperados">'+rpPairs[pi].real+'</th><th class="text-right col-gap" style="color:#6b7280;font-size:10px" title="Diferença: Realizado − Meta">Gap</th>';
+        }
+        rpHtml += '</tr></thead><tbody>' + rpRows + '</tbody></table></div></div>';
+        html += rpHtml;
+      }
+
+      
       document.getElementById('dashContent').innerHTML = html;
+
+      setTimeout(function() { criarChartsResumo(evo, mesesArr); }, 100);
     }
 
     function renderGeral() {
-      var d = allData.painelGeral;
-      var profs = d.recuperacao.profissionais.slice().sort(function(a,b){
-        var ap = a.pct > 0 ? a.pct : (a.meta > 0 ? (a.realizado/a.meta*100) : 0);
-        var bp = b.pct > 0 ? b.pct : (b.meta > 0 ? (b.realizado/b.meta*100) : 0);
-        return bp - ap;
-      });
-      var total = d.recuperacao.total;
-      var totalPct = total ? total.pct : (profs.reduce(function(s,p){return s+p.realizado;},0) / Math.max(profs.reduce(function(s,p){return s+p.meta;},0),1) * 100);
-      var days = [1,2,3,5,8,9,10,11,12,15,16,17,18,19,22,23,24,25,26,29,30];
+      var pg = allData.painelGeral;
+      var evo = allData.evolucaoMeses;
 
-      function badge(pct) {
-        if (pct >= 100) return '<span style="padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;background:#34d39922;color:#34d399">Batida ✓</span>';
-        if (pct >= 80) return '<span style="padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;background:#fbbf2422;color:#fbbf24">Parcial ⚠</span>';
-        return '<span style="padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;background:#f8717122;color:#f87171">Abaixo 🔴</span>';
+      // Build June lookup from RECUPERADOS POR RCA
+      var rpMap = {};
+      for (var ri = 0; ri < evo.recuperadosPorProf.length; ri++) {
+        var r = evo.recuperadosPorProf[ri];
+        rpMap[r.profissional] = {
+          meta: r['Junho META'] || 0,
+          real: r['Junho REAL'] || 0
+        };
       }
+      // Build June faturamento lookup from VALOR RECUPERADO POR MÊS
+      var fatMap = {};
+      for (var fi = 0; fi < evo.valorPorProf.length; fi++) {
+        var f = evo.valorPorProf[fi];
+        fatMap[f.profissional] = f.Junho || 0;
+      }
+
+      // Merge with Painel Geral data (for dias) and compute June-only values
+      var profsData = [];
+      for (var pi = 0; pi < pg.recuperacao.profissionais.length; pi++) {
+        var p = pg.recuperacao.profissionais[pi];
+        var name = p.profissional;
+        var jMeta = (rpMap[name] && rpMap[name].meta) || 0;
+        var jReal = (rpMap[name] && rpMap[name].real) || 0;
+        var jFat = fatMap[name] || 0;
+        var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
+        profsData.push({
+          profissional: name,
+          meta: jMeta,
+          realizado: jReal,
+          pct: jPct,
+          faturamento: jFat,
+          dias: p.dias
+        });
+      }
+
+      var totalMeta = profsData.reduce(function(s,p){return s+p.meta;},0);
+      var totalReal = profsData.reduce(function(s,p){return s+p.realizado;},0);
+      var totalFat = profsData.reduce(function(s,p){return s+p.faturamento;},0);
+      var totalPct = totalMeta > 0 ? (totalReal / totalMeta * 100) : 0;
+
+      profsData.sort(function(a,b){return (b.pct||0) - (a.pct||0);});
 
       var html = '';
-      var fatTotalCards = profs.reduce(function(s,p){return s+(p.faturamento||0);},0);
-      html += '<div class="cards">' +
-        '<div class="card" style="border-color:#f59e0b" title="Meta de recuperação do período"><div class="card-label">Meta Total</div><div class="card-value" style="color:#fbbf24">'+(total?total.meta:0)+'</div></div>' +
-        '<div class="card" style="border-color:#34d399" title="Total de recuperações realizadas"><div class="card-label">Realizado</div><div class="card-value" style="color:#34d399">'+(total?total.realizado:0)+'</div></div>' +
-        '<div class="card" title="Percentual de atingimento da meta"><div class="card-label">% Atingido</div><div class="card-value" style="color:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+'">'+totalPct.toFixed(1)+'%</div></div>' +
-        '<div class="card" style="border-color:#10b981" title="Valor total faturado com recuperação"><div class="card-label">Total Recuperado</div><div class="card-value" style="color:#34d399">'+fmtCurr(fatTotalCards)+'</div></div>' +
-      '</div>';
 
-      html += '<div class="chart-box" style="margin-bottom:24px"><h2>Desempenho por Profissional <span style="font-size:10px;color:#6b7280;font-weight:400;text-transform:none;letter-spacing:0">— ordenado por %</span></h2><div style="overflow-x:auto"><table style="min-width:950px;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:12px 16px;border-bottom:2px solid #f59e0b;background:#11131c">#</th><th style="text-align:left;padding:12px 16px;border-bottom:2px solid #f59e0b;background:#11131c">Profissional</th><th style="text-align:center;padding:12px 4px;border-bottom:2px solid #f59e0b;background:#11131c;font-size:10px;color:#6b7280">Status</th><th colspan="3" style="text-align:center;padding:12px 8px;border-bottom:2px solid #f59e0b;background:linear-gradient(180deg,#1a1d27,#11131c);color:#fb923c">Recuperação</th><th style="padding:0;width:1px;background:#11131c;border-bottom:2px solid #f59e0b"></th><th style="text-align:center;padding:12px 16px;border-bottom:2px solid #f59e0b;background:linear-gradient(180deg,#1a1d27,#11131c);color:#34d399">Faturamento</th></tr><tr><th style="text-align:left;padding:8px 16px;font-size:10px;color:#6b7280;background:#11131c"></th><th style="text-align:left;padding:8px 16px;font-size:10px;color:#6b7280;background:#11131c"></th><th style="text-align:center;padding:8px 4px;font-size:10px;color:#6b7280;background:#11131c"></th><th style="text-align:center;padding:8px 6px;font-size:10px;color:#6b7280;background:#11131c">Meta</th><th style="text-align:center;padding:8px 6px;font-size:10px;color:#6b7280;background:#11131c">Realizado</th><th style="text-align:center;padding:8px 6px;font-size:10px;color:#6b7280;background:#11131c">%</th><th style="text-align:center;padding:8px 16px;font-size:10px;color:#6b7280;background:#11131c"></th></tr></thead><tbody>';
-      for (var i = 0; i < profs.length; i++) {
-        var p = profs[i];
+      function badge(pct) {
+        if (pct >= 100) return '<span class="badge badge-green">Batida ✓</span>';
+        if (pct >= 80) return '<span class="badge badge-yellow">Parcial &#9888;</span>';
+        return '<span class="badge badge-red">Abaixo &#128308;</span>';
+      }
+
+      html += '<div class="grid-4">';
+      html += '<div class="card"><div class="label">' + icn('crosshair',12) + ' Meta Total</div><div class="value">' + totalMeta + '</div></div>';
+      html += '<div class="card"><div class="label">' + (totalReal >= totalMeta ? '&#9989;' : '&#10060;') + ' Realizado</div><div class="value">' + totalReal + '</div></div>';
+      html += '<div class="card"><div class="label">' + (totalPct >= 100 ? '&#9989;' : '&#10060;') + ' % Atingido</div><div class="value">' + totalPct.toFixed(1) + '%</div></div>';
+      html += '<div class="card"><div class="label">&#x1F4B0; Total Recuperado</div><div class="value">' + fmtCurr(totalFat) + '</div></div>';
+      html += '</div>';
+
+      html += '<div class="chart-box"><h2>Desempenho por Televendedora <span class="sub">&rarr; Recupera\u00E7\u00E3o de clientes em Junho</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th style="text-align:center">Status</th><th class="text-right meta-color" title="Meta de clientes recuperados">Meta</th><th class="text-right realizado-color" title="Clientes recuperados até o momento">Realizado</th><th class="text-right" title="Percentual de atingimento da meta">%</th><th class="text-right" title="Valor total faturado">Faturamento</th></tr></thead><tbody>';
+      for (var i = 0; i < profsData.length; i++) {
+        var p = profsData[i];
         var bg = i%2===0?'#0b0d14':'#11131c';
-        var recPct = p.pct > 0 ? p.pct : (p.meta > 0 ? (p.realizado/p.meta*100) : 0);
+        var recPct = p.pct;
         var recColor = recPct >= 100 ? '#34d399' : recPct >= 80 ? '#fbbf24' : '#f87171';
-        html += '<tr><td style="background:'+bg+';padding:10px 16px;text-align:center;color:#4a4d6e;font-size:11px;border-bottom:1px solid #1e1b4b">'+(i+1)+'</td>' +
-          '<td style="background:'+bg+';padding:10px 16px;font-weight:600;color:#fcd34d;border-bottom:1px solid #1e1b4b">'+icn('user',14)+' '+p.profissional+'</td>' +
-          '<td style="background:'+bg+';padding:10px 4px;text-align:center;border-bottom:1px solid #1e1b4b">'+badge(recPct)+'</td>' +
-          '<td style="background:'+bg+';padding:10px 6px;text-align:center;color:#6b7280;border-bottom:1px solid #1e1b4b">'+p.meta+'</td>' +
-          '<td style="background:'+bg+';padding:10px 6px;text-align:center;font-weight:700;color:#f0f2f8;border-bottom:1px solid #1e1b4b">'+p.realizado+'</td>' +
-          '<td style="background:'+bg+';padding:10px 6px;text-align:center;font-weight:700;color:'+recColor+';border-bottom:1px solid #1e1b4b"><div style="display:flex;align-items:center;gap:6px;justify-content:center"><span>'+recPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#1e1b4b;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(recPct,100)+'%;background:'+recColor+';border-radius:3px;min-width:2px"></div></div></div></td>' +
-          '<td style="background:'+bg+';padding:10px 16px;text-align:center;font-weight:700;color:#34d399;border-bottom:1px solid #1e1b4b">'+fmtCurr(p.faturamento||0)+'</td></tr>';
+        var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
+        html += '<tr style="background:'+bg+'"><td class="col-ranking">'+medal+(i+1)+'</td><td style="font-weight:600;color:#fcd34d">'+icn('user',14)+' '+p.profissional+'</td><td style="text-align:center">'+badge(recPct)+'</td><td class="text-right meta-color">'+p.meta+'</td><td class="text-right realizado-color" style="font-weight:700">'+p.realizado+'</td><td class="text-right" style="font-weight:700;color:'+recColor+'"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span>'+recPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#1e1b4b;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(recPct,100)+'%;background:'+recColor+';border-radius:3px;min-width:2px"></div></div></div></td><td class="text-right realizado-color" style="font-weight:700">'+fmtCurr(p.faturamento)+'</td></tr>';
       }
-      var fatTotal = profs.reduce(function(s,p){return s+(p.faturamento||0);},0);
-      html += '<tr class="tot-row"><td style="padding:12px 16px;text-align:center;border-top:2px solid #f59e0b;background:#151830"></td><td style="padding:12px 16px;border-top:2px solid #f59e0b">'+icn('users',14)+' Total</td>' +
-        '<td style="padding:12px 4px;text-align:center;border-top:2px solid #f59e0b">'+badge(total?total.pct:0)+'</td>' +
-        '<td style="padding:12px 6px;text-align:center;border-top:2px solid #f59e0b">'+(total?total.meta:0)+'</td>' +
-        '<td style="padding:12px 6px;text-align:center;font-weight:700;border-top:2px solid #f59e0b">'+(total?total.realizado:0)+'</td>' +
-        '<td style="padding:12px 6px;text-align:center;font-weight:700;color:'+(total?total.pct>=100?'#34d399':total.pct>=80?'#fbbf24':'#f87171':'#6b7280')+';border-top:2px solid #f59e0b">'+(total?total.pct.toFixed(1):0)+'%</td>' +
-        '<td style="padding:12px 16px;text-align:center;font-weight:700;color:#6ee7b7;border-top:2px solid #f59e0b">'+fmtCurr(fatTotal)+'</td></tr>';
+      html += '<tr class="tot-row"><td class="col-ranking"></td><td>'+icn('users',14)+' Total</td><td style="text-align:center">'+badge(totalPct)+'</td><td class="text-right meta-color">'+totalMeta+'</td><td class="text-right realizado-color">'+totalReal+'</td><td class="text-right" style="font-weight:700;color:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+'"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span>'+totalPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#1e1b4b;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(totalPct,100)+'%;background:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+';border-radius:3px;min-width:2px"></div></div></div></td><td class="text-right realizado-color" style="font-weight:700">'+fmtCurr(totalFat)+'</td></tr>';
       html += '</tbody></table></div></div>';
 
-      html += '<div style="display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap;font-size:11px;color:#6b7280;align-items:center"><span>Legenda:</span><span style="display:flex;align-items:center;gap:4px"><span style="padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;background:#34d39922;color:#34d399">Batida ✓</span> ≥100%</span><span style="display:flex;align-items:center;gap:4px"><span style="padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;background:#fbbf2422;color:#fbbf24">Parcial ⚠</span> 80–99%</span><span style="display:flex;align-items:center;gap:4px"><span style="padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;background:#f8717122;color:#f87171">Abaixo 🔴</span> &lt;80%</span></div>';
-      html += '<div class="grid-2" style="grid-template-columns:1.5fr 1fr"><div class="chart-box"><h2>Meta × Realizado por Profissional</h2><canvas id="chartRecProf" style="max-height:280px"></canvas></div><div class="chart-box" style="display:flex;flex-direction:column"><h2>% de Atingimento</h2><canvas id="chartRecPct" style="max-height:280px;flex:1;width:100%"></canvas></div></div>';
-      
-
-      html += '<div class="chart-box" style="margin-bottom:24px"><h2>Motivos / Resultados dos Contatos</h2><div style="overflow-x:auto"><table><thead><tr><th>Motivo</th>';
-      for (var i = 0; i < profs.length; i++) html += '<th class="text-right">'+profs[i].profissional+'</th>';
-      html += '<th class="text-right">Total</th></tr></thead><tbody>';
-      for (var i = 0; i < d.motivos.length; i++) {
-        var row = d.motivos[i];
-        html += '<tr><td style="font-weight:600">'+row.label+'</td>';
-        for (var j = 0; j < profs.length; j++) html += '<td class="text-right">'+(row[profs[j].profissional]||0)+'</td>';
-        html += '<td class="text-right" style="font-weight:700">'+(row.Total||0)+'</td></tr>';
+      // CONTATOS table
+      var contProf = pg.metaContatos && pg.metaContatos.profissionais ? pg.metaContatos.profissionais.slice() : [];
+      if (contProf.length > 0) {
+        contProf.sort(function(a,b){
+          var ap = a.pct > 0 ? a.pct : (a.meta > 0 ? (a.realizado/a.meta*100) : 0);
+          var bp = b.pct > 0 ? b.pct : (b.meta > 0 ? (b.realizado/b.meta*100) : 0);
+          return bp - ap;
+        });
+        var contTotal = pg.metaContatos.total || {meta:0, realizado:0, pct:0};
+        var contTotalPct = contTotal.pct > 0 ? contTotal.pct : (contTotal.meta > 0 ? (contTotal.realizado/contTotal.meta*100) : 0);
+        html += '<div class="chart-box"><h2>Contatos por Televendedora <span class="sub">&rarr; Meta x Realizado de contatos em Junho</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th style="text-align:center">Status</th><th class="text-right meta-color" title="Meta de contatos">Meta</th><th class="text-right realizado-color" title="Contatos realizados">Realizado</th><th class="text-right" title="Percentual de atingimento da meta">%</th></tr></thead><tbody>';
+        for (var ci = 0; ci < contProf.length; ci++) {
+          var cp = contProf[ci];
+          var cMeta = cp.meta;
+          var cReal = cp.realizado;
+          var cPct = cp.pct > 0 ? cp.pct : (cMeta > 0 ? (cReal/cMeta*100) : 0);
+          var cColor = cPct >= 100 ? '#34d399' : cPct >= 80 ? '#fbbf24' : '#f87171';
+          var cMedal = ci === 0 ? '&#x1F947; ' : ci === 1 ? '&#x1F948; ' : ci === 2 ? '&#x1F949; ' : '';
+          html += '<tr style="background:'+(ci%2===0?'#0b0d14':'#11131c')+'"><td class="col-ranking">'+cMedal+(ci+1)+'</td><td style="font-weight:600;color:#fcd34d">'+icn('user',14)+' '+cp.profissional+'</td><td style="text-align:center">'+badge(cPct)+'</td><td class="text-right meta-color">'+cMeta+'</td><td class="text-right realizado-color" style="font-weight:700">'+cReal+'</td><td class="text-right" style="font-weight:700;color:'+cColor+'"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span>'+cPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#1e1b4b;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(cPct,100)+'%;background:'+cColor+';border-radius:3px;min-width:2px"></div></div></div></td></tr>';
+        }
+        html += '<tr class="tot-row"><td class="col-ranking"></td><td>'+icn('users',14)+' Total</td><td style="text-align:center">'+badge(contTotalPct)+'</td><td class="text-right meta-color">'+(contTotal.meta||0)+'</td><td class="text-right realizado-color" style="font-weight:700">'+(contTotal.realizado||0)+'</td><td class="text-right" style="font-weight:700;color:'+(contTotalPct>=100?'#34d399':contTotalPct>=80?'#fbbf24':'#f87171')+'">'+contTotalPct.toFixed(1)+'%</td></tr>';
+        html += '</tbody></table></div></div>';
       }
-      html += '</tbody></table></div></div>';
+
+      html += '<div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;font-size:11px;color:#6b7280;align-items:center"><span>Legenda:</span><span><span class="badge badge-green">Batida ✓</span> ≥100%</span><span><span class="badge badge-yellow">Parcial &#9888;</span> 80–99%</span><span><span class="badge badge-red">Abaixo &#128308;</span> &lt;80%</span></div>';
+
+      html += '<div class="grid-2"><div class="chart-box"><h2>Meta x Realizado <span class="sub">&rarr; Comparativo por televendedora (Junho)</span></h2><canvas id="chartRecProf" style="max-height:220px"></canvas></div><div class="chart-box"><h2>% Atingimento <span class="sub">&rarr; Percentual por televendedora (Junho)</span></h2><canvas id="chartRecPct" style="max-height:220px"></canvas></div></div>';
 
       document.getElementById('dashContent').innerHTML = html;
 
       setTimeout(function() {
         try {
           new Chart(document.getElementById('chartRecProf'), {
-            type:'bar', data:{labels:profs.map(function(p){return p.profissional;}), datasets:[
-              {label:'Meta',data:profs.map(function(p){return p.meta;}),backgroundColor:'#78350f',borderRadius:4},
-              {label:'Realizado',data:profs.map(function(p){return p.realizado;}),backgroundColor:'#f59e0b',borderRadius:4}
+            type:'bar', data:{labels:profsData.map(function(p){return p.profissional;}), datasets:[
+              {label:'Meta',data:profsData.map(function(p){return p.meta;}),backgroundColor:'#78350f',borderRadius:4},
+              {label:'Realizado',data:profsData.map(function(p){return p.realizado;}),backgroundColor:'#f59e0b',borderRadius:4}
             ]},
-            options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}
+            options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{color:'#9ca3af',font:{size:9,weight:'bold'},anchor:'end',align:'end'},legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}
           });
-          var pcts = profs.map(function(p){return Math.round((p.pct>0?p.pct:(p.meta>0?(p.realizado/p.meta*100):0))*10)/10;});
+          var pcts = profsData.map(function(p){return Math.round(p.pct*10)/10;});
           new Chart(document.getElementById('chartRecPct'), {
-            type:'doughnut', data:{labels:profs.map(function(p,i){return p.profissional+' — '+pcts[i]+'%';}), datasets:[{data:pcts.map(function(p){return Math.max(p,1);}),backgroundColor:['#f59e0b','#fb923c','#f97316','#34d399','#a78bfa'],borderColor:'#0b0d14',borderWidth:2}]},
-            options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#9ca3af',padding:16,boxWidth:12,font:{size:11}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1}},title:{display:true,text:'Percentual de Atingimento',color:'#6b7280',font:{size:13}}},cutout:'55%'}
+            type:'doughnut', data:{labels:profsData.map(function(p,i){return p.profissional+' — '+pcts[i]+'%';}), datasets:[{data:pcts.map(function(p){return Math.max(p,1);}),backgroundColor:['#f59e0b','#fb923c','#f97316','#34d399','#a78bfa'],borderColor:'#0b0d14',borderWidth:2}]},
+            options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{color:'#fff',font:{size:12,weight:'bold'},anchor:'center',align:'center',formatter:function(v,ctx){return pcts[ctx.dataIndex]+'%';}},legend:{position:'left',labels:{color:'#9ca3af',padding:14,boxWidth:12,font:{size:12,weight:'bold'},usePointStyle:true},align:'center'},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false},title:{display:false}},cutout:'60%'}
           });
         } catch(e) {}
-      }, 50);
+      }, 100);
       try { lucide.createIcons(); } catch(e) {}
     }
 
     function renderDiario() {
-      var d = allData.painelGeral;
-      var profs = d.recuperacao.profissionais;
-      var total = d.recuperacao.total;
+      var pg = allData.painelGeral;
+      var evo = allData.evolucaoMeses;
+      var profsPG = pg.recuperacao.profissionais;
+      var totalPG = pg.recuperacao.total;
+
+      var rpMap = {};
+      for (var ri = 0; ri < evo.recuperadosPorProf.length; ri++) {
+        var r = evo.recuperadosPorProf[ri];
+        rpMap[r.profissional] = { meta: r['Junho META'] || 0, real: r['Junho REAL'] || 0 };
+      }
+      var totReal = 0, totMeta = 0;
+      for (var k in rpMap) { totReal += rpMap[k].real; totMeta += rpMap[k].meta; }
+      if (totReal === 0) { totReal = totalPG ? totalPG.realizado : 0; }
+      if (totMeta === 0) { totMeta = totalPG ? totalPG.meta : 0; }
       var days = [1,2,3,5,8,9,10,11,12,15,16,17,18,19,22,23,24,25,26,29,30];
       var hoje = new Date().getDate();
       var hojeIdx = -1;
       for (var hi = 0; hi < days.length; hi++) { if (days[hi] === hoje) { hojeIdx = hi; break; } }
       if (hojeIdx < 0) hojeIdx = days.length - 1;
+      var mediaDiaria = hojeIdx >= 0 ? (totReal / (hojeIdx + 1)) : 0;
       var diasRestantes = days.length - 1 - hojeIdx;
       if (diasRestantes < 0) diasRestantes = 0;
-
-      var totReal = total ? total.realizado : profs.reduce(function(s,p){return s+p.realizado;},0);
-      var totMeta = total ? total.meta : profs.reduce(function(s,p){return s+p.meta;},0);
-      var mediaDiaria = hojeIdx >= 0 ? (totReal / (hojeIdx + 1)) : 0;
       var projecao = totReal + mediaDiaria * diasRestantes;
-
       var html = '';
 
-      var hojeRealTotal = 0, hojeMetaTotal = 0;
-      for (var i = 0; i < profs.length; i++) {
-        var vh = (profs[i].dias && profs[i].dias[hojeIdx]) ? profs[i].dias[hojeIdx] : null;
-        if (vh) { hojeRealTotal += vh.realizado; hojeMetaTotal += vh.meta; }
-      }
-      var melhorProf = '', melhorVal = -1, piorProf = '', piorVal = 99999;
-      for (var i = 0; i < profs.length; i++) {
-        var vh = (profs[i].dias && profs[i].dias[hojeIdx]) ? profs[i].dias[hojeIdx] : null;
-        var r = vh ? vh.realizado : 0;
-        if (r > melhorVal) { melhorVal = r; melhorProf = profs[i].profissional; }
-        if (r < piorVal) { piorVal = r; piorProf = profs[i].profissional; }
-      }
+      html += '<div class="cards">';
+      html += '<div class="card"><div class="label">M\u00E9dia Di\u00E1ria</div><div class="value">' + mediaDiaria.toFixed(1) + '</div><div class="sub">' + totReal + ' total em ' + (hojeIdx + 1) + ' dias</div></div>';
+      html += '<div class="card"><div class="label">Realizado no M\u00EAs</div><div class="value">' + totReal + '</div><div class="sub">' + (totMeta > 0 ? (totReal/totMeta*100).toFixed(1) + '% da meta' : '') + '</div></div>';
+      html += '<div class="card"><div class="label">Proje\u00E7\u00E3o Final</div><div class="value">' + projecao.toFixed(0) + '</div><div class="sub">' + (projecao >= totMeta ? 'Bater\u00E1 a meta &#9989;' : 'Meta: ' + totMeta) + '</div></div>';
+      html += '</div>';
 
-      html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px">' +
-        '<div style="background:linear-gradient(135deg,#0f172a,#1e293b);border:1px solid #38bdf833;border-radius:16px;padding:20px;text-align:center">' +
-          '<div style="font-size:10px;color:#38bdf8;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px">Média Diária</div>' +
-          '<div style="font-size:36px;font-weight:800;color:#38bdf8;line-height:1.1">'+mediaDiaria.toFixed(1)+'</div>' +
-          '<div style="font-size:11px;color:#475569;margin-top:6px">'+totReal+' total em '+(hojeIdx+1)+' dias</div>' +
-        '</div>' +
-        '<div style="background:linear-gradient(135deg,#0f172a,#1e293b);border:1px solid #34d39933;border-radius:16px;padding:20px;text-align:center">' +
-          '<div style="font-size:10px;color:#34d399;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px">Realizado no Mês</div>' +
-          '<div style="font-size:36px;font-weight:800;color:#34d399;line-height:1.1">'+totReal+'</div>' +
-          '<div style="font-size:11px;color:'+(totMeta>0?(totReal/totMeta*100>=100?'#34d399':'#fbbf24'):'#475569')+';margin-top:6px">'+(totMeta>0?(totReal/totMeta*100).toFixed(1)+'% da meta de '+totMeta:'')+'</div>' +
-        '</div>' +
-        '<div style="background:linear-gradient(135deg,#0f172a,#1e293b);border:1px solid '+(projecao>=totMeta?'#34d39933':'#fbbf2433')+';border-radius:16px;padding:20px;text-align:center">' +
-          '<div style="font-size:10px;color:'+(projecao>=totMeta?'#34d399':'#fbbf24')+';text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:8px">Projeção Final</div>' +
-          '<div style="font-size:36px;font-weight:800;color:'+(projecao>=totMeta?'#34d399':'#fbbf24')+';line-height:1.1">'+projecao.toFixed(0)+'</div>' +
-          '<div style="font-size:11px;color:#475569;margin-top:6px">'+(projecao>=totMeta?'Baterá a meta ✓':'Meta: '+totMeta+', faltam '+(totMeta-projecao).toFixed(0))+'</div>' +
-        '</div>' +
-      '</div>' +
-      '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px">' +
-        '<div style="background:linear-gradient(135deg,#0f172a,#1e293b);border:1px solid #fb923c33;border-radius:12px;padding:16px;text-align:center">' +
-          '<div style="font-size:10px;color:#fb923c;text-transform:uppercase;letter-spacing:.8px;font-weight:700">Dia '+days[hojeIdx]+' — Meta</div>' +
-          '<div style="font-size:28px;font-weight:800;color:#fb923c;margin-top:4px">'+hojeMetaTotal+'</div>' +
-        '</div>' +
-        '<div style="background:linear-gradient(135deg,#0f172a,#1e293b);border:1px solid '+(hojeRealTotal>=hojeMetaTotal&&hojeMetaTotal>0?'#34d39933':'#fbbf2433')+';border-radius:12px;padding:16px;text-align:center">' +
-          '<div style="font-size:10px;color:#34d399;text-transform:uppercase;letter-spacing:.8px;font-weight:700">Dia '+days[hojeIdx]+' — Realizado</div>' +
-          '<div style="font-size:28px;font-weight:800;color:#34d399;margin-top:4px">'+hojeRealTotal+'</div>' +
-          '<div style="font-size:10px;color:'+(hojeRealTotal>=hojeMetaTotal&&hojeMetaTotal>0?'#34d399':hojeRealTotal>0?'#fbbf24':'#475569')+';margin-top:2px">'+(hojeMetaTotal>0?(hojeRealTotal/hojeMetaTotal*100).toFixed(1)+'% da meta':'')+'</div>' +
-        '</div>' +
-        '<div style="background:linear-gradient(135deg,#0f172a,#1e293b);border:1px solid #a78bfa33;border-radius:12px;padding:16px;text-align:center">' +
-          '<div style="font-size:10px;color:#a78bfa;text-transform:uppercase;letter-spacing:.8px;font-weight:700">Destaques do Dia</div>' +
-          '<div style="margin-top:8px;display:flex;flex-direction:column;gap:4px">' +
-            '<span style="font-size:12px;color:#34d399">▲ <strong>'+melhorProf+'</strong> — '+melhorVal+'</span>' +
-            '<span style="font-size:12px;color:'+(piorVal>0?'#fbbf24':'#f87171')+'">▼ <strong>'+piorProf+'</strong> — '+piorVal+'</span>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-
-      html += '<div class="chart-box" style="margin-bottom:20px"><h2>Acompanhamento Diário</h2><div style="overflow-x:auto"><table style="min-width:1050px;font-size:11px;border-collapse:collapse"><thead><tr><th rowspan="2" style="vertical-align:middle;text-align:left;padding:8px 14px;background:#11131c;border-bottom:2px solid #f59e0b">Profissional</th><th rowspan="2" style="vertical-align:middle;text-align:center;padding:8px 8px;background:#11131c;border-bottom:2px solid #f59e0b;color:#6b7280;font-size:10px">%</th><th rowspan="2" style="vertical-align:middle;text-align:center;padding:8px 8px;background:#11131c;border-bottom:2px solid #f59e0b;color:#6b7280;font-size:10px">Acum.</th>';
+      html += '<div class="chart-box"><h2>Acompanhamento Di\u00E1rio <span class="sub">&rarr; Recupera\u00E7\u00E3o</span></h2><div class="table-wrap"><table><thead><tr><th rowspan="2" style="vertical-align:middle">Televendedora</th><th rowspan="2" style="vertical-align:middle;text-align:center" title="Percentual de atingimento da meta">%</th><th rowspan="2" style="vertical-align:middle;text-align:center" title="Total acumulado de clientes recuperados">Acum.</th>';
       for (var di = 0; di < days.length; di++) {
         var isHoje = di === hojeIdx;
-        var diaStyle = 'text-align:center;font-size:10px;padding:5px 3px;background:'+(isHoje?'#78350f':'#11131c')+';border-bottom:2px solid #f59e0b;color:'+(isHoje?'#fcd34d':'#9ca3af')+';font-weight:'+(isHoje?'700':'400');
-        html += '<th colspan="2" style="'+diaStyle+'">'+(isHoje?'● ':'')+'Dia '+days[di]+'</th>';
+        html += '<th colspan="2" style="text-align:center;min-width:44px;' + (isHoje ? 'color:#fcd34d;background:#78350f' : '') + '">' + (isHoje ? '&#x1F514; ' : '') + 'Dia ' + days[di] + '</th>';
       }
       html += '</tr><tr>';
       for (var di = 0; di < days.length; di++) {
-        var isHoje = di === hojeIdx;
-        var subBg = isHoje ? '#1e1b4b' : '#11131c';
-        html += '<th style="text-align:center;font-size:9px;padding:3px 2px;color:#fb923c;background:'+subBg+';border-bottom:1px solid #1e1b4b;width:24px;font-weight:600">M</th><th style="text-align:center;font-size:9px;padding:3px 2px;color:#34d399;background:'+subBg+';border-bottom:1px solid #1e1b4b;width:24px;font-weight:600">R</th>';
+        html += '<th style="text-align:center;font-size:9px;width:20px" class="meta-color">M</th><th style="text-align:center;font-size:9px;width:20px" class="realizado-color">R</th>';
       }
       html += '</tr></thead><tbody>';
-      for (var i = 0; i < profs.length; i++) {
-        var p = profs[i];
+      for (var i = 0; i < profsPG.length; i++) {
+        var p = profsPG[i];
         var bg = i%2===0?'#0b0d14':'#11131c';
-        var pct = p.meta>0?(p.realizado/p.meta*100).toFixed(1):'0';
-        var pctColor = parseFloat(pct)>=100?'#34d399':parseFloat(pct)>=80?'#fbbf24':'#f87171';
-        var acum = 0;
-        for (var ac = 0; ac <= hojeIdx; ac++) { if (p.dias && p.dias[ac]) acum += p.dias[ac].realizado; }
-        html += '<tr><td style="background:'+bg+';padding:6px 14px;font-weight:600;color:#fcd34d;border-bottom:1px solid #1e1b4b;font-size:12px">'+icn('user',12)+' '+p.profissional+'</td>' +
-          '<td style="background:'+bg+';padding:6px 8px;text-align:center;font-weight:700;color:'+pctColor+';border-bottom:1px solid #1e1b4b;font-size:11px">'+pct+'%</td>' +
-          '<td style="background:'+bg+';padding:6px 8px;text-align:center;font-weight:700;color:#f0f2f8;border-bottom:1px solid #1e1b4b;font-size:11px">'+acum+'</td>';
+        var jMeta = (rpMap[p.profissional] && rpMap[p.profissional].meta) || 0;
+        var jReal = (rpMap[p.profissional] && rpMap[p.profissional].real) || 0;
+        var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
+        var pctStr = jPct.toFixed(1);
+        var pctColor = jPct >= 100 ? '#34d399' : jPct >= 80 ? '#fbbf24' : '#f87171';
+        var acum = (rpMap[p.profissional] && rpMap[p.profissional].real) || 0;
+        html += '<tr style="background:'+bg+'"><td style="font-weight:600;color:#fcd34d">'+icn('user',12)+' '+p.profissional+'</td><td style="text-align:center;font-weight:700;color:'+pctColor+'">'+pctStr+'%</td><td style="text-align:center;font-weight:700">'+acum+'</td>';
         for (var di = 0; di < days.length; di++) {
           var v = (p.dias && p.dias[di]) ? p.dias[di] : null;
           var mVal = v?v.meta:0;
           var rVal = v?v.realizado:0;
-          var isHojeCol = di === hojeIdx;
-          var colBg = isHojeCol ? '#1a1d27' : bg;
           var atingiuMeta = rVal >= mVal && mVal > 0;
           var cor = atingiuMeta ? '#34d399' : rVal > 0 ? '#fbbf24' : '#4a4d6e';
-          var destaque = isHojeCol ? ';border:1px solid #f59e0b33' : '';
-          html += '<td style="background:'+colBg+';padding:6px 2px;text-align:center;font-size:9px;color:#6b7280;border-bottom:1px solid #1e1b4b'+destaque+'">'+(mVal>0?mVal:'-')+'</td>' +
-            '<td style="background:'+colBg+';padding:4px 2px;text-align:center;font-size:10px;font-weight:700;color:'+cor+';border-bottom:1px solid #1e1b4b'+destaque+'">'+(rVal>0?rVal:'-')+(mVal>0?'<div class="daily-pct-bar" style="height:6px;margin-top:3px"><div class="daily-pct-fill" style="width:'+Math.min(rVal/mVal*100,100)+'%;background:'+cor+'"></div></div>':'')+'</td>';
+          html += '<td style="text-align:center;font-size:9px;color:#6b7280">'+(mVal>0?mVal:'-')+'</td><td style="text-align:center;font-size:11px;font-weight:700;color:'+cor+'">'+(rVal>0?rVal:'-')+'</td>';
         }
         html += '</tr>';
       }
-      if (total) {
-        var totalAcum = 0;
-        for (var ac = 0; ac <= hojeIdx; ac++) { if (total.dias && total.dias[ac]) totalAcum += total.dias[ac].realizado; }
-        html += '<tr class="tot-row"><td style="padding:8px 14px;border-top:2px solid #f59e0b;background:#151830;color:#fcd34d;font-weight:700;font-size:12px">'+icn('users',12)+' Total</td>' +
-          '<td style="padding:8px 8px;text-align:center;font-weight:700;color:'+(total.pct>=100?'#34d399':total.pct>=80?'#fbbf24':'#f87171')+';border-top:2px solid #f59e0b;background:#151830;font-size:11px">'+total.pct.toFixed(1)+'%</td>' +
-          '<td style="padding:8px 8px;text-align:center;font-weight:700;color:#f0f2f8;border-top:2px solid #f59e0b;background:#151830;font-size:11px">'+totalAcum+'</td>';
+        var totalPct = totMeta > 0 ? (totReal / totMeta * 100) : 0;
+        html += '<tr class="tot-row"><td>'+icn('users',12)+' Total</td><td style="text-align:center;font-weight:700;color:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+'">'+totalPct.toFixed(1)+'%</td><td style="text-align:center;font-weight:700">'+totReal+'</td>';
         for (var di = 0; di < days.length; di++) {
-          var v = (total.dias && total.dias[di]) ? total.dias[di] : null;
+          var v = (totalPG.dias && totalPG.dias[di]) ? totalPG.dias[di] : null;
           var mVal = v?v.meta:0;
           var rVal = v?v.realizado:0;
-          var isHojeCol = di === hojeIdx;
           var atingiuMeta = rVal >= mVal && mVal > 0;
           var cor = atingiuMeta ? '#34d399' : rVal > 0 ? '#fbbf24' : '#4a4d6e';
-          var destaque = isHojeCol ? ';border:1px solid #f59e0b44' : '';
-          html += '<td style="padding:8px 2px;text-align:center;font-size:9px;color:#6b7280;border-top:2px solid #f59e0b;background:#151830'+destaque+'">'+(mVal>0?mVal:'-')+'</td>' +
-            '<td style="padding:6px 2px;text-align:center;font-size:10px;font-weight:700;color:'+cor+';border-top:2px solid #f59e0b;background:#151830'+destaque+'">'+(rVal>0?rVal:'-')+(mVal>0?'<div class="daily-pct-bar" style="height:6px;margin-top:3px"><div class="daily-pct-fill" style="width:'+Math.min(rVal/mVal*100,100)+'%;background:'+cor+'"></div></div>':'')+'</td>';
+          html += '<td style="text-align:center;font-size:9px;color:#6b7280">'+(mVal>0?mVal:'-')+'</td><td style="text-align:center;font-size:11px;font-weight:700;color:'+cor+'">'+(rVal>0?rVal:'-')+'</td>';
         }
         html += '</tr>';
-      }
       html += '</tbody></table></div></div>';
 
-      html += '<div class="chart-box"><h2>Tendência Diária</h2><canvas id="chartDiarioTrend" style="max-height:280px"></canvas></div>';
+      html += '<div class="chart-box"><h2>Tend\u00EAncia Di\u00E1ria <span class="sub">&rarr; Meta, realizado e acumulado dia a dia</span></h2><canvas id="chartDiarioTrend" style="max-height:220px"></canvas></div>';
+      html += '<div class="chart-box"><h2>Comparativo por Televendedora <span class="sub">&rarr; Meta x Realizado acumulado no m\u00EAs</span></h2><canvas id="chartDiarioProf" style="max-height:220px"></canvas></div>';
 
       document.getElementById('dashContent').innerHTML = html;
 
       setTimeout(function() {
         try {
           var diasLabels = days.map(function(d){return 'Dia '+d;});
-          var totals = [];
-          var metas = [];
+          var totals = [], metas = [];
           for (var di = 0; di < days.length; di++) {
             var sumR = 0, sumM = 0;
-            for (var i = 0; i < profs.length; i++) {
-              var p = profs[i];
-              var v = (p.dias && p.dias[di]) ? p.dias[di] : null;
+            for (var i = 0; i < profsPG.length; i++) {
+              var v = (profsPG[i].dias && profsPG[i].dias[di]) ? profsPG[i].dias[di] : null;
               if (v) { sumR += v.realizado; sumM += v.meta; }
             }
             totals.push(sumR);
             metas.push(sumM);
           }
-          var acc = [];
-          var acum = 0;
+          var acc = [], acum = 0;
           for (var di = 0; di < totals.length; di++) { acum += totals[di]; acc.push(acum); }
-          new Chart(document.getElementById('chartDiarioTrend'), {type:'line', data:{labels:diasLabels, datasets:[
-            {label:'Meta',data:metas,borderColor:'#fb923c',backgroundColor:'transparent',tension:.3,borderDash:[3,3],pointRadius:2,pointBackgroundColor:'#fb923c'},
-            {label:'Realizado',data:totals,borderColor:'#f59e0b',backgroundColor:'#f59e0b22',fill:true,tension:.3,pointRadius:3,pointBackgroundColor:'#f59e0b'},
-            {label:'Acumulado',data:acc,borderColor:'#34d399',backgroundColor:'transparent',tension:.3,borderDash:[4,3],pointRadius:2,pointBackgroundColor:'#34d399',yAxisID:'y1'}
-          ]}, options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1}},scales:{x:{ticks:{color:'#6b7280',maxRotation:45},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,position:'left',ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'},title:{display:true,text:'Diário',color:'#6b7280'}},y1:{position:'right',beginAtZero:true,ticks:{color:'#6b7280'},grid:{display:false},title:{display:true,text:'Acumulado',color:'#6b7280'}}}}});
+          var lastAcum = acc.length > 0 ? acc[acc.length-1] : 0;
+          if (lastAcum > 0 && Math.abs(lastAcum - totReal) > 0.5) {
+            var scale = totReal / lastAcum;
+            for (var si = 0; si < acc.length; si++) acc[si] = Math.round(acc[si] * scale);
+          }
+          new Chart(document.getElementById('chartDiarioTrend'), {
+            type:'line', data:{labels:diasLabels, datasets:[
+              {label:'Meta',data:metas,borderColor:'#60a5fa',backgroundColor:'transparent',tension:.3,borderDash:[5,4],pointRadius:2,pointBackgroundColor:'#60a5fa'},
+              {label:'Realizado',data:totals,borderColor:'#fbbf24',backgroundColor:'transparent',tension:.3,borderDash:[5,4],pointRadius:3,pointBackgroundColor:'#fbbf24'},
+              {label:'Acumulado',data:acc,borderColor:'#34d399',backgroundColor:'#34d39922',fill:true,tension:.4,borderWidth:3,pointRadius:3,pointBackgroundColor:'#34d399',yAxisID:'y1'}
+            ]},
+            options:{responsive:true,plugins:{datalabels:{display:false},legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280',maxRotation:45},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,position:'left',ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'},title:{display:true,text:'Di\u00E1rio',color:'#6b7280'}},y1:{position:'right',beginAtZero:true,ticks:{color:'#6b7280'},grid:{display:false},title:{display:true,text:'Acumulado',color:'#6b7280'}}}}
+          });
         } catch(e) {}
         try {
-          var profNames = profs.map(function(p){return p.profissional;});
-          var profTotals = [];
-          for (var i = 0; i < profs.length; i++) {
-            var s = 0;
-            for (var di = 0; di <= hojeIdx; di++) { var v = (profs[i].dias && profs[i].dias[di]) ? profs[i].dias[di].realizado : 0; s += v; }
-            profTotals.push(s);
+          var profNames = profsPG.map(function(p){return p.profissional;});
+          var profTotals = [], profMetas = [];
+          for (var i = 0; i < profsPG.length; i++) {
+            var nm = profsPG[i].profissional;
+            profMetas.push((rpMap[nm] && rpMap[nm].meta) || 0);
+            profTotals.push((rpMap[nm] && rpMap[nm].real) || 0);
           }
-          var profMetas = profs.map(function(p){return p.meta;});
-          new Chart(document.getElementById('chartDiarioProf'), {type:'bar', data:{labels:profNames, datasets:[
-            {label:'Meta',data:profMetas,backgroundColor:'#78350f',borderRadius:4},
-            {label:'Realizado',data:profTotals,backgroundColor:['#f59e0b','#fb923c','#f97316','#34d399','#a78bfa'],borderRadius:4}
-          ]}, options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}});
+          new Chart(document.getElementById('chartDiarioProf'), {
+            type:'bar', data:{labels:profNames, datasets:[
+              {label:'Meta',data:profMetas,backgroundColor:'#78350f',borderRadius:4},
+              {label:'Realizado',data:profTotals,backgroundColor:['#f59e0b','#fb923c','#f97316','#34d399','#a78bfa'],borderRadius:4}
+            ]},
+            options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{color:'#9ca3af',font:{size:9,weight:'bold'},anchor:'end',align:'end'},legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}}
+          );
         } catch(e) {}
-        try { lucide.createIcons(); } catch(e) {}
-      }, 50);
+      }, 100);
+      try { lucide.createIcons(); } catch(e) {}
     }
 
     function renderMotivos() {
       var d = allData.painelGeral;
-      var profs = d.recuperacao.profissionais;
+      var profsAll = d.recuperacao.profissionais;
+      var profs = profsAll;
       var dataRows = d.motivos.filter(function(r){return r.label !== 'Total';});
       var totalRow = d.motivos.filter(function(r){return r.label === 'Total';})[0];
-      var html = '<div class="chart-box" style="margin-bottom:24px"><h2>Motivos / Resultados dos Contatos</h2><div style="overflow-x:auto"><table><thead><tr><th>Motivo</th>';
-      for (var i = 0; i < profs.length; i++) html += '<th class="text-right">'+profs[i].profissional+'</th>';
+       var html = '<div class="chart-box"><h2>Motivos / Resultados dos Contatos <span class="sub">&rarr; Detalhamento por televendedora</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Motivo</th>';
+      for (var i = 0; i < profs.length; i++) html += '<th class="text-right">' + profs[i].profissional + '</th>';
       html += '<th class="text-right">Total</th><th style="text-align:center">%</th></tr></thead><tbody>';
       var grandTotal = dataRows.reduce(function(s,r){return s+(r.Total||0);},0);
       for (var i = 0; i < dataRows.length; i++) {
         var row = dataRows[i];
         var total = row.Total||0;
         var pct = grandTotal>0?(total/grandTotal*100).toFixed(1):0;
-        html += '<tr'+(i%2===0?'':' style="background:#11131c"')+'><td style="font-weight:600">'+row.label+'</td>';
+        var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
+        html += '<tr'+(i%2===0?'':' style="background:#11131c"')+'><td class="col-ranking">'+medal+(i+1)+'</td><td style="font-weight:600">'+row.label+'</td>';
         for (var j = 0; j < profs.length; j++) html += '<td class="text-right">'+(row[profs[j].profissional]||0)+'</td>';
-        html += '<td class="text-right" style="font-weight:700">'+total+'</td><td style="text-align:center"><div class="daily-pct-bar" style="height:16px"><div class="daily-pct-fill" style="width:'+Math.min(pct,100)+'%;background:#f59e0b"></div><span class="daily-pct-label" style="font-size:9px">'+pct+'%</span></div></td></tr>';
+        html += '<td class="text-right" style="font-weight:700">'+total+'</td><td style="text-align:center"><div class="pct-bar" style="height:16px"><div class="pct-bar-fill" style="width:'+Math.min(pct,100)+'%;background:#f59e0b"></div><span style="position:relative;font-size:9px;color:#fff;padding-left:6px">'+pct+'%</span></div></td></tr>';
       }
       if (totalRow) {
-        html += '<tr class="tot-row"><td>'+totalRow.label+'</td>';
+        html += '<tr class="tot-row"><td class="col-ranking"></td><td>'+totalRow.label+'</td>';
         for (var j = 0; j < profs.length; j++) html += '<td class="text-right">'+(totalRow[profs[j].profissional]||0)+'</td>';
         html += '<td class="text-right">'+(totalRow.Total||0)+'</td><td style="text-align:center">100%</td></tr>';
       }
-      html += '</tbody></table></div></div><div class="chart-box"><h2>Distribuição dos Motivos</h2><canvas id="chartMotivos" style="max-height:340px"></canvas></div>';
+      html += '</tbody></table></div></div></div>';
+
+      html += '<div class="chart-box"><h2>Distribui\u00E7\u00E3o dos Motivos <span class="sub">&rarr; Porcentagem de cada motivo no total</span></h2><canvas id="chartMotivos" style="max-height:220px"></canvas></div>';
+
       document.getElementById('dashContent').innerHTML = html;
+
       setTimeout(function() {
         try {
           var labels = dataRows.map(function(r){return r.label;});
           var valores = dataRows.map(function(r){return r.Total||0;});
-          new Chart(document.getElementById('chartMotivos'), {type:'doughnut', data:{labels:labels, datasets:[{data:valores,backgroundColor:['#f59e0b','#34d399','#ef4444','#a78bfa','#60a5fa','#f97316','#ec4899'],borderColor:'#0b0d14',borderWidth:2}]}, options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#9ca3af',padding:16,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1}}}});
+          new Chart(document.getElementById('chartMotivos'), {
+            type:'doughnut', data:{labels:labels, datasets:[{data:valores,backgroundColor:['#f59e0b','#34d399','#ef4444','#a78bfa','#60a5fa','#f97316','#ec4899'],borderColor:'#0b0d14',borderWidth:2}]},
+            options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{datalabels:{display:false},legend:{position:'left',labels:{color:'#9ca3af',padding:14,boxWidth:12,font:{size:12,weight:'bold'},usePointStyle:true}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false},title:{display:true,text:'Distribui\u00E7\u00E3o dos Motivos',color:'#6b7280',font:{size:13}}}}}
+          );
         } catch(e) {}
-      }, 50);
+      }, 100);
     }
-
-
   </script>
 </body>
 </html>

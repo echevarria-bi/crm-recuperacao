@@ -1284,7 +1284,7 @@
       },
       "motivos": [
         {
-          "label": "Não atendeu/Não retornou",
+          "label": "Contatos Efetivo",
           "Ariane": 29,
           "Camila": 75,
           "Cristielen": 33,
@@ -1293,7 +1293,7 @@
           "Total": 270
         },
         {
-          "label": "Contatos Efetivo",
+          "label": "Baixado/Outros",
           "Ariane": 0,
           "Camila": 0,
           "Cristielen": 1,
@@ -1302,7 +1302,7 @@
           "Total": 14
         },
         {
-          "label": "Baixado/Outros",
+          "label": "Ativo por temporada",
           "Ariane": 1,
           "Camila": 0,
           "Cristielen": 3,
@@ -1311,7 +1311,7 @@
           "Total": 15
         },
         {
-          "label": "Ativo por temporada",
+          "label": "Conversão / Venda RCA Externo",
           "Ariane": 35,
           "Camila": 42,
           "Cristielen": 15,
@@ -1320,7 +1320,7 @@
           "Total": 130
         },
         {
-          "label": "Conversão / Venda RCA Externo",
+          "label": "Telefone incorreto",
           "Ariane": 2,
           "Camila": 0,
           "Cristielen": 4,
@@ -1329,7 +1329,7 @@
           "Total": 31
         },
         {
-          "label": "Telefone incorreto",
+          "label": "Problema Financeiro",
           "Ariane": 3,
           "Camila": 0,
           "Cristielen": 0,
@@ -1338,21 +1338,12 @@
           "Total": 12
         },
         {
-          "label": "Problema Financeiro",
+          "label": "Total",
           "Ariane": 299,
           "Camila": 647,
           "Cristielen": 408,
           "Natália": 318,
           "Tatiana": 276,
-          "Total": 0
-        },
-        {
-          "label": "Total",
-          "Ariane": 0,
-          "Camila": 0,
-          "Cristielen": 0,
-          "Natália": 0,
-          "Tatiana": 0,
           "Total": 0
         }
       ]
@@ -2424,5 +2415,5 @@
     ]
   },
   "fileName": "Painel CRM - Junho.xlsx",
-  "updatedAt": "2026-07-01T19:01:39.378Z"
+  "updatedAt": "2026-07-01T19:30:43.017Z"
 }

@@ -970,8 +970,11 @@
     }
 
     function renderClientes() {
-      var clientes = allData.faturamentoClientes;
+      var clientes = allData.faturamentoClientes || [];
       var html = '<div class="top-bar"><div style="position:relative;flex:1;max-width:320px"><input type="text" id="buscaCliente" placeholder="Buscar por ID do cliente..." style="width:100%;background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px 10px 36px;color:#e1e7ef;font-size:13px;outline:none"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#4a4d6e;font-size:14px">🔍</span></div><span style="font-size:12px;color:#6b7280">' + clientes.length + ' clientes</span></div>';
+      if (clientes.length === 0) {
+        html += '<div class="chart-box"><h2>Faturamento por Cliente <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal</span></h2><div style="text-align:center;padding:40px;color:#6b7280">Nenhum dado dispon\u00EDvel. Fa\u00E7a o upload do Excel para carregar.</div></div>';
+      } else {
       html += '<div class="chart-box"><h2>Faturamento por Cliente <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Cliente</th><th class="text-right realizado-color">Abril</th><th class="text-right realizado-color">Maio</th><th class="text-right realizado-color">Junho</th><th class="text-right" style="color:#fbbf24">Total</th></tr></thead><tbody id="tbodyClientes">';
       for (var i = 0; i < clientes.length; i++) {
         var c = clientes[i];
@@ -979,6 +982,7 @@
         html += '<tr data-id="' + c.cliente + '"><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600;color:#fcd34d">' + c.cliente + '</td><td class="text-right realizado-color">' + fmtCurr(c.Abril||0) + '</td><td class="text-right realizado-color">' + fmtCurr(c.Maio||0) + '</td><td class="text-right realizado-color">' + fmtCurr(c.Junho||0) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(c.total) + '</td></tr>';
       }
       html += '</tbody></table></div></div>';
+      }
       document.getElementById('dashContent').innerHTML = html;
       setTimeout(function() {
         document.getElementById('buscaCliente').addEventListener('input', function() {

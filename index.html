@@ -1017,7 +1017,6 @@
       var profsAll = d.recuperacao.profissionais;
       var profs = profsAll;
       var dataRows = d.motivos.filter(function(r){return r.label !== 'Total';});
-      var totalRow = d.motivos.filter(function(r){return r.label === 'Total';})[0];
        var html = '<div class="chart-box"><h2>Motivos / Resultados dos Contatos <span class="sub">&rarr; Detalhamento por televendedora</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Motivo</th>';
       for (var i = 0; i < profs.length; i++) html += '<th class="text-right">' + profs[i].profissional + '</th>';
       html += '<th class="text-right">Total</th><th style="text-align:center">%</th></tr></thead><tbody>';
@@ -1030,11 +1029,6 @@
         html += '<tr'+(i%2===0?'':' style="background:#11131c"')+'><td class="col-ranking">'+medal+(i+1)+'</td><td style="font-weight:600">'+row.label+'</td>';
         for (var j = 0; j < profs.length; j++) html += '<td class="text-right">'+(row[profs[j].profissional]||0)+'</td>';
         html += '<td class="text-right" style="font-weight:700">'+total+'</td><td style="text-align:center"><div class="pct-bar" style="height:16px"><div class="pct-bar-fill" style="width:'+Math.min(pct,100)+'%;background:#f59e0b"></div><span style="position:relative;font-size:9px;color:#fff;padding-left:6px">'+pct+'%</span></div></td></tr>';
-      }
-      if (totalRow) {
-        html += '<tr class="tot-row"><td class="col-ranking"></td><td>'+totalRow.label+'</td>';
-        for (var j = 0; j < profs.length; j++) html += '<td class="text-right">'+(totalRow[profs[j].profissional]||0)+'</td>';
-        html += '<td class="text-right">'+(totalRow.Total||0)+'</td><td style="text-align:center">100%</td></tr>';
       }
       html += '</tbody></table></div></div></div>';
 

@@ -71,8 +71,12 @@
 <body>
   <header>
     <h1>&#128222; Painel de Recuperação — Tele Vendas</h1>
-    <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+    <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
       <span id="statusFile" style="font-size:11px;color:#6b7280"></span>
+      <span id="tokenStatus" style="font-size:10px;color:#6b7280"></span>
+      <input type="password" id="tokenInput" placeholder="Token GitHub" onkeydown="if(event.key==='Enter')setToken(this.value)" style="width:90px;background:#11131c;border:1px solid #1e1b4b;border-radius:6px;padding:4px 8px;color:#e1e7ef;font-size:11px;outline:none;display:none">
+      <button onclick="setToken(document.getElementById('tokenInput').value)" id="btnSalvarToken" style="display:none"></button>
+      <button onclick="var i=document.getElementById('tokenInput');i.style.display='';i.focus();this.style.display='none'" id="btnConfigToken" style="background:transparent;border:1px solid #4a4d6e;color:#9ca3af;padding:4px 10px;border-radius:6px;font-size:10px;cursor:pointer;display:none">&#128274; Token</button>
       <button onclick="novoArquivo()" style="background:#1e1b4b;border:1px solid #78350f;color:#fcd34d;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:none" id="btnNovoArquivo">&#128193; Novo arquivo</button>
     </div>
   </header>
@@ -113,17 +117,35 @@
     }
 
     function getToken() {
-      var t = GH_TOKEN();
-      if (!t) {
-        t = prompt('Informe o token do GitHub para salvar os dados no reposit\u00F3rio:');
-        if (t) { localStorage.setItem('crmToken', t); }
+      return GH_TOKEN();
+    }
+    function setToken(t) {
+      if (t) {
+        localStorage.setItem('crmToken', t);
+        document.getElementById('tokenStatus').textContent = 'Token salvo';
+        document.getElementById('tokenStatus').style.color = '#34d399';
+        document.getElementById('btnConfigToken').style.display = 'none';
+        document.getElementById('tokenInput').style.display = 'none';
+        document.getElementById('btnSalvarToken').style.display = 'none';
       }
-      return t;
+    }
+    function mostrarTokenBtn() {
+      if (!GH_TOKEN()) {
+        document.getElementById('btnConfigToken').style.display = 'inline-flex';
+        document.getElementById('tokenStatus').textContent = '';
+      } else {
+        document.getElementById('tokenStatus').textContent = 'Token configurado';
+        document.getElementById('tokenStatus').style.color = '#34d399';
+      }
     }
 
     function saveRemoteData(data, fileName) {
       var token = getToken();
-      if (!token) return Promise.resolve(false);
+      if (!token) {
+        document.getElementById('tokenStatus').textContent = 'Token n\u00E3o configurado';
+        document.getElementById('tokenStatus').style.color = '#f87171';
+        return Promise.resolve(false);
+      }
       var content = JSON.stringify(data, null, 2);
       var base64 = btoa(unescape(encodeURIComponent(content)));
       var commitMsg = 'Atualiza\u00E7\u00E3o ' + (fileName || '') + ' - ' + new Date().toLocaleString('pt-BR');
@@ -156,6 +178,7 @@
           switchTab('resumo');
           salvarStorage();
           document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
+          mostrarTokenBtn();
           saveRemoteData({ data: allData, fileName: file.name, updatedAt: new Date().toISOString() }, file.name).then(function(ok) {
             if (ok) {
               document.getElementById('statusFile').textContent = 'Salvo no reposit\u00F3rio';
@@ -1022,8 +1045,10 @@
         initTabs();
         switchTab('resumo');
         document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
+        mostrarTokenBtn();
       } else if (restaurarStorage()) {
         document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
+        mostrarTokenBtn();
       }
     });
   </script>

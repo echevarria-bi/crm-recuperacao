@@ -544,10 +544,9 @@
         if (c2 && typeof Chart !== 'undefined') new Chart(c2, {
           type:'bar', data:{labels:labels, datasets:[
             {label:'Meta Recuperados',data:recupMeta,backgroundColor:'#78350f',borderRadius:4},
-            {label:'Realizado Recuperados',data:recupReal,backgroundColor:'#34d399',borderRadius:4},
-            {label:'Valor (R$)',type:'line',data:valorData,borderColor:'#fcd34d',backgroundColor:'transparent',borderWidth:3,pointRadius:5,pointBackgroundColor:'#fcd34d',tension:.2,yAxisID:'y1'}
+            {label:'Realizado Recuperados',data:recupReal,backgroundColor:'#34d399',borderRadius:4}
           ]},
-          options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{color:function(ctx){return ctx.dataset.type==='line'?'#fcd34d':'#9ca3af';},font:{size:9,weight:'bold'},offset:0,formatter:function(v,ctx){if(ctx.dataset.type==='line')return'R$ '+(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2});return v;},anchor:function(ctx){return ctx.dataset.type==='line'?'end':'end';},align:function(ctx){return ctx.dataset.type==='line'?'top':'end';}},legend:{position:'bottom',labels:{color:'#9ca3af',padding:10,boxWidth:10,font:{size:11}}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,position:'left',ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'},title:{display:true,text:'Clientes',color:'#6b7280'}},y1:{position:'right',beginAtZero:true,ticks:{color:'#6b7280'},grid:{display:false},title:{display:true,text:'Valor (R$)',color:'#6b7280'}}}}
+          options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{color:'#9ca3af',font:{size:9,weight:'bold'},anchor:'end',align:'end'},legend:{position:'bottom',labels:{color:'#9ca3af',padding:10,boxWidth:10,font:{size:11}}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}
         });
       } catch(e) { console.error(e); }
       try { lucide.createIcons(); } catch(e) {}
@@ -603,7 +602,7 @@
       // CHARTS
       html += '<div class="grid-2">';
       html += '<div class="chart-box"><h2>Contatos Realizados <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal de contatos vs meta</span></h2><canvas id="chartEvolucao1" style="max-height:220px"></canvas></div>';
-      html += '<div class="chart-box"><h2>Recuperados &amp; Valor <span class="sub">&rarr; Meta, realizado e valor recuperado por m\u00EAs</span></h2><canvas id="chartEvolucao2" style="max-height:220px"></canvas></div>';
+      html += '<div class="chart-box"><h2>Recuperados <span class="sub">&rarr; Meta x Realizado por m\u00EAs</span></h2><canvas id="chartEvolucao2" style="max-height:220px"></canvas></div>';
       html += '</div>';
 
       // VALOR POR PROFISSIONAL

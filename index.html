@@ -71,6 +71,10 @@
 <body>
   <header>
     <h1>&#128222; Painel de Recuperação — Tele Vendas</h1>
+    <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+      <span id="statusFile" style="font-size:11px;color:#6b7280"></span>
+      <button onclick="novoArquivo()" style="background:#1e1b4b;border:1px solid #78350f;color:#fcd34d;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:none" id="btnNovoArquivo">&#128193; Novo arquivo</button>
+    </div>
   </header>
   <div class="container" id="app">
     <div style="position:relative;width:100%">
@@ -112,11 +116,52 @@
           document.getElementById('footer').innerHTML = '<strong>' + file.name + '</strong> &middot; ' + now.toLocaleDateString('pt-BR') + ' &agrave;s ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recupera\u00E7\u00E3o';
           initTabs();
           switchTab('resumo');
+          salvarStorage();
+          document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
         } catch(err) {
           document.getElementById('areaInicial').innerHTML = '<div style="font-size:40px;margin-bottom:8px">⚠</div><div style="color:#f87171;font-size:14px">Erro: ' + err.message + '</div><div style="color:#4a4d6e;font-size:12px;margin-top:4px;cursor:pointer" onclick="abrirArquivo()">Clique para tentar novamente</div>';
         }
       };
       reader.readAsArrayBuffer(file);
+    }
+
+    function salvarStorage() {
+      try {
+        localStorage.setItem('crmData', JSON.stringify(allData));
+        localStorage.setItem('crmFileName', document.querySelector('#areaInicial div')?.textContent?.trim() || 'Arquivo');
+        localStorage.setItem('crmTimestamp', new Date().toISOString());
+      } catch(e) {}
+    }
+
+    function restaurarStorage() {
+      var saved = localStorage.getItem('crmData');
+      if (!saved) return false;
+      try {
+        allData = JSON.parse(saved);
+        document.getElementById('areaInicial').parentElement.style.display = 'none';
+        var fn = localStorage.getItem('crmFileName') || 'Arquivo';
+        var ts = localStorage.getItem('crmTimestamp');
+        if (ts) {
+          var d = new Date(ts);
+          document.getElementById('footer').style.display = 'block';
+          document.getElementById('footer').innerHTML = '<strong>' + fn + '</strong> &middot; ' + d.toLocaleDateString('pt-BR') + ' à' + 's ' + d.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recuperação';
+        }
+        initTabs();
+        switchTab('resumo');
+        return true;
+      } catch(e) { return false; }
+    }
+
+    function novoArquivo() {
+      localStorage.removeItem('crmData');
+      localStorage.removeItem('crmFileName');
+      localStorage.removeItem('crmTimestamp');
+      document.getElementById('areaInicial').parentElement.style.display = 'block';
+      document.getElementById('areaInicial').innerHTML = '<div style="font-size:48px;margin-bottom:12px;opacity:.5">📂</div><div style="font-size:16px;color:#9ca3af;font-weight:500">Clique para selecionar o arquivo Excel</div><div style="font-size:13px;color:#4a4d6e;margin-top:4px">Painel CRM - Junho.xlsx (com aba EVOLUCAO DOS MESES)</div>';
+      document.getElementById('tabsContainer').innerHTML = '';
+      document.getElementById('dashContent').innerHTML = '';
+      document.getElementById('footer').style.display = 'none';
+      allData = null;
     }
 
     function parseAllSheets(wb) {
@@ -863,6 +908,11 @@
           );
         } catch(e) {}
       }, 100);
+    }
+
+    // Restore saved data on page load
+    if (restaurarStorage()) {
+      document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
     }
   </script>
 </body>

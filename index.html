@@ -213,7 +213,7 @@
     }
 
     function parseAllSheets(wb) {
-      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, profissionais:{}, faturamentoTotal:0};
+      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
       var sheetMap = {};
       for (var si = 0; si < wb.SheetNames.length; si++) {
         var sn = wb.SheetNames[si];
@@ -232,6 +232,36 @@
       if (sheetMap[pgKey]) {
         var pg = XLSX.utils.sheet_to_json(sheetMap[pgKey], {header:1, defval:''});
         parsePainelGeral(pg, result);
+      }
+
+      // FATURAMENTO RECUPERACAO
+      var fatKey = 'faturamento recuperacao'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      if (sheetMap[fatKey]) {
+        var fg = XLSX.utils.sheet_to_json(sheetMap[fatKey], {header:1, defval:''});
+        var profCols = {Ariane:1, Anna:5, Camila:9, Natalia:13, Tatiana:17, Cristielen:21};
+        var clientesMap = {}, mesesCorr = {};
+        for (var fr = 1; fr < fg.length; fr++) {
+          var row = fg[fr];
+          if (!row) continue;
+          for (var fp in profCols) {
+            var fc = profCols[fp];
+            var fid = parseInt(row[fc]);
+            var fv = parseFloat(row[fc+1]) || 0;
+            var fm = String(row[fc+2] || '').trim();
+            if (fm === 'Abril' || fm === 'Maio' || fm === 'Junho') mesesCorr[fp] = fm;
+            if (!isNaN(fid) && fid > 0 && fv > 0 && mesesCorr[fp]) {
+              if (!clientesMap[fid]) clientesMap[fid] = {cliente:fid, Abril:0, Maio:0, Junho:0, total:0};
+              clientesMap[fid][mesesCorr[fp]] = (clientesMap[fid][mesesCorr[fp]]||0) + fv;
+            }
+          }
+        }
+        result.faturamentoClientes = [];
+        for (var cid in clientesMap) {
+          var c = clientesMap[cid];
+          c.total = (c.Abril||0) + (c.Maio||0) + (c.Junho||0);
+          result.faturamentoClientes.push(c);
+        }
+        result.faturamentoClientes.sort(function(a,b){return b.total - a.total;});
       }
 
       // PROFISSIONAIS
@@ -480,9 +510,9 @@
     var icn = function(n,s){s=s||14; return '<i data-lucide="'+n+'" style="display:inline-block;width:'+s+'px;height:'+s+'px;vertical-align:middle;stroke:currentColor;stroke-width:2;flex-shrink:0;margin-right:4px"></i>';};
 
     function initTabs() {
-      var tabs = ['resumo','geral','diario','motivos'];
-      var labels = ['Resumo','Junho','Diário','Motivos'];
-      var icons = ['layout-dashboard','bar-chart-3','calendar-check','clipboard-list'];
+      var tabs = ['resumo','geral','diario','clientes','motivos'];
+      var labels = ['Resumo','Junho','Diário','Clientes','Motivos'];
+      var icons = ['layout-dashboard','bar-chart-3','calendar-check','table-2','clipboard-list'];
       var h = '<div class="tabs">';
       for (var i = 0; i < tabs.length; i++) {
         h += '<button class="tab-btn' + (tabs[i] === activeTab ? ' active' : '') + '" data-tab="' + tabs[i] + '">' + icn(icons[i],14) + ' ' + labels[i] + '</button>';
@@ -505,6 +535,7 @@
       if (tab === 'resumo') renderResumo();
       else if (tab === 'geral') renderGeral();
       else if (tab === 'diario') renderDiario();
+      else if (tab === 'clientes') renderClientes();
       else if (tab === 'motivos') renderMotivos();
     }
 
@@ -912,6 +943,28 @@
           );
         } catch(e) {}
       }, 100);
+      try { lucide.createIcons(); } catch(e) {}
+    }
+
+    function renderClientes() {
+      var clientes = allData.faturamentoClientes;
+      var html = '<div class="top-bar"><div style="position:relative;flex:1;max-width:320px"><input type="text" id="buscaCliente" placeholder="Buscar por ID do cliente..." style="width:100%;background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px 10px 36px;color:#e1e7ef;font-size:13px;outline:none"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#4a4d6e;font-size:14px">🔍</span></div><span style="font-size:12px;color:#6b7280">' + clientes.length + ' clientes</span></div>';
+      html += '<div class="chart-box"><h2>Faturamento por Cliente <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Cliente</th><th class="text-right realizado-color">Abril</th><th class="text-right realizado-color">Maio</th><th class="text-right realizado-color">Junho</th><th class="text-right" style="color:#fbbf24">Total</th></tr></thead><tbody id="tbodyClientes">';
+      for (var i = 0; i < clientes.length; i++) {
+        var c = clientes[i];
+        var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
+        html += '<tr data-id="' + c.cliente + '"><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600;color:#fcd34d">' + c.cliente + '</td><td class="text-right realizado-color">' + fmtCurr(c.Abril||0) + '</td><td class="text-right realizado-color">' + fmtCurr(c.Maio||0) + '</td><td class="text-right realizado-color">' + fmtCurr(c.Junho||0) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(c.total) + '</td></tr>';
+      }
+      html += '</tbody></table></div></div>';
+      document.getElementById('dashContent').innerHTML = html;
+      setTimeout(function() {
+        document.getElementById('buscaCliente').addEventListener('input', function() {
+          var q = this.value, rows = document.querySelectorAll('#tbodyClientes tr');
+          for (var ri = 0; ri < rows.length; ri++) {
+            rows[ri].style.display = (!q || String(rows[ri].getAttribute('data-id')).indexOf(q) >= 0) ? '' : 'none';
+          }
+        });
+      }, 50);
       try { lucide.createIcons(); } catch(e) {}
     }
 

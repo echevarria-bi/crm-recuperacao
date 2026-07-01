@@ -668,7 +668,9 @@
           var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
           vpRows += '<tr><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600">' + p.profissional + '</td><td class="text-right realizado-color">' + (p.Abril ? fmtCurr(p.Abril) : '-') + '</td><td class="text-right realizado-color">' + (p.Maio ? fmtCurr(p.Maio) : '-') + '</td><td class="text-right realizado-color">' + (p.Junho ? fmtCurr(p.Junho) : '-') + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + (p.Total ? fmtCurr(p.Total) : '-') + '</td></tr>';
         }
-        html += '<div class="chart-box"><h2>Valor Recuperado por Mês <span class="sub">&rarr; Faturamento por televendedora em cada mês</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th class="text-right" title="Valor recuperado em Abril">Abril</th><th class="text-right" title="Valor recuperado em Maio">Maio</th><th class="text-right" title="Valor recuperado em Junho">Junho</th><th class="text-right" title="Valor total recuperado">Total</th></tr></thead><tbody>' + vpRows + '</tbody></table></div></div>';
+        var vpTotA = 0, vpTotM = 0, vpTotJ = 0, vpTotT = 0;
+        for (var vi = 0; vi < vpSorted.length; vi++) { vpTotA += vpSorted[vi].Abril||0; vpTotM += vpSorted[vi].Maio||0; vpTotJ += vpSorted[vi].Junho||0; vpTotT += vpSorted[vi].Total||0; }
+        html += '<div class="chart-box"><h2>Valor Recuperado por Mês <span class="sub">&rarr; Faturamento por televendedora em cada mês</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th class="text-right" title="Valor recuperado em Abril">Abril</th><th class="text-right" title="Valor recuperado em Maio">Maio</th><th class="text-right" title="Valor recuperado em Junho">Junho</th><th class="text-right" title="Valor total recuperado">Total</th></tr></thead><tbody>' + vpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotA) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotM) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotJ) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(vpTotT) + '</td></tr></tbody></table></div></div>';
       }
 
       // RECUPERADOS POR PROFISSIONAL (from RECUPERADOS POR RCA)
@@ -708,7 +710,14 @@
         for (var pi = 0; pi < rpPairs.length; pi++) {
           rpHtml += '<th class="text-right meta-color" title="Meta de clientes recuperados">'+rpPairs[pi].meta+'</th><th class="text-right realizado-color" title="Clientes efetivamente recuperados">'+rpPairs[pi].real+'</th><th class="text-right col-gap" style="color:#6b7280;font-size:10px" title="Diferença: Realizado − Meta">Gap</th>';
         }
-        rpHtml += '</tr></thead><tbody>' + rpRows + '</tbody></table></div></div>';
+        var rpTotals = '';
+        for (var rpi = 0; rpi < rpPairs.length; rpi++) {
+          var tMeta = 0, tReal = 0;
+          for (var ri2 = 0; ri2 < rpSorted.length; ri2++) { tMeta += rpSorted[ri2][rpPairs[rpi].meta]||0; tReal += rpSorted[ri2][rpPairs[rpi].real]||0; }
+          var tGap = tReal - tMeta;
+          rpTotals += '<td class="text-right meta-color" style="font-weight:700">'+tMeta+'</td><td class="text-right realizado-color" style="font-weight:700">'+tReal+'</td><td class="text-right col-gap" style="color:'+(tGap>=0?'#34d399':'#f87171')+'">'+(tGap>0?'+':'')+tGap+'</td>';
+        }
+        rpHtml += '</tr></thead><tbody>' + rpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td>'+rpTotals+'</tr></tbody></table></div></div>';
         html += rpHtml;
       }
 

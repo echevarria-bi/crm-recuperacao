@@ -990,15 +990,34 @@
       if (clientes.length === 0) {
         html += '<div class="chart-box"><h2>Faturamento por Cliente <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal</span></h2><div style="text-align:center;padding:40px;color:#6b7280">Nenhum dado dispon\u00EDvel. Fa\u00E7a o upload do Excel para carregar.</div></div>';
       } else {
-      html += '<div class="chart-box"><h2>Faturamento por Cliente <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Cliente</th><th class="text-right realizado-color">Abril</th><th class="text-right realizado-color">Maio</th><th class="text-right realizado-color">Junho</th><th class="text-right" style="color:#fbbf24">Total</th></tr></thead><tbody id="tbodyClientes">';
+      var grandTotal = clientes.reduce(function(s,c){return s+(c.total||0);},0);
+      var maxTotal = clientes.length > 0 ? Math.max.apply(null, clientes.map(function(c){return c.total||0;})) : 1;
+      html += '<div class="chart-box"><h2>Faturamento por Cliente <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal com m\u00E9tricas</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Cliente</th><th class="text-right realizado-color">Abril</th><th class="text-right realizado-color">Maio</th><th class="text-right realizado-color">Junho</th><th class="text-right" style="color:#fbbf24">Total</th><th class="text-right" style="color:#6b7280;font-size:10px" title="Varia\u00E7\u00E3o percentual de Abril para Maio">&Delta; A\u2192M</th><th class="text-right" style="color:#6b7280;font-size:10px" title="Varia\u00E7\u00E3o percentual de Maio para Junho">&Delta; M\u2192J</th><th class="text-right" style="color:#34d399;font-size:10px">M\u00E9dia</th><th class="text-right" style="color:#a78bfa;font-size:10px">%</th><th style="text-align:center;color:#6b7280;font-size:10px">Status</th><th style="text-align:center;color:#6b7280;font-size:10px">Tier</th><th style="min-width:60px;color:#6b7280;font-size:10px">Peso</th></tr></thead><tbody id="tbodyClientes">';
       for (var i = 0; i < clientes.length; i++) {
         var c = clientes[i];
         var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
-        html += '<tr data-id="' + c.cliente + '"><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600;color:#fcd34d">' + c.cliente + '</td><td class="text-right realizado-color">' + fmtCurr(c.Abril||0) + '</td><td class="text-right realizado-color">' + fmtCurr(c.Maio||0) + '</td><td class="text-right realizado-color">' + fmtCurr(c.Junho||0) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(c.total) + '</td></tr>';
+        var a = c.Abril||0, m = c.Maio||0, j = c.Junho||0, tot = c.total||0;
+        var dAM = a > 0 ? ((m-a)/a*100).toFixed(1) : (m>0?'+100.0':'-');
+        var dMJ = m > 0 ? ((j-m)/m*100).toFixed(1) : (j>0?'+100.0':'-');
+        var dAMStr = dAM === '-' ? '-' : (parseFloat(dAM)>=0?'+'+dAM:dAM);
+        var dMJStr = dMJ === '-' ? '-' : (parseFloat(dMJ)>=0?'+'+dMJ:dMJ);
+        var dAMCol = dAM === '-' ? '#4a4d6e' : (parseFloat(dAM)>=0?'#34d399':'#f87171');
+        var dMJCol = dMJ === '-' ? '#4a4d6e' : (parseFloat(dMJ)>=0?'#34d399':'#f87171');
+        var count = (a?1:0)+(m?1:0)+(j?1:0);
+        var media = count > 0 ? tot / count : 0;
+        var pct = grandTotal > 0 ? (tot/grandTotal*100) : 0;
+        var status = j > 0 ? 'Ativo' : (m > 0 ? 'Aten\u00E7\u00E3o' : (a > 0 ? 'Risco' : 'Inativo'));
+        var statusCol = j > 0 ? '#34d399' : (m > 0 ? '#fbbf24' : (a > 0 ? '#f87171' : '#4a4d6e'));
+        var tier = tot >= 5000 ? 'A' : (tot >= 1000 ? 'B' : 'C');
+        var tierCol = tot >= 5000 ? '#f59e0b' : (tot >= 1000 ? '#a78bfa' : '#4a4d6e');
+        var barW = (tot / maxTotal * 100);
+        html += '<tr data-id="' + c.cliente + '"><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600;color:#fcd34d">' + c.cliente + '</td><td class="text-right realizado-color">' + fmtCurr(a) + '</td><td class="text-right realizado-color">' + fmtCurr(m) + '</td><td class="text-right realizado-color">' + fmtCurr(j) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(tot) + '</td><td class="text-right" style="font-size:11px;font-weight:600;color:'+dAMCol+'">' + dAMStr + (dAM!=='-'?'%':'') + '</td><td class="text-right" style="font-size:11px;font-weight:600;color:'+dMJCol+'">' + dMJStr + (dMJ!=='-'?'%':'') + '</td><td class="text-right realizado-color" style="font-size:11px">' + fmtCurr(media) + '</td><td class="text-right" style="font-size:11px;color:#a78bfa">' + pct.toFixed(1) + '%</td><td style="text-align:center"><span style="font-size:10px;padding:1px 6px;border-radius:4px;background:'+statusCol+'22;color:'+statusCol+';font-weight:600">' + status + '</span></td><td style="text-align:center"><span style="font-size:10px;padding:1px 6px;border-radius:4px;background:'+tierCol+'22;color:'+tierCol+';font-weight:700">' + tier + '</span></td><td style="padding:4px 6px"><div style="height:8px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:'+Math.min(barW,100)+'%;background:#f59e0b;border-radius:4px;transition:width .3s"></div></div></td></tr>';
       }
       var tAbr = 0, tMai = 0, tJun = 0, tTot = 0;
       for (var ti = 0; ti < clientes.length; ti++) { tAbr += clientes[ti].Abril||0; tMai += clientes[ti].Maio||0; tJun += clientes[ti].Junho||0; tTot += clientes[ti].total||0; }
-      html += '</tbody><tfoot class="tot-row"><tr><td class="col-ranking"></td><td style="font-weight:700;color:#fcd34d">Total Geral</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(tAbr) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(tMai) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(tJun) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(tTot) + '</td></tr></tfoot></table></div></div>';
+      var tCount = clientes.length;
+      var tMedia = tCount > 0 ? tTot / tCount : 0;
+      html += '</tbody><tfoot class="tot-row"><tr><td class="col-ranking"></td><td style="font-weight:700;color:#fcd34d">Total Geral</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(tAbr) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(tMai) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(tJun) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(tTot) + '</td><td class="text-right" style="color:#4a4d6e">-</td><td class="text-right" style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(tMedia) + '</td><td class="text-right" style="color:#a78bfa;font-weight:700">100%</td><td style="text-align:center">-</td><td style="text-align:center">-</td><td></td></tr></tfoot></table></div></div>';
       }
       document.getElementById('dashContent').innerHTML = html;
       setTimeout(function() {

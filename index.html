@@ -96,10 +96,48 @@
     var inputArquivo = document.getElementById('inputArquivo');
     var allData = null;
     var activeTab = 'resumo';
+    var GH_TOKEN = function(){ try { return localStorage.getItem('crmToken') || ''; } catch(e) { return ''; } };
+    var GH_OWNER = 'echevarria-bi';
+    var GH_REPO = 'crm-recuperacao';
+    var GH_FILE = 'data.json';
+    var GH_BRANCH = 'main';
 
     // change handled via inline onchange on the input
 
     function abrirArquivo() { inputArquivo.click(); }
+
+    function fetchRemoteData() {
+      return fetch('https://raw.githubusercontent.com/' + GH_OWNER + '/' + GH_REPO + '/' + GH_BRANCH + '/' + GH_FILE + '?t=' + Date.now())
+        .then(function(r) { if (!r.ok) throw new Error('not found'); return r.json(); })
+        .catch(function() { return null; });
+    }
+
+    function getToken() {
+      var t = GH_TOKEN();
+      if (!t) {
+        t = prompt('Informe o token do GitHub para salvar os dados no reposit\u00F3rio:');
+        if (t) { localStorage.setItem('crmToken', t); }
+      }
+      return t;
+    }
+
+    function saveRemoteData(data, fileName) {
+      var token = getToken();
+      if (!token) return Promise.resolve(false);
+      var content = JSON.stringify(data, null, 2);
+      var base64 = btoa(unescape(encodeURIComponent(content)));
+      var commitMsg = 'Atualiza\u00E7\u00E3o ' + (fileName || '') + ' - ' + new Date().toLocaleString('pt-BR');
+      var url = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_FILE;
+      return fetch(url + '?ref=' + GH_BRANCH, { headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github.v3+json' } })
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(existing) {
+          var body = { message: commitMsg, content: base64, branch: GH_BRANCH };
+          if (existing && existing.sha) body.sha = existing.sha;
+          return fetch(url, { method: 'PUT', headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' }, body: JSON.stringify(body) });
+        })
+        .then(function(r) { return r.ok; })
+        .catch(function() { return false; });
+    }
 
     function processFile(file) {
       inputArquivo.value = '';
@@ -118,6 +156,16 @@
           switchTab('resumo');
           salvarStorage();
           document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
+          saveRemoteData({ data: allData, fileName: file.name, updatedAt: new Date().toISOString() }, file.name).then(function(ok) {
+            if (ok) {
+              document.getElementById('statusFile').textContent = 'Salvo no reposit\u00F3rio';
+              document.getElementById('statusFile').style.color = '#34d399';
+            } else {
+              document.getElementById('statusFile').textContent = 'Erro ao salvar no reposit\u00F3rio';
+              document.getElementById('statusFile').style.color = '#f87171';
+            }
+            setTimeout(function() { document.getElementById('statusFile').textContent = ''; }, 5000);
+          });
         } catch(err) {
           document.getElementById('areaInicial').innerHTML = '<div style="font-size:40px;margin-bottom:8px">⚠</div><div style="color:#f87171;font-size:14px">Erro: ' + err.message + '</div><div style="color:#4a4d6e;font-size:12px;margin-top:4px;cursor:pointer" onclick="abrirArquivo()">Clique para tentar novamente</div>';
         }
@@ -910,10 +958,22 @@
       }, 100);
     }
 
-    // Restore saved data on page load
-    if (restaurarStorage()) {
-      document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
-    }
+    // Initialize: try remote first, then localStorage, then upload area
+    fetchRemoteData().then(function(remote) {
+      if (remote && remote.data) {
+        allData = remote.data;
+        document.getElementById('areaInicial').parentElement.style.display = 'none';
+        var fn = remote.fileName || 'Arquivo remoto';
+        var ts = remote.updatedAt ? new Date(remote.updatedAt) : new Date();
+        document.getElementById('footer').style.display = 'block';
+        document.getElementById('footer').innerHTML = '<strong>' + fn + '</strong> &middot; ' + ts.toLocaleDateString('pt-BR') + ' à' + 's ' + ts.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recuperação';
+        initTabs();
+        switchTab('resumo');
+        document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
+      } else if (restaurarStorage()) {
+        document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
+      }
+    });
   </script>
 </body>
 </html>

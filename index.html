@@ -933,15 +933,6 @@
       for (var hi = 0; hi < days.length; hi++) { if (days[hi] === hoje) { hojeIdx = hi; break; } }
       if (hojeIdx < 0) hojeIdx = days.length - 1;
       var mediaDiaria = hojeIdx >= 0 ? (totReal / (hojeIdx + 1)) : 0;
-      var diasRestantes = days.length - 1 - hojeIdx;
-      if (diasRestantes < 0) diasRestantes = 0;
-      var projecao = totReal + mediaDiaria * diasRestantes;
-      html += '<div class="cards">';
-      html += '<div class="card"><div class="label">' + icn('bar-chart-3',12) + ' M\u00E9dia Di\u00E1ria (' + monthName + ')</div><div class="value">' + mediaDiaria.toFixed(1) + '</div><div class="sub">' + totReal + ' total em ' + (hojeIdx + 1) + ' dias</div></div>';
-      html += '<div class="card"><div class="label">' + icn('check-circle',12) + ' Realizado no M\u00EAs</div><div class="value">' + totReal + '</div><div class="sub">' + (totMeta > 0 ? (totReal/totMeta*100).toFixed(1) + '% da meta' : '') + '</div></div>';
-      html += '<div class="card"><div class="label">' + icn('trending-up',12) + ' Proje\u00E7\u00E3o Final</div><div class="value">' + projecao.toFixed(0) + '</div><div class="sub">' + (projecao >= totMeta ? 'Bater\u00E1 a meta &#9989;' : 'Meta: ' + totMeta) + '</div></div>';
-      html += '</div>';
-
       html += '<div class="chart-box"><h2>Acompanhamento Di\u00E1rio <span class="sub">&rarr; Recupera\u00E7\u00E3o em ' + monthName + '</span></h2><div class="table-wrap"><table><thead><tr><th rowspan="2" style="vertical-align:middle">Televendedora</th><th rowspan="2" style="vertical-align:middle;text-align:center" title="Percentual de atingimento da meta">%</th><th rowspan="2" style="vertical-align:middle;text-align:center" title="Total acumulado de clientes recuperados">Acum.</th>';
       for (var di = 0; di < days.length; di++) {
         var isHoje = di === hojeIdx;

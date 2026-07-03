@@ -671,25 +671,32 @@
       return allData.painelGeral.recuperacao.profissionais;
     }
 
-    function criarChartsResumo(evo, mesesArr) {
+    function criarChartsResumo(evo, mesesArr, contatoData, recupData, fatData) {
       try {
         var labels = mesesArr;
         var convData = [], contMeta = [], recupMeta = [], recupReal = [], valorData = [];
-        for (var mi = 0; mi < mesesArr.length; mi++) {
-          var mk = mesesArr[mi];
-          var conv = 0, mc = 0, mr = 0, rr = 0, vr = 0;
-          for (var ii = 0; ii < evo.indicadores.length; ii++) {
-            if (evo.indicadores[ii].label === 'Contatos Realizados') conv = evo.indicadores[ii][mk] || 0;
-            if (evo.indicadores[ii].label === 'Meta de Contatos') mc = evo.indicadores[ii][mk] || 0;
-            if (evo.indicadores[ii].label === 'Meta de Clientes Recuperados') mr = evo.indicadores[ii][mk] || 0;
-            if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' && evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) rr = evo.indicadores[ii][mk] || 0;
-            if (evo.indicadores[ii].label === 'Valor Recuperado' && evo.indicadores[ii].label.indexOf('%') < 0) vr = evo.indicadores[ii][mk] || 0;
+        if (evo && evo.indicadores && evo.indicadores.length > 0) {
+          for (var mi = 0; mi < mesesArr.length; mi++) {
+            var mk = mesesArr[mi];
+            var conv = 0, mc = 0, mr = 0, rr = 0, vr = 0;
+            for (var ii = 0; ii < evo.indicadores.length; ii++) {
+              if (evo.indicadores[ii].label === 'Contatos Realizados') conv = evo.indicadores[ii][mk] || 0;
+              if (evo.indicadores[ii].label === 'Meta de Contatos') mc = evo.indicadores[ii][mk] || 0;
+              if (evo.indicadores[ii].label === 'Meta de Clientes Recuperados') mr = evo.indicadores[ii][mk] || 0;
+              if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' && evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) rr = evo.indicadores[ii][mk] || 0;
+              if (evo.indicadores[ii].label === 'Valor Recuperado' && evo.indicadores[ii].label.indexOf('%') < 0) vr = evo.indicadores[ii][mk] || 0;
+            }
+            convData.push(conv);
+            contMeta.push(mc);
+            recupMeta.push(mr);
+            recupReal.push(rr);
+            valorData.push(vr);
           }
-          convData.push(conv);
-          contMeta.push(mc);
-          recupMeta.push(mr);
-          recupReal.push(rr);
-          valorData.push(vr);
+        } else {
+          // Fallback: use pre-computed data from renderResumo
+          convData = contatoData || [0,0,0];
+          recupReal = recupData || [0,0,0];
+          valorData = fatData || [0,0,0];
         }
         var c1 = document.getElementById('chartEvolucao1');
         var c2 = document.getElementById('chartEvolucao2');
@@ -719,35 +726,57 @@
       var html = '';
 
       var contatoData = [], recupData = [], fatData = [];
-      for (var mi = 0; mi < mesesArr.length; mi++) {
-        var mk = mesesArr[mi];
-        var c = 0, r = 0, f = 0;
-        for (var ii = 0; ii < evo.indicadores.length; ii++) {
-          if (evo.indicadores[ii].label === 'Contatos Realizados') c = evo.indicadores[ii][mk] || 0;
-          if ((evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' || evo.indicadores[ii].label === 'Clientes Recuperados') && evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) r = evo.indicadores[ii][mk] || 0;
-          if (evo.indicadores[ii].label === 'Valor Recuperado' && evo.indicadores[ii].label.indexOf('%') < 0) f = evo.indicadores[ii][mk] || 0;
+      var hasEvoData = evo && evo.indicadores && evo.indicadores.length > 0;
+      if (hasEvoData) {
+        for (var mi = 0; mi < mesesArr.length; mi++) {
+          var mk = mesesArr[mi];
+          var c = 0, r = 0, f = 0;
+          for (var ii = 0; ii < evo.indicadores.length; ii++) {
+            if (evo.indicadores[ii].label === 'Contatos Realizados') c = evo.indicadores[ii][mk] || 0;
+            if ((evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' || evo.indicadores[ii].label === 'Clientes Recuperados') && evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) r = evo.indicadores[ii][mk] || 0;
+            if (evo.indicadores[ii].label === 'Valor Recuperado' && evo.indicadores[ii].label.indexOf('%') < 0) f = evo.indicadores[ii][mk] || 0;
+          }
+          contatoData.push(c);
+          recupData.push(r);
+          fatData.push(f);
         }
-        contatoData.push(c);
-        recupData.push(r);
-        fatData.push(f);
+      } else {
+        // Fallback: extract from PAINEL GERAL
+        for (var mi = 0; mi < mesesArr.length; mi++) {
+          var mk = mesesArr[mi];
+          var pk = mk === 'Junho' ? 'painelGeral' : ('painel' + mk);
+          var pp = allData[pk];
+          var r = pp && pp.recuperacao && pp.recuperacao.total ? pp.recuperacao.total.realizado : 0;
+          recupData.push(r);
+          var c = pp && pp.metaContatos && pp.metaContatos.total ? pp.metaContatos.total.realizado : 0;
+          contatoData.push(c);
+          fatData.push(0);
+        }
       }
 
-      // Get "Realizado de Clientes Recuperados" total for card
       var recupTotal = 0;
-      for (var ii = 0; ii < evo.indicadores.length; ii++) {
-        if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' || evo.indicadores[ii].label === 'Clientes Recuperados') {
-          if (evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) {
-            recupTotal = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0);
+      if (hasEvoData) {
+        for (var ii = 0; ii < evo.indicadores.length; ii++) {
+          if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' || evo.indicadores[ii].label === 'Clientes Recuperados') {
+            if (evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) {
+              recupTotal = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0);
+            }
           }
         }
+      } else {
+        for (var mi = 0; mi < mesesArr.length; mi++) recupTotal += recupData[mi];
       }
 
       var totalFaturamento = 0;
       for (var mi = 0; mi < mesesArr.length; mi++) { totalFaturamento += fatData[mi]; }
+      if (totalFaturamento === 0 && allData.faturamentoTotal) totalFaturamento = allData.faturamentoTotal;
+
       var totalConv = 0;
-      for (var ii = 0; ii < evo.indicadores.length; ii++) {
-        if (evo.indicadores[ii].label === 'Convers\u00F5es Totais' || evo.indicadores[ii].label === 'Conversões Totais' || evo.indicadores[ii].label === 'Conversoes Totais') {
-          totalConv = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0);
+      if (hasEvoData) {
+        for (var ii = 0; ii < evo.indicadores.length; ii++) {
+          if (evo.indicadores[ii].label === 'Convers\u00F5es Totais' || evo.indicadores[ii].label === 'Conversões Totais' || evo.indicadores[ii].label === 'Conversoes Totais') {
+            totalConv = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0);
+          }
         }
       }
 
@@ -825,11 +854,14 @@
         rpHtml += '</tr></thead><tbody>' + rpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td>'+rpTotals+'</tr></tbody></table></div></div>';
         html += rpHtml;
       }
+      var chartsHtml = '<div class="grid-2">';
+      chartsHtml += '<div class="chart-box"><h2>Contatos Realizados <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal de contatos vs meta</span></h2><canvas id="chartEvolucao1" style="max-height:220px"></canvas></div>';
+      chartsHtml += '<div class="chart-box"><h2>Clientes Recuperados <span class="sub">&rarr; Meta x Realizado por m\u00EAs</span></h2><canvas id="chartEvolucao2" style="max-height:220px"></canvas></div></div>';
+      html += chartsHtml;
 
-      
       document.getElementById('dashContent').innerHTML = html;
 
-      setTimeout(function() { criarChartsResumo(evo, mesesArr); }, 100);
+      setTimeout(function() { criarChartsResumo(evo, mesesArr, contatoData, recupData, fatData); }, 100);
     }
 
     function renderMonth(monthName) {
@@ -859,8 +891,8 @@
       for (var pi = 0; pi < pg.recuperacao.profissionais.length; pi++) {
         var p = pg.recuperacao.profissionais[pi];
         var name = p.profissional;
-        var jMeta = (rpMap[name] && rpMap[name].meta) || 0;
-        var jReal = (rpMap[name] && rpMap[name].real) || 0;
+        var jMeta = (rpMap[name] && rpMap[name].meta) || p.meta || 0;
+        var jReal = (rpMap[name] && rpMap[name].real) || p.realizado || 0;
         var jFat = fatMap[name] || 0;
         var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
         profsData.push({
@@ -956,8 +988,8 @@
       for (var i = 0; i < pg.recuperacao.profissionais.length; i++) {
         var p = pg.recuperacao.profissionais[i];
         var bg = i%2===0?'#0b0d14':'#11131c';
-        var jMeta = (rpMap[p.profissional] && rpMap[p.profissional].meta) || 0;
-        var jReal = (rpMap[p.profissional] && rpMap[p.profissional].real) || 0;
+        var jMeta = (rpMap[p.profissional] && rpMap[p.profissional].meta) || p.meta || 0;
+        var jReal = (rpMap[p.profissional] && rpMap[p.profissional].real) || p.realizado || 0;
         var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
         var pctStr = jPct.toFixed(1);
         var pctColor = jPct >= 100 ? '#34d399' : jPct >= 80 ? '#fbbf24' : '#f87171';

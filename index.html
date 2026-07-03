@@ -181,6 +181,14 @@
       var total = files.length;
       allData = null;
       var done = 0;
+
+      // Reorder: Junho first (has full EVOLUCAO DOS MESES), then Abril, Maio
+      var ordered = [];
+      for (var fi = 0; fi < files.length; fi++) {
+        var m = detectMonthFromName(files[fi].name);
+        if (m === 'Junho') ordered.unshift(files[fi]); else ordered.push(files[fi]);
+      }
+
       function processNext(idx) {
         if (idx >= total) {
           inputArquivo.value = '';
@@ -201,7 +209,7 @@
           });
           return;
         }
-        var file = files[idx];
+        var file = ordered[idx];
         document.getElementById('areaInicial').innerHTML = '<div style="color:#f59e0b;margin-bottom:6px"><span class="spinner"></span></div><div style="color:#fcd34d;font-size:14px">Processando ' + file.name + ' (' + (idx+1) + '/' + total + ')...</div>';
         var reader = new FileReader();
         reader.onload = function(ev) {
@@ -237,6 +245,14 @@
         if (!allData[targetKey]) allData[targetKey] = {recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]};
         var ctx = {painelGeral: allData[targetKey]};
         parsePainelGeral(pg, ctx);
+      }
+      // If EVOLUCAO DOS MESES is still empty, try parsing from this file too
+      if (!allData.evolucaoMeses.indicadores || allData.evolucaoMeses.indicadores.length === 0) {
+        var evolKey = 'evolucao dos meses'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+        if (sheetMap[evolKey]) {
+          var grid = XLSX.utils.sheet_to_json(sheetMap[evolKey], {header:1, defval:''});
+          parseEvolucaoMeses(grid, allData);
+        }
       }
     }
 
@@ -417,7 +433,8 @@
         var row = grid[r];
         if (!row || !row[0]) continue;
         var label = String(row[0]).trim();
-        if (label === 'Indicador') {
+        var lu = label.toUpperCase();
+        if (lu === 'INDICADOR') {
           for (var ri = r+1; ri < grid.length; ri++) {
             var r2 = grid[ri];
             if (!r2 || !r2[0] || String(r2[0]).trim() === '') break;
@@ -433,21 +450,23 @@
           }
           continue;
         }
-        if (label === 'Mês' && String(row[1]||'').trim() === 'Conversões') {
-          for (var ri = r+1; ri < grid.length; ri++) {
-            var r2 = grid[ri];
-            if (!r2 || !r2[0] || String(r2[0]).trim() === '') break;
+        if (lu === 'MÊS' || lu === 'MES') {
+          var c1 = String(row[1]||'').trim().toUpperCase();
+          if (c1 === 'CONVERSÕES' || c1 === 'CONVERSOES') {
+            for (var ri = r+1; ri < grid.length; ri++) {
+              var r2 = grid[ri];
+              if (!r2 || !r2[0] || String(r2[0]).trim() === '') break;
+            }
+            continue;
           }
-          continue;
-        }
-        if (label === 'Mês' && String(row[1]||'').trim() === 'Meta' && String(row[2]||'').trim() === 'Realizado') {
+          if (String(row[1]||'').trim().toUpperCase() === 'META' && String(row[2]||'').trim().toUpperCase() === 'REALIZADO') {
           for (var ri = r+1; ri < grid.length; ri++) {
             var r2 = grid[ri];
             if (!r2 || !r2[0]) break;
           }
           continue;
         }
-        if (label === 'Profissional' && String(row[1]||'').trim() === 'Abril') {
+        if ((lu === 'PROFISSIONAL' || lu === 'TELEVENDEDORA') && String(row[1]||'').trim().toUpperCase() === 'ABRIL') {
           var colNames = [];
           for (var ci = 1; ci < row.length; ci++) { colNames.push(String(row[ci]).trim()); }
           for (var ri = r+1; ri < grid.length; ri++) {
@@ -469,7 +488,7 @@
           }
           continue;
         }
-        if (label === 'RECUPERADOS POR RCA' || label === 'RECUPERADOS POR RAC') {
+        if (lu === 'RECUPERADOS POR RCA' || lu === 'RECUPERADOS POR RAC' || lu.indexOf('RECUPERADOS POR') >= 0) {
           // Extract month labels from title row
           var rcaMonths = [];
           var titleRow = grid[r] || [];

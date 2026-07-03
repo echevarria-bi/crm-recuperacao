@@ -19,10 +19,14 @@
     .top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px}
     .top-bar .info{font-size:13px;color:#4a4d6e}
     .top-bar label{color:#9ca3af;font-size:13px;font-weight:500}
-    .tabs{display:flex;gap:4px;margin-bottom:20px;background:#11131c;border:1px solid #1e1b4b;border-radius:12px;padding:4px;overflow-x:auto}
-    .tab-btn{padding:10px 20px;border:none;border-radius:8px;background:transparent;color:#6b7280;font-size:13px;font-weight:600;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:6px;white-space:nowrap}
+    .tabs-group{background:#11131c;border:1px solid #1e1b4b;border-radius:12px;padding:6px;margin-bottom:20px}
+    .tabs{display:flex;gap:4px;overflow-x:auto}
+    .tabs + .tabs{margin-top:4px}
+    .tab-btn{padding:8px 16px;border:none;border-radius:8px;background:transparent;color:#6b7280;font-size:12px;font-weight:600;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:6px;white-space:nowrap}
     .tab-btn:hover{color:#fcd34d;background:#1a1d27}
     .tab-btn.active{background:linear-gradient(135deg,#78350f,#451a03);color:#fcd34d;border:1px solid #f59e0b}
+    .tab-month{padding:5px 14px;font-size:11px}
+    .tab-month.active{background:linear-gradient(135deg,#1e1b4b,#11131c);color:#a78bfa;border:1px solid #4a4d6e}
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
     .card{background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:14px;padding:20px 24px;transition:.2s}
     .card:hover{border-color:#f59e0b;transform:translateY(-1px);box-shadow:0 4px 20px rgba(245,158,11,.08)}
@@ -626,15 +630,16 @@
     var icn = function(n,s){s=s||14; return '<i data-lucide="'+n+'" style="display:inline-block;width:'+s+'px;height:'+s+'px;vertical-align:middle;stroke:currentColor;stroke-width:2;flex-shrink:0;margin-right:4px"></i>';};
 
     function initTabs() {
-      var h = '<div class="tabs" style="margin-bottom:4px">';
-      h += '<button class="tab-btn' + (activeTab==='abril'?' active':'') + '" data-tab="abril">' + icn('calendar',14) + ' Abril</button>';
-      h += '<button class="tab-btn' + (activeTab==='maio'?' active':'') + '" data-tab="maio">' + icn('calendar',14) + ' Maio</button>';
-      h += '<button class="tab-btn' + (activeTab==='geral'?' active':'') + '" data-tab="geral">' + icn('bar-chart-3',14) + ' Junho</button>';
+      var h = '<div class="tabs-group">';
+      h += '<div class="tabs">';
+      h += '<button class="tab-btn tab-month' + (activeTab==='abril'?' active':'') + '" data-tab="abril">' + icn('calendar',12) + ' Abril</button>';
+      h += '<button class="tab-btn tab-month' + (activeTab==='maio'?' active':'') + '" data-tab="maio">' + icn('calendar',12) + ' Maio</button>';
+      h += '<button class="tab-btn tab-month' + (activeTab==='geral'?' active':'') + '" data-tab="geral">' + icn('bar-chart-3',12) + ' Junho</button>';
       h += '</div><div class="tabs">';
-      h += '<button class="tab-btn' + (activeTab==='resumo'?' active':'') + '" data-tab="resumo">' + icn('layout-dashboard',14) + ' Resumo</button>';
-      h += '<button class="tab-btn' + (activeTab==='clientes'?' active':'') + '" data-tab="clientes">' + icn('table-2',14) + ' Clientes</button>';
-      h += '<button class="tab-btn' + (activeTab==='motivos'?' active':'') + '" data-tab="motivos">' + icn('clipboard-list',14) + ' Motivos</button>';
-      h += '</div>';
+      h += '<button class="tab-btn' + (activeTab==='resumo'?' active':'') + '" data-tab="resumo">' + icn('layout-dashboard',13) + ' Resumo</button>';
+      h += '<button class="tab-btn' + (activeTab==='clientes'?' active':'') + '" data-tab="clientes">' + icn('table-2',13) + ' Clientes</button>';
+      h += '<button class="tab-btn' + (activeTab==='motivos'?' active':'') + '" data-tab="motivos">' + icn('clipboard-list',13) + ' Motivos</button>';
+      h += '</div></div>';
       var tc = document.getElementById('tabsContainer');
       if (tc) tc.innerHTML = h;
       var btns = document.querySelectorAll('.tab-btn');

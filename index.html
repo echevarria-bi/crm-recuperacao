@@ -923,6 +923,76 @@
       html += '</tbody></table></div></div>';
       }
 
+      // -- Daily section for this month --
+      var totalPG = pg.recuperacao.total;
+      var totReal = 0, totMeta = 0;
+      for (var dk in rpMap) { totReal += rpMap[dk].real; totMeta += rpMap[dk].meta; }
+      if (totReal === 0) { totReal = totalPG ? totalPG.realizado : 0; }
+      if (totMeta === 0) { totMeta = totalPG ? totalPG.meta : 0; }
+      var days = [1,2,3,5,8,9,10,11,12,15,16,17,18,19,22,23,24,25,26,29,30];
+      var hoje = new Date().getDate();
+      var hojeIdx = -1;
+      for (var hi = 0; hi < days.length; hi++) { if (days[hi] === hoje) { hojeIdx = hi; break; } }
+      if (hojeIdx < 0) hojeIdx = days.length - 1;
+      var mediaDiaria = hojeIdx >= 0 ? (totReal / (hojeIdx + 1)) : 0;
+      var diasRestantes = days.length - 1 - hojeIdx;
+      if (diasRestantes < 0) diasRestantes = 0;
+      var projecao = totReal + mediaDiaria * diasRestantes;
+      html += '<div class="cards">';
+      html += '<div class="card"><div class="label">' + icn('bar-chart-3',12) + ' M\u00E9dia Di\u00E1ria (' + monthName + ')</div><div class="value">' + mediaDiaria.toFixed(1) + '</div><div class="sub">' + totReal + ' total em ' + (hojeIdx + 1) + ' dias</div></div>';
+      html += '<div class="card"><div class="label">' + icn('check-circle',12) + ' Realizado no M\u00EAs</div><div class="value">' + totReal + '</div><div class="sub">' + (totMeta > 0 ? (totReal/totMeta*100).toFixed(1) + '% da meta' : '') + '</div></div>';
+      html += '<div class="card"><div class="label">' + icn('trending-up',12) + ' Proje\u00E7\u00E3o Final</div><div class="value">' + projecao.toFixed(0) + '</div><div class="sub">' + (projecao >= totMeta ? 'Bater\u00E1 a meta &#9989;' : 'Meta: ' + totMeta) + '</div></div>';
+      html += '</div>';
+
+      html += '<div class="chart-box"><h2>Acompanhamento Di\u00E1rio <span class="sub">&rarr; Recupera\u00E7\u00E3o em ' + monthName + '</span></h2><div class="table-wrap"><table><thead><tr><th rowspan="2" style="vertical-align:middle">Televendedora</th><th rowspan="2" style="vertical-align:middle;text-align:center" title="Percentual de atingimento da meta">%</th><th rowspan="2" style="vertical-align:middle;text-align:center" title="Total acumulado de clientes recuperados">Acum.</th>';
+      for (var di = 0; di < days.length; di++) {
+        var isHoje = di === hojeIdx;
+        html += '<th colspan="2" style="text-align:center;min-width:44px;' + (isHoje ? 'color:#fcd34d;background:#78350f' : '') + '">' + (isHoje ? '&#x1F514; ' : '') + 'Dia ' + days[di] + '</th>';
+      }
+      html += '</tr><tr>';
+      for (var di = 0; di < days.length; di++) {
+        html += '<th style="text-align:center;font-size:9px;width:20px" class="meta-color">M</th><th style="text-align:center;font-size:9px;width:20px" class="realizado-color">R</th>';
+      }
+      html += '</tr></thead><tbody>';
+      for (var i = 0; i < pg.recuperacao.profissionais.length; i++) {
+        var p = pg.recuperacao.profissionais[i];
+        var bg = i%2===0?'#0b0d14':'#11131c';
+        var jMeta = (rpMap[p.profissional] && rpMap[p.profissional].meta) || 0;
+        var jReal = (rpMap[p.profissional] && rpMap[p.profissional].real) || 0;
+        var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
+        var pctStr = jPct.toFixed(1);
+        var pctColor = jPct >= 100 ? '#34d399' : jPct >= 80 ? '#fbbf24' : '#f87171';
+        var acum = (rpMap[p.profissional] && rpMap[p.profissional].real) || 0;
+        html += '<tr style="background:'+bg+'"><td style="font-weight:600;color:#fcd34d">'+icn('user',12)+' '+p.profissional+'</td><td style="text-align:center;font-weight:700;color:'+pctColor+'">'+pctStr+'%</td><td style="text-align:center;font-weight:700">'+acum+'</td>';
+        for (var di = 0; di < days.length; di++) {
+          var v = (p.dias && p.dias[di]) ? p.dias[di] : null;
+          var mVal = v?v.meta:0;
+          var rVal = v?v.realizado:0;
+          var atingiuMeta = rVal >= mVal && mVal > 0;
+          var cor = atingiuMeta ? '#34d399' : rVal > 0 ? '#fbbf24' : '#4a4d6e';
+          html += '<td style="text-align:center;font-size:9px;color:#6b7280">'+(mVal>0?mVal:'-')+'</td><td style="text-align:center;font-size:11px;font-weight:700;color:'+cor+'">'+(rVal>0?rVal:'-')+'</td>';
+        }
+        html += '</tr>';
+      }
+      // Total row for daily
+      html += '<tr class="tot-row"><td>'+icn('users',12)+' Total</td><td style="text-align:center;font-weight:700;color:'+(totMeta>0&&totReal/totMeta*100>=100?'#34d399':totMeta>0&&totReal/totMeta*100>=80?'#fbbf24':'#f87171')+'">'+(totMeta>0?(totReal/totMeta*100).toFixed(1):'0.0')+'%</td><td style="text-align:center;font-weight:700">'+totReal+'</td>';
+      for (var di = 0; di < days.length; di++) {
+        // Calculate total meta and real for this day across all professionals
+        var tM = 0, tR = 0;
+        for (var pi = 0; pi < pg.recuperacao.profissionais.length; pi++) {
+          var p = pg.recuperacao.profissionais[pi];
+          var v = (p.dias && p.dias[di]) ? p.dias[di] : null;
+          if (v) { tM += v.meta||0; tR += v.realizado||0; }
+        }
+        var aMeta = tM>0?'#34d399':'#4a4d6e';
+        html += '<td style="text-align:center;font-size:9px;color:#6b7280">'+(tM>0?tM:'-')+'</td><td style="text-align:center;font-size:11px;font-weight:700;color:'+aMeta+'">'+(tR>0?tR:'-')+'</td>';
+      }
+      html += '</tr></tbody></table></div></div>';
+
+      // Trend chart for this month
+      html += '<div class="grid-2"><div class="chart-box"><h2>Tend\u00EAncia Di\u00E1ria <span class="sub">&rarr; Meta, Realizado e Acumulado (' + monthName + ')</span></h2><canvas id="chartTendencia' + monthName + '" style="max-height:220px"></canvas></div>';
+      html += '<div class="chart-box"><h2>Comparativo por Televendedora <span class="sub">&rarr; Realizado x Meta (' + monthName + ')</span></h2><canvas id="chartComp' + monthName + '" style="max-height:220px"></canvas></div></div>';
+
       html += '<div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;font-size:11px;color:#6b7280;align-items:center"><span>Legenda:</span><span><span class="badge badge-green">Batida ✓</span> ≥100%</span><span><span class="badge badge-yellow">Parcial &#9888;</span> 80–99%</span><span><span class="badge badge-red">Abaixo &#128308;</span> &lt;80%</span></div>';
 
       html += '<div class="grid-2"><div class="chart-box"><h2>Meta x Realizado <span class="sub">&rarr; Comparativo por televendedora (' + monthName + ')</span></h2><canvas id="chartRecProf" style="max-height:220px"></canvas></div><div class="chart-box"><h2>% Atingimento <span class="sub">&rarr; Percentual por televendedora (' + monthName + ')</span></h2><canvas id="chartRecPct" style="max-height:220px"></canvas></div></div>';
@@ -942,6 +1012,47 @@
           new Chart(document.getElementById('chartRecPct'), {
             type:'doughnut', data:{labels:profsData.map(function(p,i){return p.profissional+' — '+pcts[i]+'%';}), datasets:[{data:pcts.map(function(p){return Math.max(p,1);}),backgroundColor:['#f59e0b','#fb923c','#f97316','#34d399','#a78bfa'],borderColor:'#0b0d14',borderWidth:2}]},
             options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{color:'#fff',font:{size:12,weight:'bold'},anchor:'center',align:'center',formatter:function(v,ctx){return pcts[ctx.dataIndex]+'%';}},legend:{position:'left',labels:{color:'#9ca3af',padding:14,boxWidth:12,font:{size:12,weight:'bold'},usePointStyle:true},align:'center'},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false},title:{display:false}},cutout:'60%'}
+          });
+          // Daily trend chart per month
+          var diasLabels = days.map(function(d){return 'Dia '+d;});
+          var totals = [], metas = [];
+          for (var di = 0; di < days.length; di++) {
+            var sumR = 0, sumM = 0;
+            for (var pi = 0; pi < pg.recuperacao.profissionais.length; pi++) {
+              var v = (pg.recuperacao.profissionais[pi].dias && pg.recuperacao.profissionais[pi].dias[di]) ? pg.recuperacao.profissionais[pi].dias[di] : null;
+              if (v) { sumR += v.realizado; sumM += v.meta; }
+            }
+            totals.push(sumR);
+            metas.push(sumM);
+          }
+          var acc = [], acum = 0;
+          for (var di = 0; di < totals.length; di++) { acum += totals[di]; acc.push(acum); }
+          var lastAcum = acc.length > 0 ? acc[acc.length-1] : 0;
+          if (lastAcum > 0 && Math.abs(lastAcum - totReal) > 0.5) {
+            var scale = totReal / lastAcum;
+            for (var si = 0; si < acc.length; si++) acc[si] = Math.round(acc[si] * scale);
+          }
+          new Chart(document.getElementById('chartTendencia' + monthName), {
+            type:'line', data:{labels:diasLabels, datasets:[
+              {label:'Meta',data:metas,borderColor:'#60a5fa',backgroundColor:'transparent',tension:.3,borderDash:[5,4],pointRadius:2,pointBackgroundColor:'#60a5fa'},
+              {label:'Realizado',data:totals,borderColor:'#fbbf24',backgroundColor:'transparent',tension:.3,borderDash:[5,4],pointRadius:3,pointBackgroundColor:'#fbbf24'},
+              {label:'Acumulado',data:acc,borderColor:'#34d399',backgroundColor:'#34d39922',fill:true,tension:.4,borderWidth:3,pointRadius:3,pointBackgroundColor:'#34d399',yAxisID:'y1'}
+            ]},
+            options:{responsive:true,plugins:{datalabels:{display:false},legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280',maxRotation:45},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,position:'left',ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'},title:{display:true,text:'Di\u00E1rio',color:'#6b7280'}},y1:{position:'right',beginAtZero:true,ticks:{color:'#6b7280'},grid:{display:false},title:{display:true,text:'Acumulado',color:'#6b7280'}}}}
+          });
+          var profNames = profsData.map(function(p){return p.profissional;});
+          var profTotals = [], profMetas = [];
+          for (var pi = 0; pi < profsData.length; pi++) {
+            var nm = profsData[pi].profissional;
+            profMetas.push((rpMap[nm] && rpMap[nm].meta) || 0);
+            profTotals.push((rpMap[nm] && rpMap[nm].real) || 0);
+          }
+          new Chart(document.getElementById('chartComp' + monthName), {
+            type:'bar', data:{labels:profNames, datasets:[
+              {label:'Meta',data:profMetas,backgroundColor:'#78350f',borderRadius:4},
+              {label:'Realizado',data:profTotals,backgroundColor:['#f59e0b','#fb923c','#f97316','#34d399','#a78bfa'],borderRadius:4}
+            ]},
+            options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{color:'#9ca3af',font:{size:9,weight:'bold'},anchor:'end',align:'end'},legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}
           });
         } catch(e) {}
       }, 100);

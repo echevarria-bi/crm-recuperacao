@@ -148,6 +148,7 @@
     }
 
     function saveRemoteData(data, fileName) {
+      if (!data || !data.data || !data.data.evolucaoMeses) return Promise.resolve(false);
       var token = getToken();
       if (!token) {
         document.getElementById('tokenStatus').textContent = 'Token n\u00E3o configurado';
@@ -276,6 +277,7 @@
 
     function salvarStorage() {
       try {
+        if (!allData || !allData.evolucaoMeses) return;
         localStorage.setItem('crmData', JSON.stringify(allData));
         localStorage.setItem('crmFileName', document.querySelector('#areaInicial div')?.textContent?.trim() || 'Arquivo');
         localStorage.setItem('crmTimestamp', new Date().toISOString());
@@ -286,7 +288,9 @@
       var saved = localStorage.getItem('crmData');
       if (!saved) return false;
       try {
-        allData = JSON.parse(saved);
+        var parsed = JSON.parse(saved);
+        if (!parsed || !parsed.evolucaoMeses || !parsed.painelGeral) return false;
+        allData = parsed;
         document.getElementById('areaInicial').parentElement.style.display = 'none';
         var fn = localStorage.getItem('crmFileName') || 'Arquivo';
         var ts = localStorage.getItem('crmTimestamp');
@@ -1235,7 +1239,7 @@
 
     // Initialize: try remote first, then localStorage, then upload area
     fetchRemoteData().then(function(remote) {
-      if (remote && remote.data) {
+      if (remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral) {
         allData = remote.data;
         document.getElementById('areaInicial').parentElement.style.display = 'none';
         var fn = remote.fileName || 'Arquivo remoto';

@@ -860,13 +860,14 @@
         fatMap[f.profissional] = f[monthName] || 0;
       }
 
-      // Merge with Painel Geral data (for dias) and compute June-only values
+      // Merge with Painel Geral data (for dias) and compute month values
       var profsData = [];
       for (var pi = 0; pi < pg.recuperacao.profissionais.length; pi++) {
         var p = pg.recuperacao.profissionais[pi];
         var name = p.profissional;
-        var jMeta = (rpMap[name] && rpMap[name].meta) || 0;
-        var jReal = (rpMap[name] && rpMap[name].real) || 0;
+        var useRp = rpMap[name] && (rpMap[name].meta || rpMap[name].real);
+        var jMeta = useRp ? rpMap[name].meta : (p.meta || 0);
+        var jReal = useRp ? rpMap[name].real : (p.realizado || 0);
         var jFat = fatMap[name] || 0;
         var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
         profsData.push({
@@ -940,9 +941,14 @@
       // -- Daily section for this month --
       var totalPG = pg.recuperacao.total;
       var totReal = 0, totMeta = 0;
-      for (var dk in rpMap) { totReal += rpMap[dk].real; totMeta += rpMap[dk].meta; }
-      if (totReal === 0) { totReal = totalPG ? totalPG.realizado : 0; }
-      if (totMeta === 0) { totMeta = totalPG ? totalPG.meta : 0; }
+      for (var pi2 = 0; pi2 < pg.recuperacao.profissionais.length; pi2++) {
+        var pp = pg.recuperacao.profissionais[pi2];
+        var useRp = rpMap[pp.profissional] && (rpMap[pp.profissional].meta || rpMap[pp.profissional].real);
+        totReal += useRp ? rpMap[pp.profissional].real : (pp.realizado||0);
+        totMeta += useRp ? rpMap[pp.profissional].meta : (pp.meta||0);
+      }
+      if (totReal === 0 && totalPG) { totReal = totalPG.realizado||0; }
+      if (totMeta === 0 && totalPG) { totMeta = totalPG.meta||0; }
       var days = [1,2,3,5,8,9,10,11,12,15,16,17,18,19,22,23,24,25,26,29,30];
       var hoje = new Date().getDate();
       var hojeIdx = -1;
@@ -962,8 +968,8 @@
       for (var i = 0; i < pg.recuperacao.profissionais.length; i++) {
         var p = pg.recuperacao.profissionais[i];
         var bg = i%2===0?'#0b0d14':'#11131c';
-        var jMeta = (rpMap[p.profissional] && rpMap[p.profissional].meta) || 0;
-        var jReal = (rpMap[p.profissional] && rpMap[p.profissional].real) || 0;
+        var jMeta = (rpMap[p.profissional] && rpMap[p.profissional].meta) || p.meta || 0;
+        var jReal = (rpMap[p.profissional] && rpMap[p.profissional].real) || p.realizado || 0;
         var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
         var pctStr = jPct.toFixed(1);
         var pctColor = jPct >= 100 ? '#34d399' : jPct >= 80 ? '#fbbf24' : '#f87171';
@@ -1049,8 +1055,8 @@
           var profTotals = [], profMetas = [];
           for (var pi = 0; pi < profsData.length; pi++) {
             var nm = profsData[pi].profissional;
-            profMetas.push((rpMap[nm] && rpMap[nm].meta) || 0);
-            profTotals.push((rpMap[nm] && rpMap[nm].real) || 0);
+            profMetas.push(profsData[pi].meta);
+            profTotals.push(profsData[pi].realizado);
           }
           new Chart(document.getElementById('chartComp' + monthName), {
             type:'bar', data:{labels:profNames, datasets:[

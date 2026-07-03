@@ -550,13 +550,15 @@
     var icn = function(n,s){s=s||14; return '<i data-lucide="'+n+'" style="display:inline-block;width:'+s+'px;height:'+s+'px;vertical-align:middle;stroke:currentColor;stroke-width:2;flex-shrink:0;margin-right:4px"></i>';};
 
     function initTabs() {
-      var tabs = ['resumo','abril','maio','geral','diario','clientes','motivos'];
-      var labels = ['Resumo','Abril','Maio','Junho','Diário','Clientes','Motivos'];
-      var icons = ['layout-dashboard','calendar','calendar','bar-chart-3','calendar-check','table-2','clipboard-list'];
-      var h = '<div class="tabs">';
-      for (var i = 0; i < tabs.length; i++) {
-        h += '<button class="tab-btn' + (tabs[i] === activeTab ? ' active' : '') + '" data-tab="' + tabs[i] + '">' + icn(icons[i],14) + ' ' + labels[i] + '</button>';
-      }
+      var h = '<div class="tabs" style="margin-bottom:4px">';
+      h += '<button class="tab-btn' + (activeTab==='abril'?' active':'') + '" data-tab="abril">' + icn('calendar',14) + ' Abril</button>';
+      h += '<button class="tab-btn' + (activeTab==='maio'?' active':'') + '" data-tab="maio">' + icn('calendar',14) + ' Maio</button>';
+      h += '<button class="tab-btn' + (activeTab==='geral'?' active':'') + '" data-tab="geral">' + icn('bar-chart-3',14) + ' Junho</button>';
+      h += '</div><div class="tabs">';
+      h += '<button class="tab-btn' + (activeTab==='resumo'?' active':'') + '" data-tab="resumo">' + icn('layout-dashboard',14) + ' Resumo</button>';
+      h += '<button class="tab-btn' + (activeTab==='diario'?' active':'') + '" data-tab="diario">' + icn('calendar-check',14) + ' Diário</button>';
+      h += '<button class="tab-btn' + (activeTab==='clientes'?' active':'') + '" data-tab="clientes">' + icn('table-2',14) + ' Clientes</button>';
+      h += '<button class="tab-btn' + (activeTab==='motivos'?' active':'') + '" data-tab="motivos">' + icn('clipboard-list',14) + ' Motivos</button>';
       h += '</div>';
       var tc = document.getElementById('tabsContainer');
       if (tc) tc.innerHTML = h;

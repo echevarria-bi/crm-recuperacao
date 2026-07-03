@@ -172,12 +172,12 @@
     }
 
     function processMultipleFiles(files) {
-      inputArquivo.value = '';
-      allData = null;
       var total = files.length;
+      allData = null;
       var done = 0;
       function processNext(idx) {
         if (idx >= total) {
+          inputArquivo.value = '';
           document.getElementById('areaInicial').innerHTML = '<div style="font-size:40px;margin-bottom:8px">✅</div><div style="color:#34d399;font-size:15px;font-weight:600">' + total + ' arquivo(s) carregado(s)</div><div style="color:#6b7280;font-size:12px;margin-top:2px">Mesclado com sucesso</div>';
           var now = new Date();
           var fn = Array.prototype.map.call(files,function(f){return f.name;}).join(', ');
@@ -235,10 +235,10 @@
     }
 
     function processFile(file) {
-      inputArquivo.value = '';
       document.getElementById('areaInicial').innerHTML = '<div style="color:#f59e0b;margin-bottom:6px"><span class="spinner"></span></div><div style="color:#fcd34d;font-size:14px">Processando ' + file.name + '...</div>';
       var reader = new FileReader();
       reader.onload = function(ev) {
+        inputArquivo.value = '';
         try {
           var data = new Uint8Array(ev.target.result);
           var wb = XLSX.read(data, {type:'array'});

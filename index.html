@@ -148,13 +148,13 @@
     }
 
     function saveRemoteData(data, fileName) {
-      if (!data || !data.data || !data.data.evolucaoMeses) return Promise.resolve(false);
       var token = getToken();
       if (!token) {
         document.getElementById('tokenStatus').textContent = 'Token n\u00E3o configurado';
         document.getElementById('tokenStatus').style.color = '#f87171';
         return Promise.resolve(false);
       }
+      if (!data || !data.data || !data.data.evolucaoMeses || !data.data.painelGeral) return Promise.resolve(false);
       var content = JSON.stringify(data, null, 2);
       var base64 = btoa(unescape(encodeURIComponent(content)));
       var commitMsg = 'Atualiza\u00E7\u00E3o ' + (fileName || '') + ' - ' + new Date().toLocaleString('pt-BR');
@@ -178,23 +178,21 @@
     }
 
     function processMultipleFiles(files) {
-      var total = files.length;
+      var arr = [];
+      for (var fi = 0; fi < files.length; fi++) arr.push(files[fi]);
+      arr.sort(function(a,b){
+        var an = detectMonthFromName(a.name), bn = detectMonthFromName(b.name);
+        var ord = {Junho:0, Abril:1, Maio:2};
+        return (ord[an]||1) - (ord[bn]||1);
+      });
+      var total = arr.length;
       allData = null;
-      var done = 0;
-
-      // Reorder: Junho first (has full EVOLUCAO DOS MESES), then Abril, Maio
-      var ordered = [];
-      for (var fi = 0; fi < files.length; fi++) {
-        var m = detectMonthFromName(files[fi].name);
-        if (m === 'Junho') ordered.unshift(files[fi]); else ordered.push(files[fi]);
-      }
-
       function processNext(idx) {
         if (idx >= total) {
           inputArquivo.value = '';
           document.getElementById('areaInicial').innerHTML = '<div style="font-size:40px;margin-bottom:8px">✅</div><div style="color:#34d399;font-size:15px;font-weight:600">' + total + ' arquivo(s) carregado(s)</div><div style="color:#6b7280;font-size:12px;margin-top:2px">Mesclado com sucesso</div>';
           var now = new Date();
-          var fn = Array.prototype.map.call(files,function(f){return f.name;}).join(', ');
+          var fn = arr.map(function(f){return f.name;}).join(', ');
           document.getElementById('footer').style.display = 'block';
           document.getElementById('footer').innerHTML = '<strong>' + fn + '</strong> &middot; ' + now.toLocaleDateString('pt-BR') + ' &agrave;s ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recupera\u00E7\u00E3o';
           initTabs();
@@ -209,7 +207,7 @@
           });
           return;
         }
-        var file = ordered[idx];
+        var file = arr[idx];
         document.getElementById('areaInicial').innerHTML = '<div style="color:#f59e0b;margin-bottom:6px"><span class="spinner"></span></div><div style="color:#fcd34d;font-size:14px">Processando ' + file.name + ' (' + (idx+1) + '/' + total + ')...</div>';
         var reader = new FileReader();
         reader.onload = function(ev) {
@@ -245,14 +243,6 @@
         if (!allData[targetKey]) allData[targetKey] = {recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]};
         var ctx = {painelGeral: allData[targetKey]};
         parsePainelGeral(pg, ctx);
-      }
-      // If EVOLUCAO DOS MESES is still empty, try parsing from this file too
-      if (!allData.evolucaoMeses.indicadores || allData.evolucaoMeses.indicadores.length === 0) {
-        var evolKey = 'evolucao dos meses'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-        if (sheetMap[evolKey]) {
-          var grid = XLSX.utils.sheet_to_json(sheetMap[evolKey], {header:1, defval:''});
-          parseEvolucaoMeses(grid, allData);
-        }
       }
     }
 
@@ -293,7 +283,7 @@
 
     function salvarStorage() {
       try {
-        if (!allData || !allData.evolucaoMeses) return;
+        if (!allData || !allData.evolucaoMeses || !allData.painelGeral) return;
         localStorage.setItem('crmData', JSON.stringify(allData));
         localStorage.setItem('crmFileName', document.querySelector('#areaInicial div')?.textContent?.trim() || 'Arquivo');
         localStorage.setItem('crmTimestamp', new Date().toISOString());
@@ -304,9 +294,9 @@
       var saved = localStorage.getItem('crmData');
       if (!saved) return false;
       try {
-        var parsed = JSON.parse(saved);
-        if (!parsed || !parsed.evolucaoMeses || !parsed.painelGeral) return false;
-        allData = parsed;
+        var tmp = JSON.parse(saved);
+        if (!tmp || !tmp.evolucaoMeses || !tmp.painelGeral) return false;
+        allData = tmp;
         document.getElementById('areaInicial').parentElement.style.display = 'none';
         var fn = localStorage.getItem('crmFileName') || 'Arquivo';
         var ts = localStorage.getItem('crmTimestamp');
@@ -433,8 +423,7 @@
         var row = grid[r];
         if (!row || !row[0]) continue;
         var label = String(row[0]).trim();
-        var lu = label.toUpperCase();
-        if (lu === 'INDICADOR') {
+        if (label === 'Indicador') {
           for (var ri = r+1; ri < grid.length; ri++) {
             var r2 = grid[ri];
             if (!r2 || !r2[0] || String(r2[0]).trim() === '') break;
@@ -450,23 +439,21 @@
           }
           continue;
         }
-        if (lu === 'MÊS' || lu === 'MES') {
-          var c1 = String(row[1]||'').trim().toUpperCase();
-          if (c1 === 'CONVERSÕES' || c1 === 'CONVERSOES') {
-            for (var ri = r+1; ri < grid.length; ri++) {
-              var r2 = grid[ri];
-              if (!r2 || !r2[0] || String(r2[0]).trim() === '') break;
-            }
-            continue;
+        if (label === 'Mês' && String(row[1]||'').trim() === 'Conversões') {
+          for (var ri = r+1; ri < grid.length; ri++) {
+            var r2 = grid[ri];
+            if (!r2 || !r2[0] || String(r2[0]).trim() === '') break;
           }
-          if (String(row[1]||'').trim().toUpperCase() === 'META' && String(row[2]||'').trim().toUpperCase() === 'REALIZADO') {
+          continue;
+        }
+        if (label === 'Mês' && String(row[1]||'').trim() === 'Meta' && String(row[2]||'').trim() === 'Realizado') {
           for (var ri = r+1; ri < grid.length; ri++) {
             var r2 = grid[ri];
             if (!r2 || !r2[0]) break;
           }
           continue;
         }
-        if ((lu === 'PROFISSIONAL' || lu === 'TELEVENDEDORA') && String(row[1]||'').trim().toUpperCase() === 'ABRIL') {
+        if (label === 'Profissional' && String(row[1]||'').trim() === 'Abril') {
           var colNames = [];
           for (var ci = 1; ci < row.length; ci++) { colNames.push(String(row[ci]).trim()); }
           for (var ri = r+1; ri < grid.length; ri++) {
@@ -488,7 +475,7 @@
           }
           continue;
         }
-        if (lu === 'RECUPERADOS POR RCA' || lu === 'RECUPERADOS POR RAC' || lu.indexOf('RECUPERADOS POR') >= 0) {
+        if (label === 'RECUPERADOS POR RCA' || label === 'RECUPERADOS POR RAC') {
           // Extract month labels from title row
           var rcaMonths = [];
           var titleRow = grid[r] || [];
@@ -690,32 +677,25 @@
       return allData.painelGeral.recuperacao.profissionais;
     }
 
-    function criarChartsResumo(evo, mesesArr, contatoData, recupData, fatData) {
+    function criarChartsResumo(evo, mesesArr) {
       try {
         var labels = mesesArr;
         var convData = [], contMeta = [], recupMeta = [], recupReal = [], valorData = [];
-        if (evo && evo.indicadores && evo.indicadores.length > 0) {
-          for (var mi = 0; mi < mesesArr.length; mi++) {
-            var mk = mesesArr[mi];
-            var conv = 0, mc = 0, mr = 0, rr = 0, vr = 0;
-            for (var ii = 0; ii < evo.indicadores.length; ii++) {
-              if (evo.indicadores[ii].label === 'Contatos Realizados') conv = evo.indicadores[ii][mk] || 0;
-              if (evo.indicadores[ii].label === 'Meta de Contatos') mc = evo.indicadores[ii][mk] || 0;
-              if (evo.indicadores[ii].label === 'Meta de Clientes Recuperados') mr = evo.indicadores[ii][mk] || 0;
-              if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' && evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) rr = evo.indicadores[ii][mk] || 0;
-              if (evo.indicadores[ii].label === 'Valor Recuperado' && evo.indicadores[ii].label.indexOf('%') < 0) vr = evo.indicadores[ii][mk] || 0;
-            }
-            convData.push(conv);
-            contMeta.push(mc);
-            recupMeta.push(mr);
-            recupReal.push(rr);
-            valorData.push(vr);
+        for (var mi = 0; mi < mesesArr.length; mi++) {
+          var mk = mesesArr[mi];
+          var conv = 0, mc = 0, mr = 0, rr = 0, vr = 0;
+          for (var ii = 0; ii < evo.indicadores.length; ii++) {
+            if (evo.indicadores[ii].label === 'Contatos Realizados') conv = evo.indicadores[ii][mk] || 0;
+            if (evo.indicadores[ii].label === 'Meta de Contatos') mc = evo.indicadores[ii][mk] || 0;
+            if (evo.indicadores[ii].label === 'Meta de Clientes Recuperados') mr = evo.indicadores[ii][mk] || 0;
+            if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' && evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) rr = evo.indicadores[ii][mk] || 0;
+            if (evo.indicadores[ii].label === 'Valor Recuperado' && evo.indicadores[ii].label.indexOf('%') < 0) vr = evo.indicadores[ii][mk] || 0;
           }
-        } else {
-          // Fallback: use pre-computed data from renderResumo
-          convData = contatoData || [0,0,0];
-          recupReal = recupData || [0,0,0];
-          valorData = fatData || [0,0,0];
+          convData.push(conv);
+          contMeta.push(mc);
+          recupMeta.push(mr);
+          recupReal.push(rr);
+          valorData.push(vr);
         }
         var c1 = document.getElementById('chartEvolucao1');
         var c2 = document.getElementById('chartEvolucao2');
@@ -745,57 +725,35 @@
       var html = '';
 
       var contatoData = [], recupData = [], fatData = [];
-      var hasEvoData = evo && evo.indicadores && evo.indicadores.length > 0;
-      if (hasEvoData) {
-        for (var mi = 0; mi < mesesArr.length; mi++) {
-          var mk = mesesArr[mi];
-          var c = 0, r = 0, f = 0;
-          for (var ii = 0; ii < evo.indicadores.length; ii++) {
-            if (evo.indicadores[ii].label === 'Contatos Realizados') c = evo.indicadores[ii][mk] || 0;
-            if ((evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' || evo.indicadores[ii].label === 'Clientes Recuperados') && evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) r = evo.indicadores[ii][mk] || 0;
-            if (evo.indicadores[ii].label === 'Valor Recuperado' && evo.indicadores[ii].label.indexOf('%') < 0) f = evo.indicadores[ii][mk] || 0;
-          }
-          contatoData.push(c);
-          recupData.push(r);
-          fatData.push(f);
+      for (var mi = 0; mi < mesesArr.length; mi++) {
+        var mk = mesesArr[mi];
+        var c = 0, r = 0, f = 0;
+        for (var ii = 0; ii < evo.indicadores.length; ii++) {
+          if (evo.indicadores[ii].label === 'Contatos Realizados') c = evo.indicadores[ii][mk] || 0;
+          if ((evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' || evo.indicadores[ii].label === 'Clientes Recuperados') && evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) r = evo.indicadores[ii][mk] || 0;
+          if (evo.indicadores[ii].label === 'Valor Recuperado' && evo.indicadores[ii].label.indexOf('%') < 0) f = evo.indicadores[ii][mk] || 0;
         }
-      } else {
-        // Fallback: extract from PAINEL GERAL
-        for (var mi = 0; mi < mesesArr.length; mi++) {
-          var mk = mesesArr[mi];
-          var pk = mk === 'Junho' ? 'painelGeral' : ('painel' + mk);
-          var pp = allData[pk];
-          var r = pp && pp.recuperacao && pp.recuperacao.total ? pp.recuperacao.total.realizado : 0;
-          recupData.push(r);
-          var c = pp && pp.metaContatos && pp.metaContatos.total ? pp.metaContatos.total.realizado : 0;
-          contatoData.push(c);
-          fatData.push(0);
-        }
+        contatoData.push(c);
+        recupData.push(r);
+        fatData.push(f);
       }
 
+      // Get "Realizado de Clientes Recuperados" total for card
       var recupTotal = 0;
-      if (hasEvoData) {
-        for (var ii = 0; ii < evo.indicadores.length; ii++) {
-          if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' || evo.indicadores[ii].label === 'Clientes Recuperados') {
-            if (evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) {
-              recupTotal = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0);
-            }
+      for (var ii = 0; ii < evo.indicadores.length; ii++) {
+        if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' || evo.indicadores[ii].label === 'Clientes Recuperados') {
+          if (evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) {
+            recupTotal = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0);
           }
         }
-      } else {
-        for (var mi = 0; mi < mesesArr.length; mi++) recupTotal += recupData[mi];
       }
 
       var totalFaturamento = 0;
       for (var mi = 0; mi < mesesArr.length; mi++) { totalFaturamento += fatData[mi]; }
-      if (totalFaturamento === 0 && allData.faturamentoTotal) totalFaturamento = allData.faturamentoTotal;
-
       var totalConv = 0;
-      if (hasEvoData) {
-        for (var ii = 0; ii < evo.indicadores.length; ii++) {
-          if (evo.indicadores[ii].label === 'Convers\u00F5es Totais' || evo.indicadores[ii].label === 'Conversões Totais' || evo.indicadores[ii].label === 'Conversoes Totais') {
-            totalConv = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0);
-          }
+      for (var ii = 0; ii < evo.indicadores.length; ii++) {
+        if (evo.indicadores[ii].label === 'Convers\u00F5es Totais' || evo.indicadores[ii].label === 'Conversões Totais' || evo.indicadores[ii].label === 'Conversoes Totais') {
+          totalConv = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0);
         }
       }
 
@@ -873,14 +831,11 @@
         rpHtml += '</tr></thead><tbody>' + rpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td>'+rpTotals+'</tr></tbody></table></div></div>';
         html += rpHtml;
       }
-      var chartsHtml = '<div class="grid-2">';
-      chartsHtml += '<div class="chart-box"><h2>Contatos Realizados <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal de contatos vs meta</span></h2><canvas id="chartEvolucao1" style="max-height:220px"></canvas></div>';
-      chartsHtml += '<div class="chart-box"><h2>Clientes Recuperados <span class="sub">&rarr; Meta x Realizado por m\u00EAs</span></h2><canvas id="chartEvolucao2" style="max-height:220px"></canvas></div></div>';
-      html += chartsHtml;
 
+      
       document.getElementById('dashContent').innerHTML = html;
 
-      setTimeout(function() { criarChartsResumo(evo, mesesArr, contatoData, recupData, fatData); }, 100);
+      setTimeout(function() { criarChartsResumo(evo, mesesArr); }, 100);
     }
 
     function renderMonth(monthName) {
@@ -910,8 +865,8 @@
       for (var pi = 0; pi < pg.recuperacao.profissionais.length; pi++) {
         var p = pg.recuperacao.profissionais[pi];
         var name = p.profissional;
-        var jMeta = (rpMap[name] && rpMap[name].meta) || p.meta || 0;
-        var jReal = (rpMap[name] && rpMap[name].real) || p.realizado || 0;
+        var jMeta = (rpMap[name] && rpMap[name].meta) || 0;
+        var jReal = (rpMap[name] && rpMap[name].real) || 0;
         var jFat = fatMap[name] || 0;
         var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
         profsData.push({
@@ -1007,8 +962,8 @@
       for (var i = 0; i < pg.recuperacao.profissionais.length; i++) {
         var p = pg.recuperacao.profissionais[i];
         var bg = i%2===0?'#0b0d14':'#11131c';
-        var jMeta = (rpMap[p.profissional] && rpMap[p.profissional].meta) || p.meta || 0;
-        var jReal = (rpMap[p.profissional] && rpMap[p.profissional].real) || p.realizado || 0;
+        var jMeta = (rpMap[p.profissional] && rpMap[p.profissional].meta) || 0;
+        var jReal = (rpMap[p.profissional] && rpMap[p.profissional].real) || 0;
         var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
         var pctStr = jPct.toFixed(1);
         var pctColor = jPct >= 100 ? '#34d399' : jPct >= 80 ? '#fbbf24' : '#f87171';

@@ -239,7 +239,7 @@
     }
 
     function parseAllSheets(wb) {
-      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
+      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, painelAbril:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, painelMaio:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
       var sheetMap = {};
       for (var si = 0; si < wb.SheetNames.length; si++) {
         var sn = wb.SheetNames[si];
@@ -313,6 +313,16 @@
         var p = result.profissionais[name];
         return s + (p ? p.faturamento : 0);
       }, 0);
+
+      // Month-specific painel sheets (Abril, Maio)
+      var extraMonths = [{key:'abril',store:'painelAbril'},{key:'maio',store:'painelMaio'}];
+      for (var mi = 0; mi < extraMonths.length; mi++) {
+        if (sheetMap[extraMonths[mi].key]) {
+          var mg = XLSX.utils.sheet_to_json(sheetMap[extraMonths[mi].key], {header:1, defval:''});
+          var ctx = {painelGeral: result[extraMonths[mi].store]};
+          parsePainelGeral(mg, ctx);
+        }
+      }
 
       return result;
     }
@@ -540,9 +550,9 @@
     var icn = function(n,s){s=s||14; return '<i data-lucide="'+n+'" style="display:inline-block;width:'+s+'px;height:'+s+'px;vertical-align:middle;stroke:currentColor;stroke-width:2;flex-shrink:0;margin-right:4px"></i>';};
 
     function initTabs() {
-      var tabs = ['resumo','geral','diario','clientes','motivos'];
-      var labels = ['Resumo','Junho','Diário','Clientes','Motivos'];
-      var icons = ['layout-dashboard','bar-chart-3','calendar-check','table-2','clipboard-list'];
+      var tabs = ['resumo','abril','maio','geral','diario','clientes','motivos'];
+      var labels = ['Resumo','Abril','Maio','Junho','Diário','Clientes','Motivos'];
+      var icons = ['layout-dashboard','calendar','calendar','bar-chart-3','calendar-check','table-2','clipboard-list'];
       var h = '<div class="tabs">';
       for (var i = 0; i < tabs.length; i++) {
         h += '<button class="tab-btn' + (tabs[i] === activeTab ? ' active' : '') + '" data-tab="' + tabs[i] + '">' + icn(icons[i],14) + ' ' + labels[i] + '</button>';
@@ -563,7 +573,9 @@
     function switchTab(tab) {
       activeTab = tab;
       if (tab === 'resumo') renderResumo();
-      else if (tab === 'geral') renderGeral();
+      else if (tab === 'abril') renderMonth('Abril');
+      else if (tab === 'maio') renderMonth('Maio');
+      else if (tab === 'geral') renderMonth('Junho');
       else if (tab === 'diario') renderDiario();
       else if (tab === 'clientes') renderClientes();
       else if (tab === 'motivos') renderMotivos();
@@ -734,24 +746,26 @@
       setTimeout(function() { criarChartsResumo(evo, mesesArr); }, 100);
     }
 
-    function renderGeral() {
-      var pg = allData.painelGeral;
+    function renderMonth(monthName) {
+      var monthKey = monthName === 'Junho' ? 'Junho' : monthName;
+      var pgKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
+      var pg = allData[pgKey] || allData.painelGeral;
       var evo = allData.evolucaoMeses;
 
-      // Build June lookup from RECUPERADOS POR RCA
+      // Build month lookup from RECUPERADOS POR RCA
       var rpMap = {};
       for (var ri = 0; ri < evo.recuperadosPorProf.length; ri++) {
         var r = evo.recuperadosPorProf[ri];
         rpMap[r.profissional] = {
-          meta: r['Junho META'] || 0,
-          real: r['Junho REAL'] || 0
+          meta: r[monthName + ' META'] || 0,
+          real: r[monthName + ' REAL'] || 0
         };
       }
-      // Build June faturamento lookup from VALOR RECUPERADO POR MÊS
+      // Build month faturamento lookup from VALOR RECUPERADO POR MÊS
       var fatMap = {};
       for (var fi = 0; fi < evo.valorPorProf.length; fi++) {
         var f = evo.valorPorProf[fi];
-        fatMap[f.profissional] = f.Junho || 0;
+        fatMap[f.profissional] = f[monthName] || 0;
       }
 
       // Merge with Painel Geral data (for dias) and compute June-only values
@@ -795,7 +809,7 @@
       html += '<div class="card"><div class="label">&#x1F4B0; Total Recuperado</div><div class="value">' + fmtCurr(totalFat) + '</div></div>';
       html += '</div>';
 
-      html += '<div class="chart-box"><h2>Desempenho por Televendedora <span class="sub">&rarr; Recupera\u00E7\u00E3o de clientes em Junho</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th style="text-align:center">Status</th><th class="text-right meta-color" title="Meta de clientes recuperados">Meta</th><th class="text-right realizado-color" title="Clientes recuperados até o momento">Realizado</th><th class="text-right" title="Percentual de atingimento da meta">%</th><th class="text-right" title="Valor total faturado">Faturamento</th></tr></thead><tbody>';
+      html += '<div class="chart-box"><h2>Desempenho por Televendedora <span class="sub">&rarr; Recupera\u00E7\u00E3o de clientes em ' + monthName + '</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th style="text-align:center">Status</th><th class="text-right meta-color" title="Meta de clientes recuperados">Meta</th><th class="text-right realizado-color" title="Clientes recuperados até o momento">Realizado</th><th class="text-right" title="Percentual de atingimento da meta">%</th><th class="text-right" title="Valor total faturado">Faturamento</th></tr></thead><tbody>';
       for (var i = 0; i < profsData.length; i++) {
         var p = profsData[i];
         var bg = i%2===0?'#0b0d14':'#11131c';
@@ -817,7 +831,7 @@
         });
         var contTotal = pg.metaContatos.total || {meta:0, realizado:0, pct:0};
         var contTotalPct = contTotal.pct > 0 ? contTotal.pct : (contTotal.meta > 0 ? (contTotal.realizado/contTotal.meta*100) : 0);
-        html += '<div class="chart-box"><h2>Contatos por Televendedora <span class="sub">&rarr; Meta x Realizado de contatos em Junho</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th style="text-align:center">Status</th><th class="text-right meta-color" title="Meta de contatos">Meta</th><th class="text-right realizado-color" title="Contatos realizados">Realizado</th><th class="text-right" title="Percentual de atingimento da meta">%</th></tr></thead><tbody>';
+        html += '<div class="chart-box"><h2>Contatos por Televendedora <span class="sub">&rarr; Meta x Realizado de contatos em ' + monthName + '</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th style="text-align:center">Status</th><th class="text-right meta-color" title="Meta de contatos">Meta</th><th class="text-right realizado-color" title="Contatos realizados">Realizado</th><th class="text-right" title="Percentual de atingimento da meta">%</th></tr></thead><tbody>';
         for (var ci = 0; ci < contProf.length; ci++) {
           var cp = contProf[ci];
           var cMeta = cp.meta;
@@ -833,7 +847,7 @@
 
       html += '<div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;font-size:11px;color:#6b7280;align-items:center"><span>Legenda:</span><span><span class="badge badge-green">Batida ✓</span> ≥100%</span><span><span class="badge badge-yellow">Parcial &#9888;</span> 80–99%</span><span><span class="badge badge-red">Abaixo &#128308;</span> &lt;80%</span></div>';
 
-      html += '<div class="grid-2"><div class="chart-box"><h2>Meta x Realizado <span class="sub">&rarr; Comparativo por televendedora (Junho)</span></h2><canvas id="chartRecProf" style="max-height:220px"></canvas></div><div class="chart-box"><h2>% Atingimento <span class="sub">&rarr; Percentual por televendedora (Junho)</span></h2><canvas id="chartRecPct" style="max-height:220px"></canvas></div></div>';
+      html += '<div class="grid-2"><div class="chart-box"><h2>Meta x Realizado <span class="sub">&rarr; Comparativo por televendedora (' + monthName + ')</span></h2><canvas id="chartRecProf" style="max-height:220px"></canvas></div><div class="chart-box"><h2>% Atingimento <span class="sub">&rarr; Percentual por televendedora (' + monthName + ')</span></h2><canvas id="chartRecPct" style="max-height:220px"></canvas></div></div>';
 
       document.getElementById('dashContent').innerHTML = html;
 

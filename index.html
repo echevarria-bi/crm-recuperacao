@@ -178,37 +178,44 @@
     }
 
     function processMultipleFiles(files) {
-      var arr = [], total = files.length;
-      for (var fi = 0; fi < total; fi++) arr.push(files[fi]);
-      arr.sort(function(a,b){
-        var an = detectMonthFromName(a.name), bn = detectMonthFromName(b.name);
-        if (an === 'Junho' && bn !== 'Junho') return -1;
-        if (bn === 'Junho' && an !== 'Junho') return 1;
-        return 0;
-      });
+      var total = files.length;
       allData = null;
-      function processNext(idx) {
-        if (idx >= total) {
-          inputArquivo.value = '';
-          document.getElementById('areaInicial').innerHTML = '<div style="font-size:40px;margin-bottom:8px">✅</div><div style="color:#34d399;font-size:15px;font-weight:600">' + total + ' arquivo(s) carregado(s)</div><div style="color:#6b7280;font-size:12px;margin-top:2px">Mesclado com sucesso</div>';
-          var now = new Date();
-          var fn = arr.map(function(f){return f.name;}).join(', ');
-          document.getElementById('footer').style.display = 'block';
-          document.getElementById('footer').innerHTML = '<strong>' + fn + '</strong> &middot; ' + now.toLocaleDateString('pt-BR') + ' &agrave;s ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recupera\u00E7\u00E3o';
-          initTabs();
-          switchTab('resumo');
-          salvarStorage();
-          document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
-          mostrarTokenBtn();
-          saveRemoteData({ data: allData, fileName: fn, updatedAt: new Date().toISOString() }, fn).then(function(ok) {
-            document.getElementById('statusFile').textContent = ok ? 'Salvo no reposit\u00F3rio' : 'Erro ao salvar no reposit\u00F3rio';
-            document.getElementById('statusFile').style.color = ok ? '#34d399' : '#f87171';
-            setTimeout(function() { document.getElementById('statusFile').textContent = ''; }, 5000);
-          });
-          return;
+      var junhoWb = null, processados = 0;
+      function maybeDone() {
+        if (processados < total) return;
+        inputArquivo.value = '';
+        // Always parse EVOLUCAO DOS MESES from Junho workbook
+        if (junhoWb) {
+          var sm = {};
+          for (var si = 0; si < junhoWb.SheetNames.length; si++) {
+            var sn = junhoWb.SheetNames[si];
+            sm[sn.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')] = junhoWb.Sheets[sn];
+          }
+          var evolKey = 'evolucao dos meses'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+          if (sm[evolKey]) {
+            allData.evolucaoMeses = {indicadores:[], valorPorProf:[], recuperadosPorProf:[]};
+            var grid = XLSX.utils.sheet_to_json(sm[evolKey], {header:1, defval:''});
+            parseEvolucaoMeses(grid, allData);
+          }
         }
-        var file = arr[idx];
-        document.getElementById('areaInicial').innerHTML = '<div style="color:#f59e0b;margin-bottom:6px"><span class="spinner"></span></div><div style="color:#fcd34d;font-size:14px">Processando ' + file.name + ' (' + (idx+1) + '/' + total + ')...</div>';
+        var fn = Array.prototype.map.call(files,function(f){return f.name;}).join(', ');
+        document.getElementById('areaInicial').innerHTML = '<div style="font-size:40px;margin-bottom:8px">✅</div><div style="color:#34d399;font-size:15px;font-weight:600">' + total + ' arquivo(s) carregado(s)</div><div style="color:#6b7280;font-size:12px;margin-top:2px">Mesclado com sucesso</div>';
+        var now = new Date();
+        document.getElementById('footer').style.display = 'block';
+        document.getElementById('footer').innerHTML = '<strong>' + fn + '</strong> &middot; ' + now.toLocaleDateString('pt-BR') + ' &agrave;s ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recupera\u00E7\u00E3o';
+        initTabs();
+        switchTab('resumo');
+        salvarStorage();
+        document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
+        mostrarTokenBtn();
+        saveRemoteData({ data: allData, fileName: fn, updatedAt: new Date().toISOString() }, fn).then(function(ok) {
+          document.getElementById('statusFile').textContent = ok ? 'Salvo no reposit\u00F3rio' : 'Erro ao salvar no reposit\u00F3rio';
+          document.getElementById('statusFile').style.color = ok ? '#34d399' : '#f87171';
+          setTimeout(function() { document.getElementById('statusFile').textContent = ''; }, 5000);
+        });
+      }
+      function processOne(file) {
+        document.getElementById('areaInicial').innerHTML = '<div style="color:#f59e0b;margin-bottom:6px"><span class="spinner"></span></div><div style="color:#fcd34d;font-size:14px">Processando ' + file.name + ' (' + (processados+1) + '/' + total + ')...</div>';
         var reader = new FileReader();
         reader.onload = function(ev) {
           try {
@@ -220,14 +227,16 @@
             } else {
               mergeSheetInto(wb, month);
             }
-            processNext(idx + 1);
+            if (month === 'Junho') junhoWb = wb;
+            processados++;
+            maybeDone();
           } catch(err) {
             document.getElementById('areaInicial').innerHTML = '<div style="font-size:40px;margin-bottom:8px">&#9888;</div><div style="color:#f87171;font-size:14px">Erro em ' + file.name + ': ' + err.message + '</div><div style="color:#4a4d6e;font-size:12px;margin-top:4px;cursor:pointer" onclick="abrirArquivo()">Clique para tentar novamente</div>';
           }
         };
         reader.readAsArrayBuffer(file);
       }
-      processNext(0);
+      for (var fi = 0; fi < total; fi++) processOne(files[fi]);
     }
 
     function mergeSheetInto(wb, monthName) {
@@ -240,7 +249,7 @@
       if (sheetMap[pgKey]) {
         var pg = XLSX.utils.sheet_to_json(sheetMap[pgKey], {header:1, defval:''});
         var targetKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
-        if (!allData[targetKey]) allData[targetKey] = {recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]};
+        allData[targetKey] = {recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]};
         var ctx = {painelGeral: allData[targetKey]};
         parsePainelGeral(pg, ctx);
       }

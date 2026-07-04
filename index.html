@@ -178,14 +178,21 @@
     }
 
     function processMultipleFiles(files) {
-      var total = files.length;
+      var arr = [], total = files.length;
+      for (var fi = 0; fi < total; fi++) arr.push(files[fi]);
+      arr.sort(function(a,b){
+        var an = detectMonthFromName(a.name), bn = detectMonthFromName(b.name);
+        if (an === 'Junho' && bn !== 'Junho') return -1;
+        if (bn === 'Junho' && an !== 'Junho') return 1;
+        return 0;
+      });
       allData = null;
       function processNext(idx) {
         if (idx >= total) {
           inputArquivo.value = '';
           document.getElementById('areaInicial').innerHTML = '<div style="font-size:40px;margin-bottom:8px">✅</div><div style="color:#34d399;font-size:15px;font-weight:600">' + total + ' arquivo(s) carregado(s)</div><div style="color:#6b7280;font-size:12px;margin-top:2px">Mesclado com sucesso</div>';
           var now = new Date();
-          var fn = Array.prototype.map.call(files,function(f){return f.name;}).join(', ');
+          var fn = arr.map(function(f){return f.name;}).join(', ');
           document.getElementById('footer').style.display = 'block';
           document.getElementById('footer').innerHTML = '<strong>' + fn + '</strong> &middot; ' + now.toLocaleDateString('pt-BR') + ' &agrave;s ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recupera\u00E7\u00E3o';
           initTabs();
@@ -200,7 +207,7 @@
           });
           return;
         }
-        var file = files[idx];
+        var file = arr[idx];
         document.getElementById('areaInicial').innerHTML = '<div style="color:#f59e0b;margin-bottom:6px"><span class="spinner"></span></div><div style="color:#fcd34d;font-size:14px">Processando ' + file.name + ' (' + (idx+1) + '/' + total + ')...</div>';
         var reader = new FileReader();
         reader.onload = function(ev) {

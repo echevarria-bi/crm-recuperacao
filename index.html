@@ -213,7 +213,7 @@
                 var fm = String(row[fc+2] || '').trim();
                 if (fm === 'Abril' || fm === 'Maio' || fm === 'Junho') mesesCorr[fp] = fm;
                 if (!isNaN(fid) && fid > 0 && fv > 0 && mesesCorr[fp]) {
-                  if (!clientesMap[fid]) clientesMap[fid] = {cliente:fid, Abril:0, Maio:0, Junho:0, total:0, profs:{}};
+                  if (!clientesMap[fid]) clientesMap[fid] = {cliente:fid, nome: String(row[fc+3]||'').trim(), Abril:0, Maio:0, Junho:0, total:0, profs:{}};
                   clientesMap[fid][mesesCorr[fp]] = (clientesMap[fid][mesesCorr[fp]]||0) + fv;
                   clientesMap[fid].profs[fp] = (clientesMap[fid].profs[fp]||0) + fv;
                 }
@@ -433,7 +433,7 @@
             var fm = String(row[fc+2] || '').trim();
             if (fm === 'Abril' || fm === 'Maio' || fm === 'Junho') mesesCorr[fp] = fm;
             if (!isNaN(fid) && fid > 0 && fv > 0 && mesesCorr[fp]) {
-              if (!clientesMap[fid]) clientesMap[fid] = {cliente:fid, Abril:0, Maio:0, Junho:0, total:0, profs:{}};
+              if (!clientesMap[fid]) clientesMap[fid] = {cliente:fid, nome: String(row[fc+3]||'').trim(), Abril:0, Maio:0, Junho:0, total:0, profs:{}};
               clientesMap[fid][mesesCorr[fp]] = (clientesMap[fid][mesesCorr[fp]]||0) + fv;
               clientesMap[fid].profs[fp] = (clientesMap[fid].profs[fp]||0) + fv;
             }
@@ -1208,7 +1208,7 @@
         var statusCol = mt.status === 'Recuperado' ? '#34d399' : (mt.status === 'Aten\u00E7\u00E3o' ? '#fbbf24' : (mt.status === 'Risco' ? '#f87171' : '#4a4d6e'));
         var tierCol = mt.tier === 'A' ? '#f59e0b' : (mt.tier === 'B' ? '#a78bfa' : '#4a4d6e');
         var barW = (mt.tot / maxTotal * 100);
-        html += '<tr data-id="' + clientes[i].cliente + '" data-tier="'+mt.tier+'" data-status="'+mt.status+'"><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600;color:#fcd34d">' + clientes[i].cliente + '</td><td style="font-size:10px;color:#9ca3af">' + mt.profLabel + '</td><td class="text-right realizado-color">' + fmtCurr(mt.a) + '</td><td class="text-right realizado-color">' + fmtCurr(mt.m) + '</td><td class="text-right realizado-color">' + fmtCurr(mt.j) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(mt.tot) + '</td><td class="text-right" style="font-size:11px;font-weight:600;color:'+dAMCol+'">' + dAMStr + (mt.dAM!==null?'%':'') + '</td><td class="text-right" style="font-size:11px;font-weight:600;color:'+dMJCol+'">' + dMJStr + (mt.dMJ!==null?'%':'') + '</td><td class="text-right realizado-color" style="font-size:11px">' + fmtCurr(mt.media) + '</td><td class="text-right" style="font-size:11px;color:#a78bfa">' + mt.pct.toFixed(1) + '%</td><td style="text-align:center"><span style="font-size:10px;padding:1px 6px;border-radius:4px;background:'+statusCol+'22;color:'+statusCol+';font-weight:600">' + mt.status + '</span></td><td style="text-align:center"><span style="font-size:10px;padding:1px 6px;border-radius:4px;background:'+tierCol+'22;color:'+tierCol+';font-weight:700">' + mt.tier + '</span></td><td style="padding:4px 6px"><div style="height:8px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:'+Math.min(barW,100)+'%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
+        html += '<tr data-id="' + clientes[i].cliente + '" data-nome="' + (clientes[i].nome||'').toLowerCase() + '" data-tier="'+mt.tier+'" data-status="'+mt.status+'"><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600;color:#fcd34d"><span class="cliente-id" style="font-size:10px;color:#6b7280">#' + clientes[i].cliente + '</span> ' + (clientes[i].nome || 'Cliente ' + clientes[i].cliente) + '</td><td style="font-size:10px;color:#9ca3af">' + mt.profLabel + '</td><td class="text-right realizado-color">' + fmtCurr(mt.a) + '</td><td class="text-right realizado-color">' + fmtCurr(mt.m) + '</td><td class="text-right realizado-color">' + fmtCurr(mt.j) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(mt.tot) + '</td><td class="text-right" style="font-size:11px;font-weight:600;color:'+dAMCol+'">' + dAMStr + (mt.dAM!==null?'%':'') + '</td><td class="text-right" style="font-size:11px;font-weight:600;color:'+dMJCol+'">' + dMJStr + (mt.dMJ!==null?'%':'') + '</td><td class="text-right realizado-color" style="font-size:11px">' + fmtCurr(mt.media) + '</td><td class="text-right" style="font-size:11px;color:#a78bfa">' + mt.pct.toFixed(1) + '%</td><td style="text-align:center"><span style="font-size:10px;padding:1px 6px;border-radius:4px;background:'+statusCol+'22;color:'+statusCol+';font-weight:600">' + mt.status + '</span></td><td style="text-align:center"><span style="font-size:10px;padding:1px 6px;border-radius:4px;background:'+tierCol+'22;color:'+tierCol+';font-weight:700">' + mt.tier + '</span></td><td style="padding:4px 6px"><div style="height:8px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:'+Math.min(barW,100)+'%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
       }
       var tAbr = 0, tMai = 0, tJun = 0, tTot = 0;
       for (var ti = 0; ti < clientes.length; ti++) { tAbr += clientes[ti].Abril||0; tMai += clientes[ti].Maio||0; tJun += clientes[ti].Junho||0; tTot += clientes[ti].total||0; }
@@ -1268,7 +1268,8 @@
           var rows = document.querySelectorAll('#tbodyClientes tr');
           for (var ri = 0; ri < rows.length; ri++) {
             var r = rows[ri];
-            var match = (!q || String(r.getAttribute('data-id')).indexOf(q) >= 0) && (!t || r.getAttribute('data-tier') === t) && (!s || r.getAttribute('data-status') === s);
+            var ql = q ? q.toLowerCase() : '';
+            var match = (!q || String(r.getAttribute('data-id')).indexOf(ql) >= 0 || (r.getAttribute('data-nome')||'').indexOf(ql) >= 0) && (!t || r.getAttribute('data-tier') === t) && (!s || r.getAttribute('data-status') === s);
             r.style.display = match ? '' : 'none';
           }
         }

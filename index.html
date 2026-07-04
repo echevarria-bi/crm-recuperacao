@@ -303,7 +303,6 @@
       var pgKey = 'painel geral'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
       var monthKey = monthName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
       var sheet = sheetMap[pgKey] || sheetMap[monthKey];
-      console.log('[mergeSheetInto] monthName=' + monthName + ' sheetNames=' + Object.keys(sheetMap).join(',') + ' pgKey=' + pgKey + ' monthKey=' + monthKey + ' found=' + (sheet?'sim':'nao'));
       if (sheet) {
         var pg = XLSX.utils.sheet_to_json(sheet, {header:1, defval:''});
         var targetKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
@@ -611,7 +610,6 @@
         if (cu === 'MOTIVOS') motRow = r;
         if (cu === 'META CONTATOS') contRow = r;
       }
-      console.log('[parsePainelGeral] recRow=' + recRow + ' motRow=' + motRow + ' contRow=' + contRow);
 
       if (recRow >= 0) {
         var r = recRow + 2;
@@ -909,7 +907,7 @@
     function renderMonth(monthName) {
       var monthKey = monthName === 'Junho' ? 'Junho' : monthName;
       var pgKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
-      var pg = allData[pgKey] || allData.painelGeral;
+      var pg = (allData[pgKey] && allData[pgKey].recuperacao && allData[pgKey].recuperacao.profissionais && allData[pgKey].recuperacao.profissionais.length > 0) ? allData[pgKey] : allData.painelGeral;
       var evo = allData.evolucaoMeses;
 
       // Build month lookup from RECUPERADOS POR RCA

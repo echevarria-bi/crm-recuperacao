@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Painel de Recuperação - Tele Vendas</title>
-  <script>!function(){['https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js','https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js','https://unpkg.com/lucide@latest/dist/umd/lucide.js','https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js'].forEach(function(u){var s=document.createElement('script');s.src=u;document.head.appendChild(s)})}()</script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0b0d14;color:#e1e7ef}
@@ -100,6 +99,7 @@
   <footer id="footer" style="display:none"></footer>
 
   <script>
+    (function(){['https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js','https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js','https://unpkg.com/lucide@latest/dist/umd/lucide.js','https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js'].forEach(function(u){var s=document.createElement('script');s.src=u;document.head.appendChild(s)})})();
     try { if (typeof Chart !== 'undefined' && typeof ChartDataLabels !== 'undefined') Chart.register(ChartDataLabels); } catch(e) {}
     var app = document.getElementById('app');
     var inputArquivo = document.getElementById('inputArquivo');

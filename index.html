@@ -236,11 +236,11 @@
               var fv = parseNum(row[3]);
               var fm = String(row[4] || '').trim();
               if (!fp || !fm || ['Abril','Maio','Junho'].indexOf(fm) < 0) continue;
-              if (isNaN(fid) || fid <= 0 || fv <= 0) continue;
+              if (isNaN(fid) || fid <= 0) continue;
               if (!clientesMap[fid]) clientesMap[fid] = {cliente:fid, nome:fnome, Abril:0, Maio:0, Junho:0, total:0, profs:{}};
               if (!clientesMap[fid].nome) clientesMap[fid].nome = fnome;
               clientesMap[fid][fm] = (clientesMap[fid][fm]||0) + fv;
-              clientesMap[fid].profs[fp] = (clientesMap[fid].profs[fp]||0) + fv;
+              if (fv > 0) clientesMap[fid].profs[fp] = (clientesMap[fid].profs[fp]||0) + fv;
             }
             allData.faturamentoClientes = [];
             for (var cid in clientesMap) {
@@ -452,11 +452,11 @@
           var fv = parseNum(row[3]);
           var fm = String(row[4] || '').trim();
           if (!fp || !fm || ['Abril','Maio','Junho'].indexOf(fm) < 0) continue;
-          if (isNaN(fid) || fid <= 0 || fv <= 0) continue;
+          if (isNaN(fid) || fid <= 0) continue;
           if (!clientesMap[fid]) clientesMap[fid] = {cliente:fid, nome:fnome, Abril:0, Maio:0, Junho:0, total:0, profs:{}};
           if (!clientesMap[fid].nome) clientesMap[fid].nome = fnome;
           clientesMap[fid][fm] = (clientesMap[fid][fm]||0) + fv;
-          clientesMap[fid].profs[fp] = (clientesMap[fid].profs[fp]||0) + fv;
+          if (fv > 0) clientesMap[fid].profs[fp] = (clientesMap[fid].profs[fp]||0) + fv;
         }
         result.faturamentoClientes = [];
         for (var cid in clientesMap) {

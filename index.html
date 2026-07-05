@@ -415,7 +415,7 @@
         var cu = c.toUpperCase();
         if (cu === 'META RECUPERAÇÃO' || cu === 'META RECUPERACAO' || cu === 'META POSITIVAÇÃO' || cu === 'META POSITIVACAO') recRow = r;
         if (cu === 'MOTIVOS') motRow = r;
-        if (cu === 'META CONTATOS') contRow = r;
+        if (cu.indexOf('META CONTATOS') >= 0) contRow = r;
         if (cu === 'TELEVENDEDORA') fatRow = r;
       }
 

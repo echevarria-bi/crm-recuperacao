@@ -420,16 +420,20 @@
       }
 
       if (recRow >= 0) {
+        var dayNums = [];
+        var metaRow = grid[recRow];
+        if (metaRow) { for (var dc = 4; dc < metaRow.length; dc += 2) dayNums.push(metaRow[dc] !== '' && metaRow[dc] !== undefined ? parseInt(metaRow[dc]) : dayNums.length + 1); }
+        result.painelGeral.recuperacao.dayNums = dayNums;
         var r = recRow + 2;
         while (r < grid.length) {
           var row = grid[r];
           if (!row || !row[0]) { r++; continue; }
           var name = String(row[0]).trim();
           if (!name || name === 'Total' || name === '') {
-            if (name === 'Total') result.painelGeral.recuperacao.total = {profissional:'Total', meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4)};
+            if (name === 'Total') result.painelGeral.recuperacao.total = {profissional:'Total', meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4,dayNums)};
             break;
           }
-          result.painelGeral.recuperacao.profissionais.push({profissional:name, meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4), faturamento:0});
+          result.painelGeral.recuperacao.profissionais.push({profissional:name, meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4,dayNums), faturamento:0});
           r++;
         }
       }
@@ -535,7 +539,7 @@
     function parseNum(v) { if (v===''||v===undefined||v===null) return 0; if (typeof v==='number') return v; var s=String(v).trim().replace(/[^\d.,-]/g,'').replace(',','.').replace(/\.(?=.*\.)/g,''); var n=parseFloat(s); return isNaN(n)?0:n; }
     function parsePct(v) { if (v===''||v===undefined||v===null) return 0; if (typeof v==='number') return Math.round(v*10000)/100; var s=String(v).trim().replace('%','').replace(',','.'); var n=parseFloat(s); return isNaN(n)?0:n; }
     function parseCurrency(v) { if (v===''||v===undefined||v===null) return 0; if (typeof v==='number') return v; return parseFloat(String(v).replace(/R\$\s*/gi,'').replace(/\./g,'').replace(',','.').trim())||0; }
-    function parseDias(row, startCol) { var dias=[]; for (var c=startCol; c+1<row.length; c+=2) dias.push({meta:parseNum(row[c]), realizado:parseNum(row[c+1])}); return dias; }
+    function parseDias(row, startCol, dayNums) { var dias=[]; for (var c=startCol; c+1<row.length; c+=2) { var di = (c-startCol)/2; dias.push({dia: dayNums&&dayNums[di]?dayNums[di]:di+1, meta:parseNum(row[c]), realizado:parseNum(row[c+1])}); } return dias; }
     function fmtCurr(v) { if (v==null||isNaN(v)) return '-'; return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
     var icn = function(n,s){s=s||14; return '<i data-lucide="'+n+'" style="display:inline-block;width:'+s+'px;height:'+s+'px;vertical-align:middle;stroke:currentColor;stroke-width:2;flex-shrink:0;margin-right:4px"></i>';};
 
@@ -828,7 +832,7 @@
       }
       if (totReal === 0 && totalPG) { totReal = totalPG.realizado||0; }
       if (totMeta === 0 && totalPG) { totMeta = totalPG.meta||0; }
-      var days = [1,2,3,5,8,9,10,11,12,15,16,17,18,19,22,23,24,25,26,29,30];
+      var days = pg.recuperacao.dayNums || [1,2,3,5,8,9,10,11,12,15,16,17,18,19,22,23,24,25,26,29,30];
       var hoje = new Date().getDate();
       var hojeIdx = -1;
       for (var hi = 0; hi < days.length; hi++) { if (days[hi] === hoje) { hojeIdx = hi; break; } }

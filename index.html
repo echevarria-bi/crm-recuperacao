@@ -154,7 +154,7 @@
         document.getElementById('tokenStatus').style.color = '#f87171';
         return Promise.resolve(false);
       }
-      if (!data || !data.data || !data.data.evolucaoMeses || !data.data.painelGeral || !data.data.painelGeral.recuperacao || !data.data.painelGeral.recuperacao.profissionais || data.data.painelGeral.recuperacao.profissionais.length === 0) return Promise.resolve(false);
+      if (!data || !data.data || !data.data.evolucaoMeses || !data.data.painelGeral) return Promise.resolve(false);
       var content = JSON.stringify(data, null, 2);
       var base64 = btoa(unescape(encodeURIComponent(content)));
       var commitMsg = 'Atualiza\u00E7\u00E3o ' + (fileName || '') + ' - ' + new Date().toLocaleString('pt-BR');
@@ -338,7 +338,7 @@
 
     function salvarStorage() {
       try {
-        if (!allData || !allData.evolucaoMeses || !allData.painelGeral || !allData.painelGeral.recuperacao || !allData.painelGeral.recuperacao.profissionais || allData.painelGeral.recuperacao.profissionais.length === 0) return;
+        if (!allData || !allData.evolucaoMeses || !allData.painelGeral) return;
         localStorage.setItem('crmData', JSON.stringify(allData));
         localStorage.setItem('crmFileName', document.querySelector('#areaInicial div')?.textContent?.trim() || 'Arquivo');
         localStorage.setItem('crmTimestamp', new Date().toISOString());
@@ -350,7 +350,7 @@
       if (!saved) return false;
       try {
         var tmp = JSON.parse(saved);
-        if (!tmp || !tmp.evolucaoMeses || !tmp.painelGeral || !tmp.painelGeral.recuperacao || !tmp.painelGeral.recuperacao.profissionais || tmp.painelGeral.recuperacao.profissionais.length === 0) return false;
+        if (!tmp || !tmp.evolucaoMeses || !tmp.painelGeral) return false;
         allData = tmp;
         document.getElementById('areaInicial').parentElement.style.display = 'none';
         var fn = localStorage.getItem('crmFileName') || 'Arquivo';
@@ -1227,7 +1227,7 @@
 
     // Initialize: try remote first, then localStorage, then upload area
     fetchRemoteData().then(function(remote) {
-      if (remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral && remote.data.painelGeral.recuperacao && remote.data.painelGeral.recuperacao.profissionais && remote.data.painelGeral.recuperacao.profissionais.length > 0) {
+      if (remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral) {
         allData = remote.data;
         document.getElementById('areaInicial').parentElement.style.display = 'none';
         var fn = remote.fileName || 'Arquivo remoto';

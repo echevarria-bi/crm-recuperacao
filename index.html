@@ -841,6 +841,7 @@
       var monthKey = monthName === 'Junho' ? 'Junho' : monthName;
       var pgKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
       var pg = (allData[pgKey] && allData[pgKey].recuperacao && allData[pgKey].recuperacao.profissionais && allData[pgKey].recuperacao.profissionais.length > 0) ? allData[pgKey] : allData.painelGeral;
+      console.log('renderMonth ' + monthName, { pgKey: pgKey, raw: allData[pgKey], using: pgKey + ' ou fallback', profissionais: pg.recuperacao.profissionais });
 
       var profsData = [];
       for (var pi = 0; pi < pg.recuperacao.profissionais.length; pi++) {
@@ -874,6 +875,8 @@
         if (pct >= 80) return '<span class="badge badge-yellow">Parcial &#9888;</span>';
         return '<span class="badge badge-red">Abaixo &#128308;</span>';
       }
+
+      html += '<div style="background:#1e1b4b;padding:12px;margin-bottom:12px;border-radius:8px;font-size:11px;font-family:monospace;white-space:pre-wrap;color:#9ca3af">pgKey='+pgKey+' | found='+(allData[pgKey]?'sim':'nao')+' | profs='+JSON.stringify(profsData.map(function(p){return{prof:p.profissional,meta:p.meta,real:p.realizado};}))+'</div>';
 
       html += '<div class="grid-4">';
       html += '<div class="card"><div class="label">' + icn('crosshair',12) + ' Meta Total</div><div class="value">' + totalMeta + '</div></div>';

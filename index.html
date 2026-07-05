@@ -240,7 +240,7 @@
 
     function parseAllSheets(wb, baseMonth) {
       baseMonth = baseMonth || 'Junho';
-      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, painelAbril:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, painelMaio:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
+      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
       var sheetMap = {};
       for (var si = 0; si < wb.SheetNames.length; si++) {
         var sn = wb.SheetNames[si];
@@ -261,7 +261,7 @@
         var targetStore = pgTargets[sNorm];
         if (targetStore) {
           var pg = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[si]], {header:1, defval:''});
-          result[targetStore] = {recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]};
+          result[targetStore] = {recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[]};
           parsePainelGeral(pg, {painelGeral: result[targetStore]});
         }
       }
@@ -407,7 +407,7 @@
     }
 
     function parsePainelGeral(grid, result) {
-      var recRow = -1, motRow = -1, contRow = -1;
+      var recRow = -1, motRow = -1, contRow = -1, fatRow = -1;
       for (var r = 0; r < grid.length; r++) {
         var row = grid[r];
         if (!row || !row[0]) continue;
@@ -416,6 +416,7 @@
         if (cu === 'META RECUPERAÇÃO' || cu === 'META RECUPERACAO' || cu === 'META POSITIVAÇÃO' || cu === 'META POSITIVACAO') recRow = r;
         if (cu === 'MOTIVOS') motRow = r;
         if (cu === 'META CONTATOS') contRow = r;
+        if (cu === 'TELEVENDEDORA') fatRow = r;
       }
 
       if (recRow >= 0) {
@@ -428,8 +429,33 @@
             if (name === 'Total') result.painelGeral.recuperacao.total = {profissional:'Total', meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4)};
             break;
           }
-          result.painelGeral.recuperacao.profissionais.push({profissional:name, meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4)});
+          result.painelGeral.recuperacao.profissionais.push({profissional:name, meta:parseNum(row[1]), realizado:parseNum(row[2]), pct:parsePct(row[3]), dias:parseDias(row,4), faturamento:0});
           r++;
+        }
+      }
+
+      if (fatRow >= 0) {
+        var fr = fatRow + 1;
+        while (fr < grid.length) {
+          var row = grid[fr];
+          if (!row || !row[0]) { fr++; continue; }
+          var name = String(row[0]).trim();
+          if (!name) { fr++; continue; }
+          var isTotal = name.toUpperCase().indexOf('TOTAL') === 0;
+          if (isTotal) {
+            result.painelGeral.recuperacao.faturamentoGeral = parseNum(row[1]);
+            break;
+          }
+          for (var pi = 0; pi < result.painelGeral.recuperacao.profissionais.length; pi++) {
+            var p = result.painelGeral.recuperacao.profissionais[pi];
+            var pNorm = p.profissional.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+            var fNorm = name.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+            if (pNorm === fNorm) {
+              p.faturamento = parseNum(row[1]);
+              break;
+            }
+          }
+          fr++;
         }
       }
 
@@ -621,8 +647,8 @@
         }
       }
 
-      var totalFaturamento = 0;
-      for (var mi = 0; mi < mesesArr.length; mi++) { totalFaturamento += fatData[mi]; }
+      var fatGeraluramento = 0;
+      for (var mi = 0; mi < mesesArr.length; mi++) { fatGeraluramento += fatData[mi]; }
       var totalConv = 0;
       for (var ii = 0; ii < evo.indicadores.length; ii++) {
         if (evo.indicadores[ii].label === 'Convers\u00F5es Totais' || evo.indicadores[ii].label === 'Conversões Totais' || evo.indicadores[ii].label === 'Conversoes Totais') {
@@ -634,7 +660,7 @@
       html += '<div class="cards">';
       html += '<div class="card"><div class="label">' + icn('phone',12) + ' Conversões Totais (RCA Externo + Televendas)</div><div class="value">' + totalConv + '</div></div>';
       html += '<div class="card"><div class="label">' + icn('users',12) + ' Clientes Recuperados (Televendas)</div><div class="value">' + recupTotal + '</div></div>';
-      html += '<div class="card"><div class="label">' + icn('dollar-sign',12) + ' Faturamento Total</div><div class="value">' + fmtCurr(totalFaturamento) + '</div></div>';
+      html += '<div class="card"><div class="label">' + icn('dollar-sign',12) + ' Faturamento Total</div><div class="value">' + fmtCurr(fatGeraluramento) + '</div></div>';
       html += '</div>';
 
       // CHARTS
@@ -736,7 +762,7 @@
 
       var totalMeta = profsData.reduce(function(s,p){return s+p.meta;},0);
       var totalReal = profsData.reduce(function(s,p){return s+p.realizado;},0);
-      var totalFat = profsData.reduce(function(s,p){return s+p.faturamento;},0);
+      var fatGeral = pg.recuperacao.faturamentoGeral || 0;
       var totalPct = totalMeta > 0 ? (totalReal / totalMeta * 100) : 0;
 
       profsData.sort(function(a,b){return (b.pct||0) - (a.pct||0);});
@@ -753,7 +779,7 @@
       html += '<div class="card"><div class="label">' + icn('crosshair',12) + ' Meta Total</div><div class="value">' + totalMeta + '</div></div>';
       html += '<div class="card"><div class="label">' + (totalReal >= totalMeta ? '&#9989;' : '&#10060;') + ' Realizado</div><div class="value">' + totalReal + '</div></div>';
       html += '<div class="card"><div class="label">' + (totalPct >= 100 ? '&#9989;' : '&#10060;') + ' % Atingido</div><div class="value">' + totalPct.toFixed(1) + '%</div></div>';
-      html += '<div class="card"><div class="label">&#x1F4B0; Total Recuperado</div><div class="value">' + fmtCurr(totalFat) + '</div></div>';
+      html += '<div class="card"><div class="label">&#x1F4B0; Total Recuperado</div><div class="value">' + fmtCurr(fatGeral) + '</div></div>';
       html += '</div>';
 
       html += '<div class="chart-box"><h2>Desempenho por Televendedora <span class="sub">&rarr; Recupera\u00E7\u00E3o de clientes em ' + monthName + '</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th style="text-align:center">Status</th><th class="text-right meta-color" title="Meta de clientes recuperados">Meta</th><th class="text-right realizado-color" title="Clientes recuperados até o momento">Realizado</th><th class="text-right" title="Percentual de atingimento da meta">%</th><th class="text-right" title="Valor total faturado">Faturamento</th></tr></thead><tbody>';
@@ -765,7 +791,7 @@
         var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
         html += '<tr style="background:'+bg+'"><td class="col-ranking">'+medal+(i+1)+'</td><td style="font-weight:600;color:#fcd34d">'+icn('user',14)+' '+p.profissional+'</td><td style="text-align:center">'+badge(recPct)+'</td><td class="text-right meta-color">'+p.meta+'</td><td class="text-right realizado-color" style="font-weight:700">'+p.realizado+'</td><td class="text-right" style="font-weight:700;color:'+recColor+'"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span>'+recPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#1e1b4b;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(recPct,100)+'%;background:'+recColor+';border-radius:3px;min-width:2px"></div></div></div></td><td class="text-right realizado-color" style="font-weight:700">'+fmtCurr(p.faturamento)+'</td></tr>';
       }
-      html += '<tr class="tot-row"><td class="col-ranking"></td><td>'+icn('users',14)+' Total</td><td style="text-align:center">'+badge(totalPct)+'</td><td class="text-right meta-color">'+totalMeta+'</td><td class="text-right realizado-color">'+totalReal+'</td><td class="text-right" style="font-weight:700;color:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+'"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span>'+totalPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#1e1b4b;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(totalPct,100)+'%;background:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+';border-radius:3px;min-width:2px"></div></div></div></td><td class="text-right realizado-color" style="font-weight:700">'+fmtCurr(totalFat)+'</td></tr>';
+      html += '<tr class="tot-row"><td class="col-ranking"></td><td>'+icn('users',14)+' Total</td><td style="text-align:center">'+badge(totalPct)+'</td><td class="text-right meta-color">'+totalMeta+'</td><td class="text-right realizado-color">'+totalReal+'</td><td class="text-right" style="font-weight:700;color:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+'"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span>'+totalPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#1e1b4b;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(totalPct,100)+'%;background:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+';border-radius:3px;min-width:2px"></div></div></div></td><td class="text-right realizado-color" style="font-weight:700">'+fmtCurr(fatGeral)+'</td></tr>';
       html += '</tbody></table></div></div>';
 
       // CONTATOS table

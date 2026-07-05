@@ -293,12 +293,29 @@
       var pgKey = 'painel geral'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
       var monthKey = monthName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
       var sheet = sheetMap[pgKey] || sheetMap[monthKey];
+      var targetKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
       if (sheet) {
         var pg = XLSX.utils.sheet_to_json(sheet, {header:1, defval:''});
-        var targetKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
         allData[targetKey] = {recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]};
         var ctx = {painelGeral: allData[targetKey]};
         parsePainelGeral(pg, ctx);
+      }
+      // Parse individual professional sheets for faturamento
+      var profNames = ['Ariane','Camila','Cristielen','Natália','Tatiana'];
+      for (var pi = 0; pi < profNames.length; pi++) {
+        var name = profNames[pi];
+        var key = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+        if (sheetMap[key] && allData[targetKey] && allData[targetKey].recuperacao) {
+          var grid = XLSX.utils.sheet_to_json(sheetMap[key], {header:1, defval:''});
+          var parsed = parseProfessionalSheet(name, grid);
+          for (var j = 0; j < allData[targetKey].recuperacao.profissionais.length; j++) {
+            var pk = allData[targetKey].recuperacao.profissionais[j].profissional.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+            if (pk === key) {
+              allData[targetKey].recuperacao.profissionais[j].faturamento = parsed.faturamento;
+              break;
+            }
+          }
+        }
       }
     }
 
@@ -409,6 +426,13 @@
 
       // PROFISSIONAIS
       var profNames = ['Ariane','Camila','Cristielen','Natália','Tatiana'];
+      function assignFat(st, parsed, key) {
+        if (!st || !st.recuperacao) return;
+        for (var j = 0; j < st.recuperacao.profissionais.length; j++) {
+          var pk = st.recuperacao.profissionais[j].profissional.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+          if (pk === key) { st.recuperacao.profissionais[j].faturamento = parsed.faturamento; break; }
+        }
+      }
       for (var i = 0; i < profNames.length; i++) {
         var name = profNames[i];
         var key = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
@@ -416,13 +440,8 @@
           var grid = XLSX.utils.sheet_to_json(sheetMap[key], {header:1, defval:''});
           var parsed = parseProfessionalSheet(name, grid);
           result.profissionais[name] = parsed;
-          for (var j = 0; j < result.painelGeral.recuperacao.profissionais.length; j++) {
-            var pk = result.painelGeral.recuperacao.profissionais[j].profissional.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-            if (pk === key) {
-              result.painelGeral.recuperacao.profissionais[j].faturamento = parsed.faturamento;
-              break;
-            }
-          }
+          assignFat(result.painelGeral, parsed, key);
+          if (monthKey !== 'painelGeral') assignFat(result[monthKey], parsed, key);
         }
       }
       result.faturamentoTotal = profNames.reduce(function(s,name){
@@ -887,33 +906,14 @@
       var monthKey = monthName === 'Junho' ? 'Junho' : monthName;
       var pgKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
       var pg = (allData[pgKey] && allData[pgKey].recuperacao && allData[pgKey].recuperacao.profissionais && allData[pgKey].recuperacao.profissionais.length > 0) ? allData[pgKey] : allData.painelGeral;
-      var evo = allData.evolucaoMeses;
 
-      // Build month lookup from RECUPERADOS POR RCA
-      var rpMap = {};
-      for (var ri = 0; ri < evo.recuperadosPorProf.length; ri++) {
-        var r = evo.recuperadosPorProf[ri];
-        rpMap[r.profissional] = {
-          meta: r[monthName + ' META'] || 0,
-          real: r[monthName + ' REAL'] || 0
-        };
-      }
-      // Build month faturamento lookup from VALOR RECUPERADO POR MÊS
-      var fatMap = {};
-      for (var fi = 0; fi < evo.valorPorProf.length; fi++) {
-        var f = evo.valorPorProf[fi];
-        fatMap[f.profissional] = f[monthName] || 0;
-      }
-
-      // Merge with Painel Geral data (for dias) and compute month values
       var profsData = [];
       for (var pi = 0; pi < pg.recuperacao.profissionais.length; pi++) {
         var p = pg.recuperacao.profissionais[pi];
         var name = p.profissional;
-        var useRp = rpMap[name] && (rpMap[name].meta || rpMap[name].real);
-        var jMeta = useRp ? rpMap[name].meta : (p.meta || 0);
-        var jReal = useRp ? rpMap[name].real : (p.realizado || 0);
-        var jFat = fatMap[name] || 0;
+        var jMeta = p.meta || 0;
+        var jReal = p.realizado || 0;
+        var jFat = p.faturamento || 0;
         var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
         profsData.push({
           profissional: name,
@@ -988,9 +988,8 @@
       var totReal = 0, totMeta = 0;
       for (var pi2 = 0; pi2 < pg.recuperacao.profissionais.length; pi2++) {
         var pp = pg.recuperacao.profissionais[pi2];
-        var useRp = rpMap[pp.profissional] && (rpMap[pp.profissional].meta || rpMap[pp.profissional].real);
-        totReal += useRp ? rpMap[pp.profissional].real : (pp.realizado||0);
-        totMeta += useRp ? rpMap[pp.profissional].meta : (pp.meta||0);
+        totReal += pp.realizado||0;
+        totMeta += pp.meta||0;
       }
       if (totReal === 0 && totalPG) { totReal = totalPG.realizado||0; }
       if (totMeta === 0 && totalPG) { totMeta = totalPG.meta||0; }
@@ -1013,12 +1012,12 @@
       for (var i = 0; i < pg.recuperacao.profissionais.length; i++) {
         var p = pg.recuperacao.profissionais[i];
         var bg = i%2===0?'#0b0d14':'#11131c';
-        var jMeta = (rpMap[p.profissional] && rpMap[p.profissional].meta) || p.meta || 0;
-        var jReal = (rpMap[p.profissional] && rpMap[p.profissional].real) || p.realizado || 0;
+        var jMeta = p.meta || 0;
+        var jReal = p.realizado || 0;
         var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
         var pctStr = jPct.toFixed(1);
         var pctColor = jPct >= 100 ? '#34d399' : jPct >= 80 ? '#fbbf24' : '#f87171';
-        var acum = (rpMap[p.profissional] && rpMap[p.profissional].real) || 0;
+        var acum = p.realizado || 0;
         html += '<tr style="background:'+bg+'"><td style="font-weight:600;color:#fcd34d">'+icn('user',12)+' '+p.profissional+'</td><td style="text-align:center;font-weight:700;color:'+pctColor+'">'+pctStr+'%</td><td style="text-align:center;font-weight:700">'+acum+'</td>';
         for (var di = 0; di < days.length; di++) {
           var v = (p.dias && p.dias[di]) ? p.dias[di] : null;

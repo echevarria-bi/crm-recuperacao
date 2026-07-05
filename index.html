@@ -1135,9 +1135,8 @@
       }
 
       // Summary cards
-      html += '<div class="grid-4" style="margin-bottom:16px">';
+      html += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px">';
       html += '<div class="card"><div class="label">'+icn('users',12)+' Registros na Base</div><div class="value" style="color:#a78bfa">'+clientes.length+'</div></div>';
-      html += '<div class="card"><div class="label">'+icn('users',12)+' Clientes \u00DAnicos</div><div class="value" style="color:#818cf8">'+qtdUnicos+'</div></div>';
       html += '<div class="card"><div class="label">'+icn('dollar-sign',12)+' Total Recuperado</div><div class="value" style="color:#fbbf24">'+fmtCurr(grandTotal)+'</div></div>';
       html += '<div class="card"><div class="label">'+icn('trending-up',12)+' M\u00E9dia por Registro</div><div class="value" style="color:#f59e0b">'+fmtCurr(clientes.length>0?grandTotal/clientes.length:0)+'</div></div>';
       html += '</div>';

@@ -1,0 +1,8 @@
+node_modules/
+*.xlsx
+chart.umd.min.js
+chartjs-plugin-datalabels.min.js
+lucide.min.js
+xlsx.full.min.js
+package.json
+package-lock.json

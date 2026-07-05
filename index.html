@@ -226,7 +226,7 @@
           var fatKey = 'faturamento recuperacao'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
           if (sm[fatKey]) {
             var fg = XLSX.utils.sheet_to_json(sm[fatKey], {header:1, defval:''});
-            var clientesMap = {};
+            allData.faturamentoClientes = [];
             for (var fr = 1; fr < fg.length; fr++) {
               var row = fg[fr];
               if (!row || !row[0]) continue;
@@ -237,18 +237,9 @@
               var fm = String(row[4] || '').trim();
               if (!fp || !fm || ['Abril','Maio','Junho'].indexOf(fm) < 0) continue;
               if (isNaN(fid) || fid <= 0) continue;
-              if (!clientesMap[fid]) clientesMap[fid] = {cliente:fid, nome:fnome, Abril:0, Maio:0, Junho:0, total:0, profs:{}};
-              if (!clientesMap[fid].nome) clientesMap[fid].nome = fnome;
-              clientesMap[fid][fm] = (clientesMap[fid][fm]||0) + fv;
-              if (fv > 0) clientesMap[fid].profs[fp] = (clientesMap[fid].profs[fp]||0) + fv;
+              allData.faturamentoClientes.push({cliente:fid, nome:fnome, valor:fv, mes:fm, prof:fp});
             }
-            allData.faturamentoClientes = [];
-            for (var cid in clientesMap) {
-              var c = clientesMap[cid];
-              c.total = (c.Abril||0) + (c.Maio||0) + (c.Junho||0);
-              allData.faturamentoClientes.push(c);
-            }
-            allData.faturamentoClientes.sort(function(a,b){return b.total - a.total;});
+            allData.faturamentoClientes.sort(function(a,b){return b.valor - a.valor;});
           }
         }
         var fn = Array.prototype.map.call(files,function(f){return f.name;}).join(', ');
@@ -442,7 +433,7 @@
       var fatKey = 'faturamento recuperacao'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
       if (sheetMap[fatKey]) {
         var fg = XLSX.utils.sheet_to_json(sheetMap[fatKey], {header:1, defval:''});
-        var clientesMap = {};
+        result.faturamentoClientes = [];
         for (var fr = 1; fr < fg.length; fr++) {
           var row = fg[fr];
           if (!row || !row[0]) continue;
@@ -453,18 +444,9 @@
           var fm = String(row[4] || '').trim();
           if (!fp || !fm || ['Abril','Maio','Junho'].indexOf(fm) < 0) continue;
           if (isNaN(fid) || fid <= 0) continue;
-          if (!clientesMap[fid]) clientesMap[fid] = {cliente:fid, nome:fnome, Abril:0, Maio:0, Junho:0, total:0, profs:{}};
-          if (!clientesMap[fid].nome) clientesMap[fid].nome = fnome;
-          clientesMap[fid][fm] = (clientesMap[fid][fm]||0) + fv;
-          if (fv > 0) clientesMap[fid].profs[fp] = (clientesMap[fid].profs[fp]||0) + fv;
+          result.faturamentoClientes.push({cliente:fid, nome:fnome, valor:fv, mes:fm, prof:fp});
         }
-        result.faturamentoClientes = [];
-        for (var cid in clientesMap) {
-          var c = clientesMap[cid];
-          c.total = (c.Abril||0) + (c.Maio||0) + (c.Junho||0);
-          result.faturamentoClientes.push(c);
-        }
-        result.faturamentoClientes.sort(function(a,b){return b.total - a.total;});
+        result.faturamentoClientes.sort(function(a,b){return b.valor - a.valor;});
       }
 
       // Month-specific painel sheets (Abril, Maio)
@@ -712,7 +694,6 @@
       h += '<button class="tab-btn' + (activeTab==='resumo'?' active':'') + '" data-tab="resumo">' + icn('layout-dashboard',12) + ' Resumo</button>';
       h += '<button class="tab-btn' + (activeTab==='clientes'?' active':'') + '" data-tab="clientes">' + icn('table-2',12) + ' Clientes</button>';
       h += '<button class="tab-btn' + (activeTab==='motivos'?' active':'') + '" data-tab="motivos">' + icn('clipboard-list',12) + ' Motivos</button>';
-      h += '<button class="tab-btn' + (activeTab==='testes'?' active':'') + '" data-tab="testes">' + icn('file-text',12) + ' Testes</button>';
       h += '</div></div>';
       var tc = document.getElementById('tabsContainer');
       if (tc) tc.innerHTML = h;
@@ -734,7 +715,6 @@
       else if (tab === 'geral') renderMonth('Junho');
       else if (tab === 'clientes') renderClientes();
       else if (tab === 'motivos') renderMotivos();
-      else if (tab === 'testes') renderTestes();
     }
 
     function getFilteredProfs() {
@@ -1138,39 +1118,15 @@
 
     function renderClientes() {
       var clientes = allData.faturamentoClientes || [];
-      var grandTotal = clientes.reduce(function(s,c){return s+(c.total||0);},0);
-      var maxTotal = clientes.length > 0 ? Math.max.apply(null, clientes.map(function(c){return c.total||0;})) : 1;
-      var ativos = clientes.filter(function(c){return (c.Junho||0) > 0;}).length;
-      var ticketMedio = ativos > 0 ? grandTotal / ativos : 0;
+      var grandTotal = clientes.reduce(function(s,c){return s+(c.valor||0);},0);
+      var maxVal = clientes.length > 0 ? Math.max.apply(null, clientes.map(function(c){return c.valor||0;})) : 1;
+      var clientesUnicos = {};
+      var ocorrencias = {};
+      clientes.forEach(function(c){clientesUnicos[c.cliente]=1; ocorrencias[c.cliente]=(ocorrencias[c.cliente]||0)+1;});
+      var qtdUnicos = Object.keys(clientesUnicos).length;
 
-      // Pre-compute metrics for each client
-      var metrics = [];
-      for (var i = 0; i < clientes.length; i++) {
-        var c = clientes[i];
-        var a = c.Abril||0, m = c.Maio||0, j = c.Junho||0, tot = c.total||0;
-        var dAM = a > 0 ? ((m-a)/a*100) : (m>0?100:null);
-        var dMJ = m > 0 ? ((j-m)/m*100) : (j>0?100:null);
-        var count = (a?1:0)+(m?1:0)+(j?1:0);
-        var media = count > 0 ? tot / count : 0;
-        var pct = grandTotal > 0 ? (tot/grandTotal*100) : 0;
-        var status = j > 0 ? 'Recuperado' : (m > 0 ? 'Retornou' : (a > 0 ? 'Recuperado' : 'Inativo'));
-        if (j > 0) status = 'Recuperado';
-        else if (m > 0) status = 'Aten\u00E7\u00E3o';
-        else if (a > 0) status = 'Risco';
-        else status = 'Inativo';
-        var profs = c.profs || {};
-        var profList = Object.keys(profs).sort(function(x,y){return (profs[y]||0)-(profs[x]||0);});
-        var profLabel = profList.length > 0 ? profList.join(', ') : '-';
-        var tier = tot >= 5000 ? 'A' : (tot >= 1000 ? 'B' : 'C');
-        metrics.push({idx:i, a:a, m:m, j:j, tot:tot, dAM:dAM, dMJ:dMJ, media:media, pct:pct, status:status, tier:tier, profLabel:profLabel});
-      }
-
-      // Build header with filters
-      var html = '<div class="top-bar" style="gap:8px;flex-wrap:wrap">';
-      html += '<div style="position:relative;flex:1;min-width:160px;max-width:280px"><input type="text" id="buscaCliente" placeholder="Buscar por ID do cliente..." style="width:100%;background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px 10px 36px;color:#e1e7ef;font-size:13px;outline:none"><span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#4a4d6e;font-size:14px">🔍</span></div>';
-      html += '<select id="filtroTier" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:8px 12px;color:#e1e7ef;font-size:12px;outline:none"><option value="">Tier: Todos</option><option value="A">Tier A</option><option value="B">Tier B</option><option value="C">Tier C</option></select>';
-      html += '<select id="filtroStatus" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:8px 12px;color:#e1e7ef;font-size:12px;outline:none"><option value="">Status: Todos</option><option value="Recuperado">Recuperado</option><option value="Aten\u00E7\u00E3o">Aten\u00E7\u00E3o</option><option value="Risco">Risco</option><option value="Inativo">Inativo</option></select>';
-      html += '<span style="font-size:12px;color:#6b7280;white-space:nowrap">' + clientes.length + ' clientes</span></div>';
+      // Build header with count
+      var html = '<div style="margin-bottom:16px;font-size:12px;color:#6b7280">' + clientes.length + ' registros (' + qtdUnicos + ' clientes \u00FAnicos)</div>';
 
       if (clientes.length === 0) {
         html += '<div class="chart-box"><h2>Recupera\u00E7\u00E3o por Cliente <span class="sub">&rarr; Raio-X completo</span></h2><div style="text-align:center;padding:40px;color:#6b7280">Nenhum dado dispon\u00EDvel. Fa\u00E7a o upload do Excel para carregar.</div></div>';
@@ -1180,100 +1136,56 @@
 
       // Summary cards
       html += '<div class="grid-4" style="margin-bottom:16px">';
-      html += '<div class="card"><div class="label">'+icn('users',12)+' Clientes na Base</div><div class="value" style="color:#a78bfa">'+clientes.length+'</div></div>';
-      html += '<div class="card"><div class="label">'+icn('check-circle',12)+' Recuperados (Junho)</div><div class="value" style="color:#34d399">'+ativos+'</div></div>';
+      html += '<div class="card"><div class="label">'+icn('users',12)+' Registros na Base</div><div class="value" style="color:#a78bfa">'+clientes.length+'</div></div>';
+      html += '<div class="card"><div class="label">'+icn('users',12)+' Clientes \u00DAnicos</div><div class="value" style="color:#818cf8">'+qtdUnicos+'</div></div>';
       html += '<div class="card"><div class="label">'+icn('dollar-sign',12)+' Total Recuperado</div><div class="value" style="color:#fbbf24">'+fmtCurr(grandTotal)+'</div></div>';
-      html += '<div class="card"><div class="label">'+icn('trending-up',12)+' M\u00E9dia por Cliente</div><div class="value" style="color:#f59e0b">'+fmtCurr(ticketMedio)+'</div></div>';
-      html += '</div>';
-
-      // Charts row
-      html += '<div class="grid-2" style="margin-bottom:16px">';
-      html += '<div class="chart-box"><h2>Top 10 Clientes <span class="sub">&rarr; Maior valor recuperado</span></h2><canvas id="chartTopClientes" style="max-height:220px"></canvas></div>';
-      html += '<div class="chart-box"><h2>Recupera\u00E7\u00E3o por M\u00EAs <span class="sub">&rarr; Total recuperado em cada m\u00EAs</span></h2><canvas id="chartRecMes" style="max-height:220px"></canvas></div>';
-      html += '<div class="chart-box"><h2>Distribui\u00E7\u00E3o por Tier <span class="sub">&rarr; Faixas de valor recuperado</span></h2><canvas id="chartTier" style="max-height:220px"></canvas></div>';
-      html += '<div class="chart-box"><h2>Status dos Clientes <span class="sub">&rarr; Rec\u00EAncia de recupera\u00E7\u00E3o</span></h2><canvas id="chartStatus" style="max-height:220px"></canvas></div>';
+      html += '<div class="card"><div class="label">'+icn('trending-up',12)+' M\u00E9dia por Registro</div><div class="value" style="color:#f59e0b">'+fmtCurr(clientes.length>0?grandTotal/clientes.length:0)+'</div></div>';
       html += '</div>';
 
       // Table
-      html += '<div class="chart-box"><h2>Raio-X dos Clientes <span class="sub">&rarr; Recupera\u00E7\u00E3o individual</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">#</th><th>Cliente</th><th style="color:#6b7280;font-size:10px">Televendedora</th><th class="text-right realizado-color">Abril</th><th class="text-right realizado-color">Maio</th><th class="text-right realizado-color">Junho</th><th class="text-right" style="color:#fbbf24">Total</th><th class="text-right" style="color:#6b7280;font-size:10px" title="Varia\u00E7\u00E3o Abr\u2192Mai">&Delta; A\u2192M</th><th class="text-right" style="color:#6b7280;font-size:10px" title="Varia\u00E7\u00E3o Mai\u2192Jun">&Delta; M\u2192J</th><th class="text-right" style="color:#34d399;font-size:10px">M\u00E9dia</th><th class="text-right" style="color:#a78bfa;font-size:10px">%</th><th style="text-align:center;color:#6b7280;font-size:10px">Status</th><th style="text-align:center;color:#6b7280;font-size:10px">Tier</th><th style="min-width:60px;color:#6b7280;font-size:10px">Peso</th></tr></thead><tbody id="tbodyClientes">';
+      // Build profs list for filter
+      var profList = [];
+      clientes.forEach(function(c){if (profList.indexOf(c.prof) < 0) profList.push(c.prof);});
+      profList.sort();
+      html += '<div class="chart-box"><h2>Raio-X dos Clientes <span class="sub">&rarr; Todos os registros individuais</span></h2>';
+      html += '<div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap"><input type="text" id="filtroId" placeholder="Filtrar por ID do cliente..." style="flex:1;min-width:160px;max-width:240px;background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:8px 12px;color:#e1e7ef;font-size:13px;outline:none" autofocus>';
+      html += '<select id="filtroProf" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:8px 12px;color:#e1e7ef;font-size:12px;outline:none"><option value="">Televendedora: Todas</option>';
+      for (var pi = 0; pi < profList.length; pi++) html += '<option value="' + profList[pi] + '">' + profList[pi] + '</option>';
+      html += '</select>';
+      html += '<select id="filtroMes" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:8px 12px;color:#e1e7ef;font-size:12px;outline:none"><option value="">M\u00EAs: Todos</option><option value="Abril">Abril</option><option value="Maio">Maio</option><option value="Junho">Junho</option></select></div>';
+      html += '<div class="table-wrap"><table><thead><tr><th class="col-ranking">#</th><th style="color:#6b7280;font-size:10px">ID</th><th>Nome do Cliente</th><th class="text-right" style="color:#f59e0b;font-size:10px">Registros</th><th style="color:#6b7280;font-size:10px">Televendedora</th><th class="text-right" style="color:#34d399">Valor</th><th style="text-align:center;color:#6b7280;font-size:10px">M\u00EAs</th><th style="min-width:60px;color:#6b7280;font-size:10px">Peso</th></tr></thead><tbody id="tbodyClientes">';
       for (var i = 0; i < clientes.length; i++) {
-        var mt = metrics[i];
+        var c = clientes[i];
         var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
-        var dAMStr = mt.dAM === null ? '-' : (mt.dAM>=0?'+'+mt.dAM.toFixed(1):mt.dAM.toFixed(1));
-        var dMJStr = mt.dMJ === null ? '-' : (mt.dMJ>=0?'+'+mt.dMJ.toFixed(1):mt.dMJ.toFixed(1));
-        var dAMCol = mt.dAM === null ? '#4a4d6e' : (mt.dAM>=0?'#34d399':'#f87171');
-        var dMJCol = mt.dMJ === null ? '#4a4d6e' : (mt.dMJ>=0?'#34d399':'#f87171');
-        var statusCol = mt.status === 'Recuperado' ? '#34d399' : (mt.status === 'Aten\u00E7\u00E3o' ? '#fbbf24' : (mt.status === 'Risco' ? '#f87171' : '#4a4d6e'));
-        var tierCol = mt.tier === 'A' ? '#f59e0b' : (mt.tier === 'B' ? '#a78bfa' : '#4a4d6e');
-        var barW = (mt.tot / maxTotal * 100);
-        html += '<tr data-id="' + clientes[i].cliente + '" data-nome="' + (clientes[i].nome||'').toLowerCase() + '" data-tier="'+mt.tier+'" data-status="'+mt.status+'"><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600;color:#fcd34d"><span class="cliente-id" style="font-size:10px;color:#6b7280">#' + clientes[i].cliente + '</span> ' + (clientes[i].nome || 'Cliente ' + clientes[i].cliente) + '</td><td style="font-size:10px;color:#9ca3af">' + mt.profLabel + '</td><td class="text-right realizado-color">' + fmtCurr(mt.a) + '</td><td class="text-right realizado-color">' + fmtCurr(mt.m) + '</td><td class="text-right realizado-color">' + fmtCurr(mt.j) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(mt.tot) + '</td><td class="text-right" style="font-size:11px;font-weight:600;color:'+dAMCol+'">' + dAMStr + (mt.dAM!==null?'%':'') + '</td><td class="text-right" style="font-size:11px;font-weight:600;color:'+dMJCol+'">' + dMJStr + (mt.dMJ!==null?'%':'') + '</td><td class="text-right realizado-color" style="font-size:11px">' + fmtCurr(mt.media) + '</td><td class="text-right" style="font-size:11px;color:#a78bfa">' + mt.pct.toFixed(1) + '%</td><td style="text-align:center"><span style="font-size:10px;padding:1px 6px;border-radius:4px;background:'+statusCol+'22;color:'+statusCol+';font-weight:600">' + mt.status + '</span></td><td style="text-align:center"><span style="font-size:10px;padding:1px 6px;border-radius:4px;background:'+tierCol+'22;color:'+tierCol+';font-weight:700">' + mt.tier + '</span></td><td style="padding:4px 6px"><div style="height:8px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:'+Math.min(barW,100)+'%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
+        var mesCol = c.mes === 'Junho' ? '#34d399' : (c.mes === 'Maio' ? '#60a5fa' : '#a78bfa');
+        var barW = ((c.valor||0) / maxVal * 100);
+        html += '<tr data-id="' + c.cliente + '" data-nome="' + (c.nome||'').toLowerCase() + '" data-mes="'+c.mes+'" data-prof="' + c.prof + '"><td class="col-ranking">' + (i+1) + '</td><td style="color:#6b7280;font-size:10px">' + c.cliente + '</td><td style="font-weight:600;color:#fcd34d">' + (c.nome || '') + '</td><td class="text-right" style="font-size:10px;color:#f59e0b">' + (ocorrencias[c.cliente] > 1 ? (''+ocorrencias[c.cliente]) : '') + '</td><td style="font-size:10px;color:#9ca3af">' + c.prof + '</td><td class="text-right" style="font-weight:600;color:#34d399">' + fmtCurr(c.valor||0) + '</td><td style="text-align:center"><span style="font-size:10px;padding:1px 6px;border-radius:4px;background:'+mesCol+'22;color:'+mesCol+';font-weight:600">' + c.mes + '</span></td><td style="padding:4px 6px"><div style="height:8px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:'+Math.min(barW,100)+'%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
       }
-      var tAbr = 0, tMai = 0, tJun = 0, tTot = 0;
-      for (var ti = 0; ti < clientes.length; ti++) { tAbr += clientes[ti].Abril||0; tMai += clientes[ti].Maio||0; tJun += clientes[ti].Junho||0; tTot += clientes[ti].total||0; }
-      var tMedia = clientes.length > 0 ? tTot / clientes.length : 0;
-      html += '</tbody><tfoot class="tot-row"><tr><td class="col-ranking"></td><td style="font-weight:700;color:#fcd34d">Total Geral</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(tAbr) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(tMai) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(tJun) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(tTot) + '</td><td class="text-right" style="color:#4a4d6e">-</td><td class="text-right" style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(tMedia) + '</td><td class="text-right" style="color:#a78bfa;font-weight:700">100%</td><td style="text-align:center">-</td><td style="text-align:center">-</td><td></td></tr></tfoot></table></div></div>';
+      html += '</tbody><tfoot class="tot-row"><tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total Geral</td><td class="text-right" style="color:#f59e0b;font-weight:700">'+clientes.length+'</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(grandTotal) + '</td><td style="text-align:center;font-weight:700;color:#e1e7ef">' + Object.keys(clientesUnicos).length + ' clientes</td><td></td></tr></tfoot></table></div></div>';
 
       document.getElementById('dashContent').innerHTML = html;
 
-      // Render charts
-      setTimeout(function() {
-        try {
-          var top10 = clientes.slice(0,10).reverse();
-          new Chart(document.getElementById('chartTopClientes'), {
-            type:'bar', data:{labels:top10.map(function(c){return c.cliente;}), datasets:[{data:top10.map(function(c){return c.total||0;}), backgroundColor:'#f59e0b', borderRadius:4}]},
-            options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{datalabels:{anchor:'end',align:'end',color:'#9ca3af',font:{size:9},formatter:function(v){return fmtCurr(v);}},legend:{display:false}}, scales:{x:{grid:{color:'#1e1b4b'},ticks:{color:'#6b7280',font:{size:9}}},y:{grid:{display:false},ticks:{color:'#fcd34d',font:{size:9}}}}}
-          });
-        } catch(e){}
-        try {
-          var rAbr = clientes.reduce(function(s,c){return s+(c.Abril||0);},0);
-          var rMai = clientes.reduce(function(s,c){return s+(c.Maio||0);},0);
-          var rJun = clientes.reduce(function(s,c){return s+(c.Junho||0);},0);
-          new Chart(document.getElementById('chartRecMes'), {
-            type:'bar', data:{labels:['Abril','Maio','Junho'], datasets:[{data:[rAbr,rMai,rJun], backgroundColor:['#a78bfa','#60a5fa','#34d399'], borderRadius:4}]},
-            options:{responsive:true, maintainAspectRatio:false, plugins:{datalabels:{anchor:'end',align:'end',color:'#e1e7ef',font:{size:10,weight:'bold'},formatter:function(v){return fmtCurr(v);}},legend:{display:false}}, scales:{x:{grid:{display:false},ticks:{color:'#9ca3af',font:{size:10}}},y:{grid:{color:'#1e1b4b'},ticks:{color:'#6b7280',font:{size:9}}}}}
-          });
-        } catch(e){}
-        try {
-          var tA = metrics.filter(function(m){return m.tier==='A';}).length;
-          var tB = metrics.filter(function(m){return m.tier==='B';}).length;
-          var tC = metrics.filter(function(m){return m.tier==='C';}).length;
-          new Chart(document.getElementById('chartTier'), {
-            type:'doughnut', data:{labels:['Tier A (\u2265R$5k)','Tier B (\u2265R$1k)','Tier C (<R$1k)'], datasets:[{data:[tA,tB,tC], backgroundColor:['#f59e0b','#a78bfa','#4a4d6e'], borderColor:'#0b0d14',borderWidth:2}]},
-            options:{responsive:true, maintainAspectRatio:false, cutout:'55%', plugins:{datalabels:{color:'#fff',font:{size:10,weight:'bold'},formatter:function(v,ctx){return v>0?v:'';}},legend:{position:'bottom',labels:{color:'#9ca3af',padding:10,boxWidth:12,font:{size:11},usePointStyle:true}}}}
-          });
-        } catch(e){}
-        try {
-          var sAt = metrics.filter(function(m){return m.status==='Recuperado';}).length;
-          var sAten = metrics.filter(function(m){return m.status==='Aten\u00E7\u00E3o';}).length;
-          var sR = metrics.filter(function(m){return m.status==='Risco';}).length;
-          var sI = metrics.filter(function(m){return m.status==='Inativo';}).length;
-          new Chart(document.getElementById('chartStatus'), {
-            type:'doughnut', data:{labels:['Recuperado','Aten\u00E7\u00E3o','Risco','Inativo'], datasets:[{data:[sAt,sAten,sR,sI], backgroundColor:['#34d399','#fbbf24','#f87171','#4a4d6e'], borderColor:'#0b0d14',borderWidth:2}]},
-            options:{responsive:true, maintainAspectRatio:false, cutout:'55%', plugins:{datalabels:{color:'#fff',font:{size:10,weight:'bold'},formatter:function(v,ctx){return v>0?v:'';}},legend:{position:'bottom',labels:{color:'#9ca3af',padding:10,boxWidth:12,font:{size:11},usePointStyle:true}}}}
-          });
-        } catch(e){}
-      }, 100);
-
       // Filters
       setTimeout(function() {
-        var busca = document.getElementById('buscaCliente');
-        var tierF = document.getElementById('filtroTier');
-        var statusF = document.getElementById('filtroStatus');
+        var idF = document.getElementById('filtroId');
+        var profF = document.getElementById('filtroProf');
+        var mesF = document.getElementById('filtroMes');
         function applyFilters() {
-          var q = busca ? busca.value : '';
-          var t = tierF ? tierF.value : '';
-          var s = statusF ? statusF.value : '';
+          var idQ = idF ? idF.value.toLowerCase() : '';
+          var profQ = profF ? profF.value : '';
+          var mesQ = mesF ? mesF.value : '';
           var rows = document.querySelectorAll('#tbodyClientes tr');
           for (var ri = 0; ri < rows.length; ri++) {
             var r = rows[ri];
-            var ql = q ? q.toLowerCase() : '';
-            var match = (!q || String(r.getAttribute('data-id')).indexOf(ql) >= 0 || (r.getAttribute('data-nome')||'').indexOf(ql) >= 0) && (!t || r.getAttribute('data-tier') === t) && (!s || r.getAttribute('data-status') === s);
-            r.style.display = match ? '' : 'none';
+            var matchId = !idQ || String(r.getAttribute('data-id')).indexOf(idQ) >= 0;
+            var matchProf = !profQ || r.getAttribute('data-prof') === profQ;
+            var matchMes = !mesQ || r.getAttribute('data-mes') === mesQ;
+            r.style.display = matchId && matchProf && matchMes ? '' : 'none';
           }
         }
-        if (busca) busca.addEventListener('input', applyFilters);
-        if (tierF) tierF.addEventListener('change', applyFilters);
-        if (statusF) statusF.addEventListener('change', applyFilters);
+        if (idF) { idF.addEventListener('input', applyFilters); idF.focus(); }
+        if (profF) profF.addEventListener('change', applyFilters);
+        if (mesF) mesF.addEventListener('change', applyFilters);
       }, 50);
       try { lucide.createIcons(); } catch(e) {}
     }
@@ -1312,24 +1224,6 @@
           );
         } catch(e) {}
       }, 100);
-    }
-
-    function renderTestes() {
-      var html = '<div class="chart-box"><h2>Testes - Diagnóstico <span class="sub">&rarr; Verificando dados do FATURAMENTO RECUPERACAO</span></h2>';
-      html += '<div style="font-size:13px;line-height:1.8;padding:12px;background:#11131c;border-radius:8px;border:1px solid #1e1b4b">';
-      var clientes = allData.faturamentoClientes || [];
-      html += '<div>📊 <strong>faturamentoClientes.length:</strong> ' + clientes.length + '</div>';
-      html += '<div>📋 <strong>allData keys:</strong> ' + Object.keys(allData).join(', ') + '</div>';
-      html += '<div>💼 <strong>profissionais:</strong> ' + JSON.stringify(Object.keys(allData.profissionais||{})) + '</div>';
-      if (clientes.length > 0) {
-        html += '<div style="margin-top:12px"><strong>Primeiros 5 clientes:</strong></div>';
-        for (var i = 0; i < Math.min(clientes.length, 5); i++) {
-          var c = clientes[i];
-          html += '<div style="margin-left:16px;color:#34d399">#' + c.cliente + ' ' + (c.nome||'sem nome') + ' | Abr=' + (c.Abril||0) + ' Mai=' + (c.Maio||0) + ' Jun=' + (c.Junho||0) + ' Total=' + (c.total||0) + '</div>';
-        }
-      }
-      html += '</div></div>';
-      document.getElementById('dashContent').innerHTML = html;
     }
 
     // Initialize: try remote first, then localStorage, then upload area

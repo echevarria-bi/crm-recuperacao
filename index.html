@@ -369,13 +369,17 @@
 
       // PAINEL GERAL sheets (Painel Geral - Abril, Painel Geral - Maio, Painel Geral - Junho)
       var pgTargets = {'painelgeralabril':'painelAbril','painelgeralmaio':'painelMaio','painelgeraljunho':'painelGeral','painelgeral':'painelGeral'};
+      console.log('SheetNames:', wb.SheetNames);
       for (var si = 0; si < wb.SheetNames.length; si++) {
         var sNorm = wb.SheetNames[si].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[-\s]/g,'');
+        console.log('  ->', wb.SheetNames[si], '=>', sNorm, 'target?', pgTargets[sNorm]);
         var targetStore = pgTargets[sNorm];
         if (targetStore) {
           var pg = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[si]], {header:1, defval:''});
+          console.log('  parsed rows:', pg.length, 'row0:', pg[0]);
           result[targetStore] = {recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]};
           parsePainelGeral(pg, {painelGeral: result[targetStore]});
+          console.log('  profissionais parsed:', result[targetStore].recuperacao.profissionais.length, JSON.stringify(result[targetStore].recuperacao.profissionais));
         }
       }
 
@@ -828,6 +832,7 @@
       var monthKey = monthName === 'Junho' ? 'Junho' : monthName;
       var pgKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
       var pg = (allData[pgKey] && allData[pgKey].recuperacao && allData[pgKey].recuperacao.profissionais && allData[pgKey].recuperacao.profissionais.length > 0) ? allData[pgKey] : allData.painelGeral;
+      console.log('renderMonth ' + monthName + ': pgKey=' + pgKey + ' hasData=' + (allData[pgKey]?'sim':'nao') + ' usandoFallback=' + (pg===allData.painelGeral && pgKey!=='painelGeral'?'SIM':'nao'));
 
       var profsData = [];
       for (var pi = 0; pi < pg.recuperacao.profissionais.length; pi++) {

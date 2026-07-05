@@ -260,20 +260,17 @@
     }
 
     function mergeSheetInto(wb, monthName) {
-      var sheetMap = {};
+      var pgMap = {abril:'painelAbril',maio:'painelMaio',junho:'painelGeral'};
+      var targetKey = pgMap[monthName.toLowerCase()] || 'painelGeral';
       for (var si = 0; si < wb.SheetNames.length; si++) {
-        var sn = wb.SheetNames[si];
-        sheetMap[sn.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')] = wb.Sheets[sn];
-      }
-      var pgKey = 'painel geral'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-      var monthKey = monthName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-      var sheet = sheetMap[pgKey] || sheetMap[monthKey];
-      var targetKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
-      if (sheet) {
-        var pg = XLSX.utils.sheet_to_json(sheet, {header:1, defval:''});
-        allData[targetKey] = {recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]};
-        var ctx = {painelGeral: allData[targetKey]};
-        parsePainelGeral(pg, ctx);
+        var sNorm = wb.SheetNames[si].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[-\s]/g,'');
+        var tgt = {'painelgeralabril':'painelAbril','painelgeralmaio':'painelMaio','painelgeraljunho':'painelGeral','painelgeral':'painelGeral'}[sNorm];
+        if (tgt === targetKey) {
+          var pg = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[si]], {header:1, defval:''});
+          allData[targetKey] = {recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]};
+          parsePainelGeral(pg, {painelGeral: allData[targetKey]});
+          return;
+        }
       }
     }
 
@@ -356,7 +353,6 @@
 
     function parseAllSheets(wb, baseMonth) {
       baseMonth = baseMonth || 'Junho';
-      var monthKey = baseMonth === 'Junho' ? 'painelGeral' : ('painel' + baseMonth);
       var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, painelAbril:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, painelMaio:{recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
       var sheetMap = {};
       for (var si = 0; si < wb.SheetNames.length; si++) {
@@ -371,14 +367,15 @@
         parseEvolucaoMeses(grid, result);
       }
 
-      // PAINEL GERAL
-      var pgKey = 'painel geral'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-      if (sheetMap[pgKey]) {
-        var pg = XLSX.utils.sheet_to_json(sheetMap[pgKey], {header:1, defval:''});
-        parsePainelGeral(pg, result);
-        // If base month is not Junho, also store in the month-specific slot
-        if (monthKey !== 'painelGeral') {
-          parsePainelGeral(pg, {painelGeral: result[monthKey]});
+      // PAINEL GERAL sheets (Painel Geral - Abril, Painel Geral - Maio, Painel Geral - Junho)
+      var pgTargets = {'painelgeralabril':'painelAbril','painelgeralmaio':'painelMaio','painelgeraljunho':'painelGeral','painelgeral':'painelGeral'};
+      for (var si = 0; si < wb.SheetNames.length; si++) {
+        var sNorm = wb.SheetNames[si].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[-\s]/g,'');
+        var targetStore = pgTargets[sNorm];
+        if (targetStore) {
+          var pg = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[si]], {header:1, defval:''});
+          result[targetStore] = {recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]};
+          parsePainelGeral(pg, {painelGeral: result[targetStore]});
         }
       }
 
@@ -402,16 +399,6 @@
           result.faturamentoClientes.push({cliente:fid, nome:fnome, valor:fv, mes:fm, prof:fp});
         }
         result.faturamentoClientes.sort(function(a,b){return b.valor - a.valor;});
-      }
-
-      // Month-specific painel sheets (Abril, Maio)
-      var extraMonths = [{key:'abril',store:'painelAbril'},{key:'maio',store:'painelMaio'}];
-      for (var mi = 0; mi < extraMonths.length; mi++) {
-        if (sheetMap[extraMonths[mi].key]) {
-          var mg = XLSX.utils.sheet_to_json(sheetMap[extraMonths[mi].key], {header:1, defval:''});
-          var ctx = {painelGeral: result[extraMonths[mi].store]};
-          parsePainelGeral(mg, ctx);
-        }
       }
 
       return result;
@@ -841,7 +828,6 @@
       var monthKey = monthName === 'Junho' ? 'Junho' : monthName;
       var pgKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
       var pg = (allData[pgKey] && allData[pgKey].recuperacao && allData[pgKey].recuperacao.profissionais && allData[pgKey].recuperacao.profissionais.length > 0) ? allData[pgKey] : allData.painelGeral;
-      console.log('renderMonth ' + monthName, { pgKey: pgKey, raw: allData[pgKey], using: pgKey + ' ou fallback', profissionais: pg.recuperacao.profissionais });
 
       var profsData = [];
       for (var pi = 0; pi < pg.recuperacao.profissionais.length; pi++) {
@@ -875,8 +861,6 @@
         if (pct >= 80) return '<span class="badge badge-yellow">Parcial &#9888;</span>';
         return '<span class="badge badge-red">Abaixo &#128308;</span>';
       }
-
-      html += '<div style="background:#1e1b4b;padding:12px;margin-bottom:12px;border-radius:8px;font-size:11px;font-family:monospace;white-space:pre-wrap;color:#9ca3af">pgKey='+pgKey+' | found='+(allData[pgKey]?'sim':'nao')+' | profs='+JSON.stringify(profsData.map(function(p){return{prof:p.profissional,meta:p.meta,real:p.realizado};}))+'</div>';
 
       html += '<div class="grid-4">';
       html += '<div class="card"><div class="label">' + icn('crosshair',12) + ' Meta Total</div><div class="value">' + totalMeta + '</div></div>';

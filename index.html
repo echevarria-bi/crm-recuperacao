@@ -918,15 +918,9 @@
       if (totReal === 0 && totalPG) { totReal = totalPG.realizado||0; }
       if (totMeta === 0 && totalPG) { totMeta = totalPG.meta||0; }
       var days = pg.recuperacao.dayNums || [1,2,3,5,8,9,10,11,12,15,16,17,18,19,22,23,24,25,26,29,30];
-      var hoje = new Date().getDate();
-      var hojeIdx = -1;
-      for (var hi = 0; hi < days.length; hi++) { if (days[hi] === hoje) { hojeIdx = hi; break; } }
-      if (hojeIdx < 0) hojeIdx = days.length - 1;
-      var mediaDiaria = hojeIdx >= 0 ? (totReal / (hojeIdx + 1)) : 0;
       html += '<div class="chart-box"><h2>Acompanhamento Di\u00E1rio <span class="sub">&rarr; Recupera\u00E7\u00E3o em ' + monthName + '</span></h2><div class="table-wrap"><table><thead><tr><th rowspan="2" style="vertical-align:middle">Televendedora</th><th rowspan="2" style="vertical-align:middle;text-align:center" title="Percentual de atingimento da meta">%</th><th rowspan="2" style="vertical-align:middle;text-align:center" title="Total acumulado de clientes recuperados">Acum.</th>';
       for (var di = 0; di < days.length; di++) {
-        var isHoje = di === hojeIdx;
-        html += '<th colspan="2" style="text-align:center;min-width:44px;' + (isHoje ? 'color:#fcd34d;background:#78350f' : '') + '">' + (isHoje ? '&#x1F514; ' : '') + 'Dia ' + days[di] + '</th>';
+        html += '<th colspan="2" style="text-align:center;min-width:44px">Dia ' + days[di] + '</th>';
       }
       html += '</tr><tr>';
       for (var di = 0; di < days.length; di++) {

@@ -42,7 +42,7 @@
           "label": "Realizado de Clientes Recuperados",
           "Abril": 73,
           "Maio": 54,
-          "Junho": 91
+          "Junho": 88
         },
         {
           "label": "% Meta Recuperados",
@@ -174,91 +174,112 @@
             "pct": 48,
             "dias": [
               {
+                "dia": 1,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 2,
                 "meta": 1,
                 "realizado": 2
               },
               {
+                "dia": 3,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 5,
                 "meta": 1,
                 "realizado": 3
               },
               {
+                "dia": 8,
                 "meta": 1,
                 "realizado": 0
               },
               {
-                "meta": 1,
-                "realizado": 1
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
+                "dia": 9,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 10,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 11,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 12,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 16,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 17,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 18,
                 "meta": 2,
                 "realizado": 1
               },
               {
+                "dia": 19,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 22,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 23,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 24,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 25,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 26,
                 "meta": 2,
                 "realizado": 3
               },
               {
+                "dia": 29,
                 "meta": 2,
                 "realizado": 1
               },
               {
+                "dia": 30,
                 "meta": 2,
                 "realizado": 1
               }
             ],
-            "faturamento": 738590
+            "faturamento": 2660.8
           },
           {
             "profissional": "Camila",
@@ -267,91 +288,112 @@
             "pct": 44,
             "dias": [
               {
+                "dia": 1,
                 "meta": 3,
                 "realizado": 0
               },
               {
+                "dia": 2,
                 "meta": 3,
                 "realizado": 0
               },
               {
+                "dia": 3,
                 "meta": 3,
                 "realizado": 0
               },
               {
+                "dia": 5,
                 "meta": 3,
                 "realizado": 3
               },
               {
+                "dia": 8,
                 "meta": 3,
                 "realizado": 1
               },
               {
+                "dia": 9,
                 "meta": 3,
                 "realizado": 0
               },
               {
+                "dia": 10,
                 "meta": 3,
                 "realizado": 0
               },
               {
+                "dia": 11,
                 "meta": 3,
                 "realizado": 1
               },
               {
+                "dia": 12,
                 "meta": 3,
                 "realizado": 2
               },
               {
+                "dia": 15,
                 "meta": 3,
                 "realizado": 0
               },
               {
+                "dia": 16,
                 "meta": 3,
                 "realizado": 0
               },
               {
+                "dia": 17,
                 "meta": 3,
                 "realizado": 1
               },
               {
+                "dia": 18,
                 "meta": 2,
                 "realizado": 5
               },
               {
+                "dia": 19,
                 "meta": 1,
                 "realizado": 2
               },
               {
+                "dia": 22,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 23,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 24,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 25,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 26,
                 "meta": 1,
                 "realizado": 4
               },
               {
+                "dia": 29,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 30,
                 "meta": 1,
                 "realizado": 0
               }
             ],
-            "faturamento": 1016489
+            "faturamento": 1947.7400000000002
           },
           {
             "profissional": "Cristielen",
@@ -360,91 +402,112 @@
             "pct": 20,
             "dias": [
               {
+                "dia": 1,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 2,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 3,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 5,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 8,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 9,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 10,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 11,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 12,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 15,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 16,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 17,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 18,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 19,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 22,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 23,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 24,
                 "meta": 1,
                 "realizado": 2
               },
               {
+                "dia": 25,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 26,
                 "meta": 2,
                 "realizado": 1
               },
               {
+                "dia": 29,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 30,
                 "meta": 2,
                 "realizado": 0
               }
             ],
-            "faturamento": 323161
+            "faturamento": 309.65
           },
           {
             "profissional": "Natália",
@@ -453,91 +516,112 @@
             "pct": 90,
             "dias": [
               {
+                "dia": 1,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 2,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 3,
                 "meta": 2,
                 "realizado": 2
               },
               {
+                "dia": 5,
                 "meta": 2,
                 "realizado": 1
               },
               {
+                "dia": 8,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 9,
                 "meta": 2,
                 "realizado": 1
               },
               {
+                "dia": 10,
                 "meta": 2,
                 "realizado": 3
               },
               {
+                "dia": 11,
                 "meta": 2,
                 "realizado": 4
               },
               {
+                "dia": 12,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 15,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 16,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 17,
                 "meta": 1,
                 "realizado": 2
               },
               {
+                "dia": 18,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 19,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 22,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 23,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 24,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 25,
                 "meta": 1,
                 "realizado": 3
               },
               {
+                "dia": 26,
                 "meta": 1,
                 "realizado": 2
               },
               {
+                "dia": 29,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 30,
                 "meta": 1,
                 "realizado": 4
               }
             ],
-            "faturamento": 1247805
+            "faturamento": 1560.3799999999999
           },
           {
             "profissional": "Tatiana",
@@ -546,91 +630,112 @@
             "pct": 80,
             "dias": [
               {
+                "dia": 1,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 2,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 3,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 5,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 8,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 9,
                 "meta": 1,
                 "realizado": 3
               },
               {
+                "dia": 10,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 11,
                 "meta": 1,
                 "realizado": 2
               },
               {
+                "dia": 12,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 15,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 16,
                 "meta": 1,
                 "realizado": 1
               },
               {
+                "dia": 17,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 18,
                 "meta": 1,
                 "realizado": 2
               },
               {
+                "dia": 19,
                 "meta": 1,
                 "realizado": 2
               },
               {
+                "dia": 22,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 23,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 24,
                 "meta": 1,
                 "realizado": 0
               },
               {
+                "dia": 25,
                 "meta": 2,
                 "realizado": 1
               },
               {
+                "dia": 26,
                 "meta": 2,
                 "realizado": 1
               },
               {
+                "dia": 29,
                 "meta": 2,
                 "realizado": 0
               },
               {
+                "dia": 30,
                 "meta": 2,
                 "realizado": 2
               }
             ],
-            "faturamento": 924349
+            "faturamento": 2232.45
           }
         ],
         "total": {
@@ -640,91 +745,136 @@
           "pct": 55,
           "dias": [
             {
+              "dia": 1,
               "meta": 8,
               "realizado": 1
             },
             {
+              "dia": 2,
               "meta": 8,
               "realizado": 2
             },
             {
+              "dia": 3,
               "meta": 8,
               "realizado": 3
             },
             {
+              "dia": 5,
               "meta": 8,
               "realizado": 9
             },
             {
+              "dia": 8,
               "meta": 8,
               "realizado": 1
             },
             {
+              "dia": 9,
               "meta": 8,
               "realizado": 5
             },
             {
+              "dia": 10,
               "meta": 8,
               "realizado": 4
             },
             {
+              "dia": 11,
               "meta": 8,
               "realizado": 8
             },
             {
+              "dia": 12,
               "meta": 8,
               "realizado": 4
             },
             {
+              "dia": 15,
               "meta": 7,
               "realizado": 2
             },
             {
+              "dia": 16,
               "meta": 7,
               "realizado": 2
             },
             {
+              "dia": 17,
               "meta": 8,
               "realizado": 3
             },
             {
+              "dia": 18,
               "meta": 7,
               "realizado": 9
             },
             {
+              "dia": 19,
               "meta": 6,
               "realizado": 5
             },
             {
+              "dia": 22,
               "meta": 6,
               "realizado": 1
             },
             {
+              "dia": 23,
               "meta": 6,
               "realizado": 1
             },
             {
+              "dia": 24,
               "meta": 6,
               "realizado": 4
             },
             {
+              "dia": 25,
               "meta": 8,
               "realizado": 5
             },
             {
+              "dia": 26,
               "meta": 8,
               "realizado": 11
             },
             {
+              "dia": 29,
               "meta": 8,
               "realizado": 1
             },
             {
+              "dia": 30,
               "meta": 8,
               "realizado": 7
             }
           ]
-        }
+        },
+        "faturamentoGeral": 8711.02,
+        "dayNums": [
+          1,
+          2,
+          3,
+          5,
+          8,
+          9,
+          10,
+          11,
+          12,
+          15,
+          16,
+          17,
+          18,
+          19,
+          22,
+          23,
+          24,
+          25,
+          26,
+          29,
+          30
+        ]
       },
       "metaContatos": {
         "profissionais": [
@@ -735,86 +885,107 @@
             "pct": 95,
             "dias": [
               {
+                "dia": 1,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 2,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 3,
                 "meta": 17,
                 "realizado": 13
               },
               {
+                "dia": 4,
                 "meta": 17,
                 "realizado": 8
               },
               {
+                "dia": 5,
                 "meta": 17,
                 "realizado": 3
               },
               {
+                "dia": 6,
                 "meta": 17,
                 "realizado": 33
               },
               {
+                "dia": 7,
                 "meta": 17,
                 "realizado": 10
               },
               {
+                "dia": 8,
                 "meta": 17,
                 "realizado": 10
               },
               {
+                "dia": 9,
                 "meta": 17,
                 "realizado": 12
               },
               {
+                "dia": 10,
                 "meta": 17,
                 "realizado": 12
               },
               {
+                "dia": 11,
                 "meta": 17,
                 "realizado": 11
               },
               {
+                "dia": 12,
                 "meta": 17,
                 "realizado": 10
               },
               {
+                "dia": 13,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 14,
                 "meta": 17,
                 "realizado": 3
               },
               {
+                "dia": 15,
                 "meta": 16,
                 "realizado": 40
               },
               {
+                "dia": 16,
                 "meta": 16,
                 "realizado": 30
               },
               {
+                "dia": 17,
                 "meta": 16,
                 "realizado": 0
               },
               {
+                "dia": 18,
                 "meta": 16,
                 "realizado": 47
               },
               {
+                "dia": 19,
                 "meta": 16,
                 "realizado": 54
               },
               {
+                "dia": 20,
                 "meta": 16,
                 "realizado": 36
               },
               {
+                "dia": 21,
                 "meta": 16,
                 "realizado": 0
               }
@@ -827,86 +998,107 @@
             "pct": 93,
             "dias": [
               {
+                "dia": 1,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 2,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 3,
                 "meta": 17,
                 "realizado": 12
               },
               {
+                "dia": 4,
                 "meta": 17,
                 "realizado": 20
               },
               {
+                "dia": 5,
                 "meta": 17,
                 "realizado": 20
               },
               {
+                "dia": 6,
                 "meta": 17,
                 "realizado": 21
               },
               {
+                "dia": 7,
                 "meta": 17,
                 "realizado": 14
               },
               {
+                "dia": 8,
                 "meta": 17,
                 "realizado": 25
               },
               {
+                "dia": 9,
                 "meta": 17,
                 "realizado": 20
               },
               {
+                "dia": 10,
                 "meta": 17,
                 "realizado": 10
               },
               {
+                "dia": 11,
                 "meta": 17,
                 "realizado": 20
               },
               {
+                "dia": 12,
                 "meta": 17,
                 "realizado": 12
               },
               {
+                "dia": 13,
                 "meta": 17,
                 "realizado": 8
               },
               {
+                "dia": 14,
                 "meta": 17,
                 "realizado": 20
               },
               {
+                "dia": 15,
                 "meta": 16,
                 "realizado": 20
               },
               {
+                "dia": 16,
                 "meta": 16,
                 "realizado": 20
               },
               {
+                "dia": 17,
                 "meta": 16,
                 "realizado": 20
               },
               {
+                "dia": 18,
                 "meta": 16,
                 "realizado": 13
               },
               {
+                "dia": 19,
                 "meta": 16,
                 "realizado": 20
               },
               {
+                "dia": 20,
                 "meta": 16,
                 "realizado": 30
               },
               {
+                "dia": 21,
                 "meta": 16,
                 "realizado": 0
               }
@@ -919,86 +1111,107 @@
             "pct": 89,
             "dias": [
               {
+                "dia": 1,
                 "meta": 17,
                 "realizado": 20
               },
               {
+                "dia": 2,
                 "meta": 17,
                 "realizado": 23
               },
               {
+                "dia": 3,
                 "meta": 17,
                 "realizado": 4
               },
               {
+                "dia": 4,
                 "meta": 17,
                 "realizado": 14
               },
               {
+                "dia": 5,
                 "meta": 17,
                 "realizado": 29
               },
               {
+                "dia": 6,
                 "meta": 17,
                 "realizado": 8
               },
               {
+                "dia": 7,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 8,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 9,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 10,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 11,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 12,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 13,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 14,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 15,
                 "meta": 16,
                 "realizado": 21
               },
               {
+                "dia": 16,
                 "meta": 16,
                 "realizado": 16
               },
               {
+                "dia": 17,
                 "meta": 16,
                 "realizado": 62
               },
               {
+                "dia": 18,
                 "meta": 16,
                 "realizado": 35
               },
               {
+                "dia": 19,
                 "meta": 16,
                 "realizado": 40
               },
               {
+                "dia": 20,
                 "meta": 16,
                 "realizado": 40
               },
               {
+                "dia": 21,
                 "meta": 16,
                 "realizado": 0
               }
@@ -1011,86 +1224,107 @@
             "pct": 110,
             "dias": [
               {
+                "dia": 1,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 2,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 3,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 4,
                 "meta": 17,
                 "realizado": 30
               },
               {
+                "dia": 5,
                 "meta": 17,
                 "realizado": 30
               },
               {
+                "dia": 6,
                 "meta": 17,
                 "realizado": 25
               },
               {
+                "dia": 7,
                 "meta": 17,
                 "realizado": 13
               },
               {
+                "dia": 8,
                 "meta": 17,
                 "realizado": 20
               },
               {
+                "dia": 9,
                 "meta": 17,
                 "realizado": 41
               },
               {
+                "dia": 10,
                 "meta": 17,
                 "realizado": 24
               },
               {
+                "dia": 11,
                 "meta": 17,
                 "realizado": 23
               },
               {
+                "dia": 12,
                 "meta": 17,
                 "realizado": 21
               },
               {
+                "dia": 13,
                 "meta": 17,
                 "realizado": 18
               },
               {
+                "dia": 14,
                 "meta": 17,
                 "realizado": 20
               },
               {
+                "dia": 15,
                 "meta": 16,
                 "realizado": 24
               },
               {
+                "dia": 16,
                 "meta": 16,
                 "realizado": 24
               },
               {
+                "dia": 17,
                 "meta": 16,
                 "realizado": 24
               },
               {
+                "dia": 18,
                 "meta": 16,
                 "realizado": 19
               },
               {
+                "dia": 19,
                 "meta": 16,
                 "realizado": 0
               },
               {
+                "dia": 20,
                 "meta": 16,
                 "realizado": 29
               },
               {
+                "dia": 21,
                 "meta": 16,
                 "realizado": 0
               }
@@ -1103,86 +1337,107 @@
             "pct": 72,
             "dias": [
               {
+                "dia": 1,
                 "meta": 17,
                 "realizado": 12
               },
               {
+                "dia": 2,
                 "meta": 17,
                 "realizado": 8
               },
               {
+                "dia": 3,
                 "meta": 17,
                 "realizado": 10
               },
               {
+                "dia": 4,
                 "meta": 17,
                 "realizado": 7
               },
               {
+                "dia": 5,
                 "meta": 17,
                 "realizado": 13
               },
               {
+                "dia": 6,
                 "meta": 17,
                 "realizado": 2
               },
               {
+                "dia": 7,
                 "meta": 17,
                 "realizado": 0
               },
               {
+                "dia": 8,
                 "meta": 17,
                 "realizado": 3
               },
               {
+                "dia": 9,
                 "meta": 17,
                 "realizado": 12
               },
               {
+                "dia": 10,
                 "meta": 17,
                 "realizado": 15
               },
               {
+                "dia": 11,
                 "meta": 17,
                 "realizado": 24
               },
               {
+                "dia": 12,
                 "meta": 17,
                 "realizado": 6
               },
               {
+                "dia": 13,
                 "meta": 17,
                 "realizado": 11
               },
               {
+                "dia": 14,
                 "meta": 17,
                 "realizado": 12
               },
               {
+                "dia": 15,
                 "meta": 16,
                 "realizado": 18
               },
               {
+                "dia": 16,
                 "meta": 16,
                 "realizado": 11
               },
               {
+                "dia": 17,
                 "meta": 16,
                 "realizado": 23
               },
               {
+                "dia": 18,
                 "meta": 16,
                 "realizado": 34
               },
               {
+                "dia": 19,
                 "meta": 16,
                 "realizado": 20
               },
               {
+                "dia": 20,
                 "meta": 16,
                 "realizado": 10
               },
               {
+                "dia": 21,
                 "meta": 16,
                 "realizado": 0
               }
@@ -1196,86 +1451,107 @@
           "pct": 92,
           "dias": [
             {
+              "dia": 1,
               "meta": 85,
               "realizado": 32
             },
             {
+              "dia": 2,
               "meta": 85,
               "realizado": 31
             },
             {
+              "dia": 3,
               "meta": 85,
               "realizado": 39
             },
             {
+              "dia": 4,
               "meta": 85,
               "realizado": 79
             },
             {
+              "dia": 5,
               "meta": 85,
               "realizado": 95
             },
             {
+              "dia": 6,
               "meta": 85,
               "realizado": 89
             },
             {
+              "dia": 7,
               "meta": 85,
               "realizado": 37
             },
             {
+              "dia": 8,
               "meta": 85,
               "realizado": 58
             },
             {
+              "dia": 9,
               "meta": 85,
               "realizado": 85
             },
             {
+              "dia": 10,
               "meta": 85,
               "realizado": 61
             },
             {
+              "dia": 11,
               "meta": 85,
               "realizado": 78
             },
             {
+              "dia": 12,
               "meta": 85,
               "realizado": 49
             },
             {
+              "dia": 13,
               "meta": 85,
               "realizado": 37
             },
             {
+              "dia": 14,
               "meta": 85,
               "realizado": 55
             },
             {
+              "dia": 15,
               "meta": 80,
               "realizado": 123
             },
             {
+              "dia": 16,
               "meta": 80,
               "realizado": 101
             },
             {
+              "dia": 17,
               "meta": 80,
               "realizado": 129
             },
             {
+              "dia": 18,
               "meta": 80,
               "realizado": 148
             },
             {
+              "dia": 19,
               "meta": 80,
               "realizado": 134
             },
             {
+              "dia": 20,
               "meta": 80,
               "realizado": 145
             },
             {
+              "dia": 21,
               "meta": 80,
               "realizado": 0
             }
@@ -1350,144 +1626,2831 @@
     },
     "painelAbril": {
       "recuperacao": {
-        "profissionais": [],
-        "total": null
+        "profissionais": [
+          {
+            "profissional": "Anna",
+            "meta": 72,
+            "realizado": 20,
+            "pct": 27.78,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 4,
+                "realizado": 2
+              },
+              {
+                "dia": 2,
+                "meta": 4,
+                "realizado": 0
+              },
+              {
+                "dia": 6,
+                "meta": 4,
+                "realizado": 0
+              },
+              {
+                "dia": 7,
+                "meta": 4,
+                "realizado": 0
+              },
+              {
+                "dia": 8,
+                "meta": 4,
+                "realizado": 0
+              },
+              {
+                "dia": 9,
+                "meta": 4,
+                "realizado": 2
+              },
+              {
+                "dia": 10,
+                "meta": 4,
+                "realizado": 0
+              },
+              {
+                "dia": 13,
+                "meta": 4,
+                "realizado": 0
+              },
+              {
+                "dia": 14,
+                "meta": 4,
+                "realizado": 1
+              },
+              {
+                "dia": 15,
+                "meta": 4,
+                "realizado": 0
+              },
+              {
+                "dia": 16,
+                "meta": 4,
+                "realizado": 3
+              },
+              {
+                "dia": 17,
+                "meta": 4,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 4,
+                "realizado": 1
+              },
+              {
+                "dia": 22,
+                "meta": 4,
+                "realizado": 3
+              },
+              {
+                "dia": 23,
+                "meta": 4,
+                "realizado": 1
+              },
+              {
+                "dia": 24,
+                "meta": 4,
+                "realizado": 0
+              },
+              {
+                "dia": 27,
+                "meta": 4,
+                "realizado": 3
+              },
+              {
+                "dia": 28,
+                "meta": 4,
+                "realizado": 2
+              },
+              {
+                "dia": 29,
+                "meta": 4,
+                "realizado": 2
+              },
+              {
+                "dia": 30,
+                "meta": 4,
+                "realizado": 0
+              }
+            ],
+            "faturamento": 8881.927491
+          },
+          {
+            "profissional": "Ariane",
+            "meta": 39,
+            "realizado": 11,
+            "pct": 28.21,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 2,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 6,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 7,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 8,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 9,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 10,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 13,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 14,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 16,
+                "meta": 2,
+                "realizado": 4
+              },
+              {
+                "dia": 17,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 22,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 23,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 24,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 27,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 28,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 29,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 30,
+                "meta": 2,
+                "realizado": 0
+              }
+            ],
+            "faturamento": 14368.270000000004
+          },
+          {
+            "profissional": "Camila",
+            "meta": 44,
+            "realizado": 3,
+            "pct": 6.82,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 2,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 6,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 7,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 8,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 9,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 10,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 13,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 14,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 16,
+                "meta": 3,
+                "realizado": 1
+              },
+              {
+                "dia": 17,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 22,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 23,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 24,
+                "meta": 3,
+                "realizado": 1
+              },
+              {
+                "dia": 27,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 28,
+                "meta": 3,
+                "realizado": 1
+              },
+              {
+                "dia": 29,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 30,
+                "meta": 3,
+                "realizado": 0
+              }
+            ],
+            "faturamento": 1344.6200000000001
+          },
+          {
+            "profissional": "Natália",
+            "meta": 37,
+            "realizado": 17,
+            "pct": 45.95,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 2,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 6,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 7,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 8,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 9,
+                "meta": 2,
+                "realizado": 2
+              },
+              {
+                "dia": 10,
+                "meta": 2,
+                "realizado": 2
+              },
+              {
+                "dia": 13,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 14,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 15,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 16,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 17,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 22,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 23,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 24,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 27,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 28,
+                "meta": 2,
+                "realizado": 5
+              },
+              {
+                "dia": 29,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 30,
+                "meta": 2,
+                "realizado": 0
+              }
+            ],
+            "faturamento": 31780.950000000004
+          },
+          {
+            "profissional": "Tatiana",
+            "meta": 22,
+            "realizado": 22,
+            "pct": 100,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 2,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 6,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 7,
+                "meta": 1,
+                "realizado": 3
+              },
+              {
+                "dia": 8,
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "dia": 9,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 10,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 13,
+                "meta": 1,
+                "realizado": 3
+              },
+              {
+                "dia": 14,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "dia": 16,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 17,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 1,
+                "realizado": 3
+              },
+              {
+                "dia": 22,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 23,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 24,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 27,
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "dia": 28,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 29,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 30,
+                "meta": 1,
+                "realizado": 0
+              }
+            ],
+            "faturamento": 40272.47000000001
+          }
+        ],
+        "total": {
+          "profissional": "Total",
+          "meta": 214,
+          "realizado": 73,
+          "pct": 34.11,
+          "dias": [
+            {
+              "dia": 1,
+              "meta": 13,
+              "realizado": 2
+            },
+            {
+              "dia": 2,
+              "meta": 13,
+              "realizado": 1
+            },
+            {
+              "dia": 6,
+              "meta": 12,
+              "realizado": 1
+            },
+            {
+              "dia": 7,
+              "meta": 12,
+              "realizado": 3
+            },
+            {
+              "dia": 8,
+              "meta": 12,
+              "realizado": 2
+            },
+            {
+              "dia": 9,
+              "meta": 12,
+              "realizado": 5
+            },
+            {
+              "dia": 10,
+              "meta": 12,
+              "realizado": 3
+            },
+            {
+              "dia": 13,
+              "meta": 12,
+              "realizado": 5
+            },
+            {
+              "dia": 14,
+              "meta": 12,
+              "realizado": 2
+            },
+            {
+              "dia": 15,
+              "meta": 12,
+              "realizado": 4
+            },
+            {
+              "dia": 16,
+              "meta": 12,
+              "realizado": 8
+            },
+            {
+              "dia": 17,
+              "meta": 12,
+              "realizado": 0
+            },
+            {
+              "dia": 20,
+              "meta": 12,
+              "realizado": 5
+            },
+            {
+              "dia": 22,
+              "meta": 12,
+              "realizado": 6
+            },
+            {
+              "dia": 23,
+              "meta": 12,
+              "realizado": 4
+            },
+            {
+              "dia": 24,
+              "meta": 12,
+              "realizado": 2
+            },
+            {
+              "dia": 27,
+              "meta": 12,
+              "realizado": 7
+            },
+            {
+              "dia": 28,
+              "meta": 12,
+              "realizado": 10
+            },
+            {
+              "dia": 29,
+              "meta": 12,
+              "realizado": 3
+            },
+            {
+              "dia": 30,
+              "meta": 12,
+              "realizado": 0
+            }
+          ]
+        },
+        "faturamentoGeral": 96648.237491,
+        "dayNums": [
+          1,
+          2,
+          6,
+          7,
+          8,
+          9,
+          10,
+          13,
+          14,
+          15,
+          16,
+          17,
+          20,
+          22,
+          23,
+          24,
+          27,
+          28,
+          29,
+          30
+        ]
       },
       "metaContatos": {
-        "profissionais": [],
-        "total": null
+        "profissionais": [
+          {
+            "profissional": "Anna",
+            "meta": 360,
+            "realizado": 295,
+            "pct": 81.94,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 33,
+                "realizado": 33
+              },
+              {
+                "dia": 2,
+                "meta": 33,
+                "realizado": 32
+              },
+              {
+                "dia": 3,
+                "meta": 33,
+                "realizado": 0
+              },
+              {
+                "dia": 4,
+                "meta": 33,
+                "realizado": 33
+              },
+              {
+                "dia": 5,
+                "meta": 33,
+                "realizado": 33
+              },
+              {
+                "dia": 6,
+                "meta": 33,
+                "realizado": 0
+              },
+              {
+                "dia": 7,
+                "meta": 33,
+                "realizado": 0
+              },
+              {
+                "dia": 8,
+                "meta": 33,
+                "realizado": 32
+              },
+              {
+                "dia": 9,
+                "meta": 33,
+                "realizado": 31
+              },
+              {
+                "dia": 10,
+                "meta": 33,
+                "realizado": 31
+              },
+              {
+                "dia": 11,
+                "meta": 33,
+                "realizado": 70
+              },
+              {
+                "dia": 12,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 13,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 14,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 16,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 17,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 18,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 19,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 0,
+                "realizado": 0
+              }
+            ]
+          },
+          {
+            "profissional": "Ariane",
+            "meta": 197,
+            "realizado": 185,
+            "pct": 93.91,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 18,
+                "realizado": 7
+              },
+              {
+                "dia": 2,
+                "meta": 18,
+                "realizado": 14
+              },
+              {
+                "dia": 3,
+                "meta": 18,
+                "realizado": 2
+              },
+              {
+                "dia": 4,
+                "meta": 18,
+                "realizado": 20
+              },
+              {
+                "dia": 5,
+                "meta": 18,
+                "realizado": 23
+              },
+              {
+                "dia": 6,
+                "meta": 18,
+                "realizado": 1
+              },
+              {
+                "dia": 7,
+                "meta": 18,
+                "realizado": 31
+              },
+              {
+                "dia": 8,
+                "meta": 18,
+                "realizado": 16
+              },
+              {
+                "dia": 9,
+                "meta": 18,
+                "realizado": 18
+              },
+              {
+                "dia": 10,
+                "meta": 18,
+                "realizado": 23
+              },
+              {
+                "dia": 11,
+                "meta": 18,
+                "realizado": 30
+              },
+              {
+                "dia": 12,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 13,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 14,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 16,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 17,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 18,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 19,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 0,
+                "realizado": 0
+              }
+            ]
+          },
+          {
+            "profissional": "Camila",
+            "meta": 218,
+            "realizado": 218,
+            "pct": 100,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 20,
+                "realizado": 20
+              },
+              {
+                "dia": 2,
+                "meta": 20,
+                "realizado": 26
+              },
+              {
+                "dia": 3,
+                "meta": 20,
+                "realizado": 22
+              },
+              {
+                "dia": 4,
+                "meta": 20,
+                "realizado": 21
+              },
+              {
+                "dia": 5,
+                "meta": 20,
+                "realizado": 25
+              },
+              {
+                "dia": 6,
+                "meta": 20,
+                "realizado": 20
+              },
+              {
+                "dia": 7,
+                "meta": 20,
+                "realizado": 26
+              },
+              {
+                "dia": 8,
+                "meta": 20,
+                "realizado": 12
+              },
+              {
+                "dia": 9,
+                "meta": 20,
+                "realizado": 22
+              },
+              {
+                "dia": 10,
+                "meta": 20,
+                "realizado": 23
+              },
+              {
+                "dia": 11,
+                "meta": 20,
+                "realizado": 1
+              },
+              {
+                "dia": 12,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 13,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 14,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 16,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 17,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 18,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 19,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 0,
+                "realizado": 0
+              }
+            ]
+          },
+          {
+            "profissional": "Natália",
+            "meta": 187,
+            "realizado": 190,
+            "pct": 101.6,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 17,
+                "realizado": 20
+              },
+              {
+                "dia": 2,
+                "meta": 17,
+                "realizado": 17
+              },
+              {
+                "dia": 3,
+                "meta": 17,
+                "realizado": 12
+              },
+              {
+                "dia": 4,
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "dia": 5,
+                "meta": 17,
+                "realizado": 17
+              },
+              {
+                "dia": 6,
+                "meta": 17,
+                "realizado": 23
+              },
+              {
+                "dia": 7,
+                "meta": 17,
+                "realizado": 20
+              },
+              {
+                "dia": 8,
+                "meta": 17,
+                "realizado": 23
+              },
+              {
+                "dia": 9,
+                "meta": 17,
+                "realizado": 20
+              },
+              {
+                "dia": 10,
+                "meta": 17,
+                "realizado": 19
+              },
+              {
+                "dia": 11,
+                "meta": 17,
+                "realizado": 19
+              },
+              {
+                "dia": 12,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 13,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 14,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 16,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 17,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 18,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 19,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 0,
+                "realizado": 0
+              }
+            ]
+          },
+          {
+            "profissional": "Tatiana",
+            "meta": 112,
+            "realizado": 115,
+            "pct": 102.68,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 12,
+                "realizado": 12
+              },
+              {
+                "dia": 2,
+                "meta": 12,
+                "realizado": 13
+              },
+              {
+                "dia": 3,
+                "meta": 13,
+                "realizado": 0
+              },
+              {
+                "dia": 4,
+                "meta": 12,
+                "realizado": 1
+              },
+              {
+                "dia": 5,
+                "meta": 12,
+                "realizado": 4
+              },
+              {
+                "dia": 6,
+                "meta": 12,
+                "realizado": 15
+              },
+              {
+                "dia": 7,
+                "meta": 12,
+                "realizado": 32
+              },
+              {
+                "dia": 8,
+                "meta": 12,
+                "realizado": 4
+              },
+              {
+                "dia": 9,
+                "meta": 12,
+                "realizado": 2
+              },
+              {
+                "dia": 10,
+                "meta": 12,
+                "realizado": 28
+              },
+              {
+                "dia": 11,
+                "meta": 12,
+                "realizado": 4
+              },
+              {
+                "dia": 12,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 13,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 14,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 16,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 17,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 18,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 19,
+                "meta": 0,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 0,
+                "realizado": 0
+              }
+            ]
+          }
+        ],
+        "total": {
+          "profissional": "Total",
+          "meta": 1074,
+          "realizado": 1003,
+          "pct": 93.39,
+          "dias": [
+            {
+              "dia": 1,
+              "meta": 100,
+              "realizado": 92
+            },
+            {
+              "dia": 2,
+              "meta": 100,
+              "realizado": 102
+            },
+            {
+              "dia": 3,
+              "meta": 101,
+              "realizado": 36
+            },
+            {
+              "dia": 4,
+              "meta": 100,
+              "realizado": 75
+            },
+            {
+              "dia": 5,
+              "meta": 100,
+              "realizado": 102
+            },
+            {
+              "dia": 6,
+              "meta": 100,
+              "realizado": 59
+            },
+            {
+              "dia": 7,
+              "meta": 100,
+              "realizado": 109
+            },
+            {
+              "dia": 8,
+              "meta": 100,
+              "realizado": 87
+            },
+            {
+              "dia": 9,
+              "meta": 100,
+              "realizado": 93
+            },
+            {
+              "dia": 10,
+              "meta": 100,
+              "realizado": 124
+            },
+            {
+              "dia": 11,
+              "meta": 100,
+              "realizado": 124
+            },
+            {
+              "dia": 12,
+              "meta": 0,
+              "realizado": 0
+            },
+            {
+              "dia": 13,
+              "meta": 0,
+              "realizado": 0
+            },
+            {
+              "dia": 14,
+              "meta": 0,
+              "realizado": 0
+            },
+            {
+              "dia": 15,
+              "meta": 0,
+              "realizado": 0
+            },
+            {
+              "dia": 16,
+              "meta": 0,
+              "realizado": 0
+            },
+            {
+              "dia": 17,
+              "meta": 0,
+              "realizado": 0
+            },
+            {
+              "dia": 18,
+              "meta": 0,
+              "realizado": 0
+            },
+            {
+              "dia": 19,
+              "meta": 0,
+              "realizado": 0
+            },
+            {
+              "dia": 20,
+              "meta": 0,
+              "realizado": 0
+            }
+          ]
+        }
       },
       "motivos": [
         {
           "label": "Contatos Efetivo",
-          "Total": 62
+          "Anna": 62,
+          "Ariane": 40,
+          "Camila": 25,
+          "Natália": 44,
+          "Tatiana": 27,
+          "Total": 198
         },
         {
           "label": "Baixado/Outros",
-          "Total": 25
+          "Anna": 25,
+          "Ariane": 7,
+          "Camila": 5,
+          "Natália": 15,
+          "Tatiana": 12,
+          "Total": 64
         },
         {
           "label": "Pedido Mínimo",
+          "Anna": 4,
+          "Ariane": 0,
+          "Camila": 0,
+          "Natália": 0,
+          "Tatiana": 0,
           "Total": 4
         },
         {
           "label": "Ativo por temporada",
-          "Total": 8
+          "Anna": 8,
+          "Ariane": 3,
+          "Camila": 17,
+          "Natália": 6,
+          "Tatiana": 3,
+          "Total": 37
         },
         {
           "label": "Conversão / Venda RCA Externo",
-          "Total": 62
+          "Anna": 62,
+          "Ariane": 34,
+          "Camila": 18,
+          "Natália": 34,
+          "Tatiana": 22,
+          "Total": 170
         },
         {
           "label": "Telefone incorreto",
-          "Total": 25
+          "Anna": 25,
+          "Ariane": 10,
+          "Camila": 2,
+          "Natália": 18,
+          "Tatiana": 2,
+          "Total": 57
         },
         {
           "label": "Problema Financeiro",
-          "Total": 3
-        },
-        {
-          "label": "Conversão / Televendas",
+          "Anna": 3,
+          "Ariane": 2,
+          "Camila": 2,
+          "Natália": 5,
+          "Tatiana": 8,
           "Total": 20
         },
         {
+          "label": "Conversão / Televendas",
+          "Anna": 20,
+          "Ariane": 11,
+          "Camila": 3,
+          "Natália": 17,
+          "Tatiana": 22,
+          "Total": 73
+        },
+        {
           "label": "Contatos Realizados (Não conta pra meta)",
-          "Total": 373
+          "Anna": 373,
+          "Ariane": 249,
+          "Camila": 333,
+          "Natália": 307,
+          "Tatiana": 179,
+          "Total": 1441
         },
         {
           "label": "Total",
-          "Total": 468
+          "Anna": 468,
+          "Ariane": 282,
+          "Camila": 648,
+          "Natália": 287,
+          "Tatiana": 180,
+          "Total": 0
         }
       ]
     },
     "painelMaio": {
       "recuperacao": {
-        "profissionais": [],
-        "total": null
+        "profissionais": [
+          {
+            "profissional": "Ariane",
+            "meta": 30,
+            "realizado": 10,
+            "pct": 33.33,
+            "dias": [
+              {
+                "dia": 4,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 5,
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "dia": 6,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 7,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 8,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 11,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 12,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 13,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 14,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 18,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 19,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 2,
+                "realizado": 2
+              },
+              {
+                "dia": 21,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 22,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 25,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 26,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 27,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 28,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 29,
+                "meta": 2,
+                "realizado": 0
+              }
+            ],
+            "faturamento": 5323.060002000001
+          },
+          {
+            "profissional": "Cristielen",
+            "meta": 26,
+            "realizado": 3,
+            "pct": 11.54,
+            "dias": [
+              {
+                "dia": 4,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 5,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 6,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 7,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 8,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 11,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 12,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 13,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 14,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 18,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 19,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 21,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 22,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 25,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 26,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 27,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 28,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 29,
+                "meta": 2,
+                "realizado": 1
+              }
+            ],
+            "faturamento": 1370.55
+          },
+          {
+            "profissional": "Camila",
+            "meta": 50,
+            "realizado": 18,
+            "pct": 36,
+            "dias": [
+              {
+                "dia": 4,
+                "meta": 2,
+                "realizado": 2
+              },
+              {
+                "dia": 5,
+                "meta": 2,
+                "realizado": 3
+              },
+              {
+                "dia": 6,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 7,
+                "meta": 2,
+                "realizado": 2
+              },
+              {
+                "dia": 8,
+                "meta": 2,
+                "realizado": 3
+              },
+              {
+                "dia": 11,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 12,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 13,
+                "meta": 2,
+                "realizado": 2
+              },
+              {
+                "dia": 14,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 18,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 19,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 21,
+                "meta": 3,
+                "realizado": 1
+              },
+              {
+                "dia": 22,
+                "meta": 3,
+                "realizado": 1
+              },
+              {
+                "dia": 25,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 26,
+                "meta": 3,
+                "realizado": 1
+              },
+              {
+                "dia": 27,
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "dia": 28,
+                "meta": 3,
+                "realizado": 2
+              },
+              {
+                "dia": 29,
+                "meta": 3,
+                "realizado": 0
+              }
+            ],
+            "faturamento": 10823.154999999999
+          },
+          {
+            "profissional": "Natália",
+            "meta": 33,
+            "realizado": 9,
+            "pct": 27.27,
+            "dias": [
+              {
+                "dia": 4,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 5,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 6,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 7,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 8,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 11,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 12,
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "dia": 13,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 14,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 18,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 19,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 21,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 22,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 25,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 26,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 27,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 28,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 29,
+                "meta": 1,
+                "realizado": 2
+              }
+            ],
+            "faturamento": 5969.51
+          },
+          {
+            "profissional": "Tatiana",
+            "meta": 23,
+            "realizado": 14,
+            "pct": 60.87,
+            "dias": [
+              {
+                "dia": 4,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 5,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 6,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 7,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 8,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 11,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 12,
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "dia": 13,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 14,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 18,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 19,
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "dia": 20,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 21,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 22,
+                "meta": 1,
+                "realizado": 3
+              },
+              {
+                "dia": 25,
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "dia": 26,
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "dia": 27,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 28,
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "dia": 29,
+                "meta": 2,
+                "realizado": 3
+              }
+            ],
+            "faturamento": 7196.709998000001
+          }
+        ],
+        "total": {
+          "profissional": "Total",
+          "meta": 162,
+          "realizado": 54,
+          "pct": 33.33,
+          "dias": [
+            {
+              "dia": 4,
+              "meta": 7,
+              "realizado": 3
+            },
+            {
+              "dia": 5,
+              "meta": 7,
+              "realizado": 5
+            },
+            {
+              "dia": 6,
+              "meta": 7,
+              "realizado": 2
+            },
+            {
+              "dia": 7,
+              "meta": 7,
+              "realizado": 4
+            },
+            {
+              "dia": 8,
+              "meta": 7,
+              "realizado": 3
+            },
+            {
+              "dia": 11,
+              "meta": 7,
+              "realizado": 0
+            },
+            {
+              "dia": 12,
+              "meta": 7,
+              "realizado": 3
+            },
+            {
+              "dia": 13,
+              "meta": 7,
+              "realizado": 2
+            },
+            {
+              "dia": 14,
+              "meta": 7,
+              "realizado": 0
+            },
+            {
+              "dia": 15,
+              "meta": 7,
+              "realizado": 2
+            },
+            {
+              "dia": 18,
+              "meta": 9,
+              "realizado": 0
+            },
+            {
+              "dia": 19,
+              "meta": 9,
+              "realizado": 2
+            },
+            {
+              "dia": 20,
+              "meta": 9,
+              "realizado": 3
+            },
+            {
+              "dia": 21,
+              "meta": 8,
+              "realizado": 3
+            },
+            {
+              "dia": 22,
+              "meta": 9,
+              "realizado": 5
+            },
+            {
+              "dia": 25,
+              "meta": 9,
+              "realizado": 1
+            },
+            {
+              "dia": 26,
+              "meta": 9,
+              "realizado": 4
+            },
+            {
+              "dia": 27,
+              "meta": 10,
+              "realizado": 2
+            },
+            {
+              "dia": 28,
+              "meta": 10,
+              "realizado": 4
+            },
+            {
+              "dia": 29,
+              "meta": 10,
+              "realizado": 6
+            }
+          ]
+        },
+        "faturamentoGeral": 30682.985000000004,
+        "dayNums": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          11,
+          12,
+          13,
+          14,
+          15,
+          18,
+          19,
+          20,
+          21,
+          22,
+          25,
+          26,
+          27,
+          28,
+          29
+        ]
       },
       "metaContatos": {
-        "profissionais": [],
-        "total": null
+        "profissionais": [
+          {
+            "profissional": "Ariane",
+            "meta": 299,
+            "realizado": 275,
+            "pct": 91.97,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 15,
+                "realizado": 2
+              },
+              {
+                "dia": 2,
+                "meta": 15,
+                "realizado": 0
+              },
+              {
+                "dia": 3,
+                "meta": 15,
+                "realizado": 1
+              },
+              {
+                "dia": 4,
+                "meta": 15,
+                "realizado": 0
+              },
+              {
+                "dia": 5,
+                "meta": 15,
+                "realizado": 7
+              },
+              {
+                "dia": 6,
+                "meta": 15,
+                "realizado": 1
+              },
+              {
+                "dia": 7,
+                "meta": 15,
+                "realizado": 13
+              },
+              {
+                "dia": 8,
+                "meta": 15,
+                "realizado": 22
+              },
+              {
+                "dia": 9,
+                "meta": 15,
+                "realizado": 6
+              },
+              {
+                "dia": 10,
+                "meta": 15,
+                "realizado": 31
+              },
+              {
+                "dia": 11,
+                "meta": 15,
+                "realizado": 31
+              },
+              {
+                "dia": 12,
+                "meta": 15,
+                "realizado": 20
+              },
+              {
+                "dia": 13,
+                "meta": 15,
+                "realizado": 20
+              },
+              {
+                "dia": 14,
+                "meta": 15,
+                "realizado": 12
+              },
+              {
+                "dia": 15,
+                "meta": 15,
+                "realizado": 6
+              },
+              {
+                "dia": 16,
+                "meta": 15,
+                "realizado": 19
+              },
+              {
+                "dia": 17,
+                "meta": 15,
+                "realizado": 24
+              },
+              {
+                "dia": 18,
+                "meta": 15,
+                "realizado": 9
+              },
+              {
+                "dia": 19,
+                "meta": 15,
+                "realizado": 4
+              },
+              {
+                "dia": 20,
+                "meta": 14,
+                "realizado": 47
+              }
+            ]
+          },
+          {
+            "profissional": "Cristielen",
+            "meta": 257,
+            "realizado": 344,
+            "pct": 133.85,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 13,
+                "realizado": 0
+              },
+              {
+                "dia": 2,
+                "meta": 13,
+                "realizado": 0
+              },
+              {
+                "dia": 3,
+                "meta": 13,
+                "realizado": 0
+              },
+              {
+                "dia": 4,
+                "meta": 13,
+                "realizado": 2
+              },
+              {
+                "dia": 5,
+                "meta": 13,
+                "realizado": 1
+              },
+              {
+                "dia": 6,
+                "meta": 13,
+                "realizado": 2
+              },
+              {
+                "dia": 7,
+                "meta": 13,
+                "realizado": 15
+              },
+              {
+                "dia": 8,
+                "meta": 13,
+                "realizado": 18
+              },
+              {
+                "dia": 9,
+                "meta": 13,
+                "realizado": 24
+              },
+              {
+                "dia": 10,
+                "meta": 13,
+                "realizado": 29
+              },
+              {
+                "dia": 11,
+                "meta": 13,
+                "realizado": 28
+              },
+              {
+                "dia": 12,
+                "meta": 13,
+                "realizado": 4
+              },
+              {
+                "dia": 13,
+                "meta": 13,
+                "realizado": 20
+              },
+              {
+                "dia": 14,
+                "meta": 13,
+                "realizado": 30
+              },
+              {
+                "dia": 15,
+                "meta": 13,
+                "realizado": 42
+              },
+              {
+                "dia": 16,
+                "meta": 13,
+                "realizado": 39
+              },
+              {
+                "dia": 17,
+                "meta": 13,
+                "realizado": 51
+              },
+              {
+                "dia": 18,
+                "meta": 13,
+                "realizado": 20
+              },
+              {
+                "dia": 19,
+                "meta": 10,
+                "realizado": 0
+              },
+              {
+                "dia": 20,
+                "meta": 13,
+                "realizado": 19
+              }
+            ]
+          },
+          {
+            "profissional": "Camila",
+            "meta": 508,
+            "realizado": 510,
+            "pct": 100.39,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 33,
+                "realizado": 0
+              },
+              {
+                "dia": 2,
+                "meta": 25,
+                "realizado": 0
+              },
+              {
+                "dia": 3,
+                "meta": 25,
+                "realizado": 4
+              },
+              {
+                "dia": 4,
+                "meta": 25,
+                "realizado": 6
+              },
+              {
+                "dia": 5,
+                "meta": 25,
+                "realizado": 14
+              },
+              {
+                "dia": 6,
+                "meta": 25,
+                "realizado": 11
+              },
+              {
+                "dia": 7,
+                "meta": 25,
+                "realizado": 4
+              },
+              {
+                "dia": 8,
+                "meta": 25,
+                "realizado": 26
+              },
+              {
+                "dia": 9,
+                "meta": 25,
+                "realizado": 12
+              },
+              {
+                "dia": 10,
+                "meta": 25,
+                "realizado": 38
+              },
+              {
+                "dia": 11,
+                "meta": 25,
+                "realizado": 20
+              },
+              {
+                "dia": 12,
+                "meta": 25,
+                "realizado": 7
+              },
+              {
+                "dia": 13,
+                "meta": 25,
+                "realizado": 10
+              },
+              {
+                "dia": 14,
+                "meta": 25,
+                "realizado": 32
+              },
+              {
+                "dia": 15,
+                "meta": 25,
+                "realizado": 41
+              },
+              {
+                "dia": 16,
+                "meta": 25,
+                "realizado": 57
+              },
+              {
+                "dia": 17,
+                "meta": 25,
+                "realizado": 60
+              },
+              {
+                "dia": 18,
+                "meta": 25,
+                "realizado": 60
+              },
+              {
+                "dia": 19,
+                "meta": 25,
+                "realizado": 62
+              },
+              {
+                "dia": 20,
+                "meta": 25,
+                "realizado": 46
+              }
+            ]
+          },
+          {
+            "profissional": "Natália",
+            "meta": 326,
+            "realizado": 331,
+            "pct": 101.53,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 22,
+                "realizado": 31
+              },
+              {
+                "dia": 2,
+                "meta": 16,
+                "realizado": 24
+              },
+              {
+                "dia": 3,
+                "meta": 16,
+                "realizado": 5
+              },
+              {
+                "dia": 4,
+                "meta": 16,
+                "realizado": 7
+              },
+              {
+                "dia": 5,
+                "meta": 16,
+                "realizado": 28
+              },
+              {
+                "dia": 6,
+                "meta": 16,
+                "realizado": 16
+              },
+              {
+                "dia": 7,
+                "meta": 16,
+                "realizado": 1
+              },
+              {
+                "dia": 8,
+                "meta": 16,
+                "realizado": 25
+              },
+              {
+                "dia": 9,
+                "meta": 16,
+                "realizado": 14
+              },
+              {
+                "dia": 10,
+                "meta": 16,
+                "realizado": 5
+              },
+              {
+                "dia": 11,
+                "meta": 16,
+                "realizado": 17
+              },
+              {
+                "dia": 12,
+                "meta": 16,
+                "realizado": 0
+              },
+              {
+                "dia": 13,
+                "meta": 16,
+                "realizado": 0
+              },
+              {
+                "dia": 14,
+                "meta": 16,
+                "realizado": 0
+              },
+              {
+                "dia": 15,
+                "meta": 16,
+                "realizado": 0
+              },
+              {
+                "dia": 16,
+                "meta": 16,
+                "realizado": 31
+              },
+              {
+                "dia": 17,
+                "meta": 16,
+                "realizado": 40
+              },
+              {
+                "dia": 18,
+                "meta": 16,
+                "realizado": 32
+              },
+              {
+                "dia": 19,
+                "meta": 16,
+                "realizado": 30
+              },
+              {
+                "dia": 20,
+                "meta": 16,
+                "realizado": 25
+              }
+            ]
+          },
+          {
+            "profissional": "Tatiana",
+            "meta": 233,
+            "realizado": 241,
+            "pct": 103.43,
+            "dias": [
+              {
+                "dia": 1,
+                "meta": 12,
+                "realizado": 0
+              },
+              {
+                "dia": 2,
+                "meta": 12,
+                "realizado": 1
+              },
+              {
+                "dia": 3,
+                "meta": 12,
+                "realizado": 1
+              },
+              {
+                "dia": 4,
+                "meta": 12,
+                "realizado": 8
+              },
+              {
+                "dia": 5,
+                "meta": 12,
+                "realizado": 3
+              },
+              {
+                "dia": 6,
+                "meta": 12,
+                "realizado": 0
+              },
+              {
+                "dia": 7,
+                "meta": 12,
+                "realizado": 21
+              },
+              {
+                "dia": 8,
+                "meta": 12,
+                "realizado": 11
+              },
+              {
+                "dia": 9,
+                "meta": 12,
+                "realizado": 19
+              },
+              {
+                "dia": 10,
+                "meta": 12,
+                "realizado": 1
+              },
+              {
+                "dia": 11,
+                "meta": 12,
+                "realizado": 29
+              },
+              {
+                "dia": 12,
+                "meta": 12,
+                "realizado": 6
+              },
+              {
+                "dia": 13,
+                "meta": 12,
+                "realizado": 1
+              },
+              {
+                "dia": 14,
+                "meta": 12,
+                "realizado": 3
+              },
+              {
+                "dia": 15,
+                "meta": 12,
+                "realizado": 35
+              },
+              {
+                "dia": 16,
+                "meta": 12,
+                "realizado": 36
+              },
+              {
+                "dia": 17,
+                "meta": 12,
+                "realizado": 26
+              },
+              {
+                "dia": 18,
+                "meta": 12,
+                "realizado": 20
+              },
+              {
+                "dia": 19,
+                "meta": 12,
+                "realizado": 16
+              },
+              {
+                "dia": 20,
+                "meta": 5,
+                "realizado": 4
+              }
+            ]
+          }
+        ],
+        "total": {
+          "profissional": "Total",
+          "meta": 1623,
+          "realizado": 1701,
+          "pct": 104.81,
+          "dias": [
+            {
+              "dia": 1,
+              "meta": 95,
+              "realizado": 33
+            },
+            {
+              "dia": 2,
+              "meta": 81,
+              "realizado": 25
+            },
+            {
+              "dia": 3,
+              "meta": 81,
+              "realizado": 11
+            },
+            {
+              "dia": 4,
+              "meta": 81,
+              "realizado": 23
+            },
+            {
+              "dia": 5,
+              "meta": 81,
+              "realizado": 53
+            },
+            {
+              "dia": 6,
+              "meta": 81,
+              "realizado": 30
+            },
+            {
+              "dia": 7,
+              "meta": 81,
+              "realizado": 54
+            },
+            {
+              "dia": 8,
+              "meta": 81,
+              "realizado": 102
+            },
+            {
+              "dia": 9,
+              "meta": 81,
+              "realizado": 75
+            },
+            {
+              "dia": 10,
+              "meta": 81,
+              "realizado": 104
+            },
+            {
+              "dia": 11,
+              "meta": 81,
+              "realizado": 125
+            },
+            {
+              "dia": 12,
+              "meta": 81,
+              "realizado": 37
+            },
+            {
+              "dia": 13,
+              "meta": 81,
+              "realizado": 51
+            },
+            {
+              "dia": 14,
+              "meta": 81,
+              "realizado": 77
+            },
+            {
+              "dia": 15,
+              "meta": 81,
+              "realizado": 124
+            },
+            {
+              "dia": 16,
+              "meta": 81,
+              "realizado": 182
+            },
+            {
+              "dia": 17,
+              "meta": 81,
+              "realizado": 201
+            },
+            {
+              "dia": 18,
+              "meta": 81,
+              "realizado": 141
+            },
+            {
+              "dia": 19,
+              "meta": 78,
+              "realizado": 112
+            },
+            {
+              "dia": 20,
+              "meta": 73,
+              "realizado": 141
+            }
+          ]
+        }
       },
       "motivos": [
         {
           "label": "Contatos Efetivo",
-          "Total": 40
+          "Ariane": 40,
+          "Cristielen": 79,
+          "Camila": 27,
+          "Natália": 53,
+          "Tatiana": 45,
+          "Total": 244
         },
         {
           "label": "Baixado/Outros",
-          "Total": 7
+          "Ariane": 7,
+          "Cristielen": 1,
+          "Camila": 8,
+          "Natália": 1,
+          "Tatiana": 3,
+          "Total": 20
         },
         {
           "label": "Ativo por temporada",
-          "Total": 1
+          "Ariane": 1,
+          "Cristielen": 5,
+          "Camila": 7,
+          "Natália": 0,
+          "Tatiana": 4,
+          "Total": 17
         },
         {
           "label": "Conversão / Venda RCA Externo",
-          "Total": 19
+          "Ariane": 19,
+          "Cristielen": 44,
+          "Camila": 12,
+          "Natália": 8,
+          "Tatiana": 10,
+          "Total": 93
         },
         {
           "label": "Telefone incorreto",
-          "Total": 2
+          "Ariane": 2,
+          "Cristielen": 0,
+          "Camila": 38,
+          "Natália": 6,
+          "Tatiana": 4,
+          "Total": 50
         },
         {
           "label": "Problema Financeiro",
-          "Total": 2
+          "Ariane": 2,
+          "Cristielen": 6,
+          "Camila": 4,
+          "Natália": 0,
+          "Tatiana": 2,
+          "Total": 14
         },
         {
           "label": "Total",
-          "Total": 280
+          "Ariane": 280,
+          "Cristielen": 481,
+          "Camila": 375,
+          "Natália": 287,
+          "Tatiana": 202,
+          "Total": 0
         }
       ]
     },
-    "profissionais": {
-      "Ariane": {
-        "conversao": {},
-        "contatos": {
-          "meta": 0,
-          "realizado": 0
-        },
-        "clientes": [],
-        "faturamento": 738590
-      },
-      "Camila": {
-        "conversao": {},
-        "contatos": {
-          "meta": 0,
-          "realizado": 0
-        },
-        "clientes": [],
-        "faturamento": 1016489
-      },
-      "Natália": {
-        "conversao": {},
-        "contatos": {
-          "meta": 0,
-          "realizado": 0
-        },
-        "clientes": [],
-        "faturamento": 1247805
-      },
-      "Tatiana": {
-        "conversao": {},
-        "contatos": {
-          "meta": 0,
-          "realizado": 0
-        },
-        "clientes": [],
-        "faturamento": 924349
-      },
-      "Cristielen": {
-        "conversao": {},
-        "contatos": {
-          "meta": 0,
-          "realizado": 0
-        },
-        "clientes": [],
-        "faturamento": 323161
-      }
-    },
-    "faturamentoTotal": 4250394,
+    "profissionais": {},
+    "faturamentoTotal": 0,
     "faturamentoClientes": [
       {
         "cliente": 27813,
@@ -1924,17 +4887,17 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 6805,
-        "nome": "CHURRASCARIA GARFO E BOMBACHA LTDA",
-        "valor": 533.7,
-        "mes": "Maio",
-        "prof": "Tatiana"
-      },
-      {
         "cliente": 43013,
         "nome": "46.445.588 MEIRY JANE FARIAS NEGIDIO",
         "valor": 533.7,
         "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 6805,
+        "nome": "CHURRASCARIA GARFO E BOMBACHA LTDA",
+        "valor": 533.7,
+        "mes": "Maio",
         "prof": "Tatiana"
       },
       {
@@ -3025,5 +5988,5 @@
     ]
   },
   "fileName": "",
-  "updatedAt": "2026-07-05T14:03:06.533Z"
+  "updatedAt": "2026-07-05T19:09:49.035Z"
 }

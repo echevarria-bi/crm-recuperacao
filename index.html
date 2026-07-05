@@ -1219,7 +1219,7 @@
           var valores = dataRows.map(function(r){return r.Total||0;});
           new Chart(document.getElementById('chartMotivos'), {
             type:'doughnut', data:{labels:labels, datasets:[{data:valores,backgroundColor:['#f59e0b','#34d399','#ef4444','#a78bfa','#60a5fa','#f97316','#ec4899'],borderColor:'#0b0d14',borderWidth:2}]},
-            options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{datalabels:{display:false},legend:{position:'left',labels:{color:'#9ca3af',padding:14,boxWidth:12,font:{size:12,weight:'bold'},usePointStyle:true}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false},title:{display:true,text:'Distribui\u00E7\u00E3o dos Motivos',color:'#6b7280',font:{size:13}}}}}
+            options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{datalabels:{color:'#fff',font:{size:12,weight:'bold'},anchor:'center',align:'center',formatter:function(v,ctx){return v;}},legend:{position:'left',labels:{color:'#9ca3af',padding:14,boxWidth:12,font:{size:12,weight:'bold'},usePointStyle:true},align:'center'},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false},title:{display:false}}}
           );
         } catch(e) {}
       }, 100);

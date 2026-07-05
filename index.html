@@ -264,6 +264,13 @@
         if (targetStore) {
           var pg = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[si]], {header:1, defval:''});
           console.log('  parsed rows:', pg.length, 'row0:', pg[0]);
+          // Debug: dump column A of first 15 rows
+          var dump = [];
+          for (var di = 0; di < Math.min(15, pg.length); di++) {
+            var r = pg[di];
+            dump.push('r'+di+'=[0:'+JSON.stringify(r&&r[0])+',1:'+JSON.stringify(r&&r[1])+',2:'+JSON.stringify(r&&r[2])+']');
+          }
+          console.log('  -> dump:', dump.join('; '));
           result[targetStore] = {recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]};
           parsePainelGeral(pg, {painelGeral: result[targetStore]});
           console.log('  profissionais parsed:', result[targetStore].recuperacao.profissionais.length, JSON.stringify(result[targetStore].recuperacao.profissionais));

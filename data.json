@@ -1,1 +1,3029 @@
-﻿{"data":{"evolucaoMeses":{"indicadores":[],"valorPorProf":[],"recuperadosPorProf":[]},"painelGeral":{"recuperacao":{"profissionais":[],"total":null},"metaContatos":{"profissionais":[],"total":null},"motivos":[]}},"fileName":"","updatedAt":"2026-07-03T15:58:47.061Z"}
+{
+  "data": {
+    "evolucaoMeses": {
+      "indicadores": [
+        {
+          "label": "Conversões Totais",
+          "Abril": 243,
+          "Maio": 147,
+          "Junho": 229
+        },
+        {
+          "label": "Excedente / GAP",
+          "Abril": 29,
+          "Maio": -15,
+          "Junho": 70
+        },
+        {
+          "label": "Meta de Contatos",
+          "Abril": 1074,
+          "Maio": 1623,
+          "Junho": 1750
+        },
+        {
+          "label": "Contatos Realizados",
+          "Abril": 1003,
+          "Maio": 1701,
+          "Junho": 1657
+        },
+        {
+          "label": "% Meta Contato",
+          "Abril": 93,
+          "Maio": 105,
+          "Junho": 95
+        },
+        {
+          "label": "Meta de Clientes Recuperados",
+          "Abril": 214,
+          "Maio": 162,
+          "Junho": 159
+        },
+        {
+          "label": "Realizado de Clientes Recuperados",
+          "Abril": 73,
+          "Maio": 54,
+          "Junho": 91
+        },
+        {
+          "label": "% Meta Recuperados",
+          "Abril": 34,
+          "Maio": 33,
+          "Junho": 55
+        },
+        {
+          "label": "Valor Recuperado",
+          "Abril": 96648.23749099999,
+          "Maio": 30682.985,
+          "Junho": 8711.02
+        }
+      ],
+      "valorPorProf": [
+        {
+          "profissional": "Anna",
+          "Abril": 8881.927491,
+          "Total": 8881.927491
+        },
+        {
+          "profissional": "Ariane",
+          "Abril": 14368.270000000004,
+          "Maio": 5323.060002000001,
+          "Junho": 2660.8,
+          "Total": 22352.130002000005
+        },
+        {
+          "profissional": "Camila",
+          "Abril": 1344.6200000000001,
+          "Maio": 10823.154999999999,
+          "Junho": 1947.7400000000002,
+          "Total": 14115.515
+        },
+        {
+          "profissional": "Cristielen",
+          "Maio": 1370.55,
+          "Junho": 309.65,
+          "Total": 1680.1999999999998
+        },
+        {
+          "profissional": "Natalia",
+          "Abril": 31780.950000000004,
+          "Maio": 5969.51,
+          "Junho": 1560.3799999999999,
+          "Total": 39310.840000000004
+        },
+        {
+          "profissional": "Tatiana",
+          "Abril": 40272.47000000001,
+          "Maio": 7196.709998000001,
+          "Junho": 2232.45,
+          "Total": 49701.629998000004
+        }
+      ],
+      "recuperadosPorProf": [
+        {
+          "profissional": "Anna",
+          "Abril META": 72,
+          "Abril REAL": 20,
+          "Abril %": 28,
+          "Maio META": 30,
+          "Maio REAL": 10,
+          "Maio %": 33
+        },
+        {
+          "profissional": "Ariane",
+          "Abril META": 39,
+          "Abril REAL": 11,
+          "Abril %": 28,
+          "Junho META": 31,
+          "Junho REAL": 16,
+          "Junho %": 51.61
+        },
+        {
+          "profissional": "Camila",
+          "Abril META": 44,
+          "Abril REAL": 3,
+          "Abril %": 7,
+          "Maio META": 50,
+          "Maio REAL": 18,
+          "Maio %": 36,
+          "Junho META": 48,
+          "Junho REAL": 21,
+          "Junho %": 43.75
+        },
+        {
+          "profissional": "Natália",
+          "Abril META": 37,
+          "Abril REAL": 17,
+          "Abril %": 46,
+          "Maio META": 33,
+          "Maio REAL": 9,
+          "Maio %": 27,
+          "Junho META": 30,
+          "Junho REAL": 27,
+          "Junho %": 90
+        },
+        {
+          "profissional": "Tatiana",
+          "Abril META": 22,
+          "Abril REAL": 22,
+          "Abril %": 100,
+          "Maio META": 23,
+          "Maio REAL": 14,
+          "Maio %": 61,
+          "Junho META": 25,
+          "Junho REAL": 20,
+          "Junho %": 80
+        },
+        {
+          "profissional": "Cristielen",
+          "Maio META": 26,
+          "Maio REAL": 3,
+          "Maio %": 12,
+          "Junho META": 25,
+          "Junho REAL": 7,
+          "Junho %": 28
+        }
+      ]
+    },
+    "painelGeral": {
+      "recuperacao": {
+        "profissionais": [
+          {
+            "profissional": "Ariane",
+            "meta": 31,
+            "realizado": 15,
+            "pct": 48,
+            "dias": [
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 3
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 3
+              },
+              {
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "meta": 2,
+                "realizado": 1
+              }
+            ],
+            "faturamento": 738590
+          },
+          {
+            "profissional": "Camila",
+            "meta": 48,
+            "realizado": 21,
+            "pct": 44,
+            "dias": [
+              {
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "meta": 3,
+                "realizado": 3
+              },
+              {
+                "meta": 3,
+                "realizado": 1
+              },
+              {
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "meta": 3,
+                "realizado": 1
+              },
+              {
+                "meta": 3,
+                "realizado": 2
+              },
+              {
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "meta": 3,
+                "realizado": 0
+              },
+              {
+                "meta": 3,
+                "realizado": 1
+              },
+              {
+                "meta": 2,
+                "realizado": 5
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 4
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              }
+            ],
+            "faturamento": 1016489
+          },
+          {
+            "profissional": "Cristielen",
+            "meta": 25,
+            "realizado": 5,
+            "pct": 20,
+            "dias": [
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              }
+            ],
+            "faturamento": 323161
+          },
+          {
+            "profissional": "Natália",
+            "meta": 30,
+            "realizado": 27,
+            "pct": 90,
+            "dias": [
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 2
+              },
+              {
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "meta": 2,
+                "realizado": 3
+              },
+              {
+                "meta": 2,
+                "realizado": 4
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 3
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 4
+              }
+            ],
+            "faturamento": 1247805
+          },
+          {
+            "profissional": "Tatiana",
+            "meta": 25,
+            "realizado": 20,
+            "pct": 80,
+            "dias": [
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 3
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 1,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "meta": 2,
+                "realizado": 0
+              },
+              {
+                "meta": 2,
+                "realizado": 2
+              }
+            ],
+            "faturamento": 924349
+          }
+        ],
+        "total": {
+          "profissional": "Total",
+          "meta": 159,
+          "realizado": 88,
+          "pct": 55,
+          "dias": [
+            {
+              "meta": 8,
+              "realizado": 1
+            },
+            {
+              "meta": 8,
+              "realizado": 2
+            },
+            {
+              "meta": 8,
+              "realizado": 3
+            },
+            {
+              "meta": 8,
+              "realizado": 9
+            },
+            {
+              "meta": 8,
+              "realizado": 1
+            },
+            {
+              "meta": 8,
+              "realizado": 5
+            },
+            {
+              "meta": 8,
+              "realizado": 4
+            },
+            {
+              "meta": 8,
+              "realizado": 8
+            },
+            {
+              "meta": 8,
+              "realizado": 4
+            },
+            {
+              "meta": 7,
+              "realizado": 2
+            },
+            {
+              "meta": 7,
+              "realizado": 2
+            },
+            {
+              "meta": 8,
+              "realizado": 3
+            },
+            {
+              "meta": 7,
+              "realizado": 9
+            },
+            {
+              "meta": 6,
+              "realizado": 5
+            },
+            {
+              "meta": 6,
+              "realizado": 1
+            },
+            {
+              "meta": 6,
+              "realizado": 1
+            },
+            {
+              "meta": 6,
+              "realizado": 4
+            },
+            {
+              "meta": 8,
+              "realizado": 5
+            },
+            {
+              "meta": 8,
+              "realizado": 11
+            },
+            {
+              "meta": 8,
+              "realizado": 1
+            },
+            {
+              "meta": 8,
+              "realizado": 7
+            }
+          ]
+        }
+      },
+      "metaContatos": {
+        "profissionais": [
+          {
+            "profissional": "Ariane",
+            "meta": 350,
+            "realizado": 332,
+            "pct": 95,
+            "dias": [
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 13
+              },
+              {
+                "meta": 17,
+                "realizado": 8
+              },
+              {
+                "meta": 17,
+                "realizado": 3
+              },
+              {
+                "meta": 17,
+                "realizado": 33
+              },
+              {
+                "meta": 17,
+                "realizado": 10
+              },
+              {
+                "meta": 17,
+                "realizado": 10
+              },
+              {
+                "meta": 17,
+                "realizado": 12
+              },
+              {
+                "meta": 17,
+                "realizado": 12
+              },
+              {
+                "meta": 17,
+                "realizado": 11
+              },
+              {
+                "meta": 17,
+                "realizado": 10
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 3
+              },
+              {
+                "meta": 16,
+                "realizado": 40
+              },
+              {
+                "meta": 16,
+                "realizado": 30
+              },
+              {
+                "meta": 16,
+                "realizado": 0
+              },
+              {
+                "meta": 16,
+                "realizado": 47
+              },
+              {
+                "meta": 16,
+                "realizado": 54
+              },
+              {
+                "meta": 16,
+                "realizado": 36
+              },
+              {
+                "meta": 16,
+                "realizado": 0
+              }
+            ]
+          },
+          {
+            "profissional": "Camila",
+            "meta": 350,
+            "realizado": 325,
+            "pct": 93,
+            "dias": [
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 12
+              },
+              {
+                "meta": 17,
+                "realizado": 20
+              },
+              {
+                "meta": 17,
+                "realizado": 20
+              },
+              {
+                "meta": 17,
+                "realizado": 21
+              },
+              {
+                "meta": 17,
+                "realizado": 14
+              },
+              {
+                "meta": 17,
+                "realizado": 25
+              },
+              {
+                "meta": 17,
+                "realizado": 20
+              },
+              {
+                "meta": 17,
+                "realizado": 10
+              },
+              {
+                "meta": 17,
+                "realizado": 20
+              },
+              {
+                "meta": 17,
+                "realizado": 12
+              },
+              {
+                "meta": 17,
+                "realizado": 8
+              },
+              {
+                "meta": 17,
+                "realizado": 20
+              },
+              {
+                "meta": 16,
+                "realizado": 20
+              },
+              {
+                "meta": 16,
+                "realizado": 20
+              },
+              {
+                "meta": 16,
+                "realizado": 20
+              },
+              {
+                "meta": 16,
+                "realizado": 13
+              },
+              {
+                "meta": 16,
+                "realizado": 20
+              },
+              {
+                "meta": 16,
+                "realizado": 30
+              },
+              {
+                "meta": 16,
+                "realizado": 0
+              }
+            ]
+          },
+          {
+            "profissional": "Cristielen",
+            "meta": 350,
+            "realizado": 312,
+            "pct": 89,
+            "dias": [
+              {
+                "meta": 17,
+                "realizado": 20
+              },
+              {
+                "meta": 17,
+                "realizado": 23
+              },
+              {
+                "meta": 17,
+                "realizado": 4
+              },
+              {
+                "meta": 17,
+                "realizado": 14
+              },
+              {
+                "meta": 17,
+                "realizado": 29
+              },
+              {
+                "meta": 17,
+                "realizado": 8
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 16,
+                "realizado": 21
+              },
+              {
+                "meta": 16,
+                "realizado": 16
+              },
+              {
+                "meta": 16,
+                "realizado": 62
+              },
+              {
+                "meta": 16,
+                "realizado": 35
+              },
+              {
+                "meta": 16,
+                "realizado": 40
+              },
+              {
+                "meta": 16,
+                "realizado": 40
+              },
+              {
+                "meta": 16,
+                "realizado": 0
+              }
+            ]
+          },
+          {
+            "profissional": "Natália",
+            "meta": 350,
+            "realizado": 385,
+            "pct": 110,
+            "dias": [
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 30
+              },
+              {
+                "meta": 17,
+                "realizado": 30
+              },
+              {
+                "meta": 17,
+                "realizado": 25
+              },
+              {
+                "meta": 17,
+                "realizado": 13
+              },
+              {
+                "meta": 17,
+                "realizado": 20
+              },
+              {
+                "meta": 17,
+                "realizado": 41
+              },
+              {
+                "meta": 17,
+                "realizado": 24
+              },
+              {
+                "meta": 17,
+                "realizado": 23
+              },
+              {
+                "meta": 17,
+                "realizado": 21
+              },
+              {
+                "meta": 17,
+                "realizado": 18
+              },
+              {
+                "meta": 17,
+                "realizado": 20
+              },
+              {
+                "meta": 16,
+                "realizado": 24
+              },
+              {
+                "meta": 16,
+                "realizado": 24
+              },
+              {
+                "meta": 16,
+                "realizado": 24
+              },
+              {
+                "meta": 16,
+                "realizado": 19
+              },
+              {
+                "meta": 16,
+                "realizado": 0
+              },
+              {
+                "meta": 16,
+                "realizado": 29
+              },
+              {
+                "meta": 16,
+                "realizado": 0
+              }
+            ]
+          },
+          {
+            "profissional": "Tatiana",
+            "meta": 350,
+            "realizado": 251,
+            "pct": 72,
+            "dias": [
+              {
+                "meta": 17,
+                "realizado": 12
+              },
+              {
+                "meta": 17,
+                "realizado": 8
+              },
+              {
+                "meta": 17,
+                "realizado": 10
+              },
+              {
+                "meta": 17,
+                "realizado": 7
+              },
+              {
+                "meta": 17,
+                "realizado": 13
+              },
+              {
+                "meta": 17,
+                "realizado": 2
+              },
+              {
+                "meta": 17,
+                "realizado": 0
+              },
+              {
+                "meta": 17,
+                "realizado": 3
+              },
+              {
+                "meta": 17,
+                "realizado": 12
+              },
+              {
+                "meta": 17,
+                "realizado": 15
+              },
+              {
+                "meta": 17,
+                "realizado": 24
+              },
+              {
+                "meta": 17,
+                "realizado": 6
+              },
+              {
+                "meta": 17,
+                "realizado": 11
+              },
+              {
+                "meta": 17,
+                "realizado": 12
+              },
+              {
+                "meta": 16,
+                "realizado": 18
+              },
+              {
+                "meta": 16,
+                "realizado": 11
+              },
+              {
+                "meta": 16,
+                "realizado": 23
+              },
+              {
+                "meta": 16,
+                "realizado": 34
+              },
+              {
+                "meta": 16,
+                "realizado": 20
+              },
+              {
+                "meta": 16,
+                "realizado": 10
+              },
+              {
+                "meta": 16,
+                "realizado": 0
+              }
+            ]
+          }
+        ],
+        "total": {
+          "profissional": "Total",
+          "meta": 1750,
+          "realizado": 1605,
+          "pct": 92,
+          "dias": [
+            {
+              "meta": 85,
+              "realizado": 32
+            },
+            {
+              "meta": 85,
+              "realizado": 31
+            },
+            {
+              "meta": 85,
+              "realizado": 39
+            },
+            {
+              "meta": 85,
+              "realizado": 79
+            },
+            {
+              "meta": 85,
+              "realizado": 95
+            },
+            {
+              "meta": 85,
+              "realizado": 89
+            },
+            {
+              "meta": 85,
+              "realizado": 37
+            },
+            {
+              "meta": 85,
+              "realizado": 58
+            },
+            {
+              "meta": 85,
+              "realizado": 85
+            },
+            {
+              "meta": 85,
+              "realizado": 61
+            },
+            {
+              "meta": 85,
+              "realizado": 78
+            },
+            {
+              "meta": 85,
+              "realizado": 49
+            },
+            {
+              "meta": 85,
+              "realizado": 37
+            },
+            {
+              "meta": 85,
+              "realizado": 55
+            },
+            {
+              "meta": 80,
+              "realizado": 123
+            },
+            {
+              "meta": 80,
+              "realizado": 101
+            },
+            {
+              "meta": 80,
+              "realizado": 129
+            },
+            {
+              "meta": 80,
+              "realizado": 148
+            },
+            {
+              "meta": 80,
+              "realizado": 134
+            },
+            {
+              "meta": 80,
+              "realizado": 145
+            },
+            {
+              "meta": 80,
+              "realizado": 0
+            }
+          ]
+        }
+      },
+      "motivos": [
+        {
+          "label": "Contatos Efetivo",
+          "Ariane": 29,
+          "Camila": 75,
+          "Cristielen": 33,
+          "Natália": 69,
+          "Tatiana": 64,
+          "Total": 270
+        },
+        {
+          "label": "Baixado/Outros",
+          "Ariane": 0,
+          "Camila": 0,
+          "Cristielen": 1,
+          "Natália": 6,
+          "Tatiana": 7,
+          "Total": 14
+        },
+        {
+          "label": "Ativo por temporada",
+          "Ariane": 1,
+          "Camila": 0,
+          "Cristielen": 3,
+          "Natália": 2,
+          "Tatiana": 9,
+          "Total": 15
+        },
+        {
+          "label": "Conversão / Venda RCA Externo",
+          "Ariane": 35,
+          "Camila": 42,
+          "Cristielen": 15,
+          "Natália": 14,
+          "Tatiana": 24,
+          "Total": 130
+        },
+        {
+          "label": "Telefone incorreto",
+          "Ariane": 2,
+          "Camila": 0,
+          "Cristielen": 4,
+          "Natália": 15,
+          "Tatiana": 10,
+          "Total": 31
+        },
+        {
+          "label": "Problema Financeiro",
+          "Ariane": 3,
+          "Camila": 0,
+          "Cristielen": 0,
+          "Natália": 4,
+          "Tatiana": 5,
+          "Total": 12
+        },
+        {
+          "label": "Total",
+          "Ariane": 299,
+          "Camila": 647,
+          "Cristielen": 408,
+          "Natália": 318,
+          "Tatiana": 276,
+          "Total": 0
+        }
+      ]
+    },
+    "painelAbril": {
+      "recuperacao": {
+        "profissionais": [],
+        "total": null
+      },
+      "metaContatos": {
+        "profissionais": [],
+        "total": null
+      },
+      "motivos": [
+        {
+          "label": "Contatos Efetivo",
+          "Total": 62
+        },
+        {
+          "label": "Baixado/Outros",
+          "Total": 25
+        },
+        {
+          "label": "Pedido Mínimo",
+          "Total": 4
+        },
+        {
+          "label": "Ativo por temporada",
+          "Total": 8
+        },
+        {
+          "label": "Conversão / Venda RCA Externo",
+          "Total": 62
+        },
+        {
+          "label": "Telefone incorreto",
+          "Total": 25
+        },
+        {
+          "label": "Problema Financeiro",
+          "Total": 3
+        },
+        {
+          "label": "Conversão / Televendas",
+          "Total": 20
+        },
+        {
+          "label": "Contatos Realizados (Não conta pra meta)",
+          "Total": 373
+        },
+        {
+          "label": "Total",
+          "Total": 468
+        }
+      ]
+    },
+    "painelMaio": {
+      "recuperacao": {
+        "profissionais": [],
+        "total": null
+      },
+      "metaContatos": {
+        "profissionais": [],
+        "total": null
+      },
+      "motivos": [
+        {
+          "label": "Contatos Efetivo",
+          "Total": 40
+        },
+        {
+          "label": "Baixado/Outros",
+          "Total": 7
+        },
+        {
+          "label": "Ativo por temporada",
+          "Total": 1
+        },
+        {
+          "label": "Conversão / Venda RCA Externo",
+          "Total": 19
+        },
+        {
+          "label": "Telefone incorreto",
+          "Total": 2
+        },
+        {
+          "label": "Problema Financeiro",
+          "Total": 2
+        },
+        {
+          "label": "Total",
+          "Total": 280
+        }
+      ]
+    },
+    "profissionais": {
+      "Ariane": {
+        "conversao": {},
+        "contatos": {
+          "meta": 0,
+          "realizado": 0
+        },
+        "clientes": [],
+        "faturamento": 738590
+      },
+      "Camila": {
+        "conversao": {},
+        "contatos": {
+          "meta": 0,
+          "realizado": 0
+        },
+        "clientes": [],
+        "faturamento": 1016489
+      },
+      "Natália": {
+        "conversao": {},
+        "contatos": {
+          "meta": 0,
+          "realizado": 0
+        },
+        "clientes": [],
+        "faturamento": 1247805
+      },
+      "Tatiana": {
+        "conversao": {},
+        "contatos": {
+          "meta": 0,
+          "realizado": 0
+        },
+        "clientes": [],
+        "faturamento": 924349
+      },
+      "Cristielen": {
+        "conversao": {},
+        "contatos": {
+          "meta": 0,
+          "realizado": 0
+        },
+        "clientes": [],
+        "faturamento": 323161
+      }
+    },
+    "faturamentoTotal": 4250394,
+    "faturamentoClientes": [
+      {
+        "cliente": 27813,
+        "nome": "LUCIANE TERESINHA BORGES 83405240034",
+        "valor": 20887.94,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 44093,
+        "nome": "DIOVANI DA SILVA",
+        "valor": 17371.710000000003,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 16103,
+        "nome": "RAIZ RESTAURANTE LTDA",
+        "valor": 4199.7300000000005,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 20828,
+        "nome": "NATHALIA SOUZA TASSONI",
+        "valor": 3904.49,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 41617,
+        "nome": "COMERCIAL DE ALIMENTOS FRANGO NO POTE LIVRAMENTO LTDA",
+        "valor": 2608.5200000000004,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 38862,
+        "nome": "MADU FOODS LTDA",
+        "valor": 2598.8749999999995,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 31596,
+        "nome": "HOSPITAL BDW POA LTDA",
+        "valor": 2485,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 36972,
+        "nome": "52.636.111 LUIZ AMPESSAN JUNIOR",
+        "valor": 2113.44,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 41645,
+        "nome": "56.058.941 TAIS COSTA DE OLIVEIRA SILVA",
+        "valor": 2007,
+        "mes": "Maio",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 18344,
+        "nome": "ACF COMERCIO DE ALIMENTOS LTDA",
+        "valor": 1968,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 43286,
+        "nome": "62.220.880 DIENEFER TAINARA FROS DA LUZ",
+        "valor": 1737.96,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 14601,
+        "nome": "MARCELO LIGABUE LANCHES",
+        "valor": 1710.3200000000002,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 31798,
+        "nome": "49.146.914 GIULLIANO BONNEMBERG CAMARGO DA SILVA",
+        "valor": 1628.3500000000001,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 41235,
+        "nome": "TAFAIEL HENRIQUE DAL CASTEL",
+        "valor": 1582.7800000000002,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 40979,
+        "nome": "BENDITO SABOR LTDA",
+        "valor": 1520.96,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 18928,
+        "nome": "GIULIANO WROBLESKI DE ALMEIDA",
+        "valor": 1453.3500000000001,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 38903,
+        "nome": "53.660.499 MIRTENES GOMES MENEZES",
+        "valor": 1398,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 42647,
+        "nome": "63.411.527 LUCIANO GARCIA CARVALHO",
+        "valor": 1372.1899999999998,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 32981,
+        "nome": "DAIANE FESTINALLI & CIA LTDA",
+        "valor": 1346.9,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 28492,
+        "nome": "KELLI CRISTINA ARAUJO",
+        "valor": 1225.19,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 41808,
+        "nome": "OFICINA DOS SONHOS CASA DE FESTAS LTDA",
+        "valor": 1194.4199999999998,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 41377,
+        "nome": "49.789.249 CAROLINE DOS SANTOS LUIZ",
+        "valor": 1173.5,
+        "mes": "Maio",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 15850,
+        "nome": "PMA COMERCIO DE BEBIDAS LTDA",
+        "valor": 1172.02,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 41885,
+        "nome": "FERNANDA CACERES",
+        "valor": 1165.88,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 41418,
+        "nome": "ANDRE REY MOLLER",
+        "valor": 1130.1999999999998,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 29748,
+        "nome": "27.694.894 CLAUDETE LAVI MARQUES",
+        "valor": 1092.0500000000002,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 32009,
+        "nome": "CLAUDETE MLLER ENGELMANN",
+        "valor": 1039.36,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 12978,
+        "nome": "CAFE DA PRAIA RESTAURANTE E CAFETERIA LT",
+        "valor": 977.3900000000001,
+        "mes": "Abril",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 26858,
+        "nome": "DOUGLAS DE MORAES HOMEM",
+        "valor": 937.9100000000001,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 44345,
+        "nome": "44.109.137 EZEQUIEL DOS SANTOS",
+        "valor": 910.91,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 43855,
+        "nome": "KAUE SILVA",
+        "valor": 908.8,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 39891,
+        "nome": "PITANGA ESCOLA DE EDUCAC?O INFANTIL LTDA",
+        "valor": 892.33,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 40926,
+        "nome": "JOSIENE SILVA MESQUITA",
+        "valor": 885.55,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 41105,
+        "nome": "12.683.141 CATLEN CHAIANA DA SILVA TEIXE",
+        "valor": 869,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 44270,
+        "nome": "49.363.694 ANTONIO GELSON DE OLIVEIRA AR",
+        "valor": 857.6299999999999,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 41630,
+        "nome": "60.313.027 DIEGO MANOEL DA SILVA",
+        "valor": 845,
+        "mes": "Maio",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 43357,
+        "nome": "62.199.517 CLAUDIMARA VICENTINA DE CARVALHO BEISE",
+        "valor": 843.1800000000001,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 44147,
+        "nome": "63.201.191 JULIANO SILVA SOUZA",
+        "valor": 792.5999999999999,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 10095,
+        "nome": "F T M COMERCIO DE BEBIDAS LTDA",
+        "valor": 789,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 40237,
+        "nome": "50.531.220 DOUGLAS CARVALHO GARCIA DA SILVA",
+        "valor": 784.45,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 37882,
+        "nome": "LANCHERIA TIA JU LTDA",
+        "valor": 778.7999980000001,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 7029,
+        "nome": "ASSOCIACAO DE ASSISTENCIA SOCIAL BOM PAS",
+        "valor": 775.97,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 2738,
+        "nome": "BAR E LANCHERIA REALEZA EIRELI",
+        "valor": 756.71,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 28819,
+        "nome": "JOSE CARLOS DE OLIVEIRA",
+        "valor": 748.83,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 39205,
+        "nome": "MIATTO CAFE LTDA",
+        "valor": 748.49,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 33463,
+        "nome": "SCARTEZZINI E GRIEBELER LTDA",
+        "valor": 745.8,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 29080,
+        "nome": "TRI INDUSTRIA CAMISETAS & EVENTOS LTDA",
+        "valor": 729.87,
+        "mes": "Maio",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 601,
+        "nome": "DARLEI MOREIRA",
+        "valor": 713.69,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 40650,
+        "nome": "MASTER PIZZA PIZZARIA LTDA",
+        "valor": 694.8399999999999,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 32987,
+        "nome": "GONI CONSULTORIA LTDA",
+        "valor": 685.4000000000001,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 40109,
+        "nome": "ALEXIA PIETRA MEDEIROS",
+        "valor": 682.44,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 38623,
+        "nome": "TALISSON SASSO HOMEM",
+        "valor": 674.28,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 44364,
+        "nome": "ANGELICA DA COSTA SCHUMACHER",
+        "valor": 670.49,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 29748,
+        "nome": "27.694.894 CLAUDETE LAVI MARQUES",
+        "valor": 662.71,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 38768,
+        "nome": "RAYSSA VITORIA DE FREITAS SILVA",
+        "valor": 639.08,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 29964,
+        "nome": "47.801.176 PAULO ROBERTO VARGAS DE OLIVEIRA",
+        "valor": 622.4,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 44106,
+        "nome": "47.829.257 CAROLINE DE OLIVEIRA FIGUEIRO",
+        "valor": 588.6600000000001,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 36533,
+        "nome": "SIMONE MARIA DA COSTA SOARES 71508686068",
+        "valor": 556.3,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 41852,
+        "nome": "LANCHONETE O SANTO LTDA",
+        "valor": 542.57,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 39622,
+        "nome": "ANDREW SILVA DE MELO",
+        "valor": 537.65,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 37577,
+        "nome": "ANDREW TAROUCO MONTIEL",
+        "valor": 537.439996,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 35214,
+        "nome": "CATIA MICHELE BONILHA PINTO",
+        "valor": 536.37,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 6805,
+        "nome": "CHURRASCARIA GARFO E BOMBACHA LTDA",
+        "valor": 533.7,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 43013,
+        "nome": "46.445.588 MEIRY JANE FARIAS NEGIDIO",
+        "valor": 533.7,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 35902,
+        "nome": "ROBERTA GRAZIANE DA SILVA",
+        "valor": 509.02,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 19384,
+        "nome": "DORNELLES & DORNELLES LTDA",
+        "valor": 505.89,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 28556,
+        "nome": "FIN INDUSTRIA DE ALIMENTOS LTDA",
+        "valor": 504.72,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 30281,
+        "nome": "CARLA FABIANE DE OLIVEIRA ABREU",
+        "valor": 498.82,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 30067,
+        "nome": "TIAGO DIAS",
+        "valor": 473.58000000000004,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 40022,
+        "nome": "NEIVA TEREZINHA PEREIRA",
+        "valor": 472.57,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 31563,
+        "nome": "48.972.716 ADRIANA LUIZA ELSENBACK DA SILVA",
+        "valor": 471.28,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 35203,
+        "nome": "INDUSTRIA DE ALIMENTOS DU VALLE LTDA",
+        "valor": 458.59,
+        "mes": "Maio",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 26900,
+        "nome": "MARCELO SPALDING SCHUMACHER",
+        "valor": 450.41999999999996,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 43357,
+        "nome": "62.199.517 CLAUDIMARA VICENTINA DE CARVALHO BEISE",
+        "valor": 441.99,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 1346,
+        "nome": "CABO HORN BAR LTDA",
+        "valor": 441.59000000000003,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 25286,
+        "nome": "40.327.341 FABIANO DUTRA MELLO",
+        "valor": 437.5,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 25853,
+        "nome": "ROSELE MEDINA GASQUE",
+        "valor": 437.4,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 28593,
+        "nome": "ANDRE LEANDRO SCHNEIDER",
+        "valor": 433.5,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 41370,
+        "nome": "LERIDA KARINA DA COSTA MORAES",
+        "valor": 426.37,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 40172,
+        "nome": "LANCHERIA BOM SABOR LTDA",
+        "valor": 424.29999999999995,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 12165,
+        "nome": "FABIANE SANTOS CARVALHO",
+        "valor": 420.18,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 39060,
+        "nome": "ELISANGELA ROSCA MARIANO",
+        "valor": 419.28,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 29622,
+        "nome": "LUANA DA CUNHA LEGEMANN",
+        "valor": 415.4,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 37802,
+        "nome": "ORY LAUX & CIA LTDA",
+        "valor": 414.5,
+        "mes": "Maio",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 20275,
+        "nome": "MARCOS CATAFESTA DA SILVA 29550793087",
+        "valor": 405.45000000000005,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 34349,
+        "nome": "ELENICE NOGUEIRA DOMINGUES KONRADT 01936202000",
+        "valor": 404.5,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 43917,
+        "nome": "LIMAS MERCADO LTDA",
+        "valor": 402.5,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 35076,
+        "nome": "ALECSANDRO SILVEIRA CRISTOV?O",
+        "valor": 402.1,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 39905,
+        "nome": "58.161.664 SIMONE CARVALHO DA SILVA",
+        "valor": 395.94,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 41862,
+        "nome": "ANGELICA BLANGER JORDON",
+        "valor": 385.39,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 7546,
+        "nome": "CASA DI PAOLO GALETO E GRELHADOS BENTO EIRELI",
+        "valor": 369.95,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 34899,
+        "nome": "RESTAURANTE SAN GENNARO LTDA",
+        "valor": 363.95,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 34261,
+        "nome": "ELDER YURI CUNHA LOPES 04484948095",
+        "valor": 344.45,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 40650,
+        "nome": "MASTER PIZZA PIZZARIA LTDA",
+        "valor": 343.01,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 31627,
+        "nome": "ELAINE PEREIRA DA SILVA",
+        "valor": 338.95000000000005,
+        "mes": "Maio",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 22815,
+        "nome": "DOMENICO FOOD LTDA",
+        "valor": 334,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 44062,
+        "nome": "CAMILA MACHADO ELICKER 00477725066",
+        "valor": 325.31,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 41276,
+        "nome": "JANA RICARDO DE PAULA",
+        "valor": 322.65,
+        "mes": "Maio",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 37969,
+        "nome": "55.863.802 FRANCIELI RIBEIRO GOSS",
+        "valor": 320.25,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 44049,
+        "nome": "36.020.214 BRUNA TERESINHA MENDES RENE D",
+        "valor": 317.545295,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 39761,
+        "nome": "MINIMERCADO PAI E FILHO",
+        "valor": 309.95,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 26746,
+        "nome": "JULIA MACHADO FERREIRA",
+        "valor": 309.65,
+        "mes": "Junho",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 41737,
+        "nome": "MONICA DIAS DA SILVA",
+        "valor": 307.36,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 28233,
+        "nome": "EVALDO SOUZA DE OLIVEIRA 66786240097",
+        "valor": 297.59,
+        "mes": "Maio",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 42952,
+        "nome": "ANA CLAUDIA DE SOUZA ANGELO",
+        "valor": 295.14,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 40184,
+        "nome": "ANA RUTH PEREIRA DA VEIGA",
+        "valor": 294,
+        "mes": "Maio",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 41142,
+        "nome": "48.380.544 ROZEMERY MARTINS DE SOUZA",
+        "valor": 291.34999999999997,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 28847,
+        "nome": "JOCELI MARTINS",
+        "valor": 283.46,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 31917,
+        "nome": "GISLAINE LOPES 00680937056",
+        "valor": 278,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 42096,
+        "nome": "VITORIA DA SILVA GUTIERREZ",
+        "valor": 274.86,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 23621,
+        "nome": "MARCOS OLIVEIRA RODRIGUES",
+        "valor": 273.19,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 40984,
+        "nome": "56.127.975 JOELMA ARAUJO FAGUNDES",
+        "valor": 270.65,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 42602,
+        "nome": "BISTRO GAIA COZINHA CRIATIVA LTDA",
+        "valor": 267.45,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 24421,
+        "nome": "JULIA SILVA DOS SANTOS",
+        "valor": 266.85,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 34303,
+        "nome": "LAURECI AVILA MASSENA",
+        "valor": 264.65,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 42629,
+        "nome": "CLAUDIA LISBOA",
+        "valor": 259.58,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 40921,
+        "nome": "IONE DE FATIMA SANTOS ROSA",
+        "valor": 251.40000199999997,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 27660,
+        "nome": "PORTO SUSHI RESTAURANTE LTDA",
+        "valor": 249.45,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 34219,
+        "nome": "MIRIAN VERARDI DE SOUZA",
+        "valor": 249.12,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 2010,
+        "nome": "CONFEITARIA ZONA SUL LTDA",
+        "valor": 248.95,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 34545,
+        "nome": "ANDRESSA VARGAS DE AZEVEDO",
+        "valor": 247.60999999999999,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 44665,
+        "nome": "SANDRA MARIA GEHLEN",
+        "valor": 241.86999999999998,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 42939,
+        "nome": "60.426.891 YSMAEL SIQUEIRA SILVA DA SILVA",
+        "valor": 237.75000000000003,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 43333,
+        "nome": "62.816.739 TIAGO DA COSTA BORGES",
+        "valor": 231.55,
+        "mes": "Maio",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 42963,
+        "nome": "40.199.704 GUILHERME PERES LEAL",
+        "valor": 231.22,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 38600,
+        "nome": "ELIVONE DA SILVA FORTE",
+        "valor": 228.36,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 33755,
+        "nome": "ANDERSON PADILHA DOS SANTOS",
+        "valor": 226.86,
+        "mes": "Maio",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 43346,
+        "nome": "57.732.143 CARINA APARECIDA BORGES",
+        "valor": 219.29000000000002,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 43104,
+        "nome": "63.389.815 TAINARA LOPES MONTEIRO",
+        "valor": 212.34,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 44200,
+        "nome": "58.961.833 ERICK DA SILVA DUARTE",
+        "valor": 211.97,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 30921,
+        "nome": "GIOVANA BORTOLOTTI LTDA",
+        "valor": 210.64999999999998,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 33080,
+        "nome": "DIEGO BATISTA MOREIRA",
+        "valor": 208.26000000000002,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 41723,
+        "nome": "28.679.102 MANOEL DIEGO MORAIS GAUTERIO",
+        "valor": 201.58,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 27148,
+        "nome": "LUCILENE BATISTA DE OLIVEIRA",
+        "valor": 199.77,
+        "mes": "Abril",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 27076,
+        "nome": "CARLOS EDUARDO SCHMITT",
+        "valor": 198.95,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 41058,
+        "nome": "JO?O BATISTA PEREIRA DA SILVA",
+        "valor": 195.95,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 18415,
+        "nome": "ARTE EM PAO PADARIA LTDA",
+        "valor": 183.75,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 42936,
+        "nome": "SANDRO DE OLIVEIRA TORMAN",
+        "valor": 183.75,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 38936,
+        "nome": "ROSALINA RIBEIRO GOES VAZZATA 9798472802",
+        "valor": 179.85,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 42836,
+        "nome": "KELLY SOARES BORGES",
+        "valor": 179.75,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 13483,
+        "nome": "JUCA LANCHES LTDA ME",
+        "valor": 177.9,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 41967,
+        "nome": "62.638.466 LUANA TAIS DA ROCHA RIBEIRO",
+        "valor": 177.86,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 28765,
+        "nome": "MICHELE FROS ARAUJO 02613129018",
+        "valor": 175.8422,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 43992,
+        "nome": "SUZANA MOTTA BRAGA PACHECO",
+        "valor": 172.55,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 37910,
+        "nome": "SARA MADALENA SILVA DE SOUZA",
+        "valor": 170.38,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 43494,
+        "nome": "60.160.620 TATIANE PINHEIRO FURTADO DE OLIVEIRA",
+        "valor": 167.45999999999998,
+        "mes": "Abril",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 44138,
+        "nome": "57.274.207 BRUNA NASCIMENTO SILVA",
+        "valor": 158.69,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 41854,
+        "nome": "44.571.711 ADRIANA GOMES DE AVILA",
+        "valor": 156.91,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 44200,
+        "nome": "58.961.833 ERICK DA SILVA DUARTE",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 25853,
+        "nome": "ROSELE MEDINA GASQUE",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 601,
+        "nome": "DARLEI MOREIRA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 38903,
+        "nome": "53.660.499 MIRTENES GOMES MENEZES",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 41617,
+        "nome": "COMERCIAL DE ALIMENTOS FRANGO NO POTE LIVRAMENTO LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 41105,
+        "nome": "12.683.141 CATLEN CHAIANA DA SILVA TEIXE",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 44062,
+        "nome": "CAMILA MACHADO ELICKER 00477725066",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 13483,
+        "nome": "JUCA LANCHES LTDA ME",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 27148,
+        "nome": "LUCILENE BATISTA DE OLIVEIRA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 40914,
+        "nome": "PERETTO COMERCIO DE ALIMENTOS LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 44581,
+        "nome": "BROTHERS CAFETERIA LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 43131,
+        "nome": "63.837.950 LUCAS SANTOS CRUZ",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 27411,
+        "nome": "CATHERINE OKCHSTEIN KELBERT 78874645015",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 36248,
+        "nome": "TANIA LIMA DA COSTA 47171812049",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 2425,
+        "nome": "MOACIR DOMINGOS MOCELLIN",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 24254,
+        "nome": "SUL BEER BAR LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 42652,
+        "nome": "60.267.140 KESIA TELLES RODRIGUES CHAVES",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 30292,
+        "nome": "JONAS MENDES VIEIRA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 39127,
+        "nome": "57.087.406 RODRIGO RAMOS FORTUNATO",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 40214,
+        "nome": "TAMIRIS MAGALHAES DE OLIVEIRA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 16902,
+        "nome": "26.553.758 JOICY BOTELHO MEDEIROS",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 43912,
+        "nome": "60.588.164 DIELI MARIANO ANTUNES",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 36451,
+        "nome": "ADAO MESQUITA MENDES",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 42285,
+        "nome": "ANA MARTINS SODRE",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 38884,
+        "nome": "COMERCIO SABIO LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 45080,
+        "nome": "LUANA POGORZELSKI WEBER",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 31636,
+        "nome": "CLEONICE SILVA CAMEJO KLOECKNER",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 42559,
+        "nome": "50.494.223 VIVIANE JACQUES GOMES JARDIM",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 29084,
+        "nome": "NADIA GOMES BITTENCOURT ZEFERINO",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 41123,
+        "nome": "P P DE LEON ANAN LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 38358,
+        "nome": "PEDRO A VON MUHLEN & CIA LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 30929,
+        "nome": "NICK SOUZA FARIAS",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 28933,
+        "nome": "DALVA SCHEFFER HOMEM",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 38139,
+        "nome": "JADIANE DE SOUZA MIRANDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 34343,
+        "nome": "CLAUDIO LUIZ ANTONIO DA SILVA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 28192,
+        "nome": "EMILENE DA SILVA RAMOS",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 37151,
+        "nome": "54.188.182 NEUZA MARIA NAZARIO DOS SANTOS",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 44572,
+        "nome": "DARCIRIO PEREIRA DOS SANTOS JUNIOR",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 32604,
+        "nome": "SCHAEFER SORVETERIA LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 30889,
+        "nome": "27.921.852 ANIR JOVENIL FAOTTO",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 20583,
+        "nome": "VILMAR FRANCISCO DE INHAIA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 21387,
+        "nome": "JULIO CESAR VIANA PRATES 43984363087",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 35547,
+        "nome": "LUCAS WILLIAN DE MOURA MACHADO",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 42774,
+        "nome": "VIVIANE BASTOS COSTAS",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 10376,
+        "nome": "ACALENTO NUCLEO DE EDUCACAO INFANTIL LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 41363,
+        "nome": "57.081.732 EVELIN EDUARDA SESTHERAIM",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 40966,
+        "nome": "51.971.735 MONICA CRISTIANE ALVES",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 33732,
+        "nome": "LISANDRA MARIA LUDWIG",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 43985,
+        "nome": "62.668.950 ANA PAULA DA SILVA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 26794,
+        "nome": "JULIANE DA SILVA CORRÊA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 20012,
+        "nome": "CARMEN BORGES",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 31923,
+        "nome": "TIAGO SANTOS DE PAULA 02799573002",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 37503,
+        "nome": "RAFAEL FRANCO DOS SANTOS",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 39901,
+        "nome": "JC CENTRO TERAPEUTICO SALVANDO VIDAS LTD",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 25124,
+        "nome": "AIRTON J.C. DE FARIAS",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 25071,
+        "nome": "JISIANE DA SILVA FONSECA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 40561,
+        "nome": "BEAR ICE GELO EM CUBOS LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 44255,
+        "nome": "63.126.225 REGIS PEREIRA DE LIMA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 38812,
+        "nome": "DANIEL JOSE OLIVEIRA DE OLIVEIRA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 39732,
+        "nome": "57.953.114 RAFAEL LIMA DE OLIVEIRA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 35511,
+        "nome": "LUIZ TORALES",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 29827,
+        "nome": "JOTANIL COMERCIO DE ALIMENTOS LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 32789,
+        "nome": "CRISTIANE TELES VIEIRA LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 43804,
+        "nome": "LUIS FERNANDO SILVA HENRIQUE 00868555061",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 42832,
+        "nome": "14.409.681 FERNANDO LUDWIG DE BITENCOURT",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 39094,
+        "nome": "JAQUELINE DA SILVA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 42957,
+        "nome": "ROSELENE CARVALHO BIBIANO",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 29236,
+        "nome": "SINGULAR GOURMET GASTRONOMIA LTDA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 44928,
+        "nome": "56.356.834 SABRINA VITORIA OLIVEIRA DA SILVA",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 38149,
+        "nome": "CAROLAINE MACHADO",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 34645,
+        "nome": "BRUNO TELLES CAMARGO",
+        "valor": 0,
+        "mes": "Junho",
+        "prof": "Cristielen"
+      }
+    ]
+  },
+  "fileName": "",
+  "updatedAt": "2026-07-05T03:41:34.892Z"
+}

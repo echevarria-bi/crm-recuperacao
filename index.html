@@ -265,7 +265,7 @@
         var tgt = {'painelgeralabril':'painelAbril','painelgeralmaio':'painelMaio','painelgeraljunho':'painelGeral','painelgeral':'painelGeral'}[sNorm];
         if (tgt === targetKey) {
           var pg = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[si]], {header:1, defval:''});
-          allData[targetKey] = {recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[]};
+          allData[targetKey] = {recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]};
           parsePainelGeral(pg, {painelGeral: allData[targetKey]});
           return;
         }
@@ -316,7 +316,7 @@
 
     function parseAllSheets(wb, baseMonth) {
       baseMonth = baseMonth || 'Junho';
-      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
+      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
       var sheetMap = {};
       for (var si = 0; si < wb.SheetNames.length; si++) {
         var sn = wb.SheetNames[si];
@@ -483,7 +483,7 @@
     }
 
     function parsePainelGeral(grid, result) {
-      var recRow = -1, motRow = -1, contRow = -1, fatRow = -1;
+      var recRow = -1, motRow = -1, contRow = -1, fatRow = -1, inatRow = -1;
       for (var r = 0; r < grid.length; r++) {
         var row = grid[r];
         if (!row || !row[0]) continue;
@@ -491,6 +491,7 @@
         var cu = c.toUpperCase();
         if (cu === 'META RECUPERAÇÃO' || cu === 'META RECUPERACAO' || cu === 'META POSITIVAÇÃO' || cu === 'META POSITIVACAO') recRow = r;
         if (cu === 'MOTIVOS') motRow = r;
+        if (cu.indexOf('FAIXA DE INATIVIDADE') >= 0) inatRow = r;
         if (cu.indexOf('META CONTATOS') >= 0) contRow = r;
         if (cu === 'TELEVENDEDORA') fatRow = r;
       }
@@ -539,27 +540,35 @@
         }
       }
 
-      if (motRow >= 0) {
-        var profNames = result.painelGeral.recuperacao.profissionais.map(function(p){return p.profissional;});
-        var mi = motRow + 2;
-        while (mi < grid.length) {
-          var row = grid[mi];
-          if (!row || !row[0]) { mi++; continue; }
+      function parseMatrix(start, endBoundary) {
+        var colNames = [], hdr = grid[start];
+        if (hdr) for (var c = 1; c < hdr.length; c++) if (hdr[c] !== '' && hdr[c] !== undefined) colNames.push(hdr[c]);
+        var entries = [], mr = start + 1;
+        while (mr < grid.length) {
+          var row = grid[mr];
+          if (!row || !row[0]) break;
           var label = String(row[0]).trim();
-          if (!label) { mi++; continue; }
+          if (!label) break;
+          if (endBoundary && label.toUpperCase().indexOf(endBoundary) >= 0) break;
           if (label === 'Total') {
             var tv = {label:'Total'};
-            for (var j = 0; j < profNames.length && j+1 < row.length; j++) tv[profNames[j]] = parseNum(row[j+1]);
-            tv.Total = parseNum(row[profNames.length+1]);
-            result.painelGeral.motivos.push(tv);
+            for (var j = 0; j < colNames.length && j+1 < row.length; j++) tv[colNames[j]] = parseNum(row[j+1]);
+            entries.push(tv);
             break;
           }
-          var vals = {label:label};
-          for (var j = 0; j < profNames.length && j+1 < row.length; j++) vals[profNames[j]] = parseNum(row[j+1]);
-          vals.Total = parseNum(row[profNames.length+1]);
-          result.painelGeral.motivos.push(vals);
-          mi++;
+          var entry = {label:label};
+          for (var j = 0; j < colNames.length && j+1 < row.length; j++) entry[colNames[j]] = parseNum(row[j+1]);
+          entries.push(entry);
+          mr++;
         }
+        return entries;
+      }
+      if (inatRow >= 0) {
+        result.painelGeral.inatividade = parseMatrix(inatRow, 'MOTIVOS');
+      }
+      if (motRow >= 0) {
+        result.painelGeral.motivos = parseMatrix(motRow, 'META CONTATOS');
+        result.painelGeral.motivosDiarios = result.painelGeral.motivos; // same data, kept for clarity
       }
 
       if (contRow >= 0) {
@@ -961,6 +970,25 @@
 
       // Trend chart for this month
       html += '<div class="chart-box"><h2>Tend\u00EAncia Di\u00E1ria <span class="sub">&rarr; Meta, Realizado e Acumulado (' + monthName + ')</span></h2><canvas id="chartTendencia' + monthName + '" style="max-height:220px"></canvas></div>';
+
+      function mtxHtml(entries, title, subtitle, colLabel) {
+        if (!entries || entries.length === 0) return '';
+        var cols = Object.keys(entries[0]).filter(function(k){return k !== 'label';});
+        var h = '<div class="chart-box"><h2>'+title+' <span class="sub">&rarr; '+subtitle+'</span></h2><div class="table-wrap"><table><thead><tr><th>'+(colLabel||'')+'</th>';
+        for (var c = 0; c < cols.length; c++) h += '<th class="text-right">'+cols[c]+'</th>';
+        h += '</tr></thead><tbody>';
+        for (var i = 0; i < entries.length; i++) {
+          var e = entries[i];
+          var isTot = e.label === 'Total';
+          h += '<tr'+(isTot?' class="tot-row"':(i%2===0?'':' style="background:#11131c"'))+'><td style="font-weight:600'+(isTot?'':'')+'">'+e.label+'</td>';
+          for (var c = 0; c < cols.length; c++) h += '<td class="text-right">'+(e[cols[c]]||0)+'</td>';
+          h += '</tr>';
+        }
+        h += '</tbody></table></div></div>';
+        return h;
+      }
+      html += mtxHtml(pg.inatividade, 'Faixa de Inatividade', 'Classifica\u00E7\u00E3o por televendedora em '+monthName, 'Faixa');
+      html += mtxHtml(pg.motivosDiarios, 'Motivos', 'Detalhamento dos contatos por televendedora em '+monthName, 'Motivo');
 
       html += '<div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;font-size:11px;color:#6b7280;align-items:center"><span>Legenda:</span><span><span class="badge badge-green">Batida ✓</span> ≥100%</span><span><span class="badge badge-yellow">Parcial &#9888;</span> 80–99%</span><span><span class="badge badge-red">Abaixo &#128308;</span> &lt;80%</span></div>';
 

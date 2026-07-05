@@ -198,32 +198,7 @@
             var grid = XLSX.utils.sheet_to_json(sm[evolKey], {header:1, defval:''});
             parseEvolucaoMeses(grid, allData);
           }
-          // PROFISSIONAIS from Junho
-          var profNames = ['Ariane','Camila','Cristielen','Natália','Tatiana'];
-          for (var i = 0; i < profNames.length; i++) {
-            var name = profNames[i];
-            var key = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-            if (sm[key]) {
-              var grid = XLSX.utils.sheet_to_json(sm[key], {header:1, defval:''});
-              var parsed = parseProfessionalSheet(name, grid);
-              allData.profissionais[name] = parsed;
-            }
-          }
-          allData.faturamentoTotal = profNames.reduce(function(s,name){
-            var p = allData.profissionais[name];
-            return s + (p ? p.faturamento : 0);
-          }, 0);
-          // Add faturamento to painelGeral professionals (for month tab display)
-          for (var j = 0; j < allData.painelGeral.recuperacao.profissionais.length; j++) {
-            var pk = allData.painelGeral.recuperacao.profissionais[j].profissional.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-            for (var pn in allData.profissionais) {
-              if (pn.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'') === pk) {
-                allData.painelGeral.recuperacao.profissionais[j].faturamento = allData.profissionais[pn].faturamento;
-                break;
-              }
-            }
-          }
-           // FATURAMENTO RECUPERACAO from Junho
+          // FATURAMENTO RECUPERACAO from Junho
           var fatKey = 'faturamento recuperacao'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
           if (sm[fatKey]) {
             var fg = XLSX.utils.sheet_to_json(sm[fatKey], {header:1, defval:''});
@@ -299,23 +274,6 @@
         allData[targetKey] = {recuperacao:{profissionais:[],total:null}, metaContatos:{profissionais:[],total:null}, motivos:[]};
         var ctx = {painelGeral: allData[targetKey]};
         parsePainelGeral(pg, ctx);
-      }
-      // Parse individual professional sheets for faturamento
-      var profNames = ['Ariane','Camila','Cristielen','Natália','Tatiana'];
-      for (var pi = 0; pi < profNames.length; pi++) {
-        var name = profNames[pi];
-        var key = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-        if (sheetMap[key] && allData[targetKey] && allData[targetKey].recuperacao) {
-          var grid = XLSX.utils.sheet_to_json(sheetMap[key], {header:1, defval:''});
-          var parsed = parseProfessionalSheet(name, grid);
-          for (var j = 0; j < allData[targetKey].recuperacao.profissionais.length; j++) {
-            var pk = allData[targetKey].recuperacao.profissionais[j].profissional.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-            if (pk === key) {
-              allData[targetKey].recuperacao.profissionais[j].faturamento = parsed.faturamento;
-              break;
-            }
-          }
-        }
       }
     }
 
@@ -424,30 +382,7 @@
         }
       }
 
-      // PROFISSIONAIS
-      var profNames = ['Ariane','Camila','Cristielen','Natália','Tatiana'];
-      function assignFat(st, parsed, key) {
-        if (!st || !st.recuperacao) return;
-        for (var j = 0; j < st.recuperacao.profissionais.length; j++) {
-          var pk = st.recuperacao.profissionais[j].profissional.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-          if (pk === key) { st.recuperacao.profissionais[j].faturamento = parsed.faturamento; break; }
-        }
-      }
-      for (var i = 0; i < profNames.length; i++) {
-        var name = profNames[i];
-        var key = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-        if (sheetMap[key]) {
-          var grid = XLSX.utils.sheet_to_json(sheetMap[key], {header:1, defval:''});
-          var parsed = parseProfessionalSheet(name, grid);
-          result.profissionais[name] = parsed;
-          assignFat(result.painelGeral, parsed, key);
-          if (monthKey !== 'painelGeral') assignFat(result[monthKey], parsed, key);
-        }
-      }
-      result.faturamentoTotal = profNames.reduce(function(s,name){
-        var p = result.profissionais[name];
-        return s + (p ? p.faturamento : 0);
-      }, 0);
+      // PROFISSIONAIS (parsing desativado — usa apenas Painel Geral)
 
       // FATURAMENTO RECUPERACAO
       var fatKey = 'faturamento recuperacao'.normalize('NFD').replace(/[\u0300-\u036f]/g,'');

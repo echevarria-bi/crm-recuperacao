@@ -884,8 +884,7 @@
       html += '</tr></tbody></table></div></div>';
 
       // Trend chart for this month
-      html += '<div class="grid-2"><div class="chart-box"><h2>Tend\u00EAncia Di\u00E1ria <span class="sub">&rarr; Meta, Realizado e Acumulado (' + monthName + ')</span></h2><canvas id="chartTendencia' + monthName + '" style="max-height:220px"></canvas></div>';
-      html += '<div class="chart-box"><h2>Comparativo por Televendedora <span class="sub">&rarr; Realizado x Meta (' + monthName + ')</span></h2><canvas id="chartComp' + monthName + '" style="max-height:220px"></canvas></div></div>';
+      html += '<div class="chart-box"><h2>Tend\u00EAncia Di\u00E1ria <span class="sub">&rarr; Meta, Realizado e Acumulado (' + monthName + ')</span></h2><canvas id="chartTendencia' + monthName + '" style="max-height:220px"></canvas></div>';
 
       html += '<div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;font-size:11px;color:#6b7280;align-items:center"><span>Legenda:</span><span><span class="badge badge-green">Batida ✓</span> ≥100%</span><span><span class="badge badge-yellow">Parcial &#9888;</span> 80–99%</span><span><span class="badge badge-red">Abaixo &#128308;</span> &lt;80%</span></div>';
 
@@ -934,21 +933,7 @@
             ]},
             options:{responsive:true,plugins:{datalabels:{display:false},legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280',maxRotation:45},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,position:'left',ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'},title:{display:true,text:'Di\u00E1rio',color:'#6b7280'}},y1:{position:'right',beginAtZero:true,ticks:{color:'#6b7280'},grid:{display:false},title:{display:true,text:'Acumulado',color:'#6b7280'}}}}
           });
-          var profNames = profsData.map(function(p){return p.profissional;});
-          var profTotals = [], profMetas = [];
-          for (var pi = 0; pi < profsData.length; pi++) {
-            var nm = profsData[pi].profissional;
-            profMetas.push(profsData[pi].meta);
-            profTotals.push(profsData[pi].realizado);
-          }
-          new Chart(document.getElementById('chartComp' + monthName), {
-            type:'bar', data:{labels:profNames, datasets:[
-              {label:'Meta',data:profMetas,backgroundColor:'#78350f',borderRadius:4},
-              {label:'Realizado',data:profTotals,backgroundColor:['#f59e0b','#fb923c','#f97316','#34d399','#a78bfa'],borderRadius:4}
-            ]},
-            options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{color:'#9ca3af',font:{size:9,weight:'bold'},anchor:'end',align:'end'},legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}
-          });
-        } catch(e) {}
+          } catch(e) {}
       }, 100);
       try { lucide.createIcons(); } catch(e) {}
     }

@@ -90,7 +90,7 @@
   </header>
   <div class="container" id="app">
     <div style="position:relative;width:100%">
-      <input type="file" id="inputArquivo" accept=".xlsx,.xls" multiple style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:5;font-size:0" onchange="if(this.files&&this.files.length)processMultipleFiles(this.files)">
+      <input type="file" id="inputArquivo" accept=".xlsx,.xls" multiple style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:5;font-size:0" onchange="try{if(this.files&&this.files.length)processMultipleFiles(this.files)}catch(e){document.getElementById('areaInicial').innerHTML='<div style=color:#f87171;font-size:13px>Erro: '+e.message+'</div>';console.error(e)}">
       <div class="upload-area" id="areaInicial" ondragover="this.classList.add('dragover');event.preventDefault()" ondragleave="this.classList.remove('dragover')" ondrop="event.preventDefault();this.classList.remove('dragover');if(event.dataTransfer.files[0])processFile(event.dataTransfer.files[0])">
         <div style="font-size:48px;margin-bottom:12px;opacity:.5">📂</div>
         <div style="font-size:16px;color:#9ca3af;font-weight:500">Clique para selecionar o arquivo Excel</div>

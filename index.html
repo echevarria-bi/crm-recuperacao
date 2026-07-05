@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Painel de Recuperação - Tele Vendas</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0b0d14;color:#e1e7ef}
@@ -86,7 +90,7 @@
   </header>
   <div class="container" id="app">
     <div style="position:relative;width:100%">
-      <input type="file" id="inputArquivo" accept=".xlsx,.xls" multiple style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:5;font-size:0" onchange="try{if(this.files&&this.files.length)processMultipleFiles(this.files)}catch(e){document.getElementById('areaInicial').innerHTML='<div style=color:#f87171;font-size:13px>Erro: '+e.message+'</div>';console.error(e)}">
+      <input type="file" id="inputArquivo" accept=".xlsx,.xls" multiple style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:5;font-size:0" onchange="try{if(this.files&&this.files.length){if(typeof processMultipleFiles==='function')processMultipleFiles(this.files);else document.getElementById('areaInicial').innerHTML='<div style=color:#f87171;font-size:13px>Erro: processMultipleFiles nao definido (_scriptExec='+(window._scriptExec||'false')+')</div>'}}catch(e){document.getElementById('areaInicial').innerHTML='<div style=color:#f87171;font-size:13px>Erro: '+e.message+'</div>';console.error(e)}">
       <div class="upload-area" id="areaInicial" ondragover="this.classList.add('dragover');event.preventDefault()" ondragleave="this.classList.remove('dragover')" ondrop="event.preventDefault();this.classList.remove('dragover');if(event.dataTransfer.files[0])processFile(event.dataTransfer.files[0])">
         <div style="font-size:48px;margin-bottom:12px;opacity:.5">📂</div>
         <div style="font-size:16px;color:#9ca3af;font-weight:500">Clique para selecionar o arquivo Excel</div>
@@ -99,7 +103,7 @@
   <footer id="footer" style="display:none"></footer>
 
   <script>
-    (function(){['https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js','https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js','https://unpkg.com/lucide@latest/dist/umd/lucide.js','https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js'].forEach(function(u){var s=document.createElement('script');s.src=u;document.head.appendChild(s)})})();
+    window._scriptExec = true;
     try { if (typeof Chart !== 'undefined' && typeof ChartDataLabels !== 'undefined') Chart.register(ChartDataLabels); } catch(e) {}
     var app = document.getElementById('app');
     var inputArquivo = document.getElementById('inputArquivo');
@@ -1132,8 +1136,9 @@
       }
 
       // Summary cards
-      html += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px">';
+      html += '<div class="grid-4" style="margin-bottom:16px">';
       html += '<div class="card"><div class="label">'+icn('users',12)+' Registros na Base</div><div class="value" style="color:#a78bfa">'+clientes.length+'</div></div>';
+      html += '<div class="card"><div class="label">'+icn('users',12)+' Clientes \u00DAnicos</div><div class="value" style="color:#818cf8">'+qtdUnicos+'</div></div>';
       html += '<div class="card"><div class="label">'+icn('dollar-sign',12)+' Total Recuperado</div><div class="value" style="color:#fbbf24">'+fmtCurr(grandTotal)+'</div></div>';
       html += '<div class="card"><div class="label">'+icn('trending-up',12)+' M\u00E9dia por Registro</div><div class="value" style="color:#f59e0b">'+fmtCurr(clientes.length>0?grandTotal/clientes.length:0)+'</div></div>';
       html += '</div>';
@@ -1216,7 +1221,7 @@
           var valores = dataRows.map(function(r){return r.Total||0;});
           new Chart(document.getElementById('chartMotivos'), {
             type:'doughnut', data:{labels:labels, datasets:[{data:valores,backgroundColor:['#f59e0b','#34d399','#ef4444','#a78bfa','#60a5fa','#f97316','#ec4899'],borderColor:'#0b0d14',borderWidth:2}]},
-            options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{datalabels:{color:'#fff',font:{size:12,weight:'bold'},anchor:'center',align:'center',formatter:function(v,ctx){return v;}},legend:{position:'left',labels:{color:'#9ca3af',padding:14,boxWidth:12,font:{size:12,weight:'bold'},usePointStyle:true},align:'center'},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false},title:{display:false}}}
+            options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{datalabels:{display:false},legend:{position:'left',labels:{color:'#9ca3af',padding:14,boxWidth:12,font:{size:12,weight:'bold'},usePointStyle:true}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false},title:{display:true,text:'Distribui\u00E7\u00E3o dos Motivos',color:'#6b7280',font:{size:13}}}}}
           );
         } catch(e) {}
       }, 100);
@@ -1224,7 +1229,7 @@
 
     // Initialize: try remote first, then localStorage, then upload area
     fetchRemoteData().then(function(remote) {
-      if (!allData && remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral) {
+      if (remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral) {
         allData = remote.data;
         document.getElementById('areaInicial').parentElement.style.display = 'none';
         var fn = remote.fileName || 'Arquivo remoto';

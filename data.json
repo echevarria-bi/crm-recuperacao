@@ -1560,6 +1560,127 @@
       },
       "motivos": [
         {
+          "label": "Não atendeu/Não retornou",
+          "Ariane": 180,
+          "Camila": 530,
+          "Cristielen": 352,
+          "Natália": 197,
+          "Tatiana": 139,
+          "Total": 1398
+        },
+        {
+          "label": "Contatos Efetivo",
+          "Ariane": 29,
+          "Camila": 75,
+          "Cristielen": 33,
+          "Natália": 69,
+          "Tatiana": 64,
+          "Total": 270
+        },
+        {
+          "label": "Baixado/Outros",
+          "Ariane": 0,
+          "Camila": 0,
+          "Cristielen": 1,
+          "Natália": 6,
+          "Tatiana": 7,
+          "Total": 14
+        },
+        {
+          "label": "Ativo por temporada",
+          "Ariane": 1,
+          "Camila": 0,
+          "Cristielen": 3,
+          "Natália": 2,
+          "Tatiana": 9,
+          "Total": 15
+        },
+        {
+          "label": "Conversão / Venda RCA Externo",
+          "Ariane": 35,
+          "Camila": 42,
+          "Cristielen": 15,
+          "Natália": 14,
+          "Tatiana": 24,
+          "Total": 130
+        },
+        {
+          "label": "Telefone incorreto",
+          "Ariane": 2,
+          "Camila": 0,
+          "Cristielen": 4,
+          "Natália": 15,
+          "Tatiana": 10,
+          "Total": 31
+        },
+        {
+          "label": "Problema Financeiro",
+          "Ariane": 3,
+          "Camila": 0,
+          "Cristielen": 0,
+          "Natália": 4,
+          "Tatiana": 5,
+          "Total": 12
+        },
+        {
+          "label": "Total",
+          "Ariane": 299,
+          "Camila": 647,
+          "Cristielen": 408,
+          "Natália": 318,
+          "Tatiana": 276,
+          "Total": 0
+        }
+      ],
+      "inatividade": [
+        {
+          "label": "45 a 59 Risco",
+          "Ariane": 35,
+          "Camila": 0,
+          "Cristielen": 0,
+          "Natália": 11,
+          "Tatiana": 6,
+          "Total": 52
+        },
+        {
+          "label": "60 a 74 Atenção",
+          "Ariane": 9,
+          "Camila": 0,
+          "Cristielen": 0,
+          "Natália": 0,
+          "Tatiana": 8,
+          "Total": 17
+        },
+        {
+          "label": "75 a 84 Crítico",
+          "Ariane": 4,
+          "Camila": 0,
+          "Cristielen": 0,
+          "Natália": 0,
+          "Tatiana": 3,
+          "Total": 7
+        },
+        {
+          "label": "85 a 90 Urgente",
+          "Ariane": 1,
+          "Camila": 0,
+          "Cristielen": 0,
+          "Natália": 0,
+          "Tatiana": 1,
+          "Total": 2
+        }
+      ],
+      "motivosDiarios": [
+        {
+          "label": "Não atendeu/Não retornou",
+          "Ariane": 180,
+          "Camila": 530,
+          "Cristielen": 352,
+          "Natália": 197,
+          "Tatiana": 139,
+          "Total": 1398
+        },
+        {
           "label": "Contatos Efetivo",
           "Ariane": 29,
           "Camila": 75,
@@ -2958,6 +3079,154 @@
         }
       },
       "motivos": [
+        {
+          "label": "Não atendeu",
+          "Anna": 238,
+          "Ariane": 181,
+          "Camila": 241,
+          "Natália": 149,
+          "Tatiana": 85,
+          "Total": 894
+        },
+        {
+          "label": "Contatos Efetivo",
+          "Anna": 62,
+          "Ariane": 40,
+          "Camila": 25,
+          "Natália": 44,
+          "Tatiana": 27,
+          "Total": 198
+        },
+        {
+          "label": "Baixado/Outros",
+          "Anna": 25,
+          "Ariane": 7,
+          "Camila": 5,
+          "Natália": 15,
+          "Tatiana": 12,
+          "Total": 64
+        },
+        {
+          "label": "Pedido Mínimo",
+          "Anna": 4,
+          "Ariane": 0,
+          "Camila": 0,
+          "Natália": 0,
+          "Tatiana": 0,
+          "Total": 4
+        },
+        {
+          "label": "Ativo por temporada",
+          "Anna": 8,
+          "Ariane": 3,
+          "Camila": 17,
+          "Natália": 6,
+          "Tatiana": 3,
+          "Total": 37
+        },
+        {
+          "label": "Conversão / Venda RCA Externo",
+          "Anna": 62,
+          "Ariane": 34,
+          "Camila": 18,
+          "Natália": 34,
+          "Tatiana": 22,
+          "Total": 170
+        },
+        {
+          "label": "Telefone incorreto",
+          "Anna": 25,
+          "Ariane": 10,
+          "Camila": 2,
+          "Natália": 18,
+          "Tatiana": 2,
+          "Total": 57
+        },
+        {
+          "label": "Problema Financeiro",
+          "Anna": 3,
+          "Ariane": 2,
+          "Camila": 2,
+          "Natália": 5,
+          "Tatiana": 8,
+          "Total": 20
+        },
+        {
+          "label": "Conversão / Televendas",
+          "Anna": 20,
+          "Ariane": 11,
+          "Camila": 3,
+          "Natália": 17,
+          "Tatiana": 22,
+          "Total": 73
+        },
+        {
+          "label": "Contatos Realizados (Não conta pra meta)",
+          "Anna": 373,
+          "Ariane": 249,
+          "Camila": 333,
+          "Natália": 307,
+          "Tatiana": 179,
+          "Total": 1441
+        },
+        {
+          "label": "Total",
+          "Anna": 468,
+          "Ariane": 282,
+          "Camila": 648,
+          "Natália": 287,
+          "Tatiana": 180,
+          "Total": 0
+        }
+      ],
+      "inatividade": [
+        {
+          "label": "45 a 59 Risco",
+          "Anna": 3,
+          "Ariane": 1,
+          "Camila": 1,
+          "Natália": 6,
+          "Tatiana": 11,
+          "Total": 22
+        },
+        {
+          "label": "60 a 74 Atenção",
+          "Anna": 2,
+          "Ariane": 3,
+          "Camila": 0,
+          "Natália": 10,
+          "Tatiana": 6,
+          "Total": 21
+        },
+        {
+          "label": "75 a 84 Crítico",
+          "Anna": 36,
+          "Ariane": 0,
+          "Camila": 1,
+          "Natália": 0,
+          "Tatiana": 2,
+          "Total": 39
+        },
+        {
+          "label": "85 a 90 Urgente",
+          "Anna": 0,
+          "Ariane": 1,
+          "Camila": 0,
+          "Natália": 0,
+          "Tatiana": 2,
+          "Total": 3
+        }
+      ],
+      "motivosDiarios": [
+        {
+          "label": "Não atendeu",
+          "Anna": 238,
+          "Ariane": 181,
+          "Camila": 241,
+          "Natália": 149,
+          "Tatiana": 85,
+          "Total": 894
+        },
         {
           "label": "Contatos Efetivo",
           "Anna": 62,
@@ -4385,10 +4654,19 @@
       },
       "motivos": [
         {
+          "label": "Não atendeu",
+          "Ariane": 188,
+          "Camila": 346,
+          "Cristielen": 279,
+          "Natália": 179,
+          "Tatiana": 125,
+          "Total": 1117
+        },
+        {
           "label": "Contatos Efetivo",
           "Ariane": 40,
-          "Cristielen": 79,
-          "Camila": 27,
+          "Camila": 79,
+          "Cristielen": 27,
           "Natália": 53,
           "Tatiana": 45,
           "Total": 244
@@ -4396,8 +4674,8 @@
         {
           "label": "Baixado/Outros",
           "Ariane": 7,
-          "Cristielen": 1,
-          "Camila": 8,
+          "Camila": 1,
+          "Cristielen": 8,
           "Natália": 1,
           "Tatiana": 3,
           "Total": 20
@@ -4405,8 +4683,8 @@
         {
           "label": "Ativo por temporada",
           "Ariane": 1,
-          "Cristielen": 5,
-          "Camila": 7,
+          "Camila": 5,
+          "Cristielen": 7,
           "Natália": 0,
           "Tatiana": 4,
           "Total": 17
@@ -4414,8 +4692,8 @@
         {
           "label": "Conversão / Venda RCA Externo",
           "Ariane": 19,
-          "Cristielen": 44,
-          "Camila": 12,
+          "Camila": 44,
+          "Cristielen": 12,
           "Natália": 8,
           "Tatiana": 10,
           "Total": 93
@@ -4423,8 +4701,8 @@
         {
           "label": "Telefone incorreto",
           "Ariane": 2,
-          "Cristielen": 0,
-          "Camila": 38,
+          "Camila": 0,
+          "Cristielen": 38,
           "Natália": 6,
           "Tatiana": 4,
           "Total": 50
@@ -4432,8 +4710,8 @@
         {
           "label": "Problema Financeiro",
           "Ariane": 2,
-          "Cristielen": 6,
-          "Camila": 4,
+          "Camila": 6,
+          "Cristielen": 4,
           "Natália": 0,
           "Tatiana": 2,
           "Total": 14
@@ -4441,8 +4719,120 @@
         {
           "label": "Total",
           "Ariane": 280,
-          "Cristielen": 481,
-          "Camila": 375,
+          "Camila": 481,
+          "Cristielen": 375,
+          "Natália": 287,
+          "Tatiana": 202,
+          "Total": 0
+        }
+      ],
+      "inatividade": [
+        {
+          "label": "45 a 59 Risco",
+          "Ariane": 11,
+          "Camila": 0,
+          "Cristielen": 0,
+          "Natália": 40,
+          "Tatiana": 3,
+          "Total": 54
+        },
+        {
+          "label": "60 a 74 Atenção",
+          "Ariane": 7,
+          "Camila": 0,
+          "Cristielen": 0,
+          "Natália": 0,
+          "Tatiana": 2,
+          "Total": 9
+        },
+        {
+          "label": "75 a 84 Crítico",
+          "Ariane": 3,
+          "Camila": 0,
+          "Cristielen": 0,
+          "Natália": 0,
+          "Tatiana": 4,
+          "Total": 7
+        },
+        {
+          "label": "85 a 90 Urgente",
+          "Ariane": 0,
+          "Camila": 0,
+          "Cristielen": 0,
+          "Natália": 0,
+          "Tatiana": 0,
+          "Total": 0
+        }
+      ],
+      "motivosDiarios": [
+        {
+          "label": "Não atendeu",
+          "Ariane": 188,
+          "Camila": 346,
+          "Cristielen": 279,
+          "Natália": 179,
+          "Tatiana": 125,
+          "Total": 1117
+        },
+        {
+          "label": "Contatos Efetivo",
+          "Ariane": 40,
+          "Camila": 79,
+          "Cristielen": 27,
+          "Natália": 53,
+          "Tatiana": 45,
+          "Total": 244
+        },
+        {
+          "label": "Baixado/Outros",
+          "Ariane": 7,
+          "Camila": 1,
+          "Cristielen": 8,
+          "Natália": 1,
+          "Tatiana": 3,
+          "Total": 20
+        },
+        {
+          "label": "Ativo por temporada",
+          "Ariane": 1,
+          "Camila": 5,
+          "Cristielen": 7,
+          "Natália": 0,
+          "Tatiana": 4,
+          "Total": 17
+        },
+        {
+          "label": "Conversão / Venda RCA Externo",
+          "Ariane": 19,
+          "Camila": 44,
+          "Cristielen": 12,
+          "Natália": 8,
+          "Tatiana": 10,
+          "Total": 93
+        },
+        {
+          "label": "Telefone incorreto",
+          "Ariane": 2,
+          "Camila": 0,
+          "Cristielen": 38,
+          "Natália": 6,
+          "Tatiana": 4,
+          "Total": 50
+        },
+        {
+          "label": "Problema Financeiro",
+          "Ariane": 2,
+          "Camila": 6,
+          "Cristielen": 4,
+          "Natália": 0,
+          "Tatiana": 2,
+          "Total": 14
+        },
+        {
+          "label": "Total",
+          "Ariane": 280,
+          "Camila": 481,
+          "Cristielen": 375,
           "Natália": 287,
           "Tatiana": 202,
           "Total": 0
@@ -5988,5 +6378,5 @@
     ]
   },
   "fileName": "",
-  "updatedAt": "2026-07-05T19:09:49.035Z"
+  "updatedAt": "2026-07-05T19:31:22.212Z"
 }

@@ -1227,7 +1227,7 @@
 
     // Initialize: try remote first, then localStorage, then upload area
     fetchRemoteData().then(function(remote) {
-      if (remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral) {
+      if (!allData && remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral) {
         allData = remote.data;
         document.getElementById('areaInicial').parentElement.style.display = 'none';
         var fn = remote.fileName || 'Arquivo remoto';

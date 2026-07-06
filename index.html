@@ -871,6 +871,8 @@
       html += '<div class="card"><div class="label">&#x1F4B0; Total Recuperado</div><div class="value">' + fmtCurr(fatGeral) + '</div></div>';
       html += '</div>';
 
+      html += '<div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;font-size:11px;color:#6b7280;align-items:center"><span>Legenda:</span><span><span class="badge badge-green">Batida ✓</span> ≥100%</span><span><span class="badge badge-yellow">Parcial &#9888;</span> 80–99%</span><span><span class="badge badge-red">Abaixo &#128308;</span> &lt;80%</span></div>';
+
       html += '<div class="chart-box"><h2>Desempenho por Televendedora <span class="sub">&rarr; Recupera\u00E7\u00E3o de clientes em ' + monthName + '</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th style="text-align:center">Status</th><th class="text-right meta-color" title="Meta de clientes recuperados">Meta</th><th class="text-right realizado-color" title="Clientes recuperados até o momento">Realizado</th><th class="text-right" title="Percentual de atingimento da meta">%</th><th class="text-right" title="Valor total faturado">Faturamento</th></tr></thead><tbody>';
       for (var i = 0; i < profsData.length; i++) {
         var p = profsData[i];
@@ -984,7 +986,6 @@
       html += mtxHtml(pg.inatividade, 'Faixa de Inatividade', 'Classifica\u00E7\u00E3o por televendedora em '+monthName, 'Faixa');
       html += mtxHtml(pg.motivosDiarios, 'Motivos', 'Detalhamento dos contatos por televendedora em '+monthName, 'Motivo');
 
-      html += '<div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;font-size:11px;color:#6b7280;align-items:center"><span>Legenda:</span><span><span class="badge badge-green">Batida ✓</span> ≥100%</span><span><span class="badge badge-yellow">Parcial &#9888;</span> 80–99%</span><span><span class="badge badge-red">Abaixo &#128308;</span> &lt;80%</span></div>';
 
       html += '<div class="grid-2"><div class="chart-box"><h2>Meta x Realizado <span class="sub">&rarr; Comparativo por televendedora (' + monthName + ')</span></h2><canvas id="chartRecProf" style="max-height:220px"></canvas></div><div class="chart-box"><h2>% Atingimento <span class="sub">&rarr; Percentual por televendedora (' + monthName + ')</span></h2><canvas id="chartRecPct" style="max-height:220px"></canvas></div></div>';
 

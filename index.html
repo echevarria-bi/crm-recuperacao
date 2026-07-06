@@ -637,7 +637,6 @@
       h += '</div><div class="tab-divider"></div><div class="tabs">';
       h += '<button class="tab-btn' + (activeTab==='resumo'?' active':'') + '" data-tab="resumo">' + icn('layout-dashboard',12) + ' Resumo</button>';
       h += '<button class="tab-btn' + (activeTab==='clientes'?' active':'') + '" data-tab="clientes">' + icn('table-2',12) + ' Clientes</button>';
-      h += '<button class="tab-btn' + (activeTab==='motivos'?' active':'') + '" data-tab="motivos">' + icn('clipboard-list',12) + ' Motivos</button>';
       h += '</div></div>';
       var tc = document.getElementById('tabsContainer');
       if (tc) tc.innerHTML = h;
@@ -658,7 +657,6 @@
       else if (tab === 'maio') renderMonth('Maio');
       else if (tab === 'geral') renderMonth('Junho');
       else if (tab === 'clientes') renderClientes();
-      else if (tab === 'motivos') renderMotivos();
     }
 
     function getFilteredProfs() {
@@ -1105,80 +1103,6 @@
         if (mesF) mesF.addEventListener('change', applyFilters);
       }, 50);
       try { lucide.createIcons(); } catch(e) {}
-    }
-
-    function renderMotivos() {
-      var d = allData.painelGeral;
-      var profsAll = d.recuperacao.profissionais;
-      var profs = profsAll;
-      var dataRows = d.motivos.filter(function(r){return r.label !== 'Total';});
-       var html = '<div class="chart-box"><h2>Motivos / Resultados dos Contatos <span class="sub">&rarr; Detalhamento por televendedora</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Motivo</th>';
-      for (var i = 0; i < profs.length; i++) html += '<th class="text-right">' + profs[i].profissional + '</th>';
-      html += '<th class="text-right">Total</th><th style="text-align:center">%</th></tr></thead><tbody>';
-      var grandTotal = dataRows.reduce(function(s,r){return s+(r.Total||0);},0);
-      for (var i = 0; i < dataRows.length; i++) {
-        var row = dataRows[i];
-        var total = row.Total||0;
-        var pct = grandTotal>0?(total/grandTotal*100).toFixed(1):0;
-        var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
-        html += '<tr'+(i%2===0?'':' style="background:#11131c"')+'><td class="col-ranking">'+medal+(i+1)+'</td><td style="font-weight:600">'+row.label+'</td>';
-        for (var j = 0; j < profs.length; j++) html += '<td class="text-right">'+(row[profs[j].profissional]||0)+'</td>';
-        html += '<td class="text-right" style="font-weight:700">'+total+'</td><td style="text-align:center"><div class="pct-bar" style="height:16px"><div class="pct-bar-fill" style="width:'+Math.min(pct,100)+'%;background:#f59e0b"></div><span style="position:relative;font-size:9px;color:#fff;padding-left:6px">'+pct+'%</span></div></td></tr>';
-      }
-      html += '</tbody></table></div></div></div>';
-
-      html += '<div class="chart-box"><h2>Distribui\u00E7\u00E3o dos Motivos <span class="sub">&rarr; Porcentagem de cada motivo no total</span></h2><canvas id="chartMotivos" style="max-height:320px"></canvas></div>';
-
-      document.getElementById('dashContent').innerHTML = html;
-
-      setTimeout(function() {
-        try {
-          var labels = dataRows.map(function(r){return r.label;});
-          var valores = dataRows.map(function(r){return r.Total||0;});
-          var tMot = valores.reduce(function(a,b){return a+b;},0);
-          new Chart(document.getElementById('chartMotivos'), {
-            type:'bar',
-            data:{labels:labels, datasets:[{label:'Total',data:valores,backgroundColor:['#f59e0b','#34d399','#ef4444','#a78bfa','#60a5fa','#f97316','#ec4899'],borderRadius:4}]},
-            options:{
-              responsive:true,
-              maintainAspectRatio:false,
-              indexAxis:'y',
-              plugins:{
-                datalabels:{
-                  color:'#e1e7ef',
-                  font:{size:10,weight:'bold'},
-                  anchor:'end',
-                  align:'end',
-                  offset:4,
-                  formatter:function(v){
-                    return tMot > 0 ? (v / tMot * 100).toFixed(1) + '%' : '';
-                  }
-                },
-                legend:{display:false},
-                tooltip:{
-                  backgroundColor:'#1e1b4b',
-                  titleColor:'#fcd34d',
-                  bodyColor:'#e1e7ef',
-                  borderColor:'#f59e0b',
-                  borderWidth:1,
-                  callbacks:{
-                    label:function(ctx){
-                      var v = ctx.parsed.x;
-                      var p = tMot > 0 ? (v / tMot * 100).toFixed(1) : 0;
-                      return v + ' (' + p + '%)';
-                    }
-                  }
-                }
-              },
-              scales:{
-                x:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},
-                y:{ticks:{color:'#9ca3af',font:{size:11,weight:'bold'}},grid:{display:false}}
-              }
-            },
-            plugins:[]
-          });
-        } catch(e) {}
-      }, 100);
     }
 
     function salvarStorage() {

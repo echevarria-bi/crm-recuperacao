@@ -1,108 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Painel de Recuperação - Tele Vendas</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0b0d14;color:#e1e7ef}
-    header{background:linear-gradient(135deg,#11131c,#1a1d27);border-bottom:1px solid #1e1b4b;padding:20px 32px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
-    header h1{font-size:22px;font-weight:700;background:linear-gradient(135deg,#f59e0b,#fb923c,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.5px}
-    .container{max-width:1200px;margin:0 auto;padding:24px 32px}
-    .upload-area{display:block;border:2px dashed #1e1b4b;border-radius:16px;padding:56px;text-align:center;background:linear-gradient(135deg,#11131c,#1a1d27);cursor:pointer;transition:.3s}
-    .upload-area:hover{border-color:#f59e0b;background:linear-gradient(135deg,#151830,#1e2030)}
-    .top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px}
-    .top-bar .info{font-size:13px;color:#4a4d6e}
-    .top-bar label{color:#9ca3af;font-size:13px;font-weight:500}
-    .tabs-group{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:12px;padding:7px 12px;margin-bottom:22px;flex-wrap:wrap}
-    .tabs{display:flex;align-items:center;gap:3px}
-    .tab-divider{width:1px;height:28px;background:linear-gradient(to bottom,transparent,#4a4d6e,transparent);margin:0 6px;flex-shrink:0}
-    .tab-btn{padding:8px 18px;border:none;border-radius:8px;background:transparent;color:#6b7280;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;white-space:nowrap;letter-spacing:.2px}
-    .tab-btn:hover{color:#e1e7ef;background:rgba(255,255,255,.04)}
-    .tab-btn.active{color:#fcd34d;background:linear-gradient(135deg,rgba(120,53,15,.35),rgba(69,25,3,.35));border:1px solid rgba(245,158,11,.3);box-shadow:0 0 14px rgba(245,158,11,.07)}
-    .tab-month{color:#4a4d6e;padding:6px 14px;font-size:11.5px;text-transform:uppercase;letter-spacing:.8px;font-weight:700}
-    .tab-month:hover{color:#c4c9d4;background:rgba(255,255,255,.03)}
-    .tab-month.active{color:#a78bfa;background:transparent;border:none;border-bottom:2.5px solid #a78bfa;border-radius:0;padding:6px 14px 3.5px;box-shadow:none}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
-    .card{background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:14px;padding:20px 24px;transition:.2s}
-    .card:hover{border-color:#f59e0b;transform:translateY(-1px);box-shadow:0 4px 20px rgba(245,158,11,.08)}
-    .card .label{font-size:11px;color:#6b7280;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:5px}
-    .card .value{font-size:26px;font-weight:800;margin-top:3px;color:#f0f2f8;line-height:1.2}
-    .card .sub{font-size:11px;color:#d1d5db;margin-top:5px}
-    .var-up{color:#34d399}
-    .var-down{color:#f87171}
-    .meta-color{color:#fcd34d}
-    .realizado-color{color:#34d399}
-    .col-ranking{width:48px;text-align:center;color:#4a4d6e}
-    .col-gap{width:80px;text-align:right}
-    .badge-sm{padding:1px 8px;border-radius:3px;font-size:10px;font-weight:700;display:inline-block;white-space:nowrap}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
-    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
-    .grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px}
-    .grid-5 .card,.cards .card{display:flex;flex-direction:column;justify-content:center}
-    .grid-5 .card .value,.cards .card .value{margin-top:0}
-    @media(max-width:768px){.grid-2,.grid-4,.grid-5,.cards{grid-template-columns:1fr}.container{padding:16px}}
-    .chart-box{background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:14px;padding:20px;margin-bottom:20px;transition:.2s}
-    .chart-box:hover{border-color:#78350f}
-    .chart-box h2{font-size:12px;font-weight:700;margin-bottom:14px;color:#fcd34d;text-transform:uppercase;letter-spacing:.7px;padding-left:10px;border-left:3px solid #f59e0b}
-    .chart-box h2 .sub{font-size:11px;color:#d1d5db;font-weight:400;text-transform:none;letter-spacing:0}
-    table{width:100%;border-collapse:collapse;font-size:13px}
-    th{padding:10px 12px;text-align:left;font-weight:600;color:#f59e0b;font-size:10px;text-transform:uppercase;letter-spacing:.5px;background:#11131c;border-bottom:1px solid #1e1b4b}
-    td{padding:9px 12px;text-align:left;border-bottom:1px solid #11131c;color:#c4c9d4;font-variant-numeric:tabular-nums}
-    tbody tr:hover{background:#151830!important}
-    tbody tr:nth-child(even){background:#0f1119}
-    .table-wrap{max-height:400px;overflow-y:auto;overflow-x:auto;border:1px solid #1e1b4b;border-radius:10px}
-    .table-wrap thead th{position:sticky;top:0;z-index:3;background:#0b0d14;box-shadow:0 1px 0 #1e1b4b}
-    .table-wrap tbody .tot-row td{position:sticky;bottom:0;z-index:2;background:#151830!important;box-shadow:0 -1px 0 #f59e0b}
-    .table-wrap tfoot.tot-row td{position:sticky;bottom:0;z-index:2;background:#151830!important;box-shadow:0 -1px 0 #f59e0b}
-    .text-right{text-align:right}
-    .text-center{text-align:center}
-    .tot-row td{background:#151830!important;border-top:2px solid #f59e0b;font-weight:700}
-    .badge{padding:2px 10px;border-radius:4px;font-size:10px;font-weight:700;display:inline-block}
-    .badge-green{background:rgba(52,211,153,.15);color:#34d399}
-    .badge-red{background:rgba(239,68,68,.15);color:#f87171}
-    .badge-yellow{background:rgba(245,158,11,.15);color:#fbbf24}
-    .pct-bar{height:8px;background:#1e1b4b;border-radius:4px;overflow:hidden;margin-top:6px}
-    .pct-bar-fill{height:100%;border-radius:4px;min-width:2px}
-    .spinner{display:inline-block;width:16px;height:16px;border:2px solid #1e1b4b;border-top-color:#f59e0b;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    footer{text-align:center;padding:16px 20px;font-size:11px;color:#4a4d6e;border-top:1px solid #1e1b4b;margin-top:24px}
-    footer strong{color:#6b7280}
-    @media print{body{background:#fff!important;color:#000!important}header,nav,.top-bar,.tabs,.upload-area,#inputArquivo,footer{display:none!important}.container{max-width:100%!important;padding:0!important}.chart-box{background:#fff!important;border:1px solid #ddd!important;break-inside:avoid}.chart-box h2{color:#333!important;border-left-color:#f59e0b!important}.card{background:#f8f8f8!important;border:1px solid #ccc!important}.card .label{color:#666!important}.card .value{color:#000!important}th{color:#000!important;background:#f0f0f0!important}td{color:#333!important;border-color:#ddd!important}.tot-row td{background:#e8e8e8!important}@page{size:landscape;margin:8mm}}
-  </style>
-</head>
-<body>
-  <header>
-    <h1>&#128222; Painel de Recuperação — Tele Vendas</h1>
-    <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-      <span id="statusFile" style="font-size:11px;color:#6b7280"></span>
-      <span id="tokenStatus" style="font-size:10px;color:#6b7280"></span>
-      <input type="password" id="tokenInput" placeholder="Token GitHub" onkeydown="if(event.key==='Enter')setToken(this.value)" style="width:90px;background:#11131c;border:1px solid #1e1b4b;border-radius:6px;padding:4px 8px;color:#e1e7ef;font-size:11px;outline:none;display:none">
-      <button onclick="setToken(document.getElementById('tokenInput').value)" id="btnSalvarToken" style="display:none"></button>
-      <button onclick="var i=document.getElementById('tokenInput');i.style.display='';i.focus();this.style.display='none'" id="btnConfigToken" style="background:transparent;border:1px solid #4a4d6e;color:#9ca3af;padding:4px 10px;border-radius:6px;font-size:10px;cursor:pointer;display:none">&#128274; Token</button>
-      <button onclick="novoArquivo()" style="background:#1e1b4b;border:1px solid #78350f;color:#fcd34d;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:none" id="btnNovoArquivo">&#128193; Novo arquivo</button>
-    </div>
-  </header>
-  <div class="container" id="app">
-    <div style="position:relative;width:100%">
-      <input type="file" id="inputArquivo" accept=".xlsx,.xls" multiple style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:5;font-size:0" onchange="try{if(this.files&&this.files.length){if(typeof processMultipleFiles==='function')processMultipleFiles(this.files);else document.getElementById('areaInicial').innerHTML='<div style=color:#f87171;font-size:13px>Erro: processMultipleFiles nao definido (_scriptExec='+(window._scriptExec||'false')+')</div>'}}catch(e){document.getElementById('areaInicial').innerHTML='<div style=color:#f87171;font-size:13px>Erro: '+e.message+'</div>';console.error(e)}">
-      <div class="upload-area" id="areaInicial" ondragover="this.classList.add('dragover');event.preventDefault()" ondragleave="this.classList.remove('dragover')" ondrop="event.preventDefault();this.classList.remove('dragover');if(event.dataTransfer.files[0])processFile(event.dataTransfer.files[0])">
-        <div style="font-size:48px;margin-bottom:12px;opacity:.5">📂</div>
-        <div style="font-size:16px;color:#9ca3af;font-weight:500">Clique para selecionar o arquivo Excel</div>
-        <div style="font-size:13px;color:#4a4d6e;margin-top:4px">Painel CRM - Junho.xlsx (com aba EVOLUCAO DOS MESES)</div>
-      </div>
-    </div>
-  </div>
-  <div id="tabsContainer"></div>
-  <div id="dashContent"></div>
-  <footer id="footer" style="display:none"></footer>
 
-  <script>
     window._scriptExec = true;
     try { if (typeof Chart !== 'undefined' && typeof ChartDataLabels !== 'undefined') Chart.register(ChartDataLabels); } catch(e) {}
     var app = document.getElementById('app');
@@ -1137,44 +1033,8 @@
           var valores = dataRows.map(function(r){return r.Total||0;});
           var tMot = valores.reduce(function(a,b){return a+b;},0);
           new Chart(document.getElementById('chartMotivos'), {
-            type:'bar',
-            data:{labels:labels, datasets:[{label:'Total',data:valores,backgroundColor:['#f59e0b','#34d399','#ef4444','#a78bfa','#60a5fa','#f97316','#ec4899'],borderRadius:4}]},
-            options:{
-              responsive:true,
-              maintainAspectRatio:false,
-              indexAxis:'y',
-              plugins:{
-                datalabels:{
-                  color:'#e1e7ef',
-                  font:{size:10,weight:'bold'},
-                  anchor:'end',
-                  align:'end',
-                  offset:4,
-                  formatter:function(v){
-                    return tMot > 0 ? (v / tMot * 100).toFixed(1) + '%' : '';
-                  }
-                },
-                legend:{display:false},
-                tooltip:{
-                  backgroundColor:'#1e1b4b',
-                  titleColor:'#fcd34d',
-                  bodyColor:'#e1e7ef',
-                  borderColor:'#f59e0b',
-                  borderWidth:1,
-                  callbacks:{
-                    label:function(ctx){
-                      var v = ctx.parsed.x;
-                      var p = tMot > 0 ? (v / tMot * 100).toFixed(1) : 0;
-                      return v + ' (' + p + '%)';
-                    }
-                  }
-                }
-              },
-              scales:{
-                x:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},
-                y:{ticks:{color:'#9ca3af',font:{size:11,weight:'bold'}},grid:{display:false}}
-              }
-            },
+            type:'bar', data:{labels:labels, datasets:[{label:'Total',data:valores,backgroundColor:['#f59e0b','#34d399','#ef4444','#a78bfa','#60a5fa','#f97316','#ec4899'],borderRadius:4}]},
+            options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{datalabels:{color:'#e1e7ef',font:{size:10,weight:'bold'},anchor:'end',align:'end',offset:4,formatter:function(v){return tMot>0?(v/tMot*100).toFixed(1)+'%':'';}},legend:{display:false},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,callbacks:{label:function(ctx){var v=ctx.parsed.x,p=tMot>0?(v/tMot*100).toFixed(1);return v+' ('+p+'%)';}}}},scales:{x:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{ticks:{color:'#9ca3af',font:{size:11,weight:'bold'}},grid:{display:false}}}},
             plugins:[]
           });
         } catch(e) {}
@@ -1231,6 +1091,4 @@
         document.getElementById('areaInicial').style.display = 'flex';
       }
     });
-  </script>
-</body>
-</html>
+  

@@ -1160,28 +1160,39 @@
       html += '<div class="card"><div class="label">Convers\u00E3o</div><div class="value" style="color:#f59e0b">' + pctConv + '%</div></div>';
       html += '</div>';
 
-      var campanhas = {};
+      var campanhas = {}, vendedores = {};
       dados.forEach(function(r) {
         if (!campanhas[r.campanha]) campanhas[r.campanha] = {leads:0, compras:0, valor:0};
         campanhas[r.campanha].leads++;
         if (r.compra) campanhas[r.campanha].compras++;
         campanhas[r.campanha].valor += r.valor;
+        if (!vendedores[r.vendedor]) vendedores[r.vendedor] = {leads:0, compras:0, valor:0};
+        vendedores[r.vendedor].leads++;
+        if (r.compra) vendedores[r.vendedor].compras++;
+        vendedores[r.vendedor].valor += r.valor;
       });
       var campKeys = Object.keys(campanhas).sort(function(a,b){return campanhas[b].valor - campanhas[a].valor;});
+      var vendKeys = Object.keys(vendedores).sort();
 
-      html += '<div class="chart-box"><h2>Campanhas <span class="sub">&rarr; Clique em uma campanha para ver por semana</span></h2>';
-      html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">';
+      html += '<div class="chart-box"><h2>Desempenho por Campanha <span class="sub">&rarr; Clique na campanha para ver por semana</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Campanha</th><th class="text-right">Leads</th><th class="text-right">Compras</th><th class="text-right">Valor</th><th class="text-right">Conv.</th></tr></thead><tbody>';
       for (var i = 0; i < campKeys.length; i++) {
         var c = campanhas[campKeys[i]];
         var cpct = c.leads > 0 ? (c.compras / c.leads * 100).toFixed(1) : 0;
-        html += '<div onclick="renderCampanhaDetail(\'' + campKeys[i].replace(/'/g,"\\'") + '\')" style="background:linear-gradient(135deg,#151830,#1e2030);border:1px solid #1e1b4b;border-radius:12px;padding:14px;cursor:pointer;transition:.2s" onmouseover="this.style.borderColor=\'#f59e0b\'" onmouseout="this.style.borderColor=\'#1e1b4b\'">';
-        html += '<div style="font-size:13px;font-weight:700;color:#fcd34d;margin-bottom:8px">' + campKeys[i] + '</div>';
-        html += '<div style="font-size:11px;color:#9ca3af;margin-bottom:4px">' + c.leads + ' leads / ' + c.compras + ' compras</div>';
-        html += '<div style="font-size:12px;color:#fbbf24;font-weight:600">' + fmtCurr(c.valor) + '</div>';
-        html += '<div style="font-size:10px;color:#f59e0b;margin-top:4px">' + cpct + '% conv.</div>';
-        html += '</div>';
+        var estilo = i % 2 === 0 ? '' : 'background:#11131c';
+        html += '<tr style="cursor:pointer;' + estilo + '" onclick="renderCampanhaDetail(\'' + campKeys[i].replace(/'/g,"\\'") + '\')">';
+        html += '<td class="col-ranking">' + (i + 1) + '</td><td style="font-weight:600;color:#fcd34d">' + campKeys[i] + '</td>';
+        html += '<td class="text-right">' + c.leads + '</td><td class="text-right" style="color:#34d399">' + c.compras + '</td><td class="text-right">' + fmtCurr(c.valor) + '</td><td class="text-right" style="color:#f59e0b">' + cpct + '%</td></tr>';
       }
-      html += '</div></div>';
+      html += '</tbody></table></div></div>';
+
+      html += '<div class="chart-box"><h2>Desempenho por Vendedor <span class="sub">&rarr; Leads, compras e valor por vendedor</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Vendedor</th><th class="text-right">Leads</th><th class="text-right">Compras</th><th class="text-right">Valor</th><th class="text-right">Conv.</th></tr></thead><tbody>';
+      vendKeys.sort(function(a,b){return vendedores[b].valor - vendedores[a].valor;});
+      for (var i = 0; i < vendKeys.length; i++) {
+        var v = vendedores[vendKeys[i]];
+        var vpct = v.leads > 0 ? (v.compras / v.leads * 100).toFixed(1) : 0;
+        html += '<tr' + (i % 2 === 0 ? '' : ' style="background:#11131c"') + '><td class="col-ranking">' + (i + 1) + '</td><td style="font-weight:600">' + vendKeys[i] + '</td><td class="text-right">' + v.leads + '</td><td class="text-right" style="color:#34d399">' + v.compras + '</td><td class="text-right">' + fmtCurr(v.valor) + '</td><td class="text-right" style="color:#f59e0b">' + vpct + '%</td></tr>';
+      }
+      html += '</tbody></table></div></div>';
 
       document.getElementById('dashContent').innerHTML = html;
       try { lucide.createIcons(); } catch(e) {}

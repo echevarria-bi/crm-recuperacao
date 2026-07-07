@@ -1219,34 +1219,20 @@
       var filtrados = dados.filter(function(r){return r.campanha === campanhaNome;});
       if (!filtrados.length) return '';
 
-      function parseData(d) {
-        var p = d.split('/');
-        return new Date(parseInt(p[2]), parseInt(p[1])-1, parseInt(p[0]));
-      }
-      function getWeekLabel(d) {
-        var dt = parseData(d);
-        var inicio = new Date(dt);
-        inicio.setDate(dt.getDate() - dt.getDay() + 1);
-        var fim = new Date(inicio);
-        fim.setDate(inicio.getDate() + 6);
-        function fmt(dt) { return ('0'+dt.getDate()).slice(-2)+'/'+('0'+(dt.getMonth()+1)).slice(-2); }
-        return fmt(inicio) + ' a ' + fmt(fim);
-      }
-
-      var semanas = {};
+      var dias = {};
       filtrados.forEach(function(r) {
-        var sw = getWeekLabel(r.data);
-        if (!semanas[sw]) semanas[sw] = {leads:0, compras:0, valor:0, vendedores:{}};
-        semanas[sw].leads++;
-        if (r.compra) semanas[sw].compras++;
-        semanas[sw].valor += r.valor;
-        if (!semanas[sw].vendedores[r.vendedor]) semanas[sw].vendedores[r.vendedor] = {leads:0, compras:0, valor:0};
-        semanas[sw].vendedores[r.vendedor].leads++;
-        if (r.compra) semanas[sw].vendedores[r.vendedor].compras++;
-        semanas[sw].vendedores[r.vendedor].valor += r.valor;
+        if (!dias[r.data]) dias[r.data] = {leads:0, compras:0, valor:0, vendedores:{}};
+        dias[r.data].leads++;
+        if (r.compra) dias[r.data].compras++;
+        dias[r.data].valor += r.valor;
+        if (!dias[r.data].vendedores[r.vendedor]) dias[r.data].vendedores[r.vendedor] = {leads:0, compras:0, valor:0};
+        dias[r.data].vendedores[r.vendedor].leads++;
+        if (r.compra) dias[r.data].vendedores[r.vendedor].compras++;
+        dias[r.data].vendedores[r.vendedor].valor += r.valor;
       });
-      var semKeys = Object.keys(semanas).sort(function(a,b) {
-        return parseData(a.split(' a ')[0]) - parseData(b.split(' a ')[0]);
+      var diaKeys = Object.keys(dias).sort(function(a,b) {
+        var pa = a.split('/'), pb = b.split('/');
+        return new Date(pa[2],pa[1]-1,pa[0]) - new Date(pb[2],pb[1]-1,pb[0]);
       });
 
       var totalLeads = filtrados.length;
@@ -1255,7 +1241,7 @@
       var gpct = totalLeads > 0 ? (totalCompras / totalLeads * 100).toFixed(1) : 0;
 
       var html = '<div style="padding:16px;background:linear-gradient(135deg,#0d0f17,#151830)">';
-      html += '<div style="font-size:13px;font-weight:700;color:#fcd34d;margin-bottom:10px">' + campanhaNome + ' - Desempenho por Semana</div>';
+      html += '<div style="font-size:13px;font-weight:700;color:#fcd34d;margin-bottom:10px">' + campanhaNome + ' - Desempenho por Dia</div>';
       html += '<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(100px,1fr));margin-bottom:14px">';
       html += '<div class="card" style="padding:8px"><div class="label" style="font-size:9px">Total Leads</div><div class="value" style="font-size:15px;color:#60a5fa">' + totalLeads + '</div></div>';
       html += '<div class="card" style="padding:8px"><div class="label" style="font-size:9px">Compras</div><div class="value" style="font-size:15px;color:#34d399">' + totalCompras + '</div></div>';
@@ -1263,19 +1249,19 @@
       html += '<div class="card" style="padding:8px"><div class="label" style="font-size:9px">Convers\u00E3o</div><div class="value" style="font-size:15px;color:#f59e0b">' + gpct + '%</div></div>';
       html += '</div>';
 
-      for (var s = 0; s < semKeys.length; s++) {
-        var sem = semanas[semKeys[s]];
-        var semPct = sem.leads > 0 ? (sem.compras / sem.leads * 100).toFixed(1) : 0;
+      for (var s = 0; s < diaKeys.length; s++) {
+        var dia = dias[diaKeys[s]];
+        var diaPct = dia.leads > 0 ? (dia.compras / dia.leads * 100).toFixed(1) : 0;
         html += '<div style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px;margin-bottom:8px">';
         html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
-        html += '<span style="font-size:11px;font-weight:700;color:#fcd34d">Semana ' + (s+1) + ' (' + semKeys[s] + ')</span>';
-        html += '<span style="font-size:10px;color:#9ca3af">' + sem.leads + ' leads / ' + sem.compras + ' compras / ' + fmtCurr(sem.valor) + ' / ' + semPct + '%</span>';
+        html += '<span style="font-size:11px;font-weight:700;color:#fcd34d">' + diaKeys[s] + '</span>';
+        html += '<span style="font-size:10px;color:#9ca3af">' + dia.leads + ' leads / ' + dia.compras + ' compras / ' + fmtCurr(dia.valor) + ' / ' + diaPct + '%</span>';
         html += '</div>';
-        var vendKeys = Object.keys(sem.vendedores).sort(function(a,b){return sem.vendedores[b].valor - sem.vendedores[a].valor;});
+        var vendKeys = Object.keys(dia.vendedores).sort(function(a,b){return dia.vendedores[b].valor - dia.vendedores[a].valor;});
         if (vendKeys.length > 0) {
           html += '<div class="table-wrap"><table style="font-size:10px"><thead><tr style="color:#4a4d6e;font-weight:600;text-transform:uppercase;font-size:9px"><th style="text-align:left;padding:3px 4px">Vendedor</th><th style="text-align:right;padding:3px 4px">Leads</th><th style="text-align:right;padding:3px 4px">Compras</th><th style="text-align:right;padding:3px 4px">Valor</th></tr></thead><tbody>';
           for (var vi = 0; vi < vendKeys.length; vi++) {
-            var vv = sem.vendedores[vendKeys[vi]];
+            var vv = dia.vendedores[vendKeys[vi]];
             html += '<tr><td style="padding:2px 4px;color:#e1e7ef;font-weight:500">' + vendKeys[vi] + '</td><td style="text-align:right;padding:2px 4px;color:#9ca3af">' + vv.leads + '</td><td style="text-align:right;padding:2px 4px;color:#34d399">' + vv.compras + '</td><td style="text-align:right;padding:2px 4px;color:#fbbf24">' + fmtCurr(vv.valor) + '</td></tr>';
           }
           html += '</tbody></table></div>';

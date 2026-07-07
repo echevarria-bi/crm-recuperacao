@@ -239,6 +239,16 @@
           try {
             var data = new Uint8Array(ev.target.result);
             var wb = XLSX.read(data, {type:'array'});
+            var lname = file.name.toLowerCase();
+            if (lname.indexOf('base_campanhas') >= 0) {
+              if (!allData) {
+                allData = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
+              }
+              allData.campanhas = parseCampanhas(wb);
+              processados++;
+              maybeDone();
+              return;
+            }
             var month = detectMonthFromName(file.name);
             if (!allData) {
               allData = parseAllSheets(wb, month);
@@ -280,7 +290,13 @@
         try {
           var data = new Uint8Array(ev.target.result);
           var wb = XLSX.read(data, {type:'array'});
-          allData = parseAllSheets(wb);
+          var lname = file.name.toLowerCase();
+          if (lname.indexOf('base_campanhas') >= 0) {
+            allData = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
+            allData.campanhas = parseCampanhas(wb);
+          } else {
+            allData = parseAllSheets(wb);
+          }
           document.getElementById('areaInicial').innerHTML = '<div style="font-size:40px;margin-bottom:8px">✅</div><div style="color:#34d399;font-size:15px;font-weight:600">' + file.name + '</div><div style="color:#6b7280;font-size:12px;margin-top:2px">Carregado com sucesso</div>';
           var now = new Date();
           document.getElementById('footer').style.display = 'block';
@@ -316,7 +332,7 @@
 
     function parseAllSheets(wb, baseMonth) {
       baseMonth = baseMonth || 'Junho';
-      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
+      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[], campanhas:[]};
       var sheetMap = {};
       for (var si = 0; si < wb.SheetNames.length; si++) {
         var sn = wb.SheetNames[si];
@@ -628,6 +644,25 @@
     function fmtCurr(v) { if (v==null||isNaN(v)) return '-'; return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
     var icn = function(n,s){s=s||14; return '<i data-lucide="'+n+'" style="display:inline-block;width:'+s+'px;height:'+s+'px;vertical-align:middle;stroke:currentColor;stroke-width:2;flex-shrink:0;margin-right:4px"></i>';};
 
+    function parseCampanhas(wb) {
+      var rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {defval:''});
+      return rows.map(function(r) {
+        return {
+          id: r.ID,
+          resposta: r.RESPOSTA,
+          cod: r['COD|RCA'],
+          vendedor: r['NOME|RCA'],
+          setor: r.SETOR,
+          regiao: r.REGI\u00C3O,
+          supervisor: r.SUPERVISOR,
+          campanha: r.CAMPANHA,
+          data: typeof r.DATA === 'number' ? XLSX.SSF.format('dd/mm/yyyy', r.DATA) : r.DATA,
+          compra: r.COMPRA === 'Sim',
+          valor: parseFloat(r.VALOR) || 0
+        };
+      });
+    }
+
     function initTabs() {
       var h = '<div class="tabs-group">';
       h += '<div class="tabs">';
@@ -637,6 +672,7 @@
       h += '</div><div class="tab-divider"></div><div class="tabs">';
       h += '<button class="tab-btn' + (activeTab==='resumo'?' active':'') + '" data-tab="resumo">' + icn('layout-dashboard',12) + ' Resumo</button>';
       h += '<button class="tab-btn' + (activeTab==='clientes'?' active':'') + '" data-tab="clientes">' + icn('table-2',12) + ' Clientes</button>';
+      h += '<button class="tab-btn' + (activeTab==='campanhas'?' active':'') + '" data-tab="campanhas">' + icn('megaphone',12) + ' Campanhas</button>';
       h += '</div></div>';
       var tc = document.getElementById('tabsContainer');
       if (tc) tc.innerHTML = h;
@@ -657,6 +693,7 @@
       else if (tab === 'maio') renderMonth('Maio');
       else if (tab === 'geral') renderMonth('Junho');
       else if (tab === 'clientes') renderClientes();
+      else if (tab === 'campanhas') renderCampanhas();
     }
 
     function getFilteredProfs() {
@@ -1102,6 +1139,61 @@
         if (profF) profF.addEventListener('change', applyFilters);
         if (mesF) mesF.addEventListener('change', applyFilters);
       }, 50);
+      try { lucide.createIcons(); } catch(e) {}
+    }
+
+    function renderCampanhas() {
+      var dados = allData.campanhas || [];
+      if (!dados.length) {
+        document.getElementById('dashContent').innerHTML = '<div class="chart-box"><h2>Campanhas <span class="sub">&rarr; Base de campanhas</span></h2><div style="text-align:center;padding:40px;color:#6b7280">Nenhum dado dispon\u00EDvel. Fa\u00E7a o upload do arquivo base_campanhas.xlsx.</div></div>';
+        return;
+      }
+      var totalLeads = dados.length;
+      var totalCompras = dados.filter(function(r){return r.compra;}).length;
+      var totalValor = dados.reduce(function(s,r){return s+r.valor;},0);
+      var totalInteresse = dados.filter(function(r){return r.resposta === 'Teve Interesse';}).length;
+      var pctConv = totalLeads > 0 ? (totalCompras / totalLeads * 100).toFixed(1) : 0;
+
+      var html = '<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:20px">';
+      html += '<div class="card"><div class="label">Total Leads</div><div class="value" style="color:#60a5fa">' + totalLeads + '</div></div>';
+      html += '<div class="card"><div class="label">Compras</div><div class="value" style="color:#34d399">' + totalCompras + '</div></div>';
+      html += '<div class="card"><div class="label">Valor Total</div><div class="value" style="color:#fbbf24">' + fmtCurr(totalValor) + '</div></div>';
+      html += '<div class="card"><div class="label">Convers\u00E3o</div><div class="value" style="color:#f59e0b">' + pctConv + '%</div></div>';
+      html += '</div>';
+
+      var campanhas = {}, vendedores = {};
+      dados.forEach(function(r) {
+        if (!campanhas[r.campanha]) campanhas[r.campanha] = {leads:0, compras:0, valor:0};
+        campanhas[r.campanha].leads++;
+        if (r.compra) campanhas[r.campanha].compras++;
+        campanhas[r.campanha].valor += r.valor;
+        if (!vendedores[r.vendedor]) vendedores[r.vendedor] = {leads:0, compras:0, valor:0};
+        vendedores[r.vendedor].leads++;
+        if (r.compra) vendedores[r.vendedor].compras++;
+        vendedores[r.vendedor].valor += r.valor;
+      });
+      var campKeys = Object.keys(campanhas).sort();
+      var vendKeys = Object.keys(vendedores).sort();
+
+      html += '<div class="chart-box"><h2>Desempenho por Campanha <span class="sub">&rarr; Leads, compras e valor por campanha</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Campanha</th><th class="text-right">Leads</th><th class="text-right">Compras</th><th class="text-right">Valor</th><th class="text-right">Conv.</th></tr></thead><tbody>';
+      campKeys.sort(function(a,b){return campanhas[b].valor - campanhas[a].valor;});
+      for (var i = 0; i < campKeys.length; i++) {
+        var c = campanhas[campKeys[i]];
+        var cpct = c.leads > 0 ? (c.compras / c.leads * 100).toFixed(1) : 0;
+        html += '<tr' + (i % 2 === 0 ? '' : ' style="background:#11131c"') + '><td class="col-ranking">' + (i + 1) + '</td><td style="font-weight:600">' + campKeys[i] + '</td><td class="text-right">' + c.leads + '</td><td class="text-right" style="color:#34d399">' + c.compras + '</td><td class="text-right">' + fmtCurr(c.valor) + '</td><td class="text-right" style="color:#f59e0b">' + cpct + '%</td></tr>';
+      }
+      html += '</tbody></table></div></div>';
+
+      html += '<div class="chart-box"><h2>Desempenho por Vendedor <span class="sub">&rarr; Leads, compras e valor por vendedor</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Vendedor</th><th class="text-right">Leads</th><th class="text-right">Compras</th><th class="text-right">Valor</th><th class="text-right">Conv.</th></tr></thead><tbody>';
+      vendKeys.sort(function(a,b){return vendedores[b].valor - vendedores[a].valor;});
+      for (var i = 0; i < vendKeys.length; i++) {
+        var v = vendedores[vendKeys[i]];
+        var vpct = v.leads > 0 ? (v.compras / v.leads * 100).toFixed(1) : 0;
+        html += '<tr' + (i % 2 === 0 ? '' : ' style="background:#11131c"') + '><td class="col-ranking">' + (i + 1) + '</td><td style="font-weight:600">' + vendKeys[i] + '</td><td class="text-right">' + v.leads + '</td><td class="text-right" style="color:#34d399">' + v.compras + '</td><td class="text-right">' + fmtCurr(v.valor) + '</td><td class="text-right" style="color:#f59e0b">' + vpct + '%</td></tr>';
+      }
+      html += '</tbody></table></div></div>';
+
+      document.getElementById('dashContent').innerHTML = html;
       try { lucide.createIcons(); } catch(e) {}
     }
 

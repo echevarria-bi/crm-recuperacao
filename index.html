@@ -1151,7 +1151,6 @@
       var totalLeads = dados.length;
       var totalCompras = dados.filter(function(r){return r.compra;}).length;
       var totalValor = dados.reduce(function(s,r){return s+r.valor;},0);
-      var totalInteresse = dados.filter(function(r){return r.resposta === 'Teve Interesse';}).length;
       var pctConv = totalLeads > 0 ? (totalCompras / totalLeads * 100).toFixed(1) : 0;
 
       var html = '<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:20px">';
@@ -1161,37 +1160,103 @@
       html += '<div class="card"><div class="label">Convers\u00E3o</div><div class="value" style="color:#f59e0b">' + pctConv + '%</div></div>';
       html += '</div>';
 
-      var campanhas = {}, vendedores = {};
+      var campanhas = {};
       dados.forEach(function(r) {
         if (!campanhas[r.campanha]) campanhas[r.campanha] = {leads:0, compras:0, valor:0};
         campanhas[r.campanha].leads++;
         if (r.compra) campanhas[r.campanha].compras++;
         campanhas[r.campanha].valor += r.valor;
-        if (!vendedores[r.vendedor]) vendedores[r.vendedor] = {leads:0, compras:0, valor:0};
-        vendedores[r.vendedor].leads++;
-        if (r.compra) vendedores[r.vendedor].compras++;
-        vendedores[r.vendedor].valor += r.valor;
       });
-      var campKeys = Object.keys(campanhas).sort();
-      var vendKeys = Object.keys(vendedores).sort();
+      var campKeys = Object.keys(campanhas).sort(function(a,b){return campanhas[b].valor - campanhas[a].valor;});
 
-      html += '<div class="chart-box"><h2>Desempenho por Campanha <span class="sub">&rarr; Leads, compras e valor por campanha</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Campanha</th><th class="text-right">Leads</th><th class="text-right">Compras</th><th class="text-right">Valor</th><th class="text-right">Conv.</th></tr></thead><tbody>';
-      campKeys.sort(function(a,b){return campanhas[b].valor - campanhas[a].valor;});
+      html += '<div class="chart-box"><h2>Campanhas <span class="sub">&rarr; Clique em uma campanha para ver por semana</span></h2>';
+      html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">';
       for (var i = 0; i < campKeys.length; i++) {
         var c = campanhas[campKeys[i]];
         var cpct = c.leads > 0 ? (c.compras / c.leads * 100).toFixed(1) : 0;
-        html += '<tr' + (i % 2 === 0 ? '' : ' style="background:#11131c"') + '><td class="col-ranking">' + (i + 1) + '</td><td style="font-weight:600">' + campKeys[i] + '</td><td class="text-right">' + c.leads + '</td><td class="text-right" style="color:#34d399">' + c.compras + '</td><td class="text-right">' + fmtCurr(c.valor) + '</td><td class="text-right" style="color:#f59e0b">' + cpct + '%</td></tr>';
+        html += '<div onclick="renderCampanhaDetail(\'' + campKeys[i].replace(/'/g,"\\'") + '\')" style="background:linear-gradient(135deg,#151830,#1e2030);border:1px solid #1e1b4b;border-radius:12px;padding:14px;cursor:pointer;transition:.2s" onmouseover="this.style.borderColor=\'#f59e0b\'" onmouseout="this.style.borderColor=\'#1e1b4b\'">';
+        html += '<div style="font-size:13px;font-weight:700;color:#fcd34d;margin-bottom:8px">' + campKeys[i] + '</div>';
+        html += '<div style="font-size:11px;color:#9ca3af;margin-bottom:4px">' + c.leads + ' leads / ' + c.compras + ' compras</div>';
+        html += '<div style="font-size:12px;color:#fbbf24;font-weight:600">' + fmtCurr(c.valor) + '</div>';
+        html += '<div style="font-size:10px;color:#f59e0b;margin-top:4px">' + cpct + '% conv.</div>';
+        html += '</div>';
       }
-      html += '</tbody></table></div></div>';
+      html += '</div></div>';
 
-      html += '<div class="chart-box"><h2>Desempenho por Vendedor <span class="sub">&rarr; Leads, compras e valor por vendedor</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Vendedor</th><th class="text-right">Leads</th><th class="text-right">Compras</th><th class="text-right">Valor</th><th class="text-right">Conv.</th></tr></thead><tbody>';
-      vendKeys.sort(function(a,b){return vendedores[b].valor - vendedores[a].valor;});
-      for (var i = 0; i < vendKeys.length; i++) {
-        var v = vendedores[vendKeys[i]];
-        var vpct = v.leads > 0 ? (v.compras / v.leads * 100).toFixed(1) : 0;
-        html += '<tr' + (i % 2 === 0 ? '' : ' style="background:#11131c"') + '><td class="col-ranking">' + (i + 1) + '</td><td style="font-weight:600">' + vendKeys[i] + '</td><td class="text-right">' + v.leads + '</td><td class="text-right" style="color:#34d399">' + v.compras + '</td><td class="text-right">' + fmtCurr(v.valor) + '</td><td class="text-right" style="color:#f59e0b">' + vpct + '%</td></tr>';
+      document.getElementById('dashContent').innerHTML = html;
+      try { lucide.createIcons(); } catch(e) {}
+    }
+
+    function renderCampanhaDetail(campanhaNome) {
+      var dados = allData.campanhas || [];
+      var filtrados = dados.filter(function(r){return r.campanha === campanhaNome;});
+      if (!filtrados.length) { renderCampanhas(); return; }
+
+      function parseData(d) {
+        var p = d.split('/');
+        return new Date(parseInt(p[2]), parseInt(p[1])-1, parseInt(p[0]));
       }
-      html += '</tbody></table></div></div>';
+      function getWeekLabel(d) {
+        var dt = parseData(d);
+        var inicio = new Date(dt);
+        inicio.setDate(dt.getDate() - dt.getDay() + 1);
+        var fim = new Date(inicio);
+        fim.setDate(inicio.getDate() + 6);
+        function fmt(dt) { return ('0'+dt.getDate()).slice(-2)+'/'+('0'+(dt.getMonth()+1)).slice(-2); }
+        return fmt(inicio) + ' a ' + fmt(fim);
+      }
+
+      var semanas = {};
+      filtrados.forEach(function(r) {
+        var sw = getWeekLabel(r.data);
+        if (!semanas[sw]) semanas[sw] = {leads:0, compras:0, valor:0, vendedores:{}};
+        semanas[sw].leads++;
+        if (r.compra) semanas[sw].compras++;
+        semanas[sw].valor += r.valor;
+        if (!semanas[sw].vendedores[r.vendedor]) semanas[sw].vendedores[r.vendedor] = {leads:0, compras:0, valor:0};
+        semanas[sw].vendedores[r.vendedor].leads++;
+        if (r.compra) semanas[sw].vendedores[r.vendedor].compras++;
+        semanas[sw].vendedores[r.vendedor].valor += r.valor;
+      });
+      var semKeys = Object.keys(semanas).sort(function(a,b) {
+        return parseData(a.split(' a ')[0]) - parseData(b.split(' a ')[0]);
+      });
+
+      var html = '<div style="margin-bottom:16px"><button onclick="renderCampanhas()" style="background:transparent;border:1px solid #1e1b4b;border-radius:8px;padding:6px 14px;color:#9ca3af;font-size:12px;cursor:pointer;transition:.2s" onmouseover="this.style.borderColor=\'#f59e0b\'" onmouseout="this.style.borderColor=\'#1e1b4b\'">' + icn('arrow-left',12) + ' Voltar</button></div>';
+      html += '<div class="chart-box"><h2>' + campanhaNome + ' <span class="sub">&rarr; Desempenho por semana</span></h2>';
+
+      var totalLeads = filtrados.length;
+      var totalCompras = filtrados.filter(function(r){return r.compra;}).length;
+      var totalValor = filtrados.reduce(function(s,r){return s+r.valor;},0);
+
+      html += '<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(120px,1fr));margin-bottom:16px">';
+      html += '<div class="card" style="padding:10px"><div class="label">Total Leads</div><div class="value" style="font-size:18px;color:#60a5fa">' + totalLeads + '</div></div>';
+      html += '<div class="card" style="padding:10px"><div class="label">Compras</div><div class="value" style="font-size:18px;color:#34d399">' + totalCompras + '</div></div>';
+      html += '<div class="card" style="padding:10px"><div class="label">Valor</div><div class="value" style="font-size:18px;color:#fbbf24">' + fmtCurr(totalValor) + '</div></div>';
+      var gpct = totalLeads > 0 ? (totalCompras / totalLeads * 100).toFixed(1) : 0;
+      html += '<div class="card" style="padding:10px"><div class="label">Convers\u00E3o</div><div class="value" style="font-size:18px;color:#f59e0b">' + gpct + '%</div></div>';
+      html += '</div>';
+
+      for (var s = 0; s < semKeys.length; s++) {
+        var sem = semanas[semKeys[s]];
+        var semPct = sem.leads > 0 ? (sem.compras / sem.leads * 100).toFixed(1) : 0;
+        html += '<div style="background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:12px;padding:14px;margin-bottom:12px">';
+        html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">';
+        html += '<span style="font-size:13px;font-weight:700;color:#fcd34d">Semana ' + (s+1) + ' (' + semKeys[s] + ')</span>';
+        html += '<span style="font-size:11px;color:#9ca3af">' + sem.leads + ' leads / ' + sem.compras + ' compras / ' + fmtCurr(sem.valor) + ' / ' + semPct + '%</span>';
+        html += '</div>';
+        var vendKeys = Object.keys(sem.vendedores).sort(function(a,b){return sem.vendedores[b].valor - sem.vendedores[a].valor;});
+        if (vendKeys.length > 0) {
+          html += '<table style="width:100%;border-collapse:collapse;font-size:11px"><thead><tr style="color:#4a4d6e;font-weight:600;text-transform:uppercase;font-size:10px"><th style="text-align:left;padding:4px 6px;border-bottom:1px solid #1e1b4b">Vendedor</th><th style="text-align:right;padding:4px 6px;border-bottom:1px solid #1e1b4b">Leads</th><th style="text-align:right;padding:4px 6px;border-bottom:1px solid #1e1b4b">Compras</th><th style="text-align:right;padding:4px 6px;border-bottom:1px solid #1e1b4b">Valor</th></tr></thead><tbody>';
+          for (var vi = 0; vi < vendKeys.length; vi++) {
+            var vv = sem.vendedores[vendKeys[vi]];
+            html += '<tr><td style="padding:3px 6px;color:#e1e7ef;font-weight:500">' + vendKeys[vi] + '</td><td style="text-align:right;padding:3px 6px;color:#9ca3af">' + vv.leads + '</td><td style="text-align:right;padding:3px 6px;color:#34d399">' + vv.compras + '</td><td style="text-align:right;padding:3px 6px;color:#fbbf24">' + fmtCurr(vv.valor) + '</td></tr>';
+          }
+          html += '</tbody></table>';
+        }
+        html += '</div>';
+      }
+      html += '</div>';
 
       document.getElementById('dashContent').innerHTML = html;
       try { lucide.createIcons(); } catch(e) {}

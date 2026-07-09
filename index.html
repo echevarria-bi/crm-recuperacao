@@ -1202,43 +1202,49 @@
       }
       html += '</tbody></table></div></div>';
 
-      // MATRIZ: comparar datas N (coluna M-P) com I (coluna A-K) e agrupar por data
-      var dataAgrup = {};
+      // MATRIZ: dados M-P por data, leads contados pela mesma data
+      var datasMP = {};
       for (var mi = 0; mi < dados.length; mi++) {
         var mr = dados[mi];
-        if (!mr.campanhaM) continue;
-        if (mr.dataN && (mr.dataN.indexOf('/06') >= 0 && ['10','18','30'].indexOf(mr.dataN.split('/')[0]) >= 0)) continue;
-        var dt = mr.dataN || '—';
-        if (!dataAgrup[dt]) dataAgrup[dt] = {dataN: dt, totalClientes: 0, receberam: 0, leadsNaData: 0, recupNaData: 0};
-        // Aggregate M-P (use first occurrence per data)
-        if (mr.totalClientes != null && mr.totalClientes !== '') dataAgrup[dt].totalClientes = parseFloat(mr.totalClientes) || 0;
-        if (mr.receberam != null && mr.receberam !== '') dataAgrup[dt].receberam = parseFloat(mr.receberam) || 0;
-        // Count leads where I = N
-        if (mr.data && mr.dataN && mr.data === mr.dataN) {
-          dataAgrup[dt].leadsNaData++;
-          if (mr.valor > 0) dataAgrup[dt].recupNaData++;
+        if (!mr.campanhaM || !mr.dataN) continue;
+        if (!datasMP[mr.dataN]) datasMP[mr.dataN] = {totalClientes: mr.totalClientes, receberam: mr.receberam};
+      }
+      var datas = Object.keys(datasMP).sort();
+      // Count leads by matching data
+      var leadsPorData = {};
+      datas.forEach(function(d) { leadsPorData[d] = {total:0, recup:0}; });
+      for (var mi = 0; mi < dados.length; mi++) {
+        var mr = dados[mi];
+        if (!mr.data) continue;
+        if (leadsPorData[mr.data]) {
+          leadsPorData[mr.data].total++;
+          if (mr.valor > 0) leadsPorData[mr.data].recup++;
         }
       }
-      var dataKeys = Object.keys(dataAgrup).sort();
-      if (dataKeys.length) {
-        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados M-P (Total Clientes, Receberam) agrupados por Data N, com leads onde I = N</span></h2><div class="table-wrap"><table><thead><tr><th>Data</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Leads (I = N)</th><th class="text-right">Recuperados (K>0)</th><th>% Rec.</th></tr></thead><tbody>';
-        for (var di = 0; di < dataKeys.length; di++) {
-          var d = dataAgrup[dataKeys[di]];
-          var pct = d.leadsNaData > 0 ? (d.recupNaData / d.leadsNaData * 100).toFixed(1) : '0.0';
+      if (datas.length) {
+        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados M-P por data, com leads na mesma data</span></h2><div class="table-wrap"><table><thead><tr><th>Data</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Leads</th><th class="text-right">Recuperados (K>0)</th><th>% Rec.</th></tr></thead><tbody>';
+        for (var di = 0; di < datas.length; di++) {
+          var dt = datas[di];
+          var mp = datasMP[dt];
+          var l = leadsPorData[dt] || {total:0, recup:0};
+          var pct = l.total > 0 ? (l.recup / l.total * 100).toFixed(1) : '0.0';
           html += '<tr>' +
-            '<td style="font-weight:600">' + d.dataN + '</td>' +
-            '<td class="text-right" style="color:#60a5fa">' + d.totalClientes + '</td>' +
-            '<td class="text-right" style="color:#a78bfa">' + d.receberam + '</td>' +
-            '<td class="text-right" style="color:#34d399">' + d.leadsNaData + '</td>' +
-            '<td class="text-right" style="color:#34d399">' + d.recupNaData + '</td>' +
+            '<td style="font-weight:600">' + dt + '</td>' +
+            '<td class="text-right" style="color:#60a5fa">' + (mp.totalClientes != null && mp.totalClientes !== '' ? mp.totalClientes : '—') + '</td>' +
+            '<td class="text-right" style="color:#a78bfa">' + (mp.receberam != null && mp.receberam !== '' ? mp.receberam : '—') + '</td>' +
+            '<td class="text-right" style="color:#34d399">' + l.total + '</td>' +
+            '<td class="text-right" style="color:#34d399">' + l.recup + '</td>' +
             '<td style="color:#f59e0b">' + pct + '%</td></tr>';
         }
-        // Total row
         var tCli = 0, tRec = 0, tL = 0, tR = 0;
-        for (var di = 0; di < dataKeys.length; di++) {
-          var d = dataAgrup[dataKeys[di]];
-          tCli += d.totalClientes; tRec += d.receberam; tL += d.leadsNaData; tR += d.recupNaData;
-        }
+        datas.forEach(function(dt) {
+          var mp = datasMP[dt];
+          var l = leadsPorData[dt] || {};
+          tCli += parseFloat(mp.totalClientes) || 0;
+          tRec += parseFloat(mp.receberam) || 0;
+          tL += l.total || 0;
+          tR += l.recup || 0;
+        });
         html += '<tr class="tot-row"><td style="font-weight:700">Total</td>' +
           '<td class="text-right" style="font-weight:700">' + tCli + '</td>' +
           '<td class="text-right" style="font-weight:700">' + tRec + '</td>' +

@@ -1202,64 +1202,49 @@
       }
       html += '</tbody></table></div></div>';
 
-      // MATRIZ: cruzamento A-K (retornados) com M-P (total/receberam)
-      var campMeta = {}, campLeads = {};
+      // MATRIZ: comparar datas N (coluna M-P) com I (coluna A-K) e agrupar por data
+      var dataAgrup = {};
       for (var mi = 0; mi < dados.length; mi++) {
         var mr = dados[mi];
         if (!mr.campanhaM) continue;
         if (mr.dataN && (mr.dataN.indexOf('/06') >= 0 && ['10','18','30'].indexOf(mr.dataN.split('/')[0]) >= 0)) continue;
-        // Aggregate campaign metadata from M-P (first occurrence)
-        if (!campMeta[mr.campanhaM]) campMeta[mr.campanhaM] = {totalClientes: mr.totalClientes, receberam: mr.receberam, dataN: mr.dataN, setor: mr.setor};
-        // Group leads by campanha + data I
-        if (!campLeads[mr.campanhaM]) campLeads[mr.campanhaM] = {totalIguais: 0, recupIguais: 0, totalTodos: 0, recupTodos: 0};
-        campLeads[mr.campanhaM].totalTodos++;
-        if (mr.valor > 0) campLeads[mr.campanhaM].recupTodos++;
+        var dt = mr.dataN || '—';
+        if (!dataAgrup[dt]) dataAgrup[dt] = {dataN: dt, totalClientes: 0, receberam: 0, leadsNaData: 0, recupNaData: 0};
+        // Aggregate M-P (use first occurrence per data)
+        if (mr.totalClientes != null && mr.totalClientes !== '') dataAgrup[dt].totalClientes = parseFloat(mr.totalClientes) || 0;
+        if (mr.receberam != null && mr.receberam !== '') dataAgrup[dt].receberam = parseFloat(mr.receberam) || 0;
+        // Count leads where I = N
         if (mr.data && mr.dataN && mr.data === mr.dataN) {
-          campLeads[mr.campanhaM].totalIguais++;
-          if (mr.valor > 0) campLeads[mr.campanhaM].recupIguais++;
+          dataAgrup[dt].leadsNaData++;
+          if (mr.valor > 0) dataAgrup[dt].recupNaData++;
         }
       }
-      var campKeys = Object.keys(campMeta).sort();
-      if (campKeys.length) {
-        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados agrupados por campanha: total/receberam (M-P) x leads com data I igual a N</span></h2><div class="table-wrap"><table><thead><tr><th>Campanha</th><th>Setor</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Data N</th><th class="text-right">Leads (I = N)</th><th class="text-right">Recuperados (I = N)</th><th>% Rec.</th><th class="text-right">Todos Leads</th><th class="text-right">Todos Recup.</th></tr></thead><tbody>';
-        for (var mi = 0; mi < campKeys.length; mi++) {
-          var ck = campKeys[mi];
-          var meta = campMeta[ck];
-          var leads = campLeads[ck] || {totalIguais:0, recupIguais:0, totalTodos:0, recupTodos:0};
-          var pct = leads.totalIguais > 0 ? (leads.recupIguais / leads.totalIguais * 100).toFixed(1) : '0.0';
+      var dataKeys = Object.keys(dataAgrup).sort();
+      if (dataKeys.length) {
+        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados M-P (Total Clientes, Receberam) agrupados por Data N, com leads onde I = N</span></h2><div class="table-wrap"><table><thead><tr><th>Data</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Leads (I = N)</th><th class="text-right">Recuperados (K>0)</th><th>% Rec.</th></tr></thead><tbody>';
+        for (var di = 0; di < dataKeys.length; di++) {
+          var d = dataAgrup[dataKeys[di]];
+          var pct = d.leadsNaData > 0 ? (d.recupNaData / d.leadsNaData * 100).toFixed(1) : '0.0';
           html += '<tr>' +
-            '<td style="font-weight:600;color:#fcd34d">' + ck + '</td>' +
-            '<td>' + meta.setor + '</td>' +
-            '<td class="text-right" style="color:#60a5fa">' + (meta.totalClientes != null ? meta.totalClientes : '—') + '</td>' +
-            '<td class="text-right" style="color:#a78bfa">' + (meta.receberam != null ? meta.receberam : '—') + '</td>' +
-            '<td class="text-right" style="font-size:11px">' + meta.dataN + '</td>' +
-            '<td class="text-right" style="color:#34d399">' + leads.totalIguais + '</td>' +
-            '<td class="text-right" style="color:#34d399">' + leads.recupIguais + '</td>' +
-            '<td style="color:#f59e0b">' + pct + '%</td>' +
-            '<td class="text-right" style="color:#6b7280">' + leads.totalTodos + '</td>' +
-            '<td class="text-right" style="color:#6b7280">' + leads.recupTodos + '</td></tr>';
+            '<td style="font-weight:600">' + d.dataN + '</td>' +
+            '<td class="text-right" style="color:#60a5fa">' + d.totalClientes + '</td>' +
+            '<td class="text-right" style="color:#a78bfa">' + d.receberam + '</td>' +
+            '<td class="text-right" style="color:#34d399">' + d.leadsNaData + '</td>' +
+            '<td class="text-right" style="color:#34d399">' + d.recupNaData + '</td>' +
+            '<td style="color:#f59e0b">' + pct + '%</td></tr>';
         }
         // Total row
-        var tCli = 0, tRec = 0, tL = 0, tR = 0, tTL = 0, tTR = 0;
-        for (var mi = 0; mi < campKeys.length; mi++) {
-          var meta = campMeta[campKeys[mi]];
-          var leads = campLeads[campKeys[mi]] || {};
-          tCli += parseFloat(meta.totalClientes) || 0;
-          tRec += parseFloat(meta.receberam) || 0;
-          tL += leads.totalIguais || 0;
-          tR += leads.recupIguais || 0;
-          tTL += leads.totalTodos || 0;
-          tTR += leads.recupTodos || 0;
+        var tCli = 0, tRec = 0, tL = 0, tR = 0;
+        for (var di = 0; di < dataKeys.length; di++) {
+          var d = dataAgrup[dataKeys[di]];
+          tCli += d.totalClientes; tRec += d.receberam; tL += d.leadsNaData; tR += d.recupNaData;
         }
-        html += '<tr class="tot-row"><td style="color:#fcd34d;font-weight:700">Total</td><td></td>' +
+        html += '<tr class="tot-row"><td style="font-weight:700">Total</td>' +
           '<td class="text-right" style="font-weight:700">' + tCli + '</td>' +
           '<td class="text-right" style="font-weight:700">' + tRec + '</td>' +
-          '<td></td>' +
           '<td class="text-right" style="font-weight:700;color:#34d399">' + tL + '</td>' +
           '<td class="text-right" style="font-weight:700;color:#34d399">' + tR + '</td>' +
-          '<td style="font-weight:700;color:#f59e0b">' + (tL > 0 ? (tR / tL * 100).toFixed(1) : '0.0') + '%</td>' +
-          '<td class="text-right" style="font-weight:700;color:#6b7280">' + tTL + '</td>' +
-          '<td class="text-right" style="font-weight:700;color:#6b7280">' + tTR + '</td></tr>';
+          '<td style="font-weight:700;color:#f59e0b">' + (tL > 0 ? (tR / tL * 100).toFixed(1) : '0.0') + '%</td></tr>';
         html += '</tbody></table></div></div>';
       }
 

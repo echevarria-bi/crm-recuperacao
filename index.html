@@ -645,22 +645,30 @@
     var icn = function(n,s){s=s||14; return '<i data-lucide="'+n+'" style="display:inline-block;width:'+s+'px;height:'+s+'px;vertical-align:middle;stroke:currentColor;stroke-width:2;flex-shrink:0;margin-right:4px"></i>';};
 
     function parseCampanhas(wb) {
-      var rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {defval:''});
-      return rows.map(function(r) {
-        return {
-          id: r.ID,
-          resposta: r.RESPOSTA,
-          cod: r['COD|RCA'],
-          vendedor: r['NOME|RCA'],
-          setor: r.SETOR,
-          regiao: r.REGI\u00C3O,
-          supervisor: r.SUPERVISOR,
-          campanha: r.CAMPANHA,
-          data: typeof r.DATA === 'number' ? XLSX.SSF.format('dd/mm/yyyy', r.DATA) : r.DATA,
-          compra: r.COMPRA === 'Sim',
-          valor: parseFloat(r.VALOR) || 0
-        };
-      });
+      var raw = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header:1, defval:''});
+      var rows = [];
+      for (var ri = 1; ri < raw.length; ri++) {
+        var r = raw[ri];
+        if (!r || !r[0]) continue;
+        rows.push({
+          id: r[0],
+          resposta: r[1],
+          cod: r[2],
+          vendedor: r[3],
+          setor: r[4],
+          regiao: r[5],
+          supervisor: r[6],
+          campanha: r[7],
+          data: typeof r[8] === 'number' ? XLSX.SSF.format('dd/mm/yyyy', r[8]) : r[8],
+          compra: r[9] === 'Sim',
+          valor: parseFloat(r[10]) || 0,
+          campanhaM: r[12],
+          dataN: typeof r[13] === 'number' ? XLSX.SSF.format('dd/mm/yyyy', r[13]) : r[13],
+          totalClientes: r[14],
+          receberam: r[15]
+        });
+      }
+      return rows;
     }
 
     function initTabs() {
@@ -1193,6 +1201,86 @@
         html += '<tr' + (i % 2 === 0 ? '' : ' style="background:#11131c"') + '><td class="col-ranking">' + (i + 1) + '</td><td style="font-weight:600">' + vendKeys[i] + '</td><td class="text-right">' + v.leads + '</td><td class="text-right" style="color:#34d399">' + v.compras + '</td><td class="text-right">' + fmtCurr(v.valor) + '</td><td class="text-right" style="color:#f59e0b">' + vpct + '%</td></tr>';
       }
       html += '</tbody></table></div></div>';
+
+      // MATRIZ: cruzamento dos dados A-K (retornados) com M-P (total/receberam)
+      var byCampSetor = {}, campMeta = {};
+      for (var mi = 0; mi < dados.length; mi++) {
+        var mr = dados[mi];
+        if (!mr.campanhaM) continue;
+        // Aggregate campaign metadata from M-P (first occurrence)
+        if (!campMeta[mr.campanhaM]) campMeta[mr.campanhaM] = {totalClientes: mr.totalClientes, receberam: mr.receberam, dataN: mr.dataN};
+        // Per-lead data from A-K, grouped by CAMPANHA (M) + SETOR (E)
+        var key = mr.campanhaM + '|' + mr.setor;
+        if (!byCampSetor[key]) byCampSetor[key] = {campanha: mr.campanhaM, setor: mr.setor, total: 0, recuperados: 0, valorTotal: 0, datasI: {}};
+        byCampSetor[key].total++;
+        if (mr.valor > 0) { byCampSetor[key].recuperados++; byCampSetor[key].valorTotal += mr.valor; }
+        var dI = mr.data || '—';
+        if (!byCampSetor[key].datasI[dI]) byCampSetor[key].datasI[dI] = 0;
+        byCampSetor[key].datasI[dI]++;
+      }
+      var matKeys = Object.keys(byCampSetor).sort();
+      if (matKeys.length) {
+        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Cruzamento A-K (retornados) com M-P (total/receberam) por Campanha + Setor</span></h2><div class="table-wrap"><table><thead><tr><th>Campanha (M)</th><th>Setor (E)</th><th class="text-right">Total Clientes (O)</th><th class="text-right">Receberam (P)</th><th class="text-right">Leads (A-K)</th><th class="text-right">Recuperados (K>0)</th><th>% Rec.</th><th>Data (N)</th><th>Datas (I) → Cruzamento H</th><th>Comparação I vs N</th></tr></thead><tbody>';
+        for (var mi = 0; mi < matKeys.length; mi++) {
+          var g = byCampSetor[matKeys[mi]];
+          var meta = campMeta[g.campanha] || {};
+          var pctRec = g.total > 0 ? (g.recuperados / g.total * 100).toFixed(1) : '0.0';
+          var pctTotal = meta.totalClientes > 0 ? (g.total / meta.totalClientes * 100).toFixed(1) : '0.0';
+          var dataN = meta.dataN || '—';
+          var dataIs = Object.keys(g.datasI).sort();
+          var dataIList = dataIs.map(function(d) { return d + ' (' + g.datasI[d] + ')'; }).join(', ');
+          // Compare first I date with N
+          var firstI = dataIs.length ? dataIs[0] : null;
+          dataN = dataN || '—';
+          var comp = (firstI && dataN !== '—' && firstI !== '—') ? (firstI === dataN ? 'Igual' : 'Diferente') : '—';
+          var compColor = comp === 'Igual' ? '#34d399' : (comp === 'Diferente' ? '#f87171' : '#6b7280');
+          html += '<tr>' +
+            '<td style="font-weight:600;color:#fcd34d">' + g.campanha + '</td>' +
+            '<td>' + g.setor + '</td>' +
+            '<td class="text-right" style="color:#60a5fa">' + (meta.totalClientes != null ? meta.totalClientes : '—') + '</td>' +
+            '<td class="text-right" style="color:#a78bfa">' + (meta.receberam != null ? meta.receberam : '—') + '</td>' +
+            '<td class="text-right">' + g.total + ' <span style="font-size:9px;color:#6b7280">(' + pctTotal + '%)</span></td>' +
+            '<td class="text-right" style="color:#34d399">' + g.recuperados + '</td>' +
+            '<td style="color:#f59e0b">' + pctRec + '%</td>' +
+            '<td style="font-size:11px">' + dataN + '</td>' +
+            '<td style="font-size:11px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + dataIList + '">' + (dataIList || '—') + '</td>' +
+            '<td style="color:' + compColor + ';font-weight:600">' + comp + '</td></tr>';
+        }
+        // Total row
+        var tLeads = 0, tRecup = 0, tValor = 0, tTotalCli = 0, tReceb = 0;
+        for (var mi = 0; mi < matKeys.length; mi++) {
+          var g = byCampSetor[matKeys[mi]];
+          var meta = campMeta[g.campanha] || {};
+          tLeads += g.total; tRecup += g.recuperados; tValor += g.valorTotal;
+          tTotalCli += parseFloat(meta.totalClientes) || 0;
+          tReceb += parseFloat(meta.receberam) || 0;
+        }
+        html += '<tr class="tot-row"><td style="color:#fcd34d;font-weight:700">Total</td><td></td>' +
+          '<td class="text-right" style="font-weight:700">' + tTotalCli + '</td>' +
+          '<td class="text-right" style="font-weight:700">' + tReceb + '</td>' +
+          '<td class="text-right" style="font-weight:700">' + tLeads + '</td>' +
+          '<td class="text-right" style="font-weight:700;color:#34d399">' + tRecup + '</td>' +
+          '<td style="font-weight:700;color:#f59e0b">' + (tLeads > 0 ? (tRecup / tLeads * 100).toFixed(1) : '0.0') + '%</td>' +
+          '<td colspan="3"></td></tr>';
+        html += '</tbody></table></div></div>';
+
+        // Matriz detalhada: CAMPANHA | DATA | RECUPERADOS | SETOR (cruzamento I x H)
+        html += '<div class="chart-box"><h2>Detalhamento: CAMPANHA | DATA | RECUPERADOS | SETOR <span class="sub">&rarr; Cruzamento col I (data) x col H (campanha) — cada linha é um lead</span></h2><div class="table-wrap" style="max-height:400px;overflow-y:auto"><table><thead><tr><th>CAMPANHA (H)</th><th>Data (I)</th><th>Data (N)</th><th>Comparação</th><th class="text-right">Recuperado (K>0)</th><th>SETOR (E)</th><th>CAMPANHA (M)</th></tr></thead><tbody>';
+        var detalhe = dados.filter(function(r){return r.campanhaM;});
+        for (var mi = 0; mi < detalhe.length; mi++) {
+          var mr = detalhe[mi];
+          var comp = (mr.data && mr.dataN) ? (mr.data === mr.dataN ? 'Igual' : 'Diferente') : '—';
+          html += '<tr>' +
+            '<td>' + (mr.campanha || '—') + '</td>' +
+            '<td>' + (mr.data || '—') + '</td>' +
+            '<td>' + (mr.dataN || '—') + '</td>' +
+            '<td style="color:' + (comp === 'Igual' ? '#34d399' : (comp === 'Diferente' ? '#f87171' : '#6b7280')) + '">' + comp + '</td>' +
+            '<td class="text-right" style="color:' + (mr.valor > 0 ? '#34d399' : '#6b7280') + '">' + (mr.valor > 0 ? 'Sim' : 'Não') + '</td>' +
+            '<td>' + mr.setor + '</td>' +
+            '<td style="font-weight:600;color:#fcd34d">' + mr.campanhaM + '</td></tr>';
+        }
+        html += '</tbody></table></div></div>';
+      }
 
       document.getElementById('dashContent').innerHTML = html;
       try { lucide.createIcons(); } catch(e) {}

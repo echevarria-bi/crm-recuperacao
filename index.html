@@ -1213,17 +1213,17 @@
       var datas = Object.keys(datasMP).sort();
       // Count leads by matching data
       var leadsPorData = {};
-      datas.forEach(function(d) { leadsPorData[d] = {total:0, recup:0}; });
+      datas.forEach(function(d) { leadsPorData[d] = {total:0, recup:0, faturamento:0}; });
       for (var mi = 0; mi < dados.length; mi++) {
         var mr = dados[mi];
         if (!mr.data) continue;
         if (leadsPorData[mr.data]) {
           leadsPorData[mr.data].total++;
-          if (mr.valor > 0) leadsPorData[mr.data].recup++;
+          if (mr.valor > 0) { leadsPorData[mr.data].recup++; leadsPorData[mr.data].faturamento += mr.valor; }
         }
       }
       if (datas.length) {
-        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados M-P por data, com leads na mesma data</span></h2><div class="table-wrap"><table><thead><tr><th>Data</th><th>Campanhas</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Leads</th><th class="text-right">Recuperados (K>0)</th><th>% Rec.</th></tr></thead><tbody>';
+        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados M-P por data, com leads na mesma data</span></h2><div class="table-wrap"><table><thead><tr><th>Data do Disparo</th><th>Campanhas</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Contatos Gerados</th><th class="text-right">Recuperados</th><th class="text-right">Faturamento</th><th>% Rec.</th></tr></thead><tbody>';
         for (var di = 0; di < datas.length; di++) {
           var dt = datas[di];
           var mp = datasMP[dt];
@@ -1236,9 +1236,10 @@
             '<td class="text-right" style="color:#a78bfa">' + (mp.receberam != null && mp.receberam !== '' ? mp.receberam : '—') + '</td>' +
             '<td class="text-right" style="color:#34d399">' + l.total + '</td>' +
             '<td class="text-right" style="color:#34d399">' + l.recup + '</td>' +
+            '<td class="text-right" style="color:#fbbf24">' + fmtCurr(l.faturamento) + '</td>' +
             '<td style="color:#f59e0b">' + pct + '%</td></tr>';
         }
-        var tCli = 0, tRec = 0, tL = 0, tR = 0;
+        var tCli = 0, tRec = 0, tL = 0, tR = 0, tFat = 0;
         datas.forEach(function(dt) {
           var mp = datasMP[dt];
           var l = leadsPorData[dt] || {};
@@ -1246,12 +1247,14 @@
           tRec += parseFloat(mp.receberam) || 0;
           tL += l.total || 0;
           tR += l.recup || 0;
+          tFat += l.faturamento || 0;
         });
         html += '<tr class="tot-row"><td style="font-weight:700">Total</td><td></td>' +
           '<td class="text-right" style="font-weight:700">' + tCli + '</td>' +
           '<td class="text-right" style="font-weight:700">' + tRec + '</td>' +
           '<td class="text-right" style="font-weight:700;color:#34d399">' + tL + '</td>' +
           '<td class="text-right" style="font-weight:700;color:#34d399">' + tR + '</td>' +
+          '<td class="text-right" style="font-weight:700;color:#fbbf24">' + fmtCurr(tFat) + '</td>' +
           '<td style="font-weight:700;color:#f59e0b">' + (tL > 0 ? (tR / tL * 100).toFixed(1) : '0.0') + '%</td></tr>';
         html += '</tbody></table></div></div>';
       }

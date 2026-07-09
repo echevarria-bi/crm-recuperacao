@@ -1207,7 +1207,8 @@
       for (var mi = 0; mi < dados.length; mi++) {
         var mr = dados[mi];
         if (!mr.campanhaM || !mr.dataN) continue;
-        if (!datasMP[mr.dataN]) datasMP[mr.dataN] = {totalClientes: mr.totalClientes, receberam: mr.receberam};
+        if (!datasMP[mr.dataN]) datasMP[mr.dataN] = {totalClientes: mr.totalClientes, receberam: mr.receberam, campanhas: []};
+        if (datasMP[mr.dataN].campanhas.indexOf(mr.campanhaM) < 0) datasMP[mr.dataN].campanhas.push(mr.campanhaM);
       }
       var datas = Object.keys(datasMP).sort();
       // Count leads by matching data
@@ -1222,7 +1223,7 @@
         }
       }
       if (datas.length) {
-        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados M-P por data, com leads na mesma data</span></h2><div class="table-wrap"><table><thead><tr><th>Data</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Leads</th><th class="text-right">Recuperados (K>0)</th><th>% Rec.</th></tr></thead><tbody>';
+        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados M-P por data, com leads na mesma data</span></h2><div class="table-wrap"><table><thead><tr><th>Data</th><th>Campanhas</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Leads</th><th class="text-right">Recuperados (K>0)</th><th>% Rec.</th></tr></thead><tbody>';
         for (var di = 0; di < datas.length; di++) {
           var dt = datas[di];
           var mp = datasMP[dt];
@@ -1230,6 +1231,7 @@
           var pct = l.total > 0 ? (l.recup / l.total * 100).toFixed(1) : '0.0';
           html += '<tr>' +
             '<td style="font-weight:600">' + dt + '</td>' +
+            '<td style="font-size:10px;color:#fcd34d;max-width:250px">' + mp.campanhas.join('<br>') + '</td>' +
             '<td class="text-right" style="color:#60a5fa">' + (mp.totalClientes != null && mp.totalClientes !== '' ? mp.totalClientes : '—') + '</td>' +
             '<td class="text-right" style="color:#a78bfa">' + (mp.receberam != null && mp.receberam !== '' ? mp.receberam : '—') + '</td>' +
             '<td class="text-right" style="color:#34d399">' + l.total + '</td>' +
@@ -1245,7 +1247,7 @@
           tL += l.total || 0;
           tR += l.recup || 0;
         });
-        html += '<tr class="tot-row"><td style="font-weight:700">Total</td>' +
+        html += '<tr class="tot-row"><td style="font-weight:700">Total</td><td></td>' +
           '<td class="text-right" style="font-weight:700">' + tCli + '</td>' +
           '<td class="text-right" style="font-weight:700">' + tRec + '</td>' +
           '<td class="text-right" style="font-weight:700;color:#34d399">' + tL + '</td>' +

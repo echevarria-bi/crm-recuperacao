@@ -1233,16 +1233,7 @@
         var custoPorRecuperado = tR > 0 ? custoTotal / tR : 0;
 
         html += '<div class="grid-2" style="margin-bottom:20px">';
-        // Funil
-        html += '<div class="chart-box">';
-        html += '<h2 style="margin-bottom:16px">' + icn('funnel',14) + ' Funil de Convers\u00E3o <span class="sub">&rarr; Fluxo geral</span></h2>';
-        html += '<div style="padding:10px 0">';
-        html += funnelBar('Total Clientes', tCli, '100%', '#60a5fa', 0);
-        html += funnelBar('Receberam', tRec, tCli > 0 ? (tRec / tCli * 100).toFixed(1) : '0', '#a78bfa', 1);
-        html += funnelBar('Contatos Gerados', tL, tCli > 0 ? (tL / tCli * 100).toFixed(1) : '0', '#34d399', 2);
-        html += funnelBar('Recuperados', tR, tCli > 0 ? (tR / tCli * 100).toFixed(1) : '0', '#f59e0b', 3);
-        html += '</div></div>';
-        // Custo x Retorno
+        // Custo x Retorno (esquerda)
         html += '<div class="chart-box">';
         html += '<h2 style="margin-bottom:16px">' + icn('bar-chart-3',14) + ' Custo vs Retorno <span class="sub">&rarr; R$ 0,50 por contato gerado</span></h2>';
         html += '<div style="padding:10px 0">';
@@ -1254,6 +1245,15 @@
         html += st('Ticket M\u00E9dio por Recuperado', ticketMedio, '#60a5fa', 'curr');
         html += st('Custo por Recuperado', custoPorRecuperado, '#a78bfa', 'curr');
         html += '<div style="display:flex;justify-content:space-between;padding:8px 12px;font-size:13px"><span style="color:#9ca3af">Recuperados</span><span style="color:#34d399;font-weight:700">' + tR.toLocaleString('pt-BR') + '</span></div>';
+        html += '</div></div>';
+        // Funil (direita)
+        html += '<div class="chart-box">';
+        html += '<h2 style="margin-bottom:16px">' + icn('funnel',14) + ' Funil de Convers\u00E3o <span class="sub">&rarr; Fluxo geral</span></h2>';
+        html += '<div style="padding:10px 0">';
+        html += funnelBar('Total Clientes', tCli, '100%', '#60a5fa', 0);
+        html += funnelBar('Receberam', tRec, tCli > 0 ? (tRec / tCli * 100).toFixed(1) : '0', '#a78bfa', 1);
+        html += funnelBar('Contatos Gerados', tL, tCli > 0 ? (tL / tCli * 100).toFixed(1) : '0', '#34d399', 2);
+        html += funnelBar('Recuperados', tR, tCli > 0 ? (tR / tCli * 100).toFixed(1) : '0', '#f59e0b', 3);
         html += '</div></div>';
         html += '</div>';
 

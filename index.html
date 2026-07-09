@@ -1207,9 +1207,8 @@
       for (var mi = 0; mi < dados.length; mi++) {
         var mr = dados[mi];
         if (!mr.campanhaM) continue;
-        // Skip "####" (total row) and 30/06 campaigns
-        if (mr.campanhaM === '####') continue;
-        if (mr.dataN && mr.dataN.indexOf('30/06') >= 0) continue;
+        // Skip dates 10/06, 18/06, 30/06
+        if (mr.dataN && (mr.dataN.indexOf('/06') >= 0 && ['10','18','30'].indexOf(mr.dataN.split('/')[0]) >= 0)) continue;
         // Aggregate campaign metadata from M-P (first occurrence)
         if (!campMeta[mr.campanhaM]) campMeta[mr.campanhaM] = {totalClientes: mr.totalClientes, receberam: mr.receberam, dataN: mr.dataN};
         // Per-lead data from A-K, grouped by CAMPANHA (M) + SETOR (E)

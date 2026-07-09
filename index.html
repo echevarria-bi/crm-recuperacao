@@ -1202,16 +1202,19 @@
       }
       html += '</tbody></table></div></div>';
 
-      // MATRIZ: cruzamento dos dados A-K (retornados) com M-P (total/receberam)
+      // MATRIZ: cruzamento A-K (retornados) com M-P (total/receberam)
       var byCampSetor = {}, campMeta = {};
       for (var mi = 0; mi < dados.length; mi++) {
         var mr = dados[mi];
         if (!mr.campanhaM) continue;
+        // Skip "####" (total row) and 30/06 campaigns
+        if (mr.campanhaM === '####') continue;
+        if (mr.dataN && mr.dataN.indexOf('30/06') >= 0) continue;
         // Aggregate campaign metadata from M-P (first occurrence)
         if (!campMeta[mr.campanhaM]) campMeta[mr.campanhaM] = {totalClientes: mr.totalClientes, receberam: mr.receberam, dataN: mr.dataN};
         // Per-lead data from A-K, grouped by CAMPANHA (M) + SETOR (E)
         var key = mr.campanhaM + '|' + mr.setor;
-        if (!byCampSetor[key]) byCampSetor[key] = {campanha: mr.campanhaM, setor: mr.setor, total: 0, recuperados: 0, valorTotal: 0, datasI: {}};
+        if (!byCampSetor[key]) byCampSetor[key] = {campanha: mr.campanhaM, setor: mr.setor, total: 0, recuperados: 0, valorTotal: 0, datasI: {}, nDate: mr.dataN};
         byCampSetor[key].total++;
         if (mr.valor > 0) { byCampSetor[key].recuperados++; byCampSetor[key].valorTotal += mr.valor; }
         var dI = mr.data || '—';
@@ -1220,7 +1223,7 @@
       }
       var matKeys = Object.keys(byCampSetor).sort();
       if (matKeys.length) {
-        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Cruzamento A-K (retornados) com M-P (total/receberam) por Campanha + Setor</span></h2><div class="table-wrap"><table><thead><tr><th>Campanha (M)</th><th>Setor (E)</th><th class="text-right">Total Clientes (O)</th><th class="text-right">Receberam (P)</th><th class="text-right">Leads (A-K)</th><th class="text-right">Recuperados (K>0)</th><th>% Rec.</th><th>Data (N)</th><th>Datas (I) → Cruzamento H</th><th>Comparação I vs N</th></tr></thead><tbody>';
+        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Cruzamento A-K (retornados) com M-P (total/receberam) por Campanha + Setor</span></h2><div class="table-wrap"><table><thead><tr><th>Campanha (M)</th><th>Setor (E)</th><th class="text-right">Total Clientes (O)</th><th class="text-right">Receberam (P)</th><th class="text-right">Leads (A-K)</th><th class="text-right">Recuperados (K>0)</th><th>% Rec.</th><th>Data (N)</th><th>Data (I)</th><th>Comparação I vs N</th></tr></thead><tbody>';
         for (var mi = 0; mi < matKeys.length; mi++) {
           var g = byCampSetor[matKeys[mi]];
           var meta = campMeta[g.campanha] || {};
@@ -1228,11 +1231,13 @@
           var pctTotal = meta.totalClientes > 0 ? (g.total / meta.totalClientes * 100).toFixed(1) : '0.0';
           var dataN = meta.dataN || '—';
           var dataIs = Object.keys(g.datasI).sort();
-          var dataIList = dataIs.map(function(d) { return d + ' (' + g.datasI[d] + ')'; }).join(', ');
-          // Compare first I date with N
-          var firstI = dataIs.length ? dataIs[0] : null;
-          dataN = dataN || '—';
-          var comp = (firstI && dataN !== '—' && firstI !== '—') ? (firstI === dataN ? 'Igual' : 'Diferente') : '—';
+          var dataIDisplay = dataIs.map(function(d) {
+            var match = d === dataN ? ' ✓' : '';
+            return d + match;
+          }).join(', ');
+          // Compare each I date with N date
+          var todasIguais = dataIs.length > 0 && dataIs.every(function(d) { return d === dataN; });
+          var comp = dataN !== '—' ? (todasIguais ? 'Igual' : 'Diferente') : '—';
           var compColor = comp === 'Igual' ? '#34d399' : (comp === 'Diferente' ? '#f87171' : '#6b7280');
           html += '<tr>' +
             '<td style="font-weight:600;color:#fcd34d">' + g.campanha + '</td>' +
@@ -1243,7 +1248,7 @@
             '<td class="text-right" style="color:#34d399">' + g.recuperados + '</td>' +
             '<td style="color:#f59e0b">' + pctRec + '%</td>' +
             '<td style="font-size:11px">' + dataN + '</td>' +
-            '<td style="font-size:11px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + dataIList + '">' + (dataIList || '—') + '</td>' +
+            '<td style="font-size:11px">' + (dataIDisplay || '—') + '</td>' +
             '<td style="color:' + compColor + ';font-weight:600">' + comp + '</td></tr>';
         }
         // Total row
@@ -1263,7 +1268,6 @@
           '<td style="font-weight:700;color:#f59e0b">' + (tLeads > 0 ? (tRecup / tLeads * 100).toFixed(1) : '0.0') + '%</td>' +
           '<td colspan="3"></td></tr>';
         html += '</tbody></table></div></div>';
-
       }
 
       document.getElementById('dashContent').innerHTML = html;

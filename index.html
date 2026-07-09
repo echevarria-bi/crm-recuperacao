@@ -1264,22 +1264,6 @@
           '<td colspan="3"></td></tr>';
         html += '</tbody></table></div></div>';
 
-        // Matriz detalhada: CAMPANHA | DATA | RECUPERADOS | SETOR (cruzamento I x H)
-        html += '<div class="chart-box"><h2>Detalhamento: CAMPANHA | DATA | RECUPERADOS | SETOR <span class="sub">&rarr; Cruzamento col I (data) x col H (campanha) — cada linha é um lead</span></h2><div class="table-wrap" style="max-height:400px;overflow-y:auto"><table><thead><tr><th>CAMPANHA (H)</th><th>Data (I)</th><th>Data (N)</th><th>Comparação</th><th class="text-right">Recuperado (K>0)</th><th>SETOR (E)</th><th>CAMPANHA (M)</th></tr></thead><tbody>';
-        var detalhe = dados.filter(function(r){return r.campanhaM;});
-        for (var mi = 0; mi < detalhe.length; mi++) {
-          var mr = detalhe[mi];
-          var comp = (mr.data && mr.dataN) ? (mr.data === mr.dataN ? 'Igual' : 'Diferente') : '—';
-          html += '<tr>' +
-            '<td>' + (mr.campanha || '—') + '</td>' +
-            '<td>' + (mr.data || '—') + '</td>' +
-            '<td>' + (mr.dataN || '—') + '</td>' +
-            '<td style="color:' + (comp === 'Igual' ? '#34d399' : (comp === 'Diferente' ? '#f87171' : '#6b7280')) + '">' + comp + '</td>' +
-            '<td class="text-right" style="color:' + (mr.valor > 0 ? '#34d399' : '#6b7280') + '">' + (mr.valor > 0 ? 'Sim' : 'Não') + '</td>' +
-            '<td>' + mr.setor + '</td>' +
-            '<td style="font-weight:600;color:#fcd34d">' + mr.campanhaM + '</td></tr>';
-        }
-        html += '</tbody></table></div></div>';
       }
 
       document.getElementById('dashContent').innerHTML = html;

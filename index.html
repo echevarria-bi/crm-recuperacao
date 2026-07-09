@@ -1179,29 +1179,6 @@
         if (r.compra) vendedores[r.vendedor].compras++;
         vendedores[r.vendedor].valor += r.valor;
       });
-      var campKeys = Object.keys(campanhas).sort(function(a,b){return campanhas[b].valor - campanhas[a].valor;});
-      var vendKeys = Object.keys(vendedores).sort();
-
-      html += '<div class="chart-box"><h2>Desempenho por Campanha <span class="sub">&rarr; Clique na campanha para ver por semana</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Campanha</th><th class="text-right">Leads</th><th class="text-right">Compras</th><th class="text-right">Valor</th><th class="text-right">Conv.</th></tr></thead><tbody id="tbodyCampanhas">';
-      for (var i = 0; i < campKeys.length; i++) {
-        var c = campanhas[campKeys[i]];
-        var cpct = c.leads > 0 ? (c.compras / c.leads * 100).toFixed(1) : 0;
-        var estilo = i % 2 === 0 ? '' : 'background:#11131c';
-        html += '<tr style="cursor:pointer;' + estilo + '" onclick="toggleCampanhaDetail(this, \'' + campKeys[i].replace(/'/g,"\\'") + '\')">';
-        html += '<td class="col-ranking">' + (i + 1) + '</td><td style="font-weight:600;color:#fcd34d">' + campKeys[i] + '</td>';
-        html += '<td class="text-right">' + c.leads + '</td><td class="text-right" style="color:#34d399">' + c.compras + '</td><td class="text-right">' + fmtCurr(c.valor) + '</td><td class="text-right" style="color:#f59e0b">' + cpct + '%</td></tr>';
-      }
-      html += '</tbody></table></div></div>';
-
-      html += '<div class="chart-box"><h2>Desempenho por Vendedor <span class="sub">&rarr; Leads, compras e valor por vendedor</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Vendedor</th><th class="text-right">Leads</th><th class="text-right">Compras</th><th class="text-right">Valor</th><th class="text-right">Conv.</th></tr></thead><tbody>';
-      vendKeys.sort(function(a,b){return vendedores[b].valor - vendedores[a].valor;});
-      for (var i = 0; i < vendKeys.length; i++) {
-        var v = vendedores[vendKeys[i]];
-        var vpct = v.leads > 0 ? (v.compras / v.leads * 100).toFixed(1) : 0;
-        html += '<tr' + (i % 2 === 0 ? '' : ' style="background:#11131c"') + '><td class="col-ranking">' + (i + 1) + '</td><td style="font-weight:600">' + vendKeys[i] + '</td><td class="text-right">' + v.leads + '</td><td class="text-right" style="color:#34d399">' + v.compras + '</td><td class="text-right">' + fmtCurr(v.valor) + '</td><td class="text-right" style="color:#f59e0b">' + vpct + '%</td></tr>';
-      }
-      html += '</tbody></table></div></div>';
-
       // MATRIZ: dados M-P por data, leads contados pela mesma data
       var datasMP = {};
       for (var mi = 0; mi < dados.length; mi++) {

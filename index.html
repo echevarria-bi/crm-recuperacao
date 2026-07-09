@@ -1203,69 +1203,63 @@
       html += '</tbody></table></div></div>';
 
       // MATRIZ: cruzamento A-K (retornados) com M-P (total/receberam)
-      var byCampSetor = {}, campMeta = {};
+      var campMeta = {}, campLeads = {};
       for (var mi = 0; mi < dados.length; mi++) {
         var mr = dados[mi];
         if (!mr.campanhaM) continue;
-        // Skip dates 10/06, 18/06, 30/06
         if (mr.dataN && (mr.dataN.indexOf('/06') >= 0 && ['10','18','30'].indexOf(mr.dataN.split('/')[0]) >= 0)) continue;
         // Aggregate campaign metadata from M-P (first occurrence)
-        if (!campMeta[mr.campanhaM]) campMeta[mr.campanhaM] = {totalClientes: mr.totalClientes, receberam: mr.receberam, dataN: mr.dataN};
-        // Per-lead data from A-K, grouped by CAMPANHA (M) + SETOR (E)
-        var key = mr.campanhaM + '|' + mr.setor;
-        if (!byCampSetor[key]) byCampSetor[key] = {campanha: mr.campanhaM, setor: mr.setor, total: 0, recuperados: 0, valorTotal: 0, datasI: {}, nDate: mr.dataN};
-        byCampSetor[key].total++;
-        if (mr.valor > 0) { byCampSetor[key].recuperados++; byCampSetor[key].valorTotal += mr.valor; }
-        var dI = mr.data || '—';
-        if (!byCampSetor[key].datasI[dI]) byCampSetor[key].datasI[dI] = 0;
-        byCampSetor[key].datasI[dI]++;
+        if (!campMeta[mr.campanhaM]) campMeta[mr.campanhaM] = {totalClientes: mr.totalClientes, receberam: mr.receberam, dataN: mr.dataN, setor: mr.setor};
+        // Group leads by campanha + data I
+        if (!campLeads[mr.campanhaM]) campLeads[mr.campanhaM] = {totalIguais: 0, recupIguais: 0, totalTodos: 0, recupTodos: 0};
+        campLeads[mr.campanhaM].totalTodos++;
+        if (mr.valor > 0) campLeads[mr.campanhaM].recupTodos++;
+        if (mr.data && mr.dataN && mr.data === mr.dataN) {
+          campLeads[mr.campanhaM].totalIguais++;
+          if (mr.valor > 0) campLeads[mr.campanhaM].recupIguais++;
+        }
       }
-      var matKeys = Object.keys(byCampSetor).sort();
-      if (matKeys.length) {
-        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Cruzamento A-K (retornados) com M-P (total/receberam) por Campanha + Setor</span></h2><div class="table-wrap"><table><thead><tr><th>Campanha (M)</th><th>Setor (E)</th><th class="text-right">Total Clientes (O)</th><th class="text-right">Receberam (P)</th><th class="text-right">Leads (A-K)</th><th class="text-right">Recuperados (K>0)</th><th>% Rec.</th><th>Data (N)</th><th>Data (I)</th><th>Comparação I vs N</th></tr></thead><tbody>';
-        for (var mi = 0; mi < matKeys.length; mi++) {
-          var g = byCampSetor[matKeys[mi]];
-          var meta = campMeta[g.campanha] || {};
-          var pctRec = g.total > 0 ? (g.recuperados / g.total * 100).toFixed(1) : '0.0';
-          var pctTotal = meta.totalClientes > 0 ? (g.total / meta.totalClientes * 100).toFixed(1) : '0.0';
-          var dataN = meta.dataN || '—';
-          var dataIs = Object.keys(g.datasI).sort();
-          var dataIDisplay = dataIs.map(function(d) {
-            var match = d === dataN ? ' ✓' : '';
-            return d + match;
-          }).join(', ');
-          // Compare each I date with N date
-          var todasIguais = dataIs.length > 0 && dataIs.every(function(d) { return d === dataN; });
-          var comp = dataN !== '—' ? (todasIguais ? 'Igual' : 'Diferente') : '—';
-          var compColor = comp === 'Igual' ? '#34d399' : (comp === 'Diferente' ? '#f87171' : '#6b7280');
+      var campKeys = Object.keys(campMeta).sort();
+      if (campKeys.length) {
+        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados agrupados por campanha: total/receberam (M-P) x leads com data I igual a N</span></h2><div class="table-wrap"><table><thead><tr><th>Campanha</th><th>Setor</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Data N</th><th class="text-right">Leads (I = N)</th><th class="text-right">Recuperados (I = N)</th><th>% Rec.</th><th class="text-right">Todos Leads</th><th class="text-right">Todos Recup.</th></tr></thead><tbody>';
+        for (var mi = 0; mi < campKeys.length; mi++) {
+          var ck = campKeys[mi];
+          var meta = campMeta[ck];
+          var leads = campLeads[ck] || {totalIguais:0, recupIguais:0, totalTodos:0, recupTodos:0};
+          var pct = leads.totalIguais > 0 ? (leads.recupIguais / leads.totalIguais * 100).toFixed(1) : '0.0';
           html += '<tr>' +
-            '<td style="font-weight:600;color:#fcd34d">' + g.campanha + '</td>' +
-            '<td>' + g.setor + '</td>' +
+            '<td style="font-weight:600;color:#fcd34d">' + ck + '</td>' +
+            '<td>' + meta.setor + '</td>' +
             '<td class="text-right" style="color:#60a5fa">' + (meta.totalClientes != null ? meta.totalClientes : '—') + '</td>' +
             '<td class="text-right" style="color:#a78bfa">' + (meta.receberam != null ? meta.receberam : '—') + '</td>' +
-            '<td class="text-right">' + g.total + ' <span style="font-size:9px;color:#6b7280">(' + pctTotal + '%)</span></td>' +
-            '<td class="text-right" style="color:#34d399">' + g.recuperados + '</td>' +
-            '<td style="color:#f59e0b">' + pctRec + '%</td>' +
-            '<td style="font-size:11px">' + dataN + '</td>' +
-            '<td style="font-size:11px">' + (dataIDisplay || '—') + '</td>' +
-            '<td style="color:' + compColor + ';font-weight:600">' + comp + '</td></tr>';
+            '<td class="text-right" style="font-size:11px">' + meta.dataN + '</td>' +
+            '<td class="text-right" style="color:#34d399">' + leads.totalIguais + '</td>' +
+            '<td class="text-right" style="color:#34d399">' + leads.recupIguais + '</td>' +
+            '<td style="color:#f59e0b">' + pct + '%</td>' +
+            '<td class="text-right" style="color:#6b7280">' + leads.totalTodos + '</td>' +
+            '<td class="text-right" style="color:#6b7280">' + leads.recupTodos + '</td></tr>';
         }
         // Total row
-        var tLeads = 0, tRecup = 0, tValor = 0, tTotalCli = 0, tReceb = 0;
-        for (var mi = 0; mi < matKeys.length; mi++) {
-          var g = byCampSetor[matKeys[mi]];
-          var meta = campMeta[g.campanha] || {};
-          tLeads += g.total; tRecup += g.recuperados; tValor += g.valorTotal;
-          tTotalCli += parseFloat(meta.totalClientes) || 0;
-          tReceb += parseFloat(meta.receberam) || 0;
+        var tCli = 0, tRec = 0, tL = 0, tR = 0, tTL = 0, tTR = 0;
+        for (var mi = 0; mi < campKeys.length; mi++) {
+          var meta = campMeta[campKeys[mi]];
+          var leads = campLeads[campKeys[mi]] || {};
+          tCli += parseFloat(meta.totalClientes) || 0;
+          tRec += parseFloat(meta.receberam) || 0;
+          tL += leads.totalIguais || 0;
+          tR += leads.recupIguais || 0;
+          tTL += leads.totalTodos || 0;
+          tTR += leads.recupTodos || 0;
         }
         html += '<tr class="tot-row"><td style="color:#fcd34d;font-weight:700">Total</td><td></td>' +
-          '<td class="text-right" style="font-weight:700">' + tTotalCli + '</td>' +
-          '<td class="text-right" style="font-weight:700">' + tReceb + '</td>' +
-          '<td class="text-right" style="font-weight:700">' + tLeads + '</td>' +
-          '<td class="text-right" style="font-weight:700;color:#34d399">' + tRecup + '</td>' +
-          '<td style="font-weight:700;color:#f59e0b">' + (tLeads > 0 ? (tRecup / tLeads * 100).toFixed(1) : '0.0') + '%</td>' +
-          '<td colspan="3"></td></tr>';
+          '<td class="text-right" style="font-weight:700">' + tCli + '</td>' +
+          '<td class="text-right" style="font-weight:700">' + tRec + '</td>' +
+          '<td></td>' +
+          '<td class="text-right" style="font-weight:700;color:#34d399">' + tL + '</td>' +
+          '<td class="text-right" style="font-weight:700;color:#34d399">' + tR + '</td>' +
+          '<td style="font-weight:700;color:#f59e0b">' + (tL > 0 ? (tR / tL * 100).toFixed(1) : '0.0') + '%</td>' +
+          '<td class="text-right" style="font-weight:700;color:#6b7280">' + tTL + '</td>' +
+          '<td class="text-right" style="font-weight:700;color:#6b7280">' + tTR + '</td></tr>';
         html += '</tbody></table></div></div>';
       }
 

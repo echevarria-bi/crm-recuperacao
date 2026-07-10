@@ -1239,10 +1239,10 @@
         html += '<div class="chart-box">';
         html += '<h2 style="margin-bottom:16px">' + icn('bar-chart-3',14) + ' Custo vs Retorno <span class="sub">&rarr; R$ 0,54 por mensagem enviada</span></h2>';
         html += '<div style="padding:10px 0">';
-        var st = function(label, valor, cor, form) { var f = form === 'curr' ? fmtCurr : function(v) { return typeof v === 'number' ? v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) : v; }; return '<div style="display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid #1e1b4b;font-size:13px"><span style="color:#9ca3af">' + label + '</span><span style="color:' + cor + ';font-weight:700">' + f(valor) + '</span></div>'; };
+        var st = function(label, valor, cor, form) { var f = form === 'curr' ? fmtCurr : function(v) { return typeof v === 'number' ? v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) : v; }; var sufixo = form === 'pct' ? '%' : ''; return '<div style="display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid #1e1b4b;font-size:13px"><span style="color:#9ca3af">' + label + '</span><span style="color:' + cor + ';font-weight:700">' + f(valor) + sufixo + '</span></div>'; };
         html += st('Total Investido (R$ 0,54 \u00D7 ' + totalReceberam.toLocaleString('pt-BR') + ' receberam)', custoTotal, '#f87171', 'curr');
         html += st('Lucro L\u00EDquido', lucroLiquido, lucroLiquido >= 0 ? '#34d399' : '#f87171', 'curr');
-        html += st('ROI', roi + '%', roi >= 0 ? '#34d399' : '#f87171', 'num');
+        html += st('ROI', roi, roi >= 0 ? '#34d399' : '#f87171', 'pct');
         html += st('Ticket M\u00E9dio por Recuperado', ticketMedio, '#60a5fa', 'curr');
         html += st('Custo por Recuperado', custoPorRecuperado, '#a78bfa', 'curr');
         html += '<div style="display:flex;justify-content:space-between;padding:8px 12px;font-size:13px"><span style="color:#9ca3af">Recuperados</span><span style="color:#34d399;font-weight:700">' + tR.toLocaleString('pt-BR') + '</span></div>';

@@ -658,14 +658,12 @@
           setor: r[4],
           regiao: r[5],
           supervisor: r[6],
-          campanha: r[7],
-          data: typeof r[8] === 'number' ? XLSX.SSF.format('dd/mm/yyyy', r[8]) : r[8],
-          compra: r[9] === 'Sim',
-          valor: parseFloat(r[10]) || 0,
-          campanhaM: r[12],
-          dataN: typeof r[13] === 'number' ? XLSX.SSF.format('dd/mm/yyyy', r[13]) : r[13],
-          totalClientes: r[14],
-          receberam: r[15]
+          data: typeof r[7] === 'number' ? XLSX.SSF.format('dd/mm/yyyy', r[7]) : r[7],
+          valor: parseFloat(r[8]) || 0,
+          campanhaM: r[10],
+          dataN: typeof r[11] === 'number' ? XLSX.SSF.format('dd/mm/yyyy', r[11]) : r[11],
+          totalClientes: r[12],
+          receberam: r[13]
         });
       }
       return rows;
@@ -1157,28 +1155,13 @@
         return;
       }
       var totalLeads = dados.length;
-      var totalCompras = dados.filter(function(r){return r.compra;}).length;
       var totalValor = dados.reduce(function(s,r){return s+r.valor;},0);
-      var pctConv = totalLeads > 0 ? (totalCompras / totalLeads * 100).toFixed(1) : 0;
 
       var html = '<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:20px">';
       html += '<div class="card"><div class="label">Total Leads</div><div class="value" style="color:#60a5fa">' + totalLeads + '</div></div>';
-      html += '<div class="card"><div class="label">Compras</div><div class="value" style="color:#34d399">' + totalCompras + '</div></div>';
       html += '<div class="card"><div class="label">Valor Total</div><div class="value" style="color:#fbbf24">' + fmtCurr(totalValor) + '</div></div>';
-      html += '<div class="card"><div class="label">Convers\u00E3o</div><div class="value" style="color:#f59e0b">' + pctConv + '%</div></div>';
       html += '</div>';
 
-      var campanhas = {}, vendedores = {};
-      dados.forEach(function(r) {
-        if (!campanhas[r.campanha]) campanhas[r.campanha] = {leads:0, compras:0, valor:0};
-        campanhas[r.campanha].leads++;
-        if (r.compra) campanhas[r.campanha].compras++;
-        campanhas[r.campanha].valor += r.valor;
-        if (!vendedores[r.vendedor]) vendedores[r.vendedor] = {leads:0, compras:0, valor:0};
-        vendedores[r.vendedor].leads++;
-        if (r.compra) vendedores[r.vendedor].compras++;
-        vendedores[r.vendedor].valor += r.valor;
-      });
       // MATRIZ: dados M-P por data, leads contados pela mesma data
       var datasMP = {};
       for (var mi = 0; mi < dados.length; mi++) {

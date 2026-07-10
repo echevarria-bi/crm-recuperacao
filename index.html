@@ -1231,13 +1231,13 @@
         html += '<div class="chart-box" style="display:flex;flex-direction:column">';
         html += '<h2 style="margin-bottom:16px">' + icn('bar-chart-3',14) + ' Custo vs Retorno <span class="sub">&rarr; R$ 0,54 por mensagem enviada</span></h2>';
         html += '<div style="padding:16px 0;flex:1;display:flex;flex-direction:column;justify-content:center">';
-        var st = function(label, valor, cor, form) { var f = form === 'curr' ? fmtCurr : function(v) { return typeof v === 'number' ? v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) : v; }; var sufixo = form === 'pct' ? '%' : ''; return '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #1e1b4b"><span style="color:#d1d5db;font-size:14px">' + label + '</span><span style="color:' + cor + ';font-size:20px;font-weight:800">' + f(valor) + sufixo + '</span></div>'; };
+        var st = function(label, valor, cor, form) { var f = form === 'curr' ? fmtCurr : function(v) { return typeof v === 'number' ? v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) : v; }; var sufixo = form === 'pct' ? '%' : ''; return '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #1e1b4b"><span style="color:#f3f4f6;font-size:15px">' + label + '</span><span style="color:' + cor + ';font-size:22px;font-weight:800">' + f(valor) + sufixo + '</span></div>'; };
         html += st('Total Investido (R$ 0,54 \u00D7 ' + totalReceberam.toLocaleString('pt-BR') + ' receberam)', custoTotal, '#f87171', 'curr');
         html += st('Lucro L\u00EDquido', lucroLiquido, lucroLiquido >= 0 ? '#34d399' : '#f87171', 'curr');
         html += st('ROI', roi, roi >= 0 ? '#34d399' : '#f87171', 'pct');
         html += st('Ticket M\u00E9dio por Recuperado', ticketMedio, '#60a5fa', 'curr');
         html += st('Custo por Recuperado', custoPorRecuperado, '#a78bfa', 'curr');
-        html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #1e1b4b"><span style="color:#d1d5db;font-size:14px">Recuperados</span><span style="color:#34d399;font-size:20px;font-weight:800">' + totalRecuperados.toLocaleString('pt-BR') + '</span></div>';
+        html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #1e1b4b"><span style="color:#f3f4f6;font-size:15px">Recuperados</span><span style="color:#34d399;font-size:22px;font-weight:800">' + totalRecuperados.toLocaleString('pt-BR') + '</span></div>';
         html += '</div></div>';
         // Funil (direita)
         html += '<div class="chart-box" style="display:flex;flex-direction:column">';

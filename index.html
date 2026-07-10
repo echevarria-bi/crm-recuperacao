@@ -1241,7 +1241,6 @@
         html += '<div style="padding:10px 0">';
         var st = function(label, valor, cor, form) { var f = form === 'curr' ? fmtCurr : function(v) { return typeof v === 'number' ? v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) : v; }; return '<div style="display:flex;justify-content:space-between;padding:8px 12px;border-bottom:1px solid #1e1b4b;font-size:13px"><span style="color:#9ca3af">' + label + '</span><span style="color:' + cor + ';font-weight:700">' + f(valor) + '</span></div>'; };
         html += st('Total Investido (R$ 0,54 \u00D7 ' + totalReceberam.toLocaleString('pt-BR') + ' receberam)', custoTotal, '#f87171', 'curr');
-        html += st('Faturamento Total', tFat, '#fbbf24', 'curr');
         html += st('Lucro L\u00EDquido', lucroLiquido, lucroLiquido >= 0 ? '#34d399' : '#f87171', 'curr');
         html += st('ROI', roi + '%', roi >= 0 ? '#34d399' : '#f87171', 'num');
         html += st('Ticket M\u00E9dio por Recuperado', ticketMedio, '#60a5fa', 'curr');

@@ -1171,8 +1171,9 @@
       for (var mi = 0; mi < dados.length; mi++) {
         var mr = dados[mi];
         if (!mr.campanhaM || !mr.dataN) continue;
-        if (!datasMP[mr.dataN]) datasMP[mr.dataN] = {totalClientes: mr.totalClientes, receberam: mr.receberam, campanhas: []};
+        if (!datasMP[mr.dataN]) datasMP[mr.dataN] = {totalClientes: mr.totalClientes, receberam: mr.receberam, campanhas: [], setores: []};
         if (datasMP[mr.dataN].campanhas.indexOf(mr.campanhaM) < 0) datasMP[mr.dataN].campanhas.push(mr.campanhaM);
+        if (mr.setor && datasMP[mr.dataN].setores.indexOf(mr.setor) < 0) datasMP[mr.dataN].setores.push(mr.setor);
       }
       var datas = Object.keys(datasMP).sort();
       // Count ALL leads by their date (not just M-P dates)
@@ -1249,7 +1250,7 @@
         html += '</div></div>';
         html += '</div>';
 
-        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados M-P por data, com leads na mesma data</span></h2><div class="table-wrap"><table><thead><tr><th>Data do Disparo</th><th>Campanhas</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Contatos Gerados</th><th class="text-right">Recuperados</th><th class="text-right">Faturamento</th><th>% Rec.</th></tr></thead><tbody>';
+        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados M-P por data, com leads na mesma data</span></h2><div class="table-wrap"><table><thead><tr><th>Data do Disparo</th><th>Campanhas</th><th>Setor</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Contatos Gerados</th><th class="text-right">Recuperados</th><th class="text-right">Faturamento</th><th>% Rec.</th></tr></thead><tbody>';
         for (var di = 0; di < allDates.length; di++) {
           var dt = allDates[di];
           var mp = datasMP[dt] || {campanhas:['—'], totalClientes: null, receberam: null};
@@ -1258,6 +1259,7 @@
           html += '<tr>' +
             '<td style="font-weight:600">' + dt + '</td>' +
             '<td style="font-size:10px;color:#fcd34d;max-width:250px">' + mp.campanhas.join('<br>') + '</td>' +
+            '<td style="font-size:10px;color:#93c5fd;max-width:200px">' + (mp.setores && mp.setores.length ? mp.setores.join('<br>') : '—') + '</td>' +
             '<td class="text-right" style="color:#60a5fa">' + (mp.totalClientes != null && mp.totalClientes !== '' ? mp.totalClientes : '—') + '</td>' +
             '<td class="text-right" style="color:#a78bfa">' + (mp.receberam != null && mp.receberam !== '' ? mp.receberam : '—') + '</td>' +
             '<td class="text-right" style="color:#34d399">' + l.total + '</td>' +
@@ -1265,7 +1267,7 @@
             '<td class="text-right" style="color:#fbbf24">' + fmtCurr(l.faturamento) + '</td>' +
             '<td style="color:#f59e0b">' + pct + '%</td></tr>';
         }
-        html += '<tr class="tot-row"><td style="font-weight:700">Total</td><td></td>' +
+        html += '<tr class="tot-row"><td style="font-weight:700">Total</td><td></td><td></td>' +
           '<td class="text-right" style="font-weight:700">' + tCli + '</td>' +
           '<td class="text-right" style="font-weight:700">' + tRec + '</td>' +
           '<td class="text-right" style="font-weight:700;color:#34d399">' + tL + '</td>' +

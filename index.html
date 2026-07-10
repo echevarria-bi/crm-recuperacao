@@ -1215,6 +1215,7 @@
 
         function funnelBar(label, valor, pct, color, idx) {
           var w = Math.max(valor / funnelMax * 100, 8);
+          var left = (100 - w) / 2;
           return '<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:16px">' +
             '<div style="font-size:11px;color:#9ca3af;font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">' + label + '</div>' +
             '<div style="position:relative;width:90%;max-width:360px;height:52px;overflow:hidden;border-radius:8px;background:rgba(255,255,255,0.03)">' +

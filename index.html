@@ -1175,21 +1175,25 @@
         if (datasMP[mr.dataN].campanhas.indexOf(mr.campanhaM) < 0) datasMP[mr.dataN].campanhas.push(mr.campanhaM);
       }
       var datas = Object.keys(datasMP).sort();
-      // Count leads by matching data
+      // Count ALL leads by their date (not just M-P dates)
       var leadsPorData = {};
-      datas.forEach(function(d) { leadsPorData[d] = {total:0, recup:0, faturamento:0}; });
       for (var mi = 0; mi < dados.length; mi++) {
         var mr = dados[mi];
         if (!mr.data) continue;
-        if (leadsPorData[mr.data]) {
-          leadsPorData[mr.data].total++;
-          if (mr.valor > 0) { leadsPorData[mr.data].recup++; leadsPorData[mr.data].faturamento += mr.valor; }
-        }
+        if (!leadsPorData[mr.data]) leadsPorData[mr.data] = {total:0, recup:0, faturamento:0};
+        leadsPorData[mr.data].total++;
+        if (mr.valor > 0) { leadsPorData[mr.data].recup++; leadsPorData[mr.data].faturamento += mr.valor; }
       }
-      if (datas.length) {
+      // Merge M-P dates and lead dates for full matrix
+      var allDates = Object.keys(datasMP);
+      Object.keys(leadsPorData).forEach(function(d) {
+        if (allDates.indexOf(d) < 0) allDates.push(d);
+      });
+      allDates.sort();
+      if (allDates.length) {
         // Calcular totais para o funil
         var tCli = 0, tRec = 0, tL = 0, tR = 0, tFat = 0;
-        datas.forEach(function(dt) {
+        allDates.forEach(function(dt) {
           var mp = datasMP[dt];
           var l = leadsPorData[dt] || {};
           tCli += parseFloat(mp.totalClientes) || 0;
@@ -1213,7 +1217,7 @@
         }
 
         var custoPorMsg = 0.54;
-        var totalReceberam = datas.reduce(function(s,dt){return s + (parseFloat(datasMP[dt].receberam)||0);}, 0);
+        var totalReceberam = Object.keys(datasMP).reduce(function(s,dt){return s + (parseFloat(datasMP[dt].receberam)||0);}, 0);
         var custoTotal = totalReceberam * custoPorMsg;
         var fatGlobal = totalValor;
         var ticketMedio = totalRecuperados > 0 ? fatGlobal / totalRecuperados : 0;
@@ -1246,9 +1250,9 @@
         html += '</div>';
 
         html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados M-P por data, com leads na mesma data</span></h2><div class="table-wrap"><table><thead><tr><th>Data do Disparo</th><th>Campanhas</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Contatos Gerados</th><th class="text-right">Recuperados</th><th class="text-right">Faturamento</th><th>% Rec.</th></tr></thead><tbody>';
-        for (var di = 0; di < datas.length; di++) {
-          var dt = datas[di];
-          var mp = datasMP[dt];
+        for (var di = 0; di < allDates.length; di++) {
+          var dt = allDates[di];
+          var mp = datasMP[dt] || {campanhas:['—'], totalClientes: null, receberam: null};
           var l = leadsPorData[dt] || {total:0, recup:0};
           var pct = l.total > 0 ? (l.recup / l.total * 100).toFixed(1) : '0.0';
           html += '<tr>' +

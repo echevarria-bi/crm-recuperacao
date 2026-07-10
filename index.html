@@ -1194,7 +1194,7 @@
         // Calcular totais para o funil
         var tCli = 0, tRec = 0, tL = 0, tR = 0, tFat = 0;
         allDates.forEach(function(dt) {
-          var mp = datasMP[dt];
+          var mp = datasMP[dt] || {};
           var l = leadsPorData[dt] || {};
           tCli += parseFloat(mp.totalClientes) || 0;
           tRec += parseFloat(mp.receberam) || 0;

@@ -242,16 +242,6 @@
           try {
             var data = new Uint8Array(ev.target.result);
             var wb = XLSX.read(data, {type:'array'});
-            var lname = file.name.toLowerCase();
-            if (lname.indexOf('base_campanhas') >= 0) {
-              if (!allData) {
-                allData = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
-              }
-              allData.campanhas = parseCampanhas(wb);
-              processados++;
-              maybeDone();
-              return;
-            }
             var month = detectMonthFromName(file.name);
             if (!allData) {
               allData = parseAllSheets(wb, month);
@@ -293,13 +283,7 @@
         try {
           var data = new Uint8Array(ev.target.result);
           var wb = XLSX.read(data, {type:'array'});
-          var lname = file.name.toLowerCase();
-          if (lname.indexOf('base_campanhas') >= 0) {
-            allData = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
-            allData.campanhas = parseCampanhas(wb);
-          } else {
-            allData = parseAllSheets(wb);
-          }
+          allData = parseAllSheets(wb);
           document.getElementById('areaInicial').innerHTML = '<div style="font-size:40px;margin-bottom:8px">✅</div><div style="color:#34d399;font-size:15px;font-weight:600">' + file.name + '</div><div style="color:#6b7280;font-size:12px;margin-top:2px">Carregado com sucesso</div>';
           var now = new Date();
           document.getElementById('footer').style.display = 'block';
@@ -335,7 +319,7 @@
 
     function parseAllSheets(wb, baseMonth) {
       baseMonth = baseMonth || 'Junho';
-      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[], campanhas:[]};
+      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
       var sheetMap = {};
       for (var si = 0; si < wb.SheetNames.length; si++) {
         var sn = wb.SheetNames[si];
@@ -647,31 +631,6 @@
     function fmtCurr(v) { if (v==null||isNaN(v)) return '-'; return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
     var icn = function(n,s){s=s||14; return '<i data-lucide="'+n+'" style="display:inline-block;width:'+s+'px;height:'+s+'px;vertical-align:middle;stroke:currentColor;stroke-width:2;flex-shrink:0;margin-right:4px"></i>';};
 
-    function parseCampanhas(wb) {
-      var raw = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header:1, defval:''});
-      var rows = [];
-      for (var ri = 1; ri < raw.length; ri++) {
-        var r = raw[ri];
-        if (!r || !r[0]) continue;
-        rows.push({
-          id: r[0],
-          resposta: r[1],
-          cod: r[2],
-          vendedor: r[3],
-          setor: r[4],
-          regiao: r[5],
-          supervisor: r[6],
-          data: typeof r[7] === 'number' ? XLSX.SSF.format('dd/mm/yyyy', r[7]) : r[7],
-          valor: parseFloat(r[8]) || 0,
-          campanhaM: r[10],
-          dataN: typeof r[11] === 'number' ? XLSX.SSF.format('dd/mm/yyyy', r[11]) : r[11],
-          totalClientes: r[12],
-          receberam: r[13]
-        });
-      }
-      return rows;
-    }
-
     function initTabs() {
       var h = '<div class="tabs-group">';
       h += '<div class="tabs">';
@@ -681,7 +640,6 @@
       h += '</div><div class="tab-divider"></div><div class="tabs">';
       h += '<button class="tab-btn' + (activeTab==='resumo'?' active':'') + '" data-tab="resumo">' + icn('layout-dashboard',12) + ' Resumo</button>';
       h += '<button class="tab-btn' + (activeTab==='clientes'?' active':'') + '" data-tab="clientes">' + icn('table-2',12) + ' Clientes</button>';
-      h += '<button class="tab-btn' + (activeTab==='campanhas'?' active':'') + '" data-tab="campanhas">' + icn('megaphone',12) + ' Campanhas</button>';
       h += '</div></div>';
       var tc = document.getElementById('tabsContainer');
       if (tc) tc.innerHTML = h;
@@ -702,7 +660,6 @@
       else if (tab === 'maio') renderMonth('Maio');
       else if (tab === 'geral') renderMonth('Junho');
       else if (tab === 'clientes') renderClientes();
-      else if (tab === 'campanhas') renderCampanhas();
     }
 
     function getFilteredProfs() {
@@ -1149,210 +1106,6 @@
         if (mesF) mesF.addEventListener('change', applyFilters);
       }, 50);
       try { lucide.createIcons(); } catch(e) {}
-    }
-
-    function renderCampanhas() {
-      var dados = allData.campanhas || [];
-      if (!dados.length) {
-        document.getElementById('dashContent').innerHTML = '<div class="chart-box"><h2>Campanhas <span class="sub">&rarr; Base de campanhas</span></h2><div style="text-align:center;padding:40px;color:#6b7280">Nenhum dado dispon\u00EDvel. Fa\u00E7a o upload do arquivo base_campanhas.xlsx.</div></div>';
-        return;
-      }
-      var totalLeads = dados.length;
-      var totalValor = dados.reduce(function(s,r){return s+r.valor;},0);
-      var totalRecuperados = dados.filter(function(r){return r.valor > 0;}).length;
-
-      var html = '<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:20px">';
-      html += '<div class="card"><div class="label">Recuperados</div><div class="value" style="color:#34d399">' + totalRecuperados + '</div></div>';
-      html += '<div class="card"><div class="label">Valor Total</div><div class="value" style="color:#fbbf24">' + fmtCurr(totalValor) + '</div></div>';
-      html += '</div>';
-
-      // MATRIZ: dados M-P por data, leads contados pela mesma data
-      var datasMP = {};
-      for (var mi = 0; mi < dados.length; mi++) {
-        var mr = dados[mi];
-        if (!mr.campanhaM || !mr.dataN) continue;
-        if (!datasMP[mr.dataN]) datasMP[mr.dataN] = {totalClientes: mr.totalClientes, receberam: mr.receberam, campanhas: [], setores: []};
-        if (datasMP[mr.dataN].campanhas.indexOf(mr.campanhaM) < 0) datasMP[mr.dataN].campanhas.push(mr.campanhaM);
-        if (mr.setor && datasMP[mr.dataN].setores.indexOf(mr.setor) < 0) datasMP[mr.dataN].setores.push(mr.setor);
-      }
-      var datas = Object.keys(datasMP).sort();
-      // Count ALL leads by their date (not just M-P dates)
-      var leadsPorData = {};
-      for (var mi = 0; mi < dados.length; mi++) {
-        var mr = dados[mi];
-        if (!mr.data) continue;
-        if (!leadsPorData[mr.data]) leadsPorData[mr.data] = {total:0, recup:0, faturamento:0};
-        leadsPorData[mr.data].total++;
-        if (mr.valor > 0) { leadsPorData[mr.data].recup++; leadsPorData[mr.data].faturamento += mr.valor; }
-      }
-      // Merge M-P dates and lead dates for full matrix
-      var allDates = Object.keys(datasMP);
-      Object.keys(leadsPorData).forEach(function(d) {
-        if (allDates.indexOf(d) < 0) allDates.push(d);
-      });
-      allDates.sort();
-      if (allDates.length) {
-        // Calcular totais para o funil
-        var tCli = 0, tRec = 0, tL = 0, tR = 0, tFat = 0;
-        allDates.forEach(function(dt) {
-          var mp = datasMP[dt] || {};
-          var l = leadsPorData[dt] || {};
-          tCli += parseFloat(mp.totalClientes) || 0;
-          tRec += parseFloat(mp.receberam) || 0;
-          tL += l.total || 0;
-          tR += l.recup || 0;
-          tFat += l.faturamento || 0;
-        });
-        var funnelMax = Math.max(tCli, tRec, tL, totalRecuperados, 1);
-
-        function funnelBar(label, valor, pct, color, idx) {
-          var w = Math.max(valor / funnelMax * 100, 8);
-          var left = (100 - w) / 2;
-          return '<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:16px">' +
-            '<div style="font-size:11px;color:#9ca3af;font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">' + label + '</div>' +
-            '<div style="position:relative;width:90%;max-width:360px;height:52px;overflow:hidden;border-radius:8px;background:rgba(255,255,255,0.03)">' +
-            '<div style="position:absolute;bottom:0;left:' + left + '%;width:' + w + '%;height:100%;background:linear-gradient(180deg,' + color + '22,' + color + 'cc);border-radius:8px 8px 4px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid ' + color + '66;transition:all 0.3s">' +
-            '<span style="font-size:20px;font-weight:800;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,0.6);line-height:1.1">' + (typeof valor === 'number' ? valor.toLocaleString('pt-BR') : valor) + '</span>' +
-            '<span style="font-size:11px;color:' + color + ';font-weight:600;opacity:0.9">' + pct + '</span>' +
-            '</div></div></div>';
-        }
-
-        var custoPorMsg = 0.54;
-        var totalReceberam = Object.keys(datasMP).reduce(function(s,dt){return s + (parseFloat(datasMP[dt].receberam)||0);}, 0);
-        var custoTotal = totalReceberam * custoPorMsg;
-        var fatGlobal = totalValor;
-        var ticketMedio = totalRecuperados > 0 ? fatGlobal / totalRecuperados : 0;
-        var roi = custoTotal > 0 ? ((fatGlobal - custoTotal) / custoTotal * 100) : 0;
-        var lucroLiquido = fatGlobal - custoTotal;
-        var custoPorRecuperado = totalRecuperados > 0 ? custoTotal / totalRecuperados : 0;
-
-        html += '<div class="grid-2" style="margin-bottom:20px">';
-        // Custo x Retorno (esquerda)
-        html += '<div class="chart-box" style="display:flex;flex-direction:column">';
-        html += '<h2 style="margin-bottom:16px">' + icn('bar-chart-3',14) + ' Custo vs Retorno <span class="sub">&rarr; R$ 0,54 por mensagem enviada</span></h2>';
-        html += '<div style="padding:16px 0;flex:1;display:flex;flex-direction:column;justify-content:center">';
-        var st = function(label, valor, cor, form) { var f = form === 'curr' ? fmtCurr : function(v) { return typeof v === 'number' ? v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) : v; }; var sufixo = form === 'pct' ? '%' : ''; return '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #1e1b4b"><span style="color:#f3f4f6;font-size:15px">' + label + '</span><span style="color:' + cor + ';font-size:22px;font-weight:800">' + f(valor) + sufixo + '</span></div>'; };
-        html += st('Total Investido (R$ 0,54 \u00D7 ' + totalReceberam.toLocaleString('pt-BR') + ' receberam)', custoTotal, '#f87171', 'curr');
-        html += st('Lucro L\u00EDquido', lucroLiquido, lucroLiquido >= 0 ? '#34d399' : '#f87171', 'curr');
-        html += st('ROI', roi, roi >= 0 ? '#34d399' : '#f87171', 'pct');
-        html += st('Ticket M\u00E9dio por Recuperado', ticketMedio, '#60a5fa', 'curr');
-        html += st('Custo por Recuperado', custoPorRecuperado, '#a78bfa', 'curr');
-        html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #1e1b4b"><span style="color:#f3f4f6;font-size:15px">Recuperados</span><span style="color:#34d399;font-size:22px;font-weight:800">' + totalRecuperados.toLocaleString('pt-BR') + '</span></div>';
-        html += '</div></div>';
-        // Funil (direita)
-        html += '<div class="chart-box" style="display:flex;flex-direction:column">';
-        html += '<h2 style="margin-bottom:16px">' + icn('funnel',14) + ' Funil de Convers\u00E3o <span class="sub">&rarr; Fluxo geral</span></h2>';
-        html += '<div style="padding:10px 0;flex:1;display:flex;flex-direction:column;justify-content:center">';
-        html += funnelBar('Total Clientes', tCli, '100%', '#60a5fa', 0);
-        html += funnelBar('Receberam', tRec, tCli > 0 ? (tRec / tCli * 100).toFixed(1) : '0', '#a78bfa', 1);
-        html += funnelBar('Contatos Gerados', totalLeads, tCli > 0 ? (totalLeads / tCli * 100).toFixed(1) : '0', '#34d399', 2);
-        html += funnelBar('Recuperados', totalRecuperados, tCli > 0 ? (totalRecuperados / tCli * 100).toFixed(1) : '0', '#f59e0b', 3);
-        html += '</div></div>';
-        html += '</div>';
-
-        html += '<div class="chart-box"><h2>Matriz Campanhas <span class="sub">&rarr; Dados M-P por data, com leads na mesma data</span></h2><div class="table-wrap"><table><thead><tr><th>Data do Disparo</th><th>Setor</th><th>Campanhas</th><th class="text-right">Total Clientes</th><th class="text-right">Receberam</th><th class="text-right">Contatos Gerados</th><th class="text-right">Recuperados</th><th class="text-right">Faturamento</th><th>% Rec.</th></tr></thead><tbody>';
-        for (var di = 0; di < allDates.length; di++) {
-          var dt = allDates[di];
-          var mp = datasMP[dt] || {campanhas:['—'], totalClientes: null, receberam: null};
-          var l = leadsPorData[dt] || {total:0, recup:0};
-          var pct = l.total > 0 ? (l.recup / l.total * 100).toFixed(1) : '0.0';
-          html += '<tr>' +
-            '<td style="font-weight:600">' + dt + '</td>' +
-            '<td style="font-size:10px;color:#93c5fd;max-width:200px">' + (mp.setores && mp.setores.length ? mp.setores.join('<br>') : '—') + '</td>' +
-            '<td style="font-size:10px;color:#fcd34d;max-width:250px">' + mp.campanhas.join('<br>') + '</td>' +
-            '<td class="text-right" style="color:#60a5fa">' + (mp.totalClientes != null && mp.totalClientes !== '' ? mp.totalClientes : '—') + '</td>' +
-            '<td class="text-right" style="color:#a78bfa">' + (mp.receberam != null && mp.receberam !== '' ? mp.receberam : '—') + '</td>' +
-            '<td class="text-right" style="color:#34d399">' + l.total + '</td>' +
-            '<td class="text-right" style="color:#34d399">' + l.recup + '</td>' +
-            '<td class="text-right" style="color:#fbbf24">' + fmtCurr(l.faturamento) + '</td>' +
-            '<td style="color:#f59e0b">' + pct + '%</td></tr>';
-        }
-        html += '<tr class="tot-row"><td style="font-weight:700">Total</td><td></td><td></td>' +
-          '<td class="text-right" style="font-weight:700">' + tCli + '</td>' +
-          '<td class="text-right" style="font-weight:700">' + tRec + '</td>' +
-          '<td class="text-right" style="font-weight:700;color:#34d399">' + tL + '</td>' +
-          '<td class="text-right" style="font-weight:700;color:#34d399">' + tR + '</td>' +
-          '<td class="text-right" style="font-weight:700;color:#fbbf24">' + fmtCurr(tFat) + '</td>' +
-          '<td style="font-weight:700;color:#f59e0b">' + (tL > 0 ? (tR / tL * 100).toFixed(1) : '0.0') + '%</td></tr>';
-        html += '</tbody></table></div></div>';
-      }
-
-      document.getElementById('dashContent').innerHTML = html;
-      try { lucide.createIcons(); } catch(e) {}
-    }
-
-    function toggleCampanhaDetail(tr, campanhaNome) {
-      var next = tr.nextElementSibling;
-      if (next && next.getAttribute('data-campanha-detail') === campanhaNome) {
-        next.parentNode.removeChild(next);
-        return;
-      }
-      var detailRow = document.createElement('tr');
-      detailRow.setAttribute('data-campanha-detail', campanhaNome);
-      var td = document.createElement('td');
-      td.setAttribute('colspan', '6');
-      td.style.padding = '0';
-      td.innerHTML = buildCampanhaDetailHtml(campanhaNome);
-      detailRow.appendChild(td);
-      tr.parentNode.insertBefore(detailRow, tr.nextElementSibling);
-    }
-
-    function buildCampanhaDetailHtml(campanhaNome) {
-      var dados = allData.campanhas || [];
-      var filtrados = dados.filter(function(r){return r.campanha === campanhaNome;});
-      if (!filtrados.length) return '';
-
-      var dias = {};
-      filtrados.forEach(function(r) {
-        if (!dias[r.data]) dias[r.data] = {leads:0, compras:0, valor:0, vendedores:{}};
-        dias[r.data].leads++;
-        if (r.compra) dias[r.data].compras++;
-        dias[r.data].valor += r.valor;
-        if (!dias[r.data].vendedores[r.vendedor]) dias[r.data].vendedores[r.vendedor] = {leads:0, compras:0, valor:0};
-        dias[r.data].vendedores[r.vendedor].leads++;
-        if (r.compra) dias[r.data].vendedores[r.vendedor].compras++;
-        dias[r.data].vendedores[r.vendedor].valor += r.valor;
-      });
-      var diaKeys = Object.keys(dias).sort(function(a,b) {
-        var pa = a.split('/'), pb = b.split('/');
-        return new Date(pa[2],pa[1]-1,pa[0]) - new Date(pb[2],pb[1]-1,pb[0]);
-      });
-
-      var totalLeads = filtrados.length;
-      var totalCompras = filtrados.filter(function(r){return r.compra;}).length;
-      var totalValor = filtrados.reduce(function(s,r){return s+r.valor;},0);
-      var gpct = totalLeads > 0 ? (totalCompras / totalLeads * 100).toFixed(1) : 0;
-
-      var html = '<div style="padding:16px;background:linear-gradient(135deg,#0d0f17,#151830)">';
-      html += '<div style="font-size:13px;font-weight:700;color:#fcd34d;margin-bottom:10px">' + campanhaNome + ' - Desempenho por Dia</div>';
-      html += '<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(100px,1fr));margin-bottom:14px">';
-      html += '<div class="card" style="padding:8px"><div class="label" style="font-size:9px">Total Leads</div><div class="value" style="font-size:15px;color:#60a5fa">' + totalLeads + '</div></div>';
-      html += '<div class="card" style="padding:8px"><div class="label" style="font-size:9px">Compras</div><div class="value" style="font-size:15px;color:#34d399">' + totalCompras + '</div></div>';
-      html += '<div class="card" style="padding:8px"><div class="label" style="font-size:9px">Valor</div><div class="value" style="font-size:15px;color:#fbbf24">' + fmtCurr(totalValor) + '</div></div>';
-      html += '<div class="card" style="padding:8px"><div class="label" style="font-size:9px">Convers\u00E3o</div><div class="value" style="font-size:15px;color:#f59e0b">' + gpct + '%</div></div>';
-      html += '</div>';
-
-      for (var s = 0; s < diaKeys.length; s++) {
-        var dia = dias[diaKeys[s]];
-        var diaPct = dia.leads > 0 ? (dia.compras / dia.leads * 100).toFixed(1) : 0;
-        html += '<div style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px;margin-bottom:8px">';
-        html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
-        html += '<span style="font-size:11px;font-weight:700;color:#fcd34d">' + diaKeys[s] + '</span>';
-        html += '<span style="font-size:10px;color:#9ca3af">' + dia.leads + ' leads / ' + dia.compras + ' compras / ' + fmtCurr(dia.valor) + ' / ' + diaPct + '%</span>';
-        html += '</div>';
-        var vendKeys = Object.keys(dia.vendedores).sort(function(a,b){return dia.vendedores[b].valor - dia.vendedores[a].valor;});
-        if (vendKeys.length > 0) {
-          html += '<div class="table-wrap"><table style="font-size:10px"><thead><tr style="color:#4a4d6e;font-weight:600;text-transform:uppercase;font-size:9px"><th style="text-align:left;padding:3px 4px">Vendedor</th><th style="text-align:right;padding:3px 4px">Leads</th><th style="text-align:right;padding:3px 4px">Compras</th><th style="text-align:right;padding:3px 4px">Valor</th></tr></thead><tbody>';
-          for (var vi = 0; vi < vendKeys.length; vi++) {
-            var vv = dia.vendedores[vendKeys[vi]];
-            html += '<tr><td style="padding:2px 4px;color:#e1e7ef;font-weight:500">' + vendKeys[vi] + '</td><td style="text-align:right;padding:2px 4px;color:#9ca3af">' + vv.leads + '</td><td style="text-align:right;padding:2px 4px;color:#34d399">' + vv.compras + '</td><td style="text-align:right;padding:2px 4px;color:#fbbf24">' + fmtCurr(vv.valor) + '</td></tr>';
-          }
-          html += '</tbody></table></div>';
-        }
-        html += '</div>';
-      }
-      html += '</div>';
-      return html;
     }
 
     function salvarStorage() {

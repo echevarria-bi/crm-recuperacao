@@ -1159,6 +1159,7 @@
       }
       var totalLeads = dados.length;
       var totalValor = dados.reduce(function(s,r){return s+r.valor;},0);
+      var totalRecuperados = dados.filter(function(r){return r.valor > 0;}).length;
 
       var html = '<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:20px">';
       html += '<div class="card"><div class="label">Total Leads</div><div class="value" style="color:#60a5fa">' + totalLeads + '</div></div>';
@@ -1197,7 +1198,7 @@
           tR += l.recup || 0;
           tFat += l.faturamento || 0;
         });
-        var funnelMax = Math.max(tCli, tRec, tL, tR, 1);
+        var funnelMax = Math.max(tCli, tRec, tL, totalRecuperados, 1);
 
         function funnelBar(label, valor, pct, color, idx) {
           var w = Math.max(valor / funnelMax * 100, 8);
@@ -1215,10 +1216,10 @@
         var totalReceberam = datas.reduce(function(s,dt){return s + (parseFloat(datasMP[dt].receberam)||0);}, 0);
         var custoTotal = totalReceberam * custoPorMsg;
         var fatGlobal = totalValor;
-        var ticketMedio = tR > 0 ? fatGlobal / tR : 0;
+        var ticketMedio = totalRecuperados > 0 ? fatGlobal / totalRecuperados : 0;
         var roi = custoTotal > 0 ? ((fatGlobal - custoTotal) / custoTotal * 100) : 0;
         var lucroLiquido = fatGlobal - custoTotal;
-        var custoPorRecuperado = tR > 0 ? custoTotal / tR : 0;
+        var custoPorRecuperado = totalRecuperados > 0 ? custoTotal / totalRecuperados : 0;
 
         html += '<div class="grid-2" style="margin-bottom:20px">';
         // Custo x Retorno (esquerda)
@@ -1231,7 +1232,7 @@
         html += st('ROI', roi, roi >= 0 ? '#34d399' : '#f87171', 'pct');
         html += st('Ticket M\u00E9dio por Recuperado', ticketMedio, '#60a5fa', 'curr');
         html += st('Custo por Recuperado', custoPorRecuperado, '#a78bfa', 'curr');
-        html += '<div style="display:flex;justify-content:space-between;padding:8px 12px;font-size:13px"><span style="color:#9ca3af">Recuperados</span><span style="color:#34d399;font-weight:700">' + tR.toLocaleString('pt-BR') + '</span></div>';
+        html += '<div style="display:flex;justify-content:space-between;padding:8px 12px;font-size:13px"><span style="color:#9ca3af">Recuperados</span><span style="color:#34d399;font-weight:700">' + totalRecuperados.toLocaleString('pt-BR') + '</span></div>';
         html += '</div></div>';
         // Funil (direita)
         html += '<div class="chart-box">';
@@ -1240,7 +1241,7 @@
         html += funnelBar('Total Clientes', tCli, '100%', '#60a5fa', 0);
         html += funnelBar('Receberam', tRec, tCli > 0 ? (tRec / tCli * 100).toFixed(1) : '0', '#a78bfa', 1);
         html += funnelBar('Contatos Gerados', totalLeads, tCli > 0 ? (totalLeads / tCli * 100).toFixed(1) : '0', '#34d399', 2);
-        html += funnelBar('Recuperados', tR, tCli > 0 ? (tR / tCli * 100).toFixed(1) : '0', '#f59e0b', 3);
+        html += funnelBar('Recuperados', totalRecuperados, tCli > 0 ? (totalRecuperados / tCli * 100).toFixed(1) : '0', '#f59e0b', 3);
         html += '</div></div>';
         html += '</div>';
 

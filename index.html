@@ -1214,15 +1214,14 @@
         var funnelMax = Math.max(tCli, tRec, tL, tR, 1);
 
         function funnelBar(label, valor, pct, color, idx) {
-          var w = Math.max(valor / funnelMax * 100, 5);
-          var left = (100 - w) / 2;
-          return '<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;justify-content:center">' +
-            '<div style="width:80px;text-align:right;font-size:11px;color:#9ca3af;font-weight:600">' + label + '</div>' +
-            '<div style="position:relative;width:60%;max-width:400px;height:42px;overflow:hidden">' +
-            '<div style="position:absolute;top:0;left:' + left + '%;width:' + w + '%;height:100%;background:linear-gradient(135deg,' + color + '44,' + color + ');border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.5);transition:all 0.3s">' +
-            (typeof valor === 'number' ? valor.toLocaleString('pt-BR') : valor) +
-            '</div></div>' +
-            '<div style="width:60px;text-align:left;font-size:11px;color:' + color + ';font-weight:600">' + pct + '%</div></div>';
+          var w = Math.max(valor / funnelMax * 100, 8);
+          return '<div style="display:flex;flex-direction:column;align-items:center;margin-bottom:16px">' +
+            '<div style="font-size:11px;color:#9ca3af;font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px">' + label + '</div>' +
+            '<div style="position:relative;width:90%;max-width:360px;height:52px;overflow:hidden;border-radius:8px;background:rgba(255,255,255,0.03)">' +
+            '<div style="position:absolute;bottom:0;left:' + left + '%;width:' + w + '%;height:100%;background:linear-gradient(180deg,' + color + '22,' + color + 'cc);border-radius:8px 8px 4px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid ' + color + '66;transition:all 0.3s">' +
+            '<span style="font-size:20px;font-weight:800;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,0.6);line-height:1.1">' + (typeof valor === 'number' ? valor.toLocaleString('pt-BR') : valor) + '</span>' +
+            '<span style="font-size:11px;color:' + color + ';font-weight:600;opacity:0.9">' + pct + '</span>' +
+            '</div></div></div>';
         }
 
         var custoPorContato = 0.50;

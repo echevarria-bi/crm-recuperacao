@@ -246,6 +246,15 @@
             var month = detectMonthFromName(file.name);
             if (!allData) {
               allData = parseAllSheets(wb, month);
+              // DEBUG: log July realizados
+              if (allData && allData.painelJulho && allData.painelJulho.recuperacao) {
+                var _jTotal = allData.painelJulho.recuperacao.total;
+                var _jProfs = allData.painelJulho.recuperacao.profissionais;
+                console.log('DEBUG Julho:');
+                console.log('  Total:', JSON.stringify(_jTotal));
+                console.log('  Profissionais:', JSON.stringify(_jProfs));
+                if (_jTotal) console.log('  Realizado Total:', _jTotal.realizado);
+              }
             } else {
               mergeSheetInto(wb, month);
             }

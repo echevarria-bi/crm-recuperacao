@@ -1165,27 +1165,29 @@
       } catch(e) { return false; }
     }
 
-    // Initialize: try remote first, then localStorage, then upload area
-    fetchRemoteData().then(function(remote) {
-      if (allData) return; // user already uploaded, skip overwrite
-      if (remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral) {
-        allData = remote.data;
-        document.getElementById('areaInicial').parentElement.style.display = 'none';
-        var fn = remote.fileName || 'Arquivo remoto';
-        var ts = remote.updatedAt ? new Date(remote.updatedAt) : new Date();
-        document.getElementById('footer').style.display = 'block';
-        document.getElementById('footer').innerHTML = '<strong>' + fn + '</strong> &middot; ' + ts.toLocaleDateString('pt-BR') + ' às ' + ts.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recuperação';
-        initTabs();
-        switchTab('resumo');
-        document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
-        mostrarTokenBtn();
-      } else if (restaurarStorage()) {
-        document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
-        mostrarTokenBtn();
-      } else {
-        document.getElementById('areaInicial').style.display = 'flex';
-      }
-    });
+    // Initialize: try localStorage first (user's last upload), then remote as fallback
+    if (!restaurarStorage()) {
+      fetchRemoteData().then(function(remote) {
+        if (allData) return;
+        if (remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral) {
+          allData = remote.data;
+          document.getElementById('areaInicial').parentElement.style.display = 'none';
+          var fn = remote.fileName || 'Arquivo remoto';
+          var ts = remote.updatedAt ? new Date(remote.updatedAt) : new Date();
+          document.getElementById('footer').style.display = 'block';
+          document.getElementById('footer').innerHTML = '<strong>' + fn + '</strong> &middot; ' + ts.toLocaleDateString('pt-BR') + ' às ' + ts.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recuperação';
+          initTabs();
+          switchTab('resumo');
+          document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
+          mostrarTokenBtn();
+        } else {
+          document.getElementById('areaInicial').style.display = 'flex';
+        }
+      });
+    } else {
+      document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
+      mostrarTokenBtn();
+    }
   </script>
 </body>
 </html>

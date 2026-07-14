@@ -931,8 +931,8 @@
       html += '<div class="' + (hasRCA ? 'grid-5' : 'grid-4') + '">';
       html += '<div class="card"><div class="label">' + icn('crosshair',12) + ' Meta Total</div><div class="value">' + totalMeta + '</div></div>';
       html += '<div class="card"><div class="label">' + (totalReal >= totalMeta ? '&#9989;' : '&#10060;') + ' Realizado</div><div class="value">' + totalReal + '</div></div>';
-      html += '<div class="card"><div class="label">' + (totalPct >= 100 ? '&#9989;' : '&#10060;') + ' % Atingido</div><div class="value">' + totalPct.toFixed(1) + '%</div></div>';
       html += '<div class="card"><div class="label">&#x1F4B0; Total Recuperado</div><div class="value">' + fmtCurr(fatGeral) + '</div></div>';
+      html += '<div class="card"><div class="label">' + (totalPct >= 100 ? '&#9989;' : '&#10060;') + ' % Atingido</div><div class="value">' + totalPct.toFixed(1) + '%</div></div>';
       if (hasRCA) {
         html += '<div class="card" style="border-color:#78350f;background:linear-gradient(135deg,#1a0f0a,#1f1015)"><div class="label" style="color:#f59e0b">\u{1F465} RCA Externo</div><div class="value" style="font-size:24px">' + pg.rcaExterno.totalClientes + ' clientes</div><div class="sub" style="font-size:18px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(pg.rcaExterno.totalFaturamento) + '</div></div>';
       }

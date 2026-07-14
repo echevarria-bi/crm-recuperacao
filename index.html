@@ -329,7 +329,7 @@
 
     function parseAllSheets(wb, baseMonth) {
       baseMonth = baseMonth || 'Junho';
-      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelJulho:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
+      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[], rcaExterno:null}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[], rcaExterno:null}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[], rcaExterno:null}, painelJulho:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[], rcaExterno:null}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
       var sheetMap = {};
       for (var si = 0; si < wb.SheetNames.length; si++) {
         var sn = wb.SheetNames[si];
@@ -1190,7 +1190,7 @@
         var tmp = JSON.parse(saved);
         if (!tmp || !tmp.evolucaoMeses || !tmp.painelGeral) return false;
         // Migrate old saved data to include painelJulho if missing
-        if (!tmp.painelJulho) tmp.painelJulho = {recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]};
+        if (!tmp.painelJulho) tmp.painelJulho = {recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[], rcaExterno:null};
         allData = tmp;
         document.getElementById('areaInicial').parentElement.style.display = 'none';
         var fn = localStorage.getItem('crmFileName') || 'Arquivo';

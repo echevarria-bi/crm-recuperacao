@@ -8,7 +8,7 @@
   <meta http-equiv="Expires" content="0">
   <title>Painel de Recuperação - Tele Vendas</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+  <script src="xlsx.full.min.js"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
   <style>
@@ -836,13 +836,37 @@
       var pgKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
       var pg = (allData[pgKey] && allData[pgKey].recuperacao && allData[pgKey].recuperacao.profissionais && allData[pgKey].recuperacao.profissionais.length > 0) ? allData[pgKey] : allData.painelGeral;
 
+      // Get total faturamento from EVOLUCAO DOS MESES Indicadores row "Valor Recuperado"
+      var fatGeral = 0;
+      if (allData.evolucaoMeses && allData.evolucaoMeses.indicadores) {
+        for (var fi = 0; fi < allData.evolucaoMeses.indicadores.length; fi++) {
+          if (allData.evolucaoMeses.indicadores[fi].label === 'Valor Recuperado') {
+            fatGeral = allData.evolucaoMeses.indicadores[fi][monthName] || 0;
+            break;
+          }
+        }
+      }
+
+      // Build per-profissional faturamento lookup from VALOR RECUPERADO POR MÊS
+      var fatLookup = {};
+      if (allData.evolucaoMeses && allData.evolucaoMeses.valorPorProf) {
+        for (var fi = 0; fi < allData.evolucaoMeses.valorPorProf.length; fi++) {
+          var fe = allData.evolucaoMeses.valorPorProf[fi];
+          var fk = fe.profissional.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+          fatLookup[fk] = fe[monthName] || 0;
+        }
+      }
+
       var profsData = [];
       for (var pi = 0; pi < pg.recuperacao.profissionais.length; pi++) {
         var p = pg.recuperacao.profissionais[pi];
         var name = p.profissional;
         var jMeta = p.meta || 0;
         var jReal = p.realizado || 0;
-        var jFat = p.faturamento || 0;
+        // Match base name (before " - ") against VALOR RECUPERADO POR MÊS
+        var baseName = name.split(' - ')[0].trim();
+        var baseKey = baseName.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+        var jFat = fatLookup[baseKey] || 0;
         var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
         profsData.push({
           profissional: name,
@@ -856,7 +880,6 @@
 
       var totalMeta = profsData.reduce(function(s,p){return s+p.meta;},0);
       var totalReal = profsData.reduce(function(s,p){return s+p.realizado;},0);
-      var fatGeral = pg.recuperacao.faturamentoGeral || 0;
       var totalPct = totalMeta > 0 ? (totalReal / totalMeta * 100) : 0;
 
       profsData.sort(function(a,b){return (b.pct||0) - (a.pct||0);});
@@ -1144,6 +1167,7 @@
 
     // Initialize: try remote first, then localStorage, then upload area
     fetchRemoteData().then(function(remote) {
+      if (allData) return; // user already uploaded, skip overwrite
       if (remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral) {
         allData = remote.data;
         document.getElementById('areaInicial').parentElement.style.display = 'none';

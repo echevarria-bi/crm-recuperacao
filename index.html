@@ -888,8 +888,8 @@
         });
       }
 
-      var totalMeta = profsData.reduce(function(s,p){return s+p.meta;},0);
-      var totalReal = profsData.reduce(function(s,p){return s+p.realizado;},0);
+      var totalMeta = pg.recuperacao.total ? pg.recuperacao.total.meta : profsData.reduce(function(s,p){return s+p.meta;},0);
+      var totalReal = pg.recuperacao.total ? pg.recuperacao.total.realizado : profsData.reduce(function(s,p){return s+p.realizado;},0);
       var totalPct = totalMeta > 0 ? (totalReal / totalMeta * 100) : 0;
 
       profsData.sort(function(a,b){return (b.pct||0) - (a.pct||0);});

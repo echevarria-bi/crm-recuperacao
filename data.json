@@ -5001,8 +5001,8 @@
           {
             "profissional": "Camila - SUL",
             "meta": 43,
-            "realizado": 11,
-            "pct": 25.58,
+            "realizado": 13,
+            "pct": 30.23,
             "dias": [
               {
                 "dia": 1,
@@ -5279,8 +5279,8 @@
           {
             "profissional": "Tatiana - SERRA",
             "meta": 22,
-            "realizado": 3,
-            "pct": 13.64,
+            "realizado": 4,
+            "pct": 18.18,
             "dias": [
               {
                 "dia": 1,
@@ -8438,5 +8438,5 @@
     ]
   },
   "fileName": "",
-  "updatedAt": "2026-07-14T14:50:13.468Z"
+  "updatedAt": "2026-07-14T14:57:15.853Z"
 }

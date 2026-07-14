@@ -843,7 +843,8 @@
     function renderMonth(monthName) {
       var monthKey = monthName === 'Junho' ? 'Junho' : monthName;
       var pgKey = monthName === 'Junho' ? 'painelGeral' : ('painel' + monthName);
-      var pg = (allData[pgKey] && allData[pgKey].recuperacao && allData[pgKey].recuperacao.profissionais && allData[pgKey].recuperacao.profissionais.length > 0) ? allData[pgKey] : allData.painelGeral;
+      var pg = (allData[pgKey] && allData[pgKey].recuperacao && allData[pgKey].recuperacao.profissionais && allData[pgKey].recuperacao.profissionais.length > 0) ? allData[pgKey] : null;
+      if (!pg) { document.getElementById('dashContent').innerHTML = '<div style="padding:40px;text-align:center;color:#6b7280">Sem dados para ' + monthName + '. Faça upload da planilha.</div>'; return; }
 
       // Get total faturamento from EVOLUCAO DOS MESES Indicadores row "Valor Recuperado"
       var fatGeral = 0;
@@ -1159,6 +1160,8 @@
       try {
         var tmp = JSON.parse(saved);
         if (!tmp || !tmp.evolucaoMeses || !tmp.painelGeral) return false;
+        // Migrate old saved data to include painelJulho if missing
+        if (!tmp.painelJulho) tmp.painelJulho = {recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]};
         allData = tmp;
         document.getElementById('areaInicial').parentElement.style.display = 'none';
         var fn = localStorage.getItem('crmFileName') || 'Arquivo';

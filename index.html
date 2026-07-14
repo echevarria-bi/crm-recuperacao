@@ -176,6 +176,7 @@
       var n = fileName.toLowerCase();
       if (n.indexOf('abril') >= 0) return 'Abril';
       if (n.indexOf('maio') >= 0) return 'Maio';
+      if (n.indexOf('julho') >= 0) return 'Julho';
       return 'Junho';
     }
 
@@ -212,7 +213,7 @@
               var fnome = String(row[2]||'').trim();
               var fv = parseNum(row[3]);
               var fm = String(row[4] || '').trim();
-              if (!fp || !fm || ['Abril','Maio','Junho'].indexOf(fm) < 0) continue;
+              if (!fp || !fm || ['Abril','Maio','Junho','Julho'].indexOf(fm) < 0) continue;
               if (isNaN(fid) || fid <= 0) continue;
               allData.faturamentoClientes.push({cliente:fid, nome:fnome, valor:fv, mes:fm, prof:fp});
             }
@@ -261,7 +262,7 @@
     }
 
     function mergeSheetInto(wb, monthName) {
-      var pgMap = {abril:'painelAbril',maio:'painelMaio',junho:'painelGeral'};
+      var pgMap = {abril:'painelAbril',maio:'painelMaio',junho:'painelGeral',julho:'painelJulho'};
       var targetKey = pgMap[monthName.toLowerCase()] || 'painelGeral';
       for (var si = 0; si < wb.SheetNames.length; si++) {
         var sNorm = wb.SheetNames[si].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[-\s]/g,'');
@@ -319,7 +320,7 @@
 
     function parseAllSheets(wb, baseMonth) {
       baseMonth = baseMonth || 'Junho';
-      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
+      var result = {evolucaoMeses:{indicadores:[], valorPorProf:[], recuperadosPorProf:[]}, painelGeral:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelAbril:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelMaio:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, painelJulho:{recuperacao:{profissionais:[],total:null,faturamentoGeral:0}, metaContatos:{profissionais:[],total:null}, motivos:[], inatividade:[], motivosDiarios:[]}, profissionais:{}, faturamentoTotal:0, faturamentoClientes:[]};
       var sheetMap = {};
       for (var si = 0; si < wb.SheetNames.length; si++) {
         var sn = wb.SheetNames[si];
@@ -334,7 +335,7 @@
       }
 
       // PAINEL GERAL sheets (Painel Geral - Abril, Painel Geral - Maio, Painel Geral - Junho)
-      var pgTargets = {'painelgeralabril':'painelAbril','painelgeralmaio':'painelMaio','painelgeraljunho':'painelGeral','painelgeral':'painelGeral'};
+      var pgTargets = {'painelgeralabril':'painelAbril','painelgeralmaio':'painelMaio','painelgeraljunho':'painelGeral','painelgeraljulho':'painelJulho','painelgeral':'painelGeral'};
       for (var si = 0; si < wb.SheetNames.length; si++) {
         var sNorm = wb.SheetNames[si].toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[-\s]/g,'');
         var targetStore = pgTargets[sNorm];
@@ -360,7 +361,7 @@
           var fnome = String(row[2]||'').trim();
           var fv = parseNum(row[3]);
           var fm = String(row[4] || '').trim();
-          if (!fp || !fm || ['Abril','Maio','Junho'].indexOf(fm) < 0) continue;
+          if (!fp || !fm || ['Abril','Maio','Junho','Julho'].indexOf(fm) < 0) continue;
           if (isNaN(fid) || fid <= 0) continue;
           result.faturamentoClientes.push({cliente:fid, nome:fnome, valor:fv, mes:fm, prof:fp});
         }
@@ -379,14 +380,15 @@
           for (var ri = r+1; ri < grid.length; ri++) {
             var r2 = grid[ri];
             if (!r2 || !r2[0] || String(r2[0]).trim() === '') break;
-            if (r2[3] === undefined || r2[3] === '') break;
+            if (r2[4] === undefined || r2[4] === '') break;
             var indLabel = String(r2[0]).trim();
             var isPct = indLabel.indexOf('%') >= 0;
             result.evolucaoMeses.indicadores.push({
               label: indLabel,
               Abril: isPct ? parsePct(r2[1]) : parseNum(r2[1]),
               Maio: isPct ? parsePct(r2[2]) : parseNum(r2[2]),
-              Junho: isPct ? parsePct(r2[3]) : parseNum(r2[3])
+              Junho: isPct ? parsePct(r2[3]) : parseNum(r2[3]),
+              Julho: isPct ? parsePct(r2[4]) : parseNum(r2[4])
             });
           }
           continue;
@@ -636,7 +638,8 @@
       h += '<div class="tabs">';
       h += '<button class="tab-btn tab-month' + (activeTab==='abril'?' active':'') + '" data-tab="abril">Abril</button>';
       h += '<button class="tab-btn tab-month' + (activeTab==='maio'?' active':'') + '" data-tab="maio">Maio</button>';
-      h += '<button class="tab-btn tab-month' + (activeTab==='geral'?' active':'') + '" data-tab="geral">Junho</button>';
+      h += '<button class="tab-btn tab-month' + (activeTab==='junho'?' active':'') + '" data-tab="junho">Junho</button>';
+      h += '<button class="tab-btn tab-month' + (activeTab==='julho'?' active':'') + '" data-tab="julho">Julho</button>';
       h += '</div><div class="tab-divider"></div><div class="tabs">';
       h += '<button class="tab-btn' + (activeTab==='resumo'?' active':'') + '" data-tab="resumo">' + icn('layout-dashboard',12) + ' Resumo</button>';
       h += '<button class="tab-btn' + (activeTab==='clientes'?' active':'') + '" data-tab="clientes">' + icn('table-2',12) + ' Clientes</button>';
@@ -658,7 +661,8 @@
       if (tab === 'resumo') renderResumo();
       else if (tab === 'abril') renderMonth('Abril');
       else if (tab === 'maio') renderMonth('Maio');
-      else if (tab === 'geral') renderMonth('Junho');
+      else if (tab === 'junho') renderMonth('Junho');
+      else if (tab === 'julho') renderMonth('Julho');
       else if (tab === 'clientes') renderClientes();
     }
 
@@ -710,7 +714,7 @@
       var evo = allData.evolucaoMeses;
       var pg = allData.painelGeral;
       var profs = pg.recuperacao.profissionais;
-      var mesesArr = ['Abril','Maio','Junho'];
+      var mesesArr = ['Abril','Maio','Junho','Julho'];
       var html = '';
 
       var contatoData = [], recupData = [], fatData = [];
@@ -732,7 +736,7 @@
       for (var ii = 0; ii < evo.indicadores.length; ii++) {
         if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' || evo.indicadores[ii].label === 'Clientes Recuperados') {
           if (evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) {
-            recupTotal = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0);
+            recupTotal = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0) + (evo.indicadores[ii].Julho||0);
           }
         }
       }
@@ -742,7 +746,7 @@
       var totalConv = 0;
       for (var ii = 0; ii < evo.indicadores.length; ii++) {
         if (evo.indicadores[ii].label === 'Convers\u00F5es Totais' || evo.indicadores[ii].label === 'Conversões Totais' || evo.indicadores[ii].label === 'Conversoes Totais') {
-          totalConv = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0);
+          totalConv = (evo.indicadores[ii].Abril||0) + (evo.indicadores[ii].Maio||0) + (evo.indicadores[ii].Junho||0) + (evo.indicadores[ii].Julho||0);
         }
       }
 
@@ -766,11 +770,11 @@
         for (var i = 0; i < vpSorted.length; i++) {
           var p = vpSorted[i];
           var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
-          vpRows += '<tr><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600">' + p.profissional + '</td><td class="text-right realizado-color">' + (p.Abril ? fmtCurr(p.Abril) : '-') + '</td><td class="text-right realizado-color">' + (p.Maio ? fmtCurr(p.Maio) : '-') + '</td><td class="text-right realizado-color">' + (p.Junho ? fmtCurr(p.Junho) : '-') + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + (p.Total ? fmtCurr(p.Total) : '-') + '</td></tr>';
+          vpRows += '<tr><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600">' + p.profissional + '</td><td class="text-right realizado-color">' + (p.Abril ? fmtCurr(p.Abril) : '-') + '</td><td class="text-right realizado-color">' + (p.Maio ? fmtCurr(p.Maio) : '-') + '</td><td class="text-right realizado-color">' + (p.Junho ? fmtCurr(p.Junho) : '-') + '</td><td class="text-right realizado-color">' + (p.Julho ? fmtCurr(p.Julho) : '-') + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + (p.Total ? fmtCurr(p.Total) : '-') + '</td></tr>';
         }
-        var vpTotA = 0, vpTotM = 0, vpTotJ = 0, vpTotT = 0;
-        for (var vi = 0; vi < vpSorted.length; vi++) { vpTotA += vpSorted[vi].Abril||0; vpTotM += vpSorted[vi].Maio||0; vpTotJ += vpSorted[vi].Junho||0; vpTotT += vpSorted[vi].Total||0; }
-        html += '<div class="chart-box"><h2>Valor Recuperado por Mês <span class="sub">&rarr; Faturamento por televendedora em cada mês</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th class="text-right" title="Valor recuperado em Abril">Abril</th><th class="text-right" title="Valor recuperado em Maio">Maio</th><th class="text-right" title="Valor recuperado em Junho">Junho</th><th class="text-right" title="Valor total recuperado">Total</th></tr></thead><tbody>' + vpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotA) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotM) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotJ) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(vpTotT) + '</td></tr></tbody></table></div></div>';
+        var vpTotA = 0, vpTotM = 0, vpTotJ = 0, vpTotJL = 0, vpTotT = 0;
+        for (var vi = 0; vi < vpSorted.length; vi++) { vpTotA += vpSorted[vi].Abril||0; vpTotM += vpSorted[vi].Maio||0; vpTotJ += vpSorted[vi].Junho||0; vpTotJL += vpSorted[vi].Julho||0; vpTotT += vpSorted[vi].Total||0; }
+        html += '<div class="chart-box"><h2>Valor Recuperado por Mês <span class="sub">&rarr; Faturamento por televendedora em cada mês</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th class="text-right" title="Valor recuperado em Abril">Abril</th><th class="text-right" title="Valor recuperado em Maio">Maio</th><th class="text-right" title="Valor recuperado em Junho">Junho</th><th class="text-right" title="Valor recuperado em Julho">Julho</th><th class="text-right" title="Valor total recuperado">Total</th></tr></thead><tbody>' + vpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotA) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotM) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotJ) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotJL) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(vpTotT) + '</td></tr></tbody></table></div></div>';
       }
 
       // RECUPERADOS POR PROFISSIONAL (from RECUPERADOS POR RCA)
@@ -1060,12 +1064,12 @@
       html += '<select id="filtroProf" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:8px 12px;color:#e1e7ef;font-size:12px;outline:none"><option value="">Televendedora: Todas</option>';
       for (var pi = 0; pi < profList.length; pi++) html += '<option value="' + profList[pi] + '">' + profList[pi] + '</option>';
       html += '</select>';
-      html += '<select id="filtroMes" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:8px 12px;color:#e1e7ef;font-size:12px;outline:none"><option value="">M\u00EAs: Todos</option><option value="Abril">Abril</option><option value="Maio">Maio</option><option value="Junho">Junho</option></select></div>';
+      html += '<select id="filtroMes" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:8px 12px;color:#e1e7ef;font-size:12px;outline:none"><option value="">M\u00EAs: Todos</option><option value="Abril">Abril</option><option value="Maio">Maio</option><option value="Junho">Junho</option><option value="Julho">Julho</option></select></div>';
       html += '<div class="table-wrap"><table><thead><tr><th class="col-ranking">#</th><th style="color:#6b7280;font-size:10px">ID</th><th>Nome do Cliente</th><th class="text-right" style="color:#f59e0b;font-size:10px">Registros</th><th style="color:#6b7280;font-size:10px">Televendedora</th><th class="text-right" style="color:#34d399">Valor</th><th style="text-align:center;color:#6b7280;font-size:10px">M\u00EAs</th><th style="min-width:60px;color:#6b7280;font-size:10px">Peso</th></tr></thead><tbody id="tbodyClientes">';
       for (var i = 0; i < clientes.length; i++) {
         var c = clientes[i];
         var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
-        var mesCol = c.mes === 'Junho' ? '#34d399' : (c.mes === 'Maio' ? '#60a5fa' : '#a78bfa');
+        var mesCol = c.mes === 'Junho' ? '#34d399' : (c.mes === 'Julho' ? '#f59e0b' : (c.mes === 'Maio' ? '#60a5fa' : '#a78bfa'));
         var barW = ((c.valor||0) / maxVal * 100);
         html += '<tr data-id="' + c.cliente + '" data-nome="' + (c.nome||'').toLowerCase() + '" data-mes="'+c.mes+'" data-prof="' + c.prof + '"><td class="col-ranking">' + (i+1) + '</td><td style="color:#6b7280;font-size:10px">' + c.cliente + '</td><td style="font-weight:600;color:#fcd34d">' + (c.nome || '') + '</td><td class="text-right" style="font-size:10px;color:#f59e0b">' + (ocorrencias[c.cliente] > 1 ? (''+ocorrencias[c.cliente]) : '') + '</td><td style="font-size:10px;color:#9ca3af">' + c.prof + '</td><td class="text-right" style="font-weight:600;color:#34d399">' + fmtCurr(c.valor||0) + '</td><td style="text-align:center"><span style="font-size:10px;padding:1px 6px;border-radius:4px;background:'+mesCol+'22;color:'+mesCol+';font-weight:600">' + c.mes + '</span></td><td style="padding:4px 6px"><div style="height:8px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:'+Math.min(barW,100)+'%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
       }

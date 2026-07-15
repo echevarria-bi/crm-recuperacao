@@ -946,8 +946,8 @@
 
       var hasRCA = !!(pg.rcaExterno && pg.rcaExterno.totalClientes > 0);
       html += '<div class="' + (hasRCA ? 'grid-5' : 'grid-4') + '">';
-      html += '<div class="card"><div class="label">' + icn('crosshair',12) + ' Meta Total</div><div class="value">' + totalMeta + '</div></div>';
-      html += '<div class="card"><div class="label">' + (totalReal >= totalMeta ? '&#9989;' : '&#10060;') + ' Realizado</div><div class="value">' + totalReal + '</div></div>';
+      html += '<div class="card"><div class="label">' + icn('crosshair',12) + ' Meta Total Televendas</div><div class="value">' + totalMeta + '</div></div>';
+      html += '<div class="card"><div class="label">' + (totalReal >= totalMeta ? '&#9989;' : '&#10060;') + ' Realizado Televendas</div><div class="value">' + totalReal + '</div></div>';
       html += '<div class="card"><div class="label">&#x1F4B0; Total Recuperado</div><div class="value">' + fmtCurr(fatGeral) + '</div></div>';
       html += '<div class="card"><div class="label">' + (totalPct >= 100 ? '&#9989;' : '&#10060;') + ' % Atingido</div><div class="value">' + totalPct.toFixed(1) + '%</div></div>';
       if (hasRCA) {

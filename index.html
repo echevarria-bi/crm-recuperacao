@@ -801,32 +801,6 @@
         }
       }
 
-      // RCA Externo totals across all months
-      var rcaTotalClientes = 0, rcaTotalFaturamento = 0;
-      var rcaKeys = ['painelAbril','painelMaio','painelGeral','painelJulho'];
-      for (var rki = 0; rki < rcaKeys.length; rki++) {
-        var rObj = allData[rcaKeys[rki]] && allData[rcaKeys[rki]].rcaExterno;
-        if (rObj) {
-          rcaTotalClientes += rObj.totalClientes || 0;
-          rcaTotalFaturamento += rObj.totalFaturamento || 0;
-        }
-      }
-      var totalGeralClientes = recupTotal + rcaTotalClientes;
-      var totalGeralFaturamento = fatGeraluramento + rcaTotalFaturamento;
-
-      // TOTALIZER BOX
-      html += '<div class="chart-box" style="margin-bottom:22px;border-color:#f59e0b;background:linear-gradient(135deg,#1a120b,#1f1510)">';
-      html += '<h2 style="border-left-color:#f59e0b;color:#f59e0b;font-size:15px">' + icn('bar-chart-3',14) + ' Total Geral Recuperado</h2>';
-      html += '<div style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;padding:8px 0 4px">';
-      html += '<div><span style="font-size:36px;font-weight:800;color:#f0f2f8">' + totalGeralClientes + '</span><span style="font-size:16px;color:#9ca3af;margin-left:6px">clientes</span></div>';
-      html += '<div style="font-size:28px;color:#4a4d6e">|</div>';
-      html += '<div><span style="font-size:36px;font-weight:800;color:#fbbf24">' + fmtCurr(totalGeralFaturamento) + '</span></div>';
-      html += '</div>';
-      html += '<div style="display:flex;flex-wrap:wrap;gap:24px;margin-top:8px;padding-top:12px;border-top:1px solid rgba(245,158,11,0.15)">';
-      html += '<div><span style="font-size:13px;color:#6b7280;text-transform:uppercase;font-weight:600">Televendas</span><div style="font-size:18px;font-weight:700;color:#34d399;margin-top:2px">' + recupTotal + ' clientes</div><div style="font-size:16px;font-weight:600;color:#34d399">' + fmtCurr(fatGeraluramento) + '</div></div>';
-      html += '<div><span style="font-size:13px;color:#6b7280;text-transform:uppercase;font-weight:600">RCA Externo</span><div style="font-size:18px;font-weight:700;color:#f59e0b;margin-top:2px">' + rcaTotalClientes + ' clientes</div><div style="font-size:16px;font-weight:600;color:#f59e0b">' + fmtCurr(rcaTotalFaturamento) + '</div></div>';
-      html += '</div></div>';
-
       // CARDS
       html += '<div class="cards">';
       html += '<div class="card"><div class="label">' + icn('phone',12) + ' Conversões Totais (RCA Externo + Televendas)</div><div class="value">' + totalConv + '</div></div>';

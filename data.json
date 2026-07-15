@@ -1760,7 +1760,12 @@
           "Tatiana": 276,
           "Total": 0
         }
-      ]
+      ],
+      "rcaExterno": {
+        "clientes": [],
+        "totalClientes": 154,
+        "totalFaturamento": 222628.42
+      }
     },
     "painelAbril": {
       "recuperacao": {
@@ -3334,7 +3339,12 @@
           "Tatiana": 180,
           "Total": 0
         }
-      ]
+      ],
+      "rcaExterno": {
+        "clientes": [],
+        "totalClientes": 170,
+        "totalFaturamento": 265032.1
+      }
     },
     "painelMaio": {
       "recuperacao": {
@@ -4854,7 +4864,12 @@
           "Tatiana": 202,
           "Total": 0
         }
-      ]
+      ],
+      "rcaExterno": {
+        "clientes": [],
+        "totalClientes": 93,
+        "totalFaturamento": 85163.89
+      }
     },
     "painelJulho": {
       "recuperacao": {
@@ -5047,7 +5062,7 @@
               {
                 "dia": 13,
                 "meta": 2,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "dia": 14,
@@ -5057,7 +5072,7 @@
               {
                 "dia": 15,
                 "meta": 2,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "dia": 16,
@@ -5320,7 +5335,7 @@
               {
                 "dia": 10,
                 "meta": 1,
-                "realizado": 1
+                "realizado": 2
               },
               {
                 "dia": 13,
@@ -5729,8 +5744,8 @@
           {
             "profissional": "Ariane - POA",
             "meta": 250,
-            "realizado": 78,
-            "pct": 31.2,
+            "realizado": 89,
+            "pct": 36,
             "dias": [
               {
                 "dia": 1,
@@ -5775,7 +5790,7 @@
               {
                 "dia": 9,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 11
               },
               {
                 "dia": 10,
@@ -6005,8 +6020,8 @@
           {
             "profissional": "Cristielen - VALE DOS SINOS",
             "meta": 250,
-            "realizado": 78,
-            "pct": 31.2,
+            "realizado": 95,
+            "pct": 38,
             "dias": [
               {
                 "dia": 1,
@@ -6051,7 +6066,7 @@
               {
                 "dia": 9,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 17
               },
               {
                 "dia": 10,
@@ -6143,8 +6158,8 @@
           {
             "profissional": "Tatiana - SERRA",
             "meta": 250,
-            "realizado": 66,
-            "pct": 26.4,
+            "realizado": 78,
+            "pct": 31,
             "dias": [
               {
                 "dia": 1,
@@ -6189,7 +6204,7 @@
               {
                 "dia": 9,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 12
               },
               {
                 "dia": 10,
@@ -6281,8 +6296,8 @@
           {
             "profissional": "Tatiana - LITORAL",
             "meta": 250,
-            "realizado": 65,
-            "pct": 26,
+            "realizado": 75,
+            "pct": 30,
             "dias": [
               {
                 "dia": 1,
@@ -6327,7 +6342,7 @@
               {
                 "dia": 9,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 10,
@@ -6420,8 +6435,8 @@
         "total": {
           "profissional": "Total",
           "meta": 1250,
-          "realizado": 357,
-          "pct": 28.56,
+          "realizado": 407,
+          "pct": 33,
           "dias": [
             {
               "dia": 1,
@@ -6466,7 +6481,7 @@
             {
               "dia": 9,
               "meta": 50,
-              "realizado": 10
+              "realizado": 60
             },
             {
               "dia": 10,
@@ -6561,17 +6576,17 @@
           "label": "Não atendeu/Não retornou",
           "POA": 76,
           "SUL": 221,
-          "VALE DOS SINOS": 96,
-          "SERRA": 29,
+          "VALE DOS SINOS": 110,
+          "SERRA": 30,
           "LITORAL": 91,
-          "Total": 513
+          "Total": 528
         },
         {
           "label": "Contatos Efetivo",
           "POA": 3,
           "SUL": 7,
-          "VALE DOS SINOS": 22,
-          "SERRA": 27,
+          "VALE DOS SINOS": 23,
+          "SERRA": 26,
           "LITORAL": 7,
           "Total": 66
         },
@@ -6580,9 +6595,9 @@
           "POA": 0,
           "SUL": 0,
           "VALE DOS SINOS": 0,
-          "SERRA": 2,
+          "SERRA": 0,
           "LITORAL": 1,
-          "Total": 3
+          "Total": 1
         },
         {
           "label": "Ativo por temporada",
@@ -6595,21 +6610,21 @@
         },
         {
           "label": "Conversão / Venda RCA Externo",
-          "POA": 7,
+          "POA": 11,
           "SUL": 14,
           "VALE DOS SINOS": 5,
           "SERRA": 5,
           "LITORAL": 5,
-          "Total": 36
+          "Total": 40
         },
         {
           "label": "Telefone incorreto",
           "POA": 0,
           "SUL": 0,
-          "VALE DOS SINOS": 2,
-          "SERRA": 5,
+          "VALE DOS SINOS": 3,
+          "SERRA": 6,
           "LITORAL": 5,
-          "Total": 12
+          "Total": 14
         },
         {
           "label": "Problema Financeiro",
@@ -6622,32 +6637,32 @@
         },
         {
           "label": "Total",
-          "POA": 214,
-          "SUL": 334,
-          "VALE DOS SINOS": 175,
-          "SERRA": 124,
-          "LITORAL": 172,
+          "POA": 122,
+          "SUL": 289,
+          "VALE DOS SINOS": 145,
+          "SERRA": 101,
+          "LITORAL": 143,
           "Total": 0
         }
       ],
       "inatividade": [
         {
           "label": "45 a 59 Risco",
-          "POA": 92,
-          "SUL": 42,
-          "VALE DOS SINOS": 27,
-          "SERRA": 15,
-          "LITORAL": 29,
-          "Total": 205
+          "POA": 0,
+          "SUL": 0,
+          "VALE DOS SINOS": 0,
+          "SERRA": 0,
+          "LITORAL": 0,
+          "Total": 0
         },
         {
           "label": "60 a 74 Atenção",
-          "POA": 4,
-          "SUL": 3,
-          "VALE DOS SINOS": 3,
-          "SERRA": 6,
+          "POA": 0,
+          "SUL": 0,
+          "VALE DOS SINOS": 0,
+          "SERRA": 0,
           "LITORAL": 0,
-          "Total": 16
+          "Total": 0
         },
         {
           "label": "75 a 84 Crítico",
@@ -6671,10 +6686,10 @@
           "label": "90 a 104",
           "POA": 24,
           "SUL": 47,
-          "VALE DOS SINOS": 20,
-          "SERRA": 34,
+          "VALE DOS SINOS": 4,
+          "SERRA": 33,
           "LITORAL": 34,
-          "Total": 159
+          "Total": 142
         }
       ],
       "motivosDiarios": [
@@ -6682,17 +6697,17 @@
           "label": "Não atendeu/Não retornou",
           "POA": 76,
           "SUL": 221,
-          "VALE DOS SINOS": 96,
-          "SERRA": 29,
+          "VALE DOS SINOS": 110,
+          "SERRA": 30,
           "LITORAL": 91,
-          "Total": 513
+          "Total": 528
         },
         {
           "label": "Contatos Efetivo",
           "POA": 3,
           "SUL": 7,
-          "VALE DOS SINOS": 22,
-          "SERRA": 27,
+          "VALE DOS SINOS": 23,
+          "SERRA": 26,
           "LITORAL": 7,
           "Total": 66
         },
@@ -6701,9 +6716,9 @@
           "POA": 0,
           "SUL": 0,
           "VALE DOS SINOS": 0,
-          "SERRA": 2,
+          "SERRA": 0,
           "LITORAL": 1,
-          "Total": 3
+          "Total": 1
         },
         {
           "label": "Ativo por temporada",
@@ -6716,21 +6731,21 @@
         },
         {
           "label": "Conversão / Venda RCA Externo",
-          "POA": 7,
+          "POA": 11,
           "SUL": 14,
           "VALE DOS SINOS": 5,
           "SERRA": 5,
           "LITORAL": 5,
-          "Total": 36
+          "Total": 40
         },
         {
           "label": "Telefone incorreto",
           "POA": 0,
           "SUL": 0,
-          "VALE DOS SINOS": 2,
-          "SERRA": 5,
+          "VALE DOS SINOS": 3,
+          "SERRA": 6,
           "LITORAL": 5,
-          "Total": 12
+          "Total": 14
         },
         {
           "label": "Problema Financeiro",
@@ -6743,14 +6758,300 @@
         },
         {
           "label": "Total",
-          "POA": 214,
-          "SUL": 334,
-          "VALE DOS SINOS": 175,
-          "SERRA": 124,
-          "LITORAL": 172,
+          "POA": 122,
+          "SUL": 289,
+          "VALE DOS SINOS": 145,
+          "SERRA": 101,
+          "LITORAL": 143,
           "Total": 0
         }
-      ]
+      ],
+      "rcaExterno": {
+        "clientes": [
+          {
+            "empresa": "45375 | KARINA TEIXEIRA ORTIZ DA SILVA",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "45375",
+            "faturamento": 289.85
+          },
+          {
+            "empresa": "41914 | ANDRESSA INEZ HOLZ",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "41914",
+            "faturamento": 414.5
+          },
+          {
+            "empresa": "45137 | BENDITO PASTELARIA LTDA",
+            "responsavel": "Cristielen - Vale dos Sinos",
+            "regiao": "Vale dos Sinos",
+            "codcli": "45137",
+            "faturamento": 216.95
+          },
+          {
+            "empresa": "25139 | SANDRA SOUZA DOS SANTOS 00313237077",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "25139",
+            "faturamento": 189.75
+          },
+          {
+            "empresa": "44701 | W S DISTRIBUIDORA E LOGISTICA LTDA",
+            "responsavel": "Ariane Quebao",
+            "regiao": "Metropolitana",
+            "codcli": "44701",
+            "faturamento": 2319.6
+          },
+          {
+            "empresa": "30570 | ROSANE APARECIDA",
+            "responsavel": "Ariane Quebao",
+            "regiao": "Metropolitana",
+            "codcli": "30570",
+            "faturamento": 1345.02
+          },
+          {
+            "empresa": "20152 | NIVALDO DE OLIVEIRA COIMBRA",
+            "responsavel": "Ariane Quebao",
+            "regiao": "Metropolitana",
+            "codcli": "20152",
+            "faturamento": 1080.22
+          },
+          {
+            "empresa": "39310 | GUTI COMERCIO DE ALIMENTOS LTDA",
+            "responsavel": "Ariane Quebao",
+            "regiao": "Metropolitana",
+            "codcli": "39310",
+            "faturamento": 693.69
+          },
+          {
+            "empresa": "37296 | BANCA 43 - TRES FIGUEIRAS LTDA",
+            "responsavel": "Ariane Quebao",
+            "regiao": "Metropolitana",
+            "codcli": "37296",
+            "faturamento": 1097.87
+          },
+          {
+            "empresa": "43395 | ATRIO HOTEIS S.A.",
+            "responsavel": "Ariane Quebao",
+            "regiao": "Metropolitana",
+            "codcli": "43395",
+            "faturamento": 1041.3600000000001
+          },
+          {
+            "empresa": "43996 | CLAISE CARINA ZIMMER HANSEN LTDA",
+            "responsavel": "Tatiana - Serra",
+            "regiao": "Serra",
+            "codcli": "43996",
+            "faturamento": 397.43
+          },
+          {
+            "empresa": "40085 | 59.185.770 ISRAEL ZIMMERMANN",
+            "responsavel": "Tatiana - Serra",
+            "regiao": "Serra",
+            "codcli": "40085",
+            "faturamento": 0.011019999999959396
+          },
+          {
+            "empresa": "44818 | R V PRODUCAO E EVENTOS LTDA",
+            "responsavel": "Ariane Quebao",
+            "regiao": "Metropolitana",
+            "codcli": "44818",
+            "faturamento": 464.66
+          },
+          {
+            "empresa": "34101 | 52.067.787 ILAINE SALETE LOEBLEIN",
+            "responsavel": "Tatiana - Serra",
+            "regiao": "Serra",
+            "codcli": "34101",
+            "faturamento": 829
+          },
+          {
+            "empresa": "31323 | LUIZA S. DE PAULA & RAPHAEL T. SCHMIDT LTDA",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "31323",
+            "faturamento": 1445
+          },
+          {
+            "empresa": "30921 | GIOVANA BORTOLOTTI LTDA",
+            "responsavel": "Cristielen - Vale dos Sinos",
+            "regiao": "Vale dos Sinos",
+            "codcli": "30921",
+            "faturamento": 382.4
+          },
+          {
+            "empresa": "42884 | SAYMON VITORIA DA SILVA",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "42884",
+            "faturamento": 624.8099999999998
+          },
+          {
+            "empresa": "37478 | RICARDO HENN LTDA",
+            "responsavel": "Tatiana - Serra",
+            "regiao": "Serra",
+            "codcli": "37478",
+            "faturamento": 329.55
+          },
+          {
+            "empresa": "37514 | 55.239.773 JHENIFFER VIEIRA CARVALHO",
+            "responsavel": "Tatiana - Serra",
+            "regiao": "Serra",
+            "codcli": "37514",
+            "faturamento": 820.5899999999999
+          },
+          {
+            "empresa": "44649 | THIAGO SILVA MOCELIN",
+            "responsavel": "Ariane Quebao",
+            "regiao": "Metropolitana",
+            "codcli": "44649",
+            "faturamento": 1615.34
+          },
+          {
+            "empresa": "40914 | PERETTO COMERCIO DE ALIMENTOS LTDA",
+            "responsavel": "Ariane Quebao",
+            "regiao": "Metropolitana",
+            "codcli": "40914",
+            "faturamento": 6392
+          },
+          {
+            "empresa": "44506 | 24.311.166 PABLO LOPES CAVALHEIRO",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "44506",
+            "faturamento": 550.39
+          },
+          {
+            "empresa": "39288 | TAINARA LEMOS DA COSTA",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "39288",
+            "faturamento": 268.96000000000004
+          },
+          {
+            "empresa": "11822 | FELIPE DOS SANTOS MACHADO E JAQUELINE DE AZAMBUJA DOS SANTOS",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "11822",
+            "faturamento": 365.75
+          },
+          {
+            "empresa": "40976 | C. A. M. GRANDE & D. M. CINMAN LTDA",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "40976",
+            "faturamento": 935.95
+          },
+          {
+            "empresa": "27842 | FRANCIELE VEIGA RIMES",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "27842",
+            "faturamento": 339.91
+          },
+          {
+            "empresa": "19742 | DANIEL COSTA DE OLIVEIRA",
+            "responsavel": "Tatiana - Litoral",
+            "regiao": "Litoral",
+            "codcli": "19742",
+            "faturamento": 1082.2
+          },
+          {
+            "empresa": "19817 | LURDEMARI PIZZARIA LTDA",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "19817",
+            "faturamento": 196.85
+          },
+          {
+            "empresa": "44295 | 65.032.606 ANA CAROLINA DILLENBURG NAZARIO",
+            "responsavel": "Cristielen - Vale dos Sinos",
+            "regiao": "Vale dos Sinos",
+            "codcli": "44295",
+            "faturamento": 231.81
+          },
+          {
+            "empresa": "29642 | LUCIO CRISTIANO DE OLIVEIRA",
+            "responsavel": "Ariane Quebao",
+            "regiao": "Metropolitana",
+            "codcli": "29642",
+            "faturamento": 791.5699999999999
+          },
+          {
+            "empresa": "38526 | LANCHONETE VRM LTDA",
+            "responsavel": "Cristielen - Vale dos Sinos",
+            "regiao": "Vale dos Sinos",
+            "codcli": "38526",
+            "faturamento": 187.85
+          },
+          {
+            "empresa": "35870 | CRISTIANE RIBEIRO BARBOZA",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "35870",
+            "faturamento": 266.46999999999997
+          },
+          {
+            "empresa": "43994 | GEADA FRIA ALIMENTOS LTDA",
+            "responsavel": "Ariane Quebao",
+            "regiao": "Metropolitana",
+            "codcli": "43994",
+            "faturamento": 477.87000000000006
+          },
+          {
+            "empresa": "44999 | JOSE AUGUSTO GONALVES SOUZA",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "44999",
+            "faturamento": 1419.5100000000002
+          },
+          {
+            "empresa": "20948 | JOSÃ‰ RICARDO VEIGAS",
+            "responsavel": "Cristielen - Vale dos Sinos",
+            "regiao": "Vale dos Sinos",
+            "codcli": "20948",
+            "faturamento": 235.6
+          },
+          {
+            "empresa": "40737 | LUANA ESTIGARRIBIA TAVARES LTDA",
+            "responsavel": "Camila Arruda",
+            "regiao": "Sul",
+            "codcli": "40737",
+            "faturamento": 838.6999999999999
+          },
+          {
+            "empresa": "27148 | LUCILENE BATISTA DE OLIVEIRA",
+            "responsavel": "Tatiana - Litoral",
+            "regiao": "Litoral",
+            "codcli": "27148",
+            "faturamento": 151.8
+          },
+          {
+            "empresa": "43534 | SULZBACH E SULZBACH PADARIA E CONFEITARI",
+            "responsavel": "Tatiana - Litoral",
+            "regiao": "Litoral",
+            "codcli": "43534",
+            "faturamento": 3376.159999999999
+          },
+          {
+            "empresa": "36732 | RENATA BAPTISTA DA LUZ",
+            "responsavel": "Tatiana - Litoral",
+            "regiao": "Litoral",
+            "codcli": "36732",
+            "faturamento": 255.49
+          },
+          {
+            "empresa": "43744 | CLEIA REGINA DOS SANTOS",
+            "responsavel": "Tatiana - Litoral",
+            "regiao": "Litoral",
+            "codcli": "43744",
+            "faturamento": 303.24
+          }
+        ],
+        "totalClientes": 40,
+        "totalFaturamento": 34265.68101999999
+      }
     },
     "profissionais": {},
     "faturamentoTotal": 0,
@@ -8438,5 +8739,5 @@
     ]
   },
   "fileName": "",
-  "updatedAt": "2026-07-14T14:57:15.853Z"
+  "updatedAt": "2026-07-15T12:04:48.479Z"
 }

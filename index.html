@@ -600,28 +600,45 @@
         }
       }
 
-      // RCA Externo matrix (rows with header ["Empresa","Responsavel",...])
-      for (var rcaR = 0; rcaR < grid.length - 1; rcaR++) {
+      // RCA Externo — try summary rows first (Faturamento RCA Externo + Numero de clientes)
+      var rcaFat = -1, rcaCli = -1;
+      for (var rcaR = 0; rcaR < grid.length; rcaR++) {
         var r = grid[rcaR];
-        if (r && r[0] === 'Empresa' && r[1] === 'Responsavel') {
-          var rcaClientes = [], rcaR2 = rcaR + 1;
-          while (rcaR2 < grid.length) {
-            var r2 = grid[rcaR2];
-            if (!r2 || !r2[0]) break;
-            var nomeEmpresa = String(r2[0]).trim();
-            if (!nomeEmpresa) break;
-            rcaClientes.push({
-              empresa: nomeEmpresa,
-              responsavel: r2[1] || '',
-              regiao: r2[2] || '',
-              codcli: r2[3] || '',
-              faturamento: parseNum(r2[4])
-            });
-            rcaR2++;
+        if (!r || !r[0]) continue;
+        var lbl = String(r[0]).trim().toUpperCase();
+        if (lbl.indexOf('FATURAMENTO RCA') >= 0) rcaFat = rcaR;
+        if (lbl.indexOf('NUMERO DE CLIENTES') >= 0 || lbl.indexOf('NÚMERO DE CLIENTES') >= 0) rcaCli = rcaR;
+      }
+      if (rcaFat >= 0 && rcaCli >= 0) {
+        result.painelGeral.rcaExterno = {
+          clientes: [],
+          totalClientes: parseNum(grid[rcaCli][1]),
+          totalFaturamento: parseNum(grid[rcaFat][1])
+        };
+      } else {
+        // Fallback: matrix with header ["Empresa","Responsavel",...]
+        for (var rcaR = 0; rcaR < grid.length - 1; rcaR++) {
+          var r = grid[rcaR];
+          if (r && r[0] === 'Empresa' && r[1] === 'Responsavel') {
+            var rcaClientes = [], rcaR2 = rcaR + 1;
+            while (rcaR2 < grid.length) {
+              var r2 = grid[rcaR2];
+              if (!r2 || !r2[0]) break;
+              var nomeEmpresa = String(r2[0]).trim();
+              if (!nomeEmpresa) break;
+              rcaClientes.push({
+                empresa: nomeEmpresa,
+                responsavel: r2[1] || '',
+                regiao: r2[2] || '',
+                codcli: r2[3] || '',
+                faturamento: parseNum(r2[4])
+              });
+              rcaR2++;
+            }
+            var totalFat = rcaClientes.reduce(function(s, c){ return s + c.faturamento; }, 0);
+            result.painelGeral.rcaExterno = { clientes: rcaClientes, totalClientes: rcaClientes.length, totalFaturamento: totalFat };
+            break;
           }
-          var totalFat = rcaClientes.reduce(function(s, c){ return s + c.faturamento; }, 0);
-          result.painelGeral.rcaExterno = { clientes: rcaClientes, totalClientes: rcaClientes.length, totalFaturamento: totalFat };
-          break;
         }
       }
     }

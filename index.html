@@ -745,15 +745,15 @@
         var c2 = document.getElementById('chartEvolucao2');
         if (c1 && typeof Chart !== 'undefined') new Chart(c1, {
           type:'bar', data:{labels:labels, datasets:[
-            {label:'Contatos Realizados',data:convData,backgroundColor:'#a78bfa',borderRadius:4},
-            {label:'Meta Contatos',data:contMeta,backgroundColor:'#78350f',borderRadius:4}
+            {label:'Contatos Realizados (Televendas)',data:convData,backgroundColor:'#a78bfa',borderRadius:4},
+            {label:'Meta Contatos (Televendas)',data:contMeta,backgroundColor:'#78350f',borderRadius:4}
           ]},
           options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{anchor:'end',align:'end',color:'#9ca3af',font:{size:10,weight:'bold'},offset:0},legend:{position:'bottom',labels:{color:'#9ca3af',padding:10,boxWidth:10,font:{size:11}}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}
         });
         if (c2 && typeof Chart !== 'undefined') new Chart(c2, {
           type:'bar', data:{labels:labels, datasets:[
-            {label:'Meta Recuperados',data:recupMeta,backgroundColor:'#78350f',borderRadius:4},
-            {label:'Realizado Recuperados',data:recupReal,backgroundColor:'#34d399',borderRadius:4}
+            {label:'Meta Recuperados (Televendas)',data:recupMeta,backgroundColor:'#78350f',borderRadius:4},
+            {label:'Realizado Recuperados (Televendas)',data:recupReal,backgroundColor:'#34d399',borderRadius:4}
           ]},
           options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{color:'#9ca3af',font:{size:9,weight:'bold'},anchor:'end',align:'end'},legend:{position:'bottom',labels:{color:'#9ca3af',padding:10,boxWidth:10,font:{size:11}}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}
         });
@@ -810,8 +810,8 @@
 
       // CHARTS
       html += '<div class="grid-2">';
-      html += '<div class="chart-box"><h2>Contatos Realizados <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal de contatos vs meta</span></h2><canvas id="chartEvolucao1" style="max-height:220px"></canvas></div>';
-      html += '<div class="chart-box"><h2>Recuperados <span class="sub">&rarr; Meta x Realizado por m\u00EAs</span></h2><canvas id="chartEvolucao2" style="max-height:220px"></canvas></div>';
+      html += '<div class="chart-box"><h2>Contatos Realizados (Televendas) <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal de contatos vs meta</span></h2><canvas id="chartEvolucao1" style="max-height:220px"></canvas></div>';
+      html += '<div class="chart-box"><h2>Recuperados (Televendas) <span class="sub">&rarr; Meta x Realizado por m\u00EAs</span></h2><canvas id="chartEvolucao2" style="max-height:220px"></canvas></div>';
       html += '</div>';
 
       // VALOR POR PROFISSIONAL
@@ -825,7 +825,7 @@
         }
         var vpTotA = 0, vpTotM = 0, vpTotJ = 0, vpTotJL = 0, vpTotT = 0;
         for (var vi = 0; vi < vpSorted.length; vi++) { vpTotA += vpSorted[vi].Abril||0; vpTotM += vpSorted[vi].Maio||0; vpTotJ += vpSorted[vi].Junho||0; vpTotJL += vpSorted[vi].Julho||0; vpTotT += vpSorted[vi].Total||0; }
-        html += '<div class="chart-box"><h2>Valor Recuperado por Mês <span class="sub">&rarr; Faturamento por televendedora em cada mês</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th class="text-right" title="Valor recuperado em Abril">Abril</th><th class="text-right" title="Valor recuperado em Maio">Maio</th><th class="text-right" title="Valor recuperado em Junho">Junho</th><th class="text-right" title="Valor recuperado em Julho">Julho</th><th class="text-right" title="Valor total recuperado">Total</th></tr></thead><tbody>' + vpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotA) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotM) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotJ) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotJL) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(vpTotT) + '</td></tr></tbody></table></div></div>';
+        html += '<div class="chart-box"><h2>Valor Recuperado por Mês (Televendas) <span class="sub">&rarr; Faturamento por televendedora em cada mês</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th class="text-right" title="Valor recuperado em Abril">Abril</th><th class="text-right" title="Valor recuperado em Maio">Maio</th><th class="text-right" title="Valor recuperado em Junho">Junho</th><th class="text-right" title="Valor recuperado em Julho">Julho</th><th class="text-right" title="Valor total recuperado">Total</th></tr></thead><tbody>' + vpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotA) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotM) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotJ) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotJL) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(vpTotT) + '</td></tr></tbody></table></div></div>';
       }
 
       // RECUPERADOS POR PROFISSIONAL (from RECUPERADOS POR RCA)

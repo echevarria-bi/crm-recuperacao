@@ -8,44 +8,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',sans-serif;background:#080a12;color:#e1e7ef;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
-    .bg-glow{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(245,158,11,0.05) 0%,transparent 70%);pointer-events:none;z-index:0}
-    header{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:20px 32px 10px;text-align:center}
-    header h1{font-size:44px;font-weight:900;background:linear-gradient(135deg,#fbbf24,#f59e0b,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.15}
-    header p{font-size:17px;color:#6b7280;margin-top:8px;font-weight:400}
-    .container{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:16px 32px 20px;flex:0;display:flex;flex-direction:column;align-items:center}
-    .section-label{display:flex;align-items:center;gap:12px;margin-bottom:28px;width:100%;max-width:760px}
-    .section-label span{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#6b7280;white-space:nowrap}
-    .section-label .line{flex:1;height:1px;background:linear-gradient(90deg,transparent,#1e1b4b,transparent)}
-    .grid{display:grid;grid-template-columns:1fr;gap:24px;width:100%;max-width:760px}
-    .card{position:relative;display:flex;align-items:center;gap:28px;padding:32px 36px;background:linear-gradient(135deg,#11131c,#161924);border:1px solid #1e1b4b;border-radius:20px;cursor:pointer;transition:all .3s ease;text-decoration:none;color:inherit;overflow:hidden}
-    .card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:20px;opacity:0;background:linear-gradient(135deg,rgba(245,158,11,0.03),transparent);transition:opacity .3s}
+    html,body{height:100%}
+    body{font-family:'Inter',sans-serif;background:#080a12;color:#e1e7ef;display:flex;flex-direction:column;overflow:hidden}
+    .bg-glow{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:1200px;height:1200px;background:radial-gradient(circle,rgba(245,158,11,0.05) 0%,transparent 70%);pointer-events:none;z-index:0}
+    .main-wrap{display:flex;flex-direction:column;flex:1;justify-content:center;align-items:center;padding:40px 20px}
+    header{position:relative;z-index:1;text-align:center;margin-bottom:28px}
+    header h1{font-size:52px;font-weight:900;background:linear-gradient(135deg,#fbbf24,#f59e0b,#fb923c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.15}
+    header p{font-size:18px;color:#6b7280;margin-top:10px;font-weight:400}
+    .container{position:relative;z-index:1;width:100%;max-width:880px;display:flex;flex-direction:column;align-items:center}
+    .grid{display:grid;grid-template-columns:1fr;gap:28px;width:100%}
+    .card{position:relative;display:flex;align-items:center;gap:32px;padding:40px 44px;background:linear-gradient(135deg,#11131c,#161924);border:1px solid #1e1b4b;border-radius:24px;cursor:pointer;transition:all .3s ease;text-decoration:none;color:inherit;overflow:hidden}
+    .card::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:24px;opacity:0;background:linear-gradient(135deg,rgba(245,158,11,0.03),transparent);transition:opacity .3s}
     .card:hover::before{opacity:1}
-    .card:hover{transform:translateY(-2px) scale(1.02);border-color:rgba(245,158,11,0.3);box-shadow:0 16px 48px rgba(245,158,11,0.08)}
-    .card .icon-wrap{flex-shrink:0;width:76px;height:76px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:34px;position:relative}
+    .card:hover{transform:translateY(-3px) scale(1.02);border-color:rgba(245,158,11,0.3);box-shadow:0 20px 56px rgba(245,158,11,0.08)}
+    .card .icon-wrap{flex-shrink:0;width:96px;height:96px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:42px;position:relative}
     .card .icon-wrap.crm{background:linear-gradient(135deg,rgba(52,211,153,0.1),rgba(52,211,153,0.02));border:1px solid rgba(52,211,153,0.15)}
     .card .icon-wrap.camp{background:linear-gradient(135deg,rgba(96,165,250,0.1),rgba(96,165,250,0.02));border:1px solid rgba(96,165,250,0.15)}
     .card .body{flex:1;min-width:0}
-    .card .body h3{font-size:22px;font-weight:700;color:#fcd34d;margin-bottom:6px;letter-spacing:.2px}
-    .card .body p{font-size:15px;color:#6b7280;line-height:1.5}
-    .card .status{flex-shrink:0;padding:6px 16px;border-radius:8px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-    .status-on{background:rgba(52,211,153,0.1);color:#34d399}
-    .card .arrow{flex-shrink:0;width:36px;height:36px;border-radius:50%;border:1px solid #1e1b4b;display:flex;align-items:center;justify-content:center;font-size:18px;color:#4a4d6e;transition:all .3s}
-    .card:hover .arrow{border-color:#f59e0b;color:#f59e0b;transform:translateX(4px)}
-    footer{position:relative;z-index:1;text-align:center;padding:24px 32px;font-size:14px;color:#4a4d6e}
+    .card .body h3{font-size:26px;font-weight:700;color:#fcd34d;margin-bottom:8px;letter-spacing:.2px}
+    .card .body p{font-size:16px;color:#6b7280;line-height:1.5}
+    .card .status{flex-shrink:0;padding:8px 20px;border-radius:10px;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+    .status-on{background:rgba(52,211,153,0.12);color:#34d399}
+    .card .arrow{flex-shrink:0;width:44px;height:44px;border-radius:50%;border:1.5px solid #1e1b4b;display:flex;align-items:center;justify-content:center;font-size:22px;color:#4a4d6e;transition:all .3s}
+    .card:hover .arrow{border-color:#f59e0b;color:#f59e0b;transform:translateX(5px)}
+    footer{position:relative;z-index:1;text-align:center;padding:24px 32px 36px;font-size:14px;color:#4a4d6e}
   </style>
 </head>
 <body>
   <div class="bg-glow"></div>
+  <div class="main-wrap">
   <header>
     <h1>Televendas · Relatórios</h1>
     <p>Central de dashboards da equipe de televendas</p>
   </header>
   <div class="container">
-    <div class="section-label">
-      <span>Dashboards</span>
-      <div class="line"></div>
-    </div>
     <div class="grid">
       <a class="card" href="https://echevarria-bi.github.io/crm-recuperacao/" target="_blank">
         <div class="icon-wrap crm">&#128222;</div>
@@ -66,6 +62,7 @@
         <div class="arrow">&#8594;</div>
       </a>
     </div>
+  </div>
   </div>
   <footer>Televendas &middot; Central de Relatórios</footer>
 </body>

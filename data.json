@@ -4878,7 +4878,7 @@
             "profissional": "Ariane - POA",
             "meta": 42,
             "realizado": 5,
-            "pct": 11.9,
+            "pct": 12,
             "dias": [
               {
                 "dia": 1,
@@ -5017,7 +5017,7 @@
             "profissional": "Camila - SUL",
             "meta": 43,
             "realizado": 13,
-            "pct": 30.23,
+            "pct": 30,
             "dias": [
               {
                 "dia": 1,
@@ -5155,8 +5155,8 @@
           {
             "profissional": "Cristielen - VALE DOS SINOS",
             "meta": 31,
-            "realizado": 2,
-            "pct": 6.45,
+            "realizado": 3,
+            "pct": 10,
             "dias": [
               {
                 "dia": 1,
@@ -5231,7 +5231,7 @@
               {
                 "dia": 21,
                 "meta": 1,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "dia": 22,
@@ -5294,8 +5294,8 @@
           {
             "profissional": "Tatiana - SERRA",
             "meta": 22,
-            "realizado": 4,
-            "pct": 18.18,
+            "realizado": 9,
+            "pct": 41,
             "dias": [
               {
                 "dia": 1,
@@ -5355,12 +5355,12 @@
               {
                 "dia": 16,
                 "meta": 1,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "dia": 17,
                 "meta": 1,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "dia": 20,
@@ -5370,12 +5370,12 @@
               {
                 "dia": 21,
                 "meta": 1,
-                "realizado": 0
+                "realizado": 2
               },
               {
                 "dia": 22,
                 "meta": 1,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "dia": 23,
@@ -5433,8 +5433,8 @@
           {
             "profissional": "Tatiana - LITORAL",
             "meta": 23,
-            "realizado": 0,
-            "pct": 0,
+            "realizado": 1,
+            "pct": 4,
             "dias": [
               {
                 "dia": 1,
@@ -5524,7 +5524,7 @@
               {
                 "dia": 24,
                 "meta": 1,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "dia": 27,
@@ -5573,8 +5573,8 @@
         "total": {
           "profissional": "Total",
           "meta": 161,
-          "realizado": 24,
-          "pct": 14.91,
+          "realizado": 31,
+          "pct": 19,
           "dias": [
             {
               "dia": 1,
@@ -5614,12 +5614,12 @@
             {
               "dia": 10,
               "meta": 8,
-              "realizado": 4
+              "realizado": 5
             },
             {
               "dia": 13,
               "meta": 7,
-              "realizado": 0
+              "realizado": 1
             },
             {
               "dia": 14,
@@ -5629,17 +5629,17 @@
             {
               "dia": 15,
               "meta": 7,
-              "realizado": 0
+              "realizado": 1
             },
             {
               "dia": 16,
               "meta": 7,
-              "realizado": 1
+              "realizado": 2
             },
             {
               "dia": 17,
               "meta": 7,
-              "realizado": 0
+              "realizado": 1
             },
             {
               "dia": 20,
@@ -5649,12 +5649,12 @@
             {
               "dia": 21,
               "meta": 7,
-              "realizado": 0
+              "realizado": 3
             },
             {
               "dia": 22,
               "meta": 7,
-              "realizado": 0
+              "realizado": 1
             },
             {
               "dia": 23,
@@ -5664,7 +5664,7 @@
             {
               "dia": 24,
               "meta": 7,
-              "realizado": 0
+              "realizado": 1
             },
             {
               "dia": 27,
@@ -5744,8 +5744,8 @@
           {
             "profissional": "Ariane - POA",
             "meta": 250,
-            "realizado": 89,
-            "pct": 36,
+            "realizado": 129,
+            "pct": 52,
             "dias": [
               {
                 "dia": 1,
@@ -5795,22 +5795,22 @@
               {
                 "dia": 10,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 11,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 12,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 13,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 14,
@@ -5882,8 +5882,8 @@
           {
             "profissional": "Camila - SUL",
             "meta": 250,
-            "realizado": 70,
-            "pct": 28,
+            "realizado": 110,
+            "pct": 44,
             "dias": [
               {
                 "dia": 1,
@@ -5933,22 +5933,22 @@
               {
                 "dia": 10,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 11,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 12,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 13,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 14,
@@ -6020,8 +6020,8 @@
           {
             "profissional": "Cristielen - VALE DOS SINOS",
             "meta": 250,
-            "realizado": 95,
-            "pct": 38,
+            "realizado": 150,
+            "pct": 60,
             "dias": [
               {
                 "dia": 1,
@@ -6071,22 +6071,22 @@
               {
                 "dia": 10,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 11,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 12,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 17
               },
               {
                 "dia": 13,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 18
               },
               {
                 "dia": 14,
@@ -6158,8 +6158,8 @@
           {
             "profissional": "Tatiana - SERRA",
             "meta": 250,
-            "realizado": 78,
-            "pct": 31,
+            "realizado": 118,
+            "pct": 47,
             "dias": [
               {
                 "dia": 1,
@@ -6209,22 +6209,22 @@
               {
                 "dia": 10,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 11,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 12,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 13,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 14,
@@ -6296,8 +6296,8 @@
           {
             "profissional": "Tatiana - LITORAL",
             "meta": 250,
-            "realizado": 75,
-            "pct": 30,
+            "realizado": 90,
+            "pct": 36,
             "dias": [
               {
                 "dia": 1,
@@ -6347,12 +6347,12 @@
               {
                 "dia": 10,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 5
               },
               {
                 "dia": 11,
                 "meta": 10,
-                "realizado": 0
+                "realizado": 10
               },
               {
                 "dia": 12,
@@ -6435,8 +6435,8 @@
         "total": {
           "profissional": "Total",
           "meta": 1250,
-          "realizado": 407,
-          "pct": 33,
+          "realizado": 597,
+          "pct": 48,
           "dias": [
             {
               "dia": 1,
@@ -6486,22 +6486,22 @@
             {
               "dia": 10,
               "meta": 50,
-              "realizado": 0
+              "realizado": 45
             },
             {
               "dia": 11,
               "meta": 50,
-              "realizado": 0
+              "realizado": 50
             },
             {
               "dia": 12,
               "meta": 50,
-              "realizado": 0
+              "realizado": 47
             },
             {
               "dia": 13,
               "meta": 50,
-              "realizado": 0
+              "realizado": 48
             },
             {
               "dia": 14,
@@ -6574,30 +6574,30 @@
       "motivos": [
         {
           "label": "Não atendeu/Não retornou",
-          "POA": 76,
+          "POA": 87,
           "SUL": 221,
-          "VALE DOS SINOS": 110,
-          "SERRA": 30,
-          "LITORAL": 91,
-          "Total": 528
+          "VALE DOS SINOS": 146,
+          "SERRA": 32,
+          "LITORAL": 99,
+          "Total": 585
         },
         {
           "label": "Contatos Efetivo",
-          "POA": 3,
+          "POA": 5,
           "SUL": 7,
-          "VALE DOS SINOS": 23,
-          "SERRA": 26,
-          "LITORAL": 7,
-          "Total": 66
+          "VALE DOS SINOS": 25,
+          "SERRA": 27,
+          "LITORAL": 9,
+          "Total": 73
         },
         {
           "label": "Baixado/Outros",
           "POA": 0,
           "SUL": 0,
           "VALE DOS SINOS": 0,
-          "SERRA": 0,
-          "LITORAL": 1,
-          "Total": 1
+          "SERRA": 4,
+          "LITORAL": 5,
+          "Total": 9
         },
         {
           "label": "Ativo por temporada",
@@ -6610,21 +6610,21 @@
         },
         {
           "label": "Conversão / Venda RCA Externo",
-          "POA": 11,
+          "POA": 12,
           "SUL": 14,
           "VALE DOS SINOS": 5,
-          "SERRA": 5,
+          "SERRA": 6,
           "LITORAL": 5,
-          "Total": 40
+          "Total": 42
         },
         {
           "label": "Telefone incorreto",
           "POA": 0,
           "SUL": 0,
           "VALE DOS SINOS": 3,
-          "SERRA": 6,
-          "LITORAL": 5,
-          "Total": 14
+          "SERRA": 7,
+          "LITORAL": 6,
+          "Total": 16
         },
         {
           "label": "Problema Financeiro",
@@ -6637,88 +6637,88 @@
         },
         {
           "label": "Total",
-          "POA": 122,
-          "SUL": 289,
-          "VALE DOS SINOS": 145,
-          "SERRA": 101,
-          "LITORAL": 143,
+          "POA": 199,
+          "SUL": 291,
+          "VALE DOS SINOS": 188,
+          "SERRA": 97,
+          "LITORAL": 147,
           "Total": 0
         }
       ],
       "inatividade": [
         {
           "label": "45 a 59 Risco",
-          "POA": 0,
-          "SUL": 0,
+          "POA": 70,
+          "SUL": 48,
           "VALE DOS SINOS": 0,
-          "SERRA": 0,
-          "LITORAL": 0,
-          "Total": 0
+          "SERRA": 13,
+          "LITORAL": 22,
+          "Total": 153
         },
         {
           "label": "60 a 74 Atenção",
-          "POA": 0,
+          "POA": 16,
           "SUL": 0,
-          "VALE DOS SINOS": 0,
-          "SERRA": 0,
-          "LITORAL": 0,
-          "Total": 0
+          "VALE DOS SINOS": 6,
+          "SERRA": 1,
+          "LITORAL": 1,
+          "Total": 24
         },
         {
           "label": "75 a 84 Crítico",
-          "POA": 6,
+          "POA": 3,
           "SUL": 0,
-          "VALE DOS SINOS": 0,
-          "SERRA": 1,
+          "VALE DOS SINOS": 2,
+          "SERRA": 7,
           "LITORAL": 0,
-          "Total": 7
+          "Total": 12
         },
         {
           "label": "85 a 90 Urgente",
-          "POA": 2,
+          "POA": 1,
           "SUL": 0,
           "VALE DOS SINOS": 0,
           "SERRA": 0,
           "LITORAL": 0,
-          "Total": 2
+          "Total": 1
         },
         {
           "label": "90 a 104",
-          "POA": 24,
-          "SUL": 47,
-          "VALE DOS SINOS": 4,
-          "SERRA": 33,
-          "LITORAL": 34,
-          "Total": 142
+          "POA": 5,
+          "SUL": 1,
+          "VALE DOS SINOS": 1,
+          "SERRA": 0,
+          "LITORAL": 0,
+          "Total": 7
         }
       ],
       "motivosDiarios": [
         {
           "label": "Não atendeu/Não retornou",
-          "POA": 76,
+          "POA": 87,
           "SUL": 221,
-          "VALE DOS SINOS": 110,
-          "SERRA": 30,
-          "LITORAL": 91,
-          "Total": 528
+          "VALE DOS SINOS": 146,
+          "SERRA": 32,
+          "LITORAL": 99,
+          "Total": 585
         },
         {
           "label": "Contatos Efetivo",
-          "POA": 3,
+          "POA": 5,
           "SUL": 7,
-          "VALE DOS SINOS": 23,
-          "SERRA": 26,
-          "LITORAL": 7,
-          "Total": 66
+          "VALE DOS SINOS": 25,
+          "SERRA": 27,
+          "LITORAL": 9,
+          "Total": 73
         },
         {
           "label": "Baixado/Outros",
           "POA": 0,
           "SUL": 0,
           "VALE DOS SINOS": 0,
-          "SERRA": 0,
-          "LITORAL": 1,
-          "Total": 1
+          "SERRA": 4,
+          "LITORAL": 5,
+          "Total": 9
         },
         {
           "label": "Ativo por temporada",
@@ -6731,21 +6731,21 @@
         },
         {
           "label": "Conversão / Venda RCA Externo",
-          "POA": 11,
+          "POA": 12,
           "SUL": 14,
           "VALE DOS SINOS": 5,
-          "SERRA": 5,
+          "SERRA": 6,
           "LITORAL": 5,
-          "Total": 40
+          "Total": 42
         },
         {
           "label": "Telefone incorreto",
           "POA": 0,
           "SUL": 0,
           "VALE DOS SINOS": 3,
-          "SERRA": 6,
-          "LITORAL": 5,
-          "Total": 14
+          "SERRA": 7,
+          "LITORAL": 6,
+          "Total": 16
         },
         {
           "label": "Problema Financeiro",
@@ -6758,11 +6758,11 @@
         },
         {
           "label": "Total",
-          "POA": 122,
-          "SUL": 289,
-          "VALE DOS SINOS": 145,
-          "SERRA": 101,
-          "LITORAL": 143,
+          "POA": 199,
+          "SUL": 291,
+          "VALE DOS SINOS": 188,
+          "SERRA": 97,
+          "LITORAL": 147,
           "Total": 0
         }
       ],
@@ -8739,5 +8739,5 @@
     ]
   },
   "fileName": "",
-  "updatedAt": "2026-07-15T13:13:07.361Z"
+  "updatedAt": "2026-07-21T12:50:36.444Z"
 }

@@ -4,190 +4,172 @@
       "indicadores": [
         {
           "label": "Faturamento Total",
-          "Abril": 824521.82,
-          "Maio": 649714.46,
-          "Junho": 778038.96,
-          "Julho": 861367.5
+          "Abril": 152766.47,
+          "Maio": 62333.03,
+          "Junho": 100458.72,
+          "Julho": 35699.48
         },
         {
           "label": "Positivação (Clientes Únicos)",
-          "Abril": 470,
-          "Maio": 426,
-          "Junho": 451,
-          "Julho": 364
+          "Abril": 73,
+          "Maio": 54,
+          "Junho": 90,
+          "Julho": 40
         },
         {
           "label": "Ticket Médio",
-          "Abril": 1754.3,
-          "Maio": 1525.15,
-          "Junho": 1725.14,
-          "Julho": 2366.39
+          "Abril": 2092.69,
+          "Maio": 1154.32,
+          "Junho": 1116.21,
+          "Julho": 892.49
         },
         {
           "label": "Contatos Realizados",
-          "Abril": 470,
-          "Maio": 426,
-          "Junho": 451,
-          "Julho": 364
+          "Abril": 73,
+          "Maio": 54,
+          "Junho": 90,
+          "Julho": 40
         },
         {
           "label": "Meta de Contatos",
-          "Abril": 470,
-          "Maio": 426,
-          "Junho": 451,
-          "Julho": 364
+          "Abril": 73,
+          "Maio": 54,
+          "Junho": 90,
+          "Julho": 40
         },
         {
           "label": "Meta de Clientes Recuperados",
-          "Abril": 470,
-          "Maio": 426,
-          "Junho": 451,
-          "Julho": 364
+          "Abril": 73,
+          "Maio": 54,
+          "Junho": 90,
+          "Julho": 40
         },
         {
           "label": "Realizado de Clientes Recuperados",
-          "Abril": 470,
-          "Maio": 426,
-          "Junho": 451,
-          "Julho": 364
+          "Abril": 73,
+          "Maio": 54,
+          "Junho": 90,
+          "Julho": 40
         },
         {
           "label": "Valor Recuperado",
-          "Abril": 824521.82,
-          "Maio": 649714.46,
-          "Junho": 778038.96,
-          "Julho": 861367.5
+          "Abril": 152766.47,
+          "Maio": 62333.03,
+          "Junho": 100458.72,
+          "Julho": 35699.48
         }
       ],
       "valorPorProf": [
         {
+          "profissional": "Anna",
+          "Abril": 11165.82,
+          "Total": 11165.82
+        },
+        {
           "profissional": "Ariane",
-          "Abril": 121767.7,
-          "Maio": 153592.91,
-          "Junho": 120568.18,
-          "Julho": 136342.44,
-          "Total": 532271.23
+          "Abril": 18884.41,
+          "Maio": 8267.59,
+          "Junho": 24978.59,
+          "Julho": 6166.22,
+          "Total": 58296.81
         },
         {
           "profissional": "Camila",
-          "Abril": 100007.04,
-          "Maio": 161974.55,
-          "Junho": 175506.76,
-          "Julho": 130229.02,
-          "Total": 567717.37
+          "Abril": 2195.42,
+          "Maio": 18375.52,
+          "Junho": 12888.17,
+          "Julho": 9966.94,
+          "Total": 43426.05
         },
         {
           "profissional": "Cristielen",
-          "Maio": 62863.94,
-          "Junho": 82172.88,
-          "Julho": 132079.29,
-          "Total": 277116.11
+          "Maio": 2570.25,
+          "Junho": 4392.49,
+          "Julho": 1332.71,
+          "Total": 8295.45
         },
         {
-          "profissional": "Natália",
-          "Abril": 209669.06,
-          "Maio": 170101.69,
-          "Junho": 275800.86,
-          "Julho": 284496.9,
-          "Total": 940068.51
-        },
-        {
-          "profissional": "Tatiana",
-          "Abril": 158770.71,
-          "Maio": 101331.85,
-          "Junho": 123576.67,
-          "Julho": 117162.71,
-          "Total": 500841.94
+          "profissional": "Natalia",
+          "Abril": 64136.46,
+          "Maio": 20447.43,
+          "Junho": 37280.67,
+          "Total": 121864.56
         },
         {
           "profissional": "Tatiana",
-          "Junho": 413.6,
-          "Julho": 61057.13,
-          "Total": 61470.73
-        },
-        {
-          "profissional": "Anna",
-          "Abril": 234307.32,
-          "Total": 234156.84
+          "Abril": 56384.36,
+          "Maio": 12672.24,
+          "Junho": 20918.8,
+          "Julho": 18233.61,
+          "Total": 108209.01
         }
       ],
       "recuperadosPorProf": [
         {
-          "profissional": "Ariane",
-          "Abril META": 62,
-          "Abril REAL": 62,
-          "Maio META": 69,
-          "Maio REAL": 69,
-          "Junho META": 69,
-          "Junho REAL": 69,
-          "Julho META": 51,
-          "Julho REAL": 51
-        },
-        {
-          "profissional": "Camila",
-          "Abril META": 63,
-          "Abril REAL": 63,
-          "Maio META": 120,
-          "Maio REAL": 120,
-          "Junho META": 115,
-          "Junho REAL": 115,
-          "Julho META": 93,
-          "Julho REAL": 93
-        },
-        {
-          "profissional": "Cristielen",
-          "Abril META": 0,
-          "Abril REAL": 0,
-          "Maio META": 52,
-          "Maio REAL": 52,
-          "Junho META": 65,
-          "Junho REAL": 65,
-          "Julho META": 84,
-          "Julho REAL": 84
-        },
-        {
-          "profissional": "Natália",
-          "Abril META": 124,
-          "Abril REAL": 124,
-          "Maio META": 102,
-          "Maio REAL": 102,
-          "Junho META": 109,
-          "Junho REAL": 109,
-          "Julho META": 11,
-          "Julho REAL": 11
-        },
-        {
-          "profissional": "Tatiana",
-          "Abril META": 100,
-          "Abril REAL": 100,
-          "Maio META": 83,
-          "Maio REAL": 83,
-          "Junho META": 92,
-          "Junho REAL": 92,
-          "Julho META": 77,
-          "Julho REAL": 77
-        },
-        {
-          "profissional": "Tatiana",
-          "Abril META": 0,
-          "Abril REAL": 0,
-          "Maio META": 0,
-          "Maio REAL": 0,
-          "Junho META": 1,
-          "Junho REAL": 1,
-          "Julho META": 48,
-          "Julho REAL": 48
-        },
-        {
           "profissional": "Anna",
-          "Abril META": 121,
-          "Abril REAL": 121,
+          "Abril META": 20,
+          "Abril REAL": 20,
           "Maio META": 0,
           "Maio REAL": 0,
           "Junho META": 0,
           "Junho REAL": 0,
           "Julho META": 0,
           "Julho REAL": 0
+        },
+        {
+          "profissional": "Ariane",
+          "Abril META": 11,
+          "Abril REAL": 11,
+          "Maio META": 10,
+          "Maio REAL": 10,
+          "Junho META": 16,
+          "Junho REAL": 16,
+          "Julho META": 5,
+          "Julho REAL": 5
+        },
+        {
+          "profissional": "Camila",
+          "Abril META": 3,
+          "Abril REAL": 3,
+          "Maio META": 18,
+          "Maio REAL": 18,
+          "Junho META": 22,
+          "Junho REAL": 22,
+          "Julho META": 15,
+          "Julho REAL": 15
+        },
+        {
+          "profissional": "Cristielen",
+          "Abril META": 0,
+          "Abril REAL": 0,
+          "Maio META": 3,
+          "Maio REAL": 3,
+          "Junho META": 7,
+          "Junho REAL": 7,
+          "Julho META": 4,
+          "Julho REAL": 4
+        },
+        {
+          "profissional": "Natalia",
+          "Abril META": 17,
+          "Abril REAL": 17,
+          "Maio META": 9,
+          "Maio REAL": 9,
+          "Junho META": 26,
+          "Junho REAL": 26,
+          "Julho META": 0,
+          "Julho REAL": 0
+        },
+        {
+          "profissional": "Tatiana",
+          "Abril META": 22,
+          "Abril REAL": 22,
+          "Maio META": 14,
+          "Maio REAL": 14,
+          "Junho META": 19,
+          "Junho REAL": 19,
+          "Julho META": 16,
+          "Julho REAL": 16
         }
       ]
     },
@@ -195,70 +177,62 @@
       "recuperacao": {
         "profissionais": [
           {
-            "profissional": "Ariane",
-            "meta": 69,
-            "realizado": 69,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 120568.18
-          },
-          {
-            "profissional": "Camila",
-            "meta": 115,
-            "realizado": 115,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 175506.76
-          },
-          {
-            "profissional": "Cristielen",
-            "meta": 65,
-            "realizado": 65,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 82172.88
-          },
-          {
-            "profissional": "Natália",
-            "meta": 109,
-            "realizado": 109,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 275800.86
-          },
-          {
-            "profissional": "Tatiana",
-            "meta": 92,
-            "realizado": 92,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 123576.67
-          },
-          {
-            "profissional": "Tatiana",
-            "meta": 1,
-            "realizado": 1,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 413.6
-          },
-          {
             "profissional": "Anna",
             "meta": 0,
             "realizado": 0,
-            "pct": 100,
+            "pct": 0,
             "dias": [],
             "faturamento": 0
+          },
+          {
+            "profissional": "Ariane",
+            "meta": 16,
+            "realizado": 16,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 24978.59
+          },
+          {
+            "profissional": "Camila",
+            "meta": 22,
+            "realizado": 22,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 12888.17
+          },
+          {
+            "profissional": "Cristielen",
+            "meta": 7,
+            "realizado": 7,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 4392.49
+          },
+          {
+            "profissional": "Natalia",
+            "meta": 26,
+            "realizado": 26,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 37280.67
+          },
+          {
+            "profissional": "Tatiana",
+            "meta": 19,
+            "realizado": 19,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 20918.8
           }
         ],
         "total": {
           "profissional": "Total",
-          "meta": 451,
-          "realizado": 451,
+          "meta": 90,
+          "realizado": 90,
           "pct": 100,
           "dias": []
         },
-        "faturamentoGeral": 778038.95,
+        "faturamentoGeral": 100458.72,
         "dayNums": []
       },
       "metaContatos": {
@@ -274,70 +248,62 @@
       "recuperacao": {
         "profissionais": [
           {
-            "profissional": "Ariane",
-            "meta": 62,
-            "realizado": 62,
+            "profissional": "Anna",
+            "meta": 20,
+            "realizado": 20,
             "pct": 100,
             "dias": [],
-            "faturamento": 121767.7
+            "faturamento": 11165.82
+          },
+          {
+            "profissional": "Ariane",
+            "meta": 11,
+            "realizado": 11,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 18884.41
           },
           {
             "profissional": "Camila",
-            "meta": 63,
-            "realizado": 63,
+            "meta": 3,
+            "realizado": 3,
             "pct": 100,
             "dias": [],
-            "faturamento": 100007.04
+            "faturamento": 2195.42
           },
           {
             "profissional": "Cristielen",
             "meta": 0,
             "realizado": 0,
-            "pct": 100,
+            "pct": 0,
             "dias": [],
             "faturamento": 0
           },
           {
-            "profissional": "Natália",
-            "meta": 124,
-            "realizado": 124,
+            "profissional": "Natalia",
+            "meta": 17,
+            "realizado": 17,
             "pct": 100,
             "dias": [],
-            "faturamento": 209669.06
+            "faturamento": 64136.46
           },
           {
             "profissional": "Tatiana",
-            "meta": 100,
-            "realizado": 100,
+            "meta": 22,
+            "realizado": 22,
             "pct": 100,
             "dias": [],
-            "faturamento": 158770.71
-          },
-          {
-            "profissional": "Tatiana",
-            "meta": 0,
-            "realizado": 0,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 0
-          },
-          {
-            "profissional": "Anna",
-            "meta": 121,
-            "realizado": 121,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 234307.32
+            "faturamento": 56384.36
           }
         ],
         "total": {
           "profissional": "Total",
-          "meta": 470,
-          "realizado": 470,
+          "meta": 73,
+          "realizado": 73,
           "pct": 100,
           "dias": []
         },
-        "faturamentoGeral": 824521.8300000001,
+        "faturamentoGeral": 152766.47,
         "dayNums": []
       },
       "metaContatos": {
@@ -353,70 +319,62 @@
       "recuperacao": {
         "profissionais": [
           {
-            "profissional": "Ariane",
-            "meta": 69,
-            "realizado": 69,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 153592.91
-          },
-          {
-            "profissional": "Camila",
-            "meta": 120,
-            "realizado": 120,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 161974.55
-          },
-          {
-            "profissional": "Cristielen",
-            "meta": 52,
-            "realizado": 52,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 62863.94
-          },
-          {
-            "profissional": "Natália",
-            "meta": 102,
-            "realizado": 102,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 170101.69
-          },
-          {
-            "profissional": "Tatiana",
-            "meta": 83,
-            "realizado": 83,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 101331.85
-          },
-          {
-            "profissional": "Tatiana",
+            "profissional": "Anna",
             "meta": 0,
             "realizado": 0,
-            "pct": 100,
+            "pct": 0,
             "dias": [],
             "faturamento": 0
           },
           {
-            "profissional": "Anna",
-            "meta": 0,
-            "realizado": 0,
+            "profissional": "Ariane",
+            "meta": 10,
+            "realizado": 10,
             "pct": 100,
             "dias": [],
-            "faturamento": -150.48
+            "faturamento": 8267.59
+          },
+          {
+            "profissional": "Camila",
+            "meta": 18,
+            "realizado": 18,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 18375.52
+          },
+          {
+            "profissional": "Cristielen",
+            "meta": 3,
+            "realizado": 3,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 2570.25
+          },
+          {
+            "profissional": "Natalia",
+            "meta": 9,
+            "realizado": 9,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 20447.43
+          },
+          {
+            "profissional": "Tatiana",
+            "meta": 14,
+            "realizado": 14,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 12672.24
           }
         ],
         "total": {
           "profissional": "Total",
-          "meta": 426,
-          "realizado": 426,
+          "meta": 54,
+          "realizado": 54,
           "pct": 100,
           "dias": []
         },
-        "faturamentoGeral": 649714.46,
+        "faturamentoGeral": 62333.03,
         "dayNums": []
       },
       "metaContatos": {
@@ -432,70 +390,62 @@
       "recuperacao": {
         "profissionais": [
           {
-            "profissional": "Ariane",
-            "meta": 51,
-            "realizado": 51,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 136342.44
-          },
-          {
-            "profissional": "Camila",
-            "meta": 93,
-            "realizado": 93,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 130229.02
-          },
-          {
-            "profissional": "Cristielen",
-            "meta": 84,
-            "realizado": 84,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 132079.29
-          },
-          {
-            "profissional": "Natália",
-            "meta": 11,
-            "realizado": 11,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 284496.9
-          },
-          {
-            "profissional": "Tatiana",
-            "meta": 77,
-            "realizado": 77,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 117162.71
-          },
-          {
-            "profissional": "Tatiana",
-            "meta": 48,
-            "realizado": 48,
-            "pct": 100,
-            "dias": [],
-            "faturamento": 61057.13
-          },
-          {
             "profissional": "Anna",
             "meta": 0,
             "realizado": 0,
-            "pct": 100,
+            "pct": 0,
             "dias": [],
             "faturamento": 0
+          },
+          {
+            "profissional": "Ariane",
+            "meta": 5,
+            "realizado": 5,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 6166.22
+          },
+          {
+            "profissional": "Camila",
+            "meta": 15,
+            "realizado": 15,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 9966.94
+          },
+          {
+            "profissional": "Cristielen",
+            "meta": 4,
+            "realizado": 4,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 1332.71
+          },
+          {
+            "profissional": "Natalia",
+            "meta": 0,
+            "realizado": 0,
+            "pct": 0,
+            "dias": [],
+            "faturamento": 0
+          },
+          {
+            "profissional": "Tatiana",
+            "meta": 16,
+            "realizado": 16,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 18233.61
           }
         ],
         "total": {
           "profissional": "Total",
-          "meta": 364,
-          "realizado": 364,
+          "meta": 40,
+          "realizado": 40,
           "pct": 100,
           "dias": []
         },
-        "faturamentoGeral": 861367.49,
+        "faturamentoGeral": 35699.48,
         "dayNums": []
       },
       "metaContatos": {
@@ -508,7 +458,7 @@
       "rcaExterno": null
     },
     "profissionais": {},
-    "faturamentoTotal": 5875463.14,
+    "faturamentoTotal": 351257.7,
     "faturamentoClientes": [
       {
         "cliente": 44093,
@@ -2312,5 +2262,5 @@
     ]
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-23T19:48:43.235Z"
+  "updatedAt": "2026-07-23T19:58:31.545Z"
 }

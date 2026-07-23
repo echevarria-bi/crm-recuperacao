@@ -137,10 +137,42 @@ console.log('  Clientes com faturamento: ' + encontrados);
 console.log('  Sem faturamento na base: ' + semFat);
 console.log('  Total faturamentoClientes: ' + faturamentoClientesArr.length);
 
-console.log('[3/4] Construindo data.json...');
+// ============================================================
+// 3. Consolidar dados da aba FATURAMENTO RECUPERACAO por mes
+// ============================================================
+console.log('[3/4] Construindo data.json a partir da aba FATURAMENTO RECUPERACAO...');
 var MONTHS = ['Abril', 'Maio', 'Junho', 'Julho'];
 var monthNums = [4, 5, 6, 7];
 
+// Acumular faturamento e clientes por profissional + mes de referencia
+// profFat[prof][mesRef] = soma acumulada (mesRef ate Julho)
+// profCli[prof][mesRef] = clientes unicos com fat>0
+var profFat = {}, profCli = {};
+var totalFatPorMes = { 4: 0, 5: 0, 6: 0, 7: 0 };
+var totalCliPorMes = { 4: 0, 5: 0, 6: 0, 7: 0 };
+
+faturamentoClientesArr.forEach(function (c) {
+  var mesNum = MES_NUM[c.mes];
+  if (!mesNum) return;
+  if (!profFat[c.prof]) profFat[c.prof] = {};
+  if (!profCli[c.prof]) profCli[c.prof] = {};
+  if (!profFat[c.prof][mesNum]) profFat[c.prof][mesNum] = 0;
+  if (!profCli[c.prof][mesNum]) profCli[c.prof][mesNum] = 0;
+  profFat[c.prof][mesNum] += c.valor;
+  profCli[c.prof][mesNum]++;
+  totalFatPorMes[mesNum] += c.valor;
+  totalCliPorMes[mesNum]++;
+});
+
+// Arredondar
+for (var p in profFat) {
+  for (var m in profFat[p]) {
+    profFat[p][m] = Math.round(profFat[p][m] * 100) / 100;
+  }
+}
+for (var m in totalFatPorMes) totalFatPorMes[m] = Math.round(totalFatPorMes[m] * 100) / 100;
+
+// Indicadores baseados na aba FATURAMENTO RECUPERACAO
 var indicadores = [
   { label: 'Faturamento Total' },
   { label: 'Positivação (Clientes Únicos)' },
@@ -153,67 +185,67 @@ var indicadores = [
 ];
 MONTHS.forEach(function (mk, mi) {
   var mNum = monthNums[mi];
-  var totalFat = 0, totalCli = 0;
-  ACTIVE.forEach(function (c) {
-    var sm = sellerMonth[mNum] && sellerMonth[mNum][c];
-    if (sm) { totalFat += sm.fat; totalCli += Object.keys(sm.cli).length; }
-  });
-  indicadores[0][mk] = Math.round(totalFat * 100) / 100;
-  indicadores[1][mk] = totalCli;
-  indicadores[2][mk] = totalCli > 0 ? Math.round(totalFat / totalCli * 100) / 100 : 0;
-  indicadores[3][mk] = totalCli;
-  indicadores[4][mk] = totalCli;
-  indicadores[5][mk] = totalCli;
-  indicadores[6][mk] = totalCli;
-  indicadores[7][mk] = Math.round(totalFat * 100) / 100;
+  var tf = totalFatPorMes[mNum] || 0;
+  var tc = totalCliPorMes[mNum] || 0;
+  indicadores[0][mk] = tf;
+  indicadores[1][mk] = tc;
+  indicadores[2][mk] = tc > 0 ? Math.round(tf / tc * 100) / 100 : 0;
+  indicadores[3][mk] = tc;
+  indicadores[4][mk] = tc;
+  indicadores[5][mk] = tc;
+  indicadores[6][mk] = tc;
+  indicadores[7][mk] = tf;
 });
 
+// Valor por profissional (acumulado a partir do mes de referencia)
 var valorPorProf = [];
-ACTIVE.forEach(function (c) {
-  var entry = { profissional: NOMES[c] || c };
+var nomesUsados = {};
+faturamentoClientesArr.forEach(function (c) { nomesUsados[c.prof] = 1; });
+Object.keys(nomesUsados).sort().forEach(function (prof) {
+  var entry = { profissional: prof };
   var total = 0;
   MONTHS.forEach(function (mk, mi) {
     var mNum = monthNums[mi];
-    var sm = sellerMonth[mNum] && sellerMonth[mNum][c];
-    var fat = sm ? Math.round(sm.fat * 100) / 100 : 0;
-    if (fat > 0) entry[mk] = fat;
-    total += fat;
+    var val = (profFat[prof] && profFat[prof][mNum]) || 0;
+    if (val > 0) entry[mk] = val;
+    total += val;
   });
   entry.Total = Math.round(total * 100) / 100;
   valorPorProf.push(entry);
 });
 
+// Recuperados por profissional
 var recuperadosPorProf = [];
-ACTIVE.forEach(function (c) {
-  var entry = { profissional: NOMES[c] || c };
+Object.keys(nomesUsados).sort().forEach(function (prof) {
+  var entry = { profissional: prof };
   MONTHS.forEach(function (mk, mi) {
     var mNum = monthNums[mi];
-    var sm = sellerMonth[mNum] && sellerMonth[mNum][c];
-    var cliCount = sm ? Object.keys(sm.cli).length : 0;
-    entry[mk + ' META'] = cliCount;
-    entry[mk + ' REAL'] = cliCount;
+    var cli = (profCli[prof] && profCli[prof][mNum]) || 0;
+    entry[mk + ' META'] = cli;
+    entry[mk + ' REAL'] = cli;
   });
   recuperadosPorProf.push(entry);
 });
 
-function buildPainelMonth(mNum) {
+// Build painel por mes (acumulado a partir do mes de referencia)
+function buildPainelMonth(mesRef) {
   var profs = [];
   var totalMeta = 0, totalReal = 0, totalFat = 0;
-  ACTIVE.forEach(function (c) {
-    var sm = sellerMonth[mNum] && sellerMonth[mNum][c];
-    var fat = sm ? Math.round(sm.fat * 100) / 100 : 0;
-    var cli = sm ? Object.keys(sm.cli).length : 0;
-    profs.push({ profissional: NOMES[c] || c, meta: cli, realizado: cli, pct: 100, dias: [], faturamento: fat });
+  Object.keys(nomesUsados).sort().forEach(function (prof) {
+    var fat = (profFat[prof] && profFat[prof][mesRef]) || 0;
+    var cli = (profCli[prof] && profCli[prof][mesRef]) || 0;
+    fat = Math.round(fat * 100) / 100;
+    profs.push({ profissional: prof, meta: cli, realizado: cli, pct: cli > 0 ? 100 : 0, dias: [], faturamento: fat });
     totalMeta += cli; totalReal += cli; totalFat += fat;
   });
   return {
-    recuperacao: { profissionais: profs, total: { profissional: 'Total', meta: totalMeta, realizado: totalReal, pct: 100, dias: [] }, faturamentoGeral: totalFat, dayNums: [] },
+    recuperacao: { profissionais: profs, total: { profissional: 'Total', meta: totalMeta, realizado: totalReal, pct: totalMeta > 0 ? 100 : 0, dias: [] }, faturamentoGeral: Math.round(totalFat * 100) / 100, dayNums: [] },
     metaContatos: { profissionais: [], total: null },
     motivos: [], inatividade: [], motivosDiarios: [], rcaExterno: null
   };
 }
 
-var faturamentoTotal = ACTIVE.reduce(function (s, c) { return s + sellerTotal[c].fat; }, 0);
+var faturamentoTotal = Math.round(faturamentoClientesArr.reduce(function (s, c) { return s + c.valor; }, 0) * 100) / 100;
 
 var output = {
   data: {
@@ -223,7 +255,7 @@ var output = {
     painelMaio: buildPainelMonth(5),
     painelJulho: buildPainelMonth(7),
     profissionais: {},
-    faturamentoTotal: Math.round(faturamentoTotal * 100) / 100,
+    faturamentoTotal: faturamentoTotal,
     faturamentoClientes: faturamentoClientesArr
   },
   fileName: 'base_8026_2026.xlsx',
@@ -233,27 +265,10 @@ var output = {
 fs.writeFileSync(OUT_DIR + 'data.json', JSON.stringify(output, null, 2));
 console.log('data.json salvo');
 
-console.log('\n[4/4] Resumo:');
+console.log('\n[4/4] Resumo (aba FATURAMENTO RECUPERACAO):');
 MONTHS.forEach(function (mk, mi) {
   var mNum = monthNums[mi];
-  var totalFat = 0, totalCli = 0;
-  ACTIVE.forEach(function (c) {
-    var sm = sellerMonth[mNum] && sellerMonth[mNum][c];
-    if (sm) { totalFat += sm.fat; totalCli += Object.keys(sm.cli).length; }
-  });
-  console.log('  ' + mk + ': R$ ' + totalFat.toFixed(2) + ' | ' + totalCli + ' clientes');
+  console.log('  ' + mk + ': R$ ' + (totalFatPorMes[mNum] || 0).toFixed(2) + ' | ' + (totalCliPorMes[mNum] || 0) + ' clientes');
 });
-
-// Faturamento from sheet (recuperados)
-var fatSheet = {};
-faturamentoClientesArr.forEach(function (c) {
-  if (!fatSheet[c.mes]) fatSheet[c.mes] = 0;
-  fatSheet[c.mes] += c.valor;
-});
-console.log('\n  Faturamento Recuperados (da planilha):');
-MONTHS.forEach(function (mk) {
-  console.log('    ' + mk + ': R$ ' + (fatSheet[mk] || 0).toFixed(2));
-});
-
-console.log('\n  Total base: R$ ' + faturamentoTotal.toFixed(2));
-console.log('  Clientes únicos: ' + Object.keys(globalClientes).length);
+console.log('\n  Total acumulado: R$ ' + faturamentoTotal.toFixed(2));
+console.log('  Total clientes: ' + faturamentoClientesArr.length);

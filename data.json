@@ -513,36 +513,106 @@
       {
         "cliente": 44093,
         "nome": "DIOVANI DA SILVA",
-        "valor": 10720.2,
+        "valor": 35463.91,
         "mes": "Abril",
         "prof": "Natalia"
       },
       {
+        "cliente": 27813,
+        "nome": "LUCIANE TERESINHA BORGES 83405240034",
+        "valor": 26227.35,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
         "cliente": 40914,
         "nome": "PERETTO COMERCIO DE ALIMENTOS LTDA",
-        "valor": 9588,
+        "valor": 15980,
         "mes": "Junho",
         "prof": "Ariane"
       },
       {
         "cliente": 40561,
         "nome": "BEAR ICE GELO EM CUBOS LTDA",
-        "valor": 7224.1,
+        "valor": 12093.2,
         "mes": "Junho",
         "prof": "Tatiana"
       },
       {
-        "cliente": 27813,
-        "nome": "LUCIANE TERESINHA BORGES 83405240034",
-        "valor": 6276.41,
+        "cliente": 41617,
+        "nome": "COMERCIAL DE ALIMENTOS FRANGO NO POTE LIVRAMENTO LTDA",
+        "valor": 10297.78,
         "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 41645,
+        "nome": "56.058.941 TAIS COSTA DE OLIVEIRA SILVA",
+        "valor": 9603.8,
+        "mes": "Maio",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 44025,
+        "nome": "M & S COMERCIO DE SORVETES LTDA",
+        "valor": 8463.5,
+        "mes": "Julho",
         "prof": "Tatiana"
       },
       {
         "cliente": 41617,
         "nome": "COMERCIAL DE ALIMENTOS FRANGO NO POTE LI",
-        "valor": 4677.46,
+        "valor": 7689.26,
         "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 20583,
+        "nome": "VILMAR FRANCISCO DE INHAIA",
+        "valor": 6727,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 31596,
+        "nome": "HOSPITAL BDW POA LTDA",
+        "valor": 4945.91,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 20828,
+        "nome": "NATHALIA SOUZA TASSONI",
+        "valor": 4646.89,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 32981,
+        "nome": "DAIANE FESTINALLI & CIA LTDA",
+        "valor": 4555.71,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 16103,
+        "nome": "RAIZ RESTAURANTE LTDA",
+        "valor": 4199.73,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 41105,
+        "nome": "12.683.141 CATLEN CHAIANA DA SILVA TEIXE",
+        "valor": 4088.2,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 37802,
+        "nome": "ORY LAUX & CIA LTDA",
+        "valor": 3989.41,
+        "mes": "Maio",
         "prof": "Natalia"
       },
       {
@@ -553,46 +623,158 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 20583,
-        "nome": "VILMAR FRANCISCO DE INHAIA",
-        "valor": 3316,
+        "cliente": 17036,
+        "nome": "CONFEITARIA OTTO LTDA",
+        "valor": 3355.15,
+        "mes": "Julho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 41105,
+        "nome": "12.683.141 CATLEN CHAIANA DA SILVA TEIXE",
+        "valor": 3219.2,
         "mes": "Junho",
         "prof": "Natalia"
       },
       {
-        "cliente": 38862,
-        "nome": "MADU FOODS LTDA",
-        "valor": 2598.88,
+        "cliente": 41808,
+        "nome": "OFICINA DOS SONHOS CASA DE FESTAS LTDA",
+        "valor": 3162.76,
         "mes": "Maio",
         "prof": "Camila"
       },
       {
-        "cliente": 16103,
-        "nome": "RAIZ RESTAURANTE LTDA",
-        "valor": 2254.8,
+        "cliente": 31798,
+        "nome": "49.146.914 GIULLIANO BONNEMBERG CAMARGO DA SILVA",
+        "valor": 3117.23,
         "mes": "Abril",
-        "prof": "Ariane"
+        "prof": "Tatiana"
       },
       {
-        "cliente": 41617,
-        "nome": "COMERCIAL DE ALIMENTOS FRANGO NO POTE LIVRAMENTO LTDA",
-        "valor": 2064.3,
+        "cliente": 36972,
+        "nome": "52.636.111 LUIZ AMPESSAN JUNIOR",
+        "valor": 3066.78,
         "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 38862,
+        "nome": "MADU FOODS LTDA",
+        "valor": 3047.83,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 41363,
+        "nome": "57.081.732 EVELIN EDUARDA SESTHERAIM",
+        "valor": 2960.63,
+        "mes": "Junho",
         "prof": "Natalia"
       },
       {
-        "cliente": 41645,
-        "nome": "56.058.941 TAIS COSTA DE OLIVEIRA SILVA",
-        "valor": 2007,
+        "cliente": 41377,
+        "nome": "49.789.249 CAROLINE DOS SANTOS LUIZ",
+        "valor": 2820.69,
         "mes": "Maio",
         "prof": "Natalia"
       },
       {
         "cliente": 18344,
         "nome": "ACF COMERCIO DE ALIMENTOS LTDA",
-        "valor": 1968,
+        "valor": 2807.25,
         "mes": "Maio",
         "prof": "Ariane"
+      },
+      {
+        "cliente": 29236,
+        "nome": "SINGULAR GOURMET GASTRONOMIA LTDA",
+        "valor": 2714.38,
+        "mes": "Junho",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 42285,
+        "nome": "ANA MARTINS SODRE",
+        "valor": 2535,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 12165,
+        "nome": "FABIANE SANTOS CARVALHO",
+        "valor": 2424.24,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 40979,
+        "nome": "BENDITO SABOR LTDA",
+        "valor": 2205.86,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 41235,
+        "nome": "TAFAIEL HENRIQUE DAL CASTEL",
+        "valor": 2142.58,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 18928,
+        "nome": "GIULIANO WROBLESKI DE ALMEIDA",
+        "valor": 2076.2,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 41885,
+        "nome": "FERNANDA CÁCERES",
+        "valor": 2072.75,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 38903,
+        "nome": "53.660.499 MIRTENES GOMES MENEZES",
+        "valor": 2015,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 44299,
+        "nome": "B & H COMERCIO DE SORVETES LTDA",
+        "valor": 1990,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 28492,
+        "nome": "KELLI CRISTINA ARAÚJO",
+        "valor": 1946.48,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 14601,
+        "nome": "MARCELO LIGABUE LANCHES",
+        "valor": 1901.12,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 41370,
+        "nome": "LERIDA KARINA DA COSTA MORAES",
+        "valor": 1822.94,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 601,
+        "nome": "DARLEI MOREIRA",
+        "valor": 1818.74,
+        "mes": "Abril",
+        "prof": "Natalia"
       },
       {
         "cliente": 30292,
@@ -609,6 +791,13 @@
         "prof": "Ariane"
       },
       {
+        "cliente": 44270,
+        "nome": "49.363.694 ANTONIO GELSON DE OLIVEIRA ARAUJO",
+        "valor": 1762.94,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
         "cliente": 43286,
         "nome": "62.220.880 DIENEFER TAINARA FROS DA LUZ",
         "valor": 1737.96,
@@ -616,25 +805,109 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 12165,
-        "nome": "FABIANE SANTOS CARVALHO",
-        "valor": 1607.92,
+        "cliente": 41630,
+        "nome": "60.313.027 DIEGO MANOEL DA SILVA",
+        "valor": 1690,
+        "mes": "Maio",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 12978,
+        "nome": "CAFE DA PRAIA RESTAURANTE E CAFETERIA LTDA",
+        "valor": 1676.39,
+        "mes": "Abril",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 39891,
+        "nome": "PITANGA ESCOLA DE EDUCAÇÃO INFANTIL LTDA",
+        "valor": 1658.82,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 7029,
+        "nome": "ASSOCIAÇAO DE ASSISTENCIA SOCIAL BOM PASTOR",
+        "valor": 1640.8,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 30889,
+        "nome": "27.921.852 ANIR JOVENIL FAOTTO",
+        "valor": 1627,
         "mes": "Junho",
         "prof": "Natalia"
       },
       {
-        "cliente": 40979,
-        "nome": "BENDITO SABOR LTDA",
-        "valor": 1520.96,
+        "cliente": 10095,
+        "nome": "F T M COMERCIO DE BEBIDAS LTDA",
+        "valor": 1578,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 32009,
+        "nome": "CLAUDETE MLLER ENGELMANN",
+        "valor": 1493.88,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 40926,
+        "nome": "JOSIENE SILVA MESQUITA",
+        "valor": 1489.49,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 30921,
+        "nome": "GIOVANA BORTOLOTTI LTDA",
+        "valor": 1442.95,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 28556,
+        "nome": "FIN INDUSTRIA DE ALIMENTOS LTDA",
+        "valor": 1435.88,
         "mes": "Maio",
         "prof": "Tatiana"
       },
       {
-        "cliente": 38903,
-        "nome": "53.660.499 MIRTENES GOMES MENEZES",
-        "valor": 1398,
+        "cliente": 43917,
+        "nome": "LIMAS MERCADO LTDA",
+        "valor": 1382.1,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 42647,
+        "nome": "63.411.527 LUCIANO GARCIA CARVALHO",
+        "valor": 1372.19,
         "mes": "Abril",
-        "prof": "Natalia"
+        "prof": "Anna"
+      },
+      {
+        "cliente": 37882,
+        "nome": "LANCHERIA TIA JU LTDA",
+        "valor": 1359,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 44364,
+        "nome": "ANGÉLICA DA COSTA SCHUMACHER",
+        "valor": 1349.65,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 43357,
+        "nome": "62.199.517 CLAUDIMARA VICENTINA DE CARVALHO BEISE",
+        "valor": 1343.18,
+        "mes": "Abril",
+        "prof": "Tatiana"
       },
       {
         "cliente": 25286,
@@ -651,11 +924,18 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 42285,
-        "nome": "ANA MARTINS SODRE",
-        "valor": 1277,
-        "mes": "Junho",
-        "prof": "Camila"
+        "cliente": 39205,
+        "nome": "MIATTO CAFE LTDA",
+        "valor": 1330.05,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 28593,
+        "nome": "ANDRÉ LEANDRO SCHNEIDER",
+        "valor": 1312.55,
+        "mes": "Maio",
+        "prof": "Tatiana"
       },
       {
         "cliente": 30929,
@@ -665,11 +945,18 @@
         "prof": "Camila"
       },
       {
-        "cliente": 41808,
-        "nome": "OFICINA DOS SONHOS CASA DE FESTAS LTDA",
-        "valor": 1194.42,
-        "mes": "Maio",
-        "prof": "Camila"
+        "cliente": 39622,
+        "nome": "ANDREW SILVA DE MELO",
+        "valor": 1247.05,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 2738,
+        "nome": "BAR E LANCHERIA REALEZA EIRELI",
+        "valor": 1231.8,
+        "mes": "Abril",
+        "prof": "Ariane"
       },
       {
         "cliente": 42900,
@@ -679,13 +966,6 @@
         "prof": "Camila"
       },
       {
-        "cliente": 41377,
-        "nome": "49.789.249 CAROLINE DOS SANTOS LUIZ",
-        "valor": 1173.5,
-        "mes": "Maio",
-        "prof": "Natalia"
-      },
-      {
         "cliente": 15850,
         "nome": "PMA COMERCIO DE BEBIDAS LTDA",
         "valor": 1172.02,
@@ -693,11 +973,39 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 41885,
-        "nome": "FERNANDA CÁCERES",
-        "valor": 1165.88,
+        "cliente": 24254,
+        "nome": "SUL BEER BAR LTDA",
+        "valor": 1162.67,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 32987,
+        "nome": "GONI CONSULTORIA LTDA",
+        "valor": 1144.26,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 25853,
+        "nome": "ROSELE MEDINA GASQUE",
+        "valor": 1141.21,
         "mes": "Maio",
         "prof": "Camila"
+      },
+      {
+        "cliente": 44255,
+        "nome": "63.126.225 REGIS PEREIRA DE LIMA",
+        "valor": 1132.98,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 41418,
+        "nome": "ANDRÉ REY MOLLER",
+        "valor": 1130.2,
+        "mes": "Abril",
+        "prof": "Natalia"
       },
       {
         "cliente": 601,
@@ -707,18 +1015,25 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 41105,
-        "nome": "12.683.141 CATLEN CHAIANA DA SILVA TEIXE",
-        "valor": 1058,
-        "mes": "Junho",
+        "cliente": 29748,
+        "nome": "27.694.894 CLAUDETE LAVI MARQUES",
+        "valor": 1092.05,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 31627,
+        "nome": "ELAINE PEREIRA DA SILVA",
+        "valor": 1079.63,
+        "mes": "Maio",
         "prof": "Natalia"
       },
       {
-        "cliente": 30889,
-        "nome": "27.921.852 ANIR JOVENIL FAOTTO",
-        "valor": 994.8,
-        "mes": "Junho",
-        "prof": "Natalia"
+        "cliente": 40650,
+        "nome": "MASTER PIZZA PIZZARIA LTDA",
+        "valor": 1046.2,
+        "mes": "Abril",
+        "prof": "Tatiana"
       },
       {
         "cliente": 44770,
@@ -735,6 +1050,13 @@
         "prof": "Natalia"
       },
       {
+        "cliente": 43357,
+        "nome": "62.199.517 CLAUDIMARA VICENTINA DE CARVALHO BEISE",
+        "valor": 941.99,
+        "mes": "Junho",
+        "prof": "Tatiana"
+      },
+      {
         "cliente": 26858,
         "nome": "DOUGLAS DE MORAES HOMEM",
         "valor": 937.91,
@@ -749,6 +1071,13 @@
         "prof": "Natalia"
       },
       {
+        "cliente": 43855,
+        "nome": "KAUE SILVA",
+        "valor": 908.8,
+        "mes": "Abril",
+        "prof": "Natalia"
+      },
+      {
         "cliente": 10376,
         "nome": "ACALENTO NUCLEO DE EDUCACAO INFANTIL LTDA",
         "valor": 892.99,
@@ -756,25 +1085,39 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 41105,
-        "nome": "12.683.141 CATLEN CHAIANA DA SILVA TEIXE",
-        "valor": 869,
-        "mes": "Abril",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 30921,
-        "nome": "GIOVANA BORTOLOTTI LTDA",
-        "valor": 855.9,
-        "mes": "Junho",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 41630,
-        "nome": "60.313.027 DIEGO MANOEL DA SILVA",
-        "valor": 845,
+        "cliente": 38623,
+        "nome": "TALISSON SASSO HOMEM",
+        "valor": 884.7,
         "mes": "Maio",
-        "prof": "Cristielen"
+        "prof": "Camila"
+      },
+      {
+        "cliente": 34349,
+        "nome": "ELENICE NOGUEIRA DOMINGUES KONRADT 01936202000",
+        "valor": 881.62,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 1346,
+        "nome": "CABO HORN BAR LTDA",
+        "valor": 869.63,
+        "mes": "Maio",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 44665,
+        "nome": "SANDRA MARIA GEHLEN",
+        "valor": 865.71,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 30281,
+        "nome": "CARLA FABIANE DE OLIVEIRA ABREU",
+        "valor": 853.07,
+        "mes": "Maio",
+        "prof": "Camila"
       },
       {
         "cliente": 42774,
@@ -784,17 +1127,45 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 31596,
-        "nome": "HOSPITAL BDW POA LTDA",
-        "valor": 812.8,
+        "cliente": 36533,
+        "nome": "SIMONE MARIA DA COSTA SOARES 71508686068",
+        "valor": 814.95,
         "mes": "Abril",
-        "prof": "Ariane"
+        "prof": "Anna"
       },
       {
-        "cliente": 36972,
-        "nome": "52.636.111 LUIZ AMPESSAN JUNIOR",
-        "valor": 811.8,
-        "mes": "Abril",
+        "cliente": 41737,
+        "nome": "MÔNICA DIAS DA SILVA",
+        "valor": 809.65,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 42559,
+        "nome": "50.494.223 VIVIANE JACQUES GOMES JARDIM",
+        "valor": 804.06,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 37151,
+        "nome": "54.188.182 NEUZA MARIA NAZARIO DOS SANTOS",
+        "valor": 800.16,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 44872,
+        "nome": "A & J COMERCIO DE SORVETES LTDA",
+        "valor": 798,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 44298,
+        "nome": "S & M COMERCIO DE SORVETES LTDA",
+        "valor": 798,
+        "mes": "Julho",
         "prof": "Tatiana"
       },
       {
@@ -812,25 +1183,32 @@
         "prof": "Anna"
       },
       {
+        "cliente": 29043,
+        "nome": "GENI ANDRADE SEVERO",
+        "valor": 790.99,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
         "cliente": 10095,
         "nome": "F T M COMERCIO DE BEBIDAS LTDA",
         "valor": 789,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 40237,
+        "nome": "50.531.220 DOUGLAS CARVALHO GARCIA DA SILVA",
+        "valor": 784.45,
         "mes": "Abril",
-        "prof": "Tatiana"
+        "prof": "Natalia"
       },
       {
-        "cliente": 37882,
-        "nome": "LANCHERIA TIA JU LTDA",
-        "valor": 778.8,
-        "mes": "Maio",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 7029,
-        "nome": "ASSOCIAÇAO DE ASSISTENCIA SOCIAL BOM PASTOR",
-        "valor": 775.97,
-        "mes": "Maio",
-        "prof": "Ariane"
+        "cliente": 35902,
+        "nome": "ROBERTA GRAZIANE DA SILVA",
+        "valor": 781.99,
+        "mes": "Abril",
+        "prof": "Natalia"
       },
       {
         "cliente": 39732,
@@ -840,6 +1218,27 @@
         "prof": "Tatiana"
       },
       {
+        "cliente": 44062,
+        "nome": "CAMILA MACHADO ELICKER 00477725066",
+        "valor": 768.99,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 28819,
+        "nome": "JOSE CARLOS DE OLIVEIRA",
+        "valor": 748.83,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 33755,
+        "nome": "ANDERSON PADILHA DOS SANTOS",
+        "valor": 746.75,
+        "mes": "Maio",
+        "prof": "Natalia"
+      },
+      {
         "cliente": 33463,
         "nome": "SCARTEZZINI E GRIEBELER LTDA",
         "valor": 745.8,
@@ -847,11 +1246,18 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 29236,
-        "nome": "SINGULAR GOURMET GASTRONOMIA LTDA",
-        "valor": 732.91,
+        "cliente": 21387,
+        "nome": "JULIO CESAR VIANA PRATES 43984363087",
+        "valor": 745.27,
         "mes": "Junho",
-        "prof": "Cristielen"
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 7546,
+        "nome": "CASA DI PAOLO GALETO E GRELHADOS BENTO EIRELI",
+        "valor": 739.9,
+        "mes": "Junho",
+        "prof": "Tatiana"
       },
       {
         "cliente": 29080,
@@ -868,6 +1274,13 @@
         "prof": "Camila"
       },
       {
+        "cliente": 41276,
+        "nome": "JANA RICARDO DE PAULA",
+        "valor": 721.1,
+        "mes": "Maio",
+        "prof": "Natalia"
+      },
+      {
         "cliente": 40085,
         "nome": "59.185.770 ISRAEL ZIMMERMANN",
         "valor": 716.41,
@@ -882,13 +1295,6 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 601,
-        "nome": "DARLEI MOREIRA",
-        "valor": 713.69,
-        "mes": "Abril",
-        "prof": "Natalia"
-      },
-      {
         "cliente": 40728,
         "nome": "RUAN BITTENCOURT",
         "valor": 711.72,
@@ -896,10 +1302,17 @@
         "prof": "Cristielen"
       },
       {
-        "cliente": 41235,
-        "nome": "TAFAIEL HENRIQUE DAL CASTEL",
-        "valor": 702.88,
-        "mes": "Abril",
+        "cliente": 25853,
+        "nome": "ROSELE MEDINA GASQUE",
+        "valor": 703.81,
+        "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 37969,
+        "nome": "55.863.802 FRANCIELI RIBEIRO GOSS",
+        "valor": 697.13,
+        "mes": "Maio",
         "prof": "Tatiana"
       },
       {
@@ -910,38 +1323,10 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 14601,
-        "nome": "MARCELO LIGABUE LANCHES",
-        "valor": 691.32,
-        "mes": "Abril",
-        "prof": "Ariane"
-      },
-      {
-        "cliente": 32987,
-        "nome": "GONI CONSULTORIA LTDA",
-        "valor": 685.4,
-        "mes": "Maio",
-        "prof": "Ariane"
-      },
-      {
         "cliente": 40109,
         "nome": "ALEXIA PIETRA MEDEIROS",
         "valor": 682.44,
         "mes": "Maio",
-        "prof": "Camila"
-      },
-      {
-        "cliente": 38623,
-        "nome": "TALISSON SASSO HOMEM",
-        "valor": 674.28,
-        "mes": "Maio",
-        "prof": "Camila"
-      },
-      {
-        "cliente": 44364,
-        "nome": "ANGÉLICA DA COSTA SCHUMACHER",
-        "valor": 670.49,
-        "mes": "Junho",
         "prof": "Camila"
       },
       {
@@ -952,9 +1337,16 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 32981,
-        "nome": "DAIANE FESTINALLI & CIA LTDA",
-        "valor": 649,
+        "cliente": 38768,
+        "nome": "RAYSSA VITÓRIA DE FREITAS SILVA",
+        "valor": 639.08,
+        "mes": "Abril",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 41862,
+        "nome": "ANGELICA BLANGER JORDON",
+        "valor": 637.9,
         "mes": "Abril",
         "prof": "Tatiana"
       },
@@ -980,6 +1372,13 @@
         "prof": "Tatiana"
       },
       {
+        "cliente": 38600,
+        "nome": "ELIVONE DA SILVA FORTE",
+        "valor": 619.33,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
         "cliente": 38903,
         "nome": "53.660.499 MIRTENES GOMES MENEZES",
         "valor": 617,
@@ -987,10 +1386,10 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 20828,
-        "nome": "NATHALIA SOUZA TASSONI",
-        "valor": 599.91,
-        "mes": "Abril",
+        "cliente": 25124,
+        "nome": "AIRTON J.C. DE FARIAS",
+        "valor": 614.2,
+        "mes": "Junho",
         "prof": "Tatiana"
       },
       {
@@ -1008,11 +1407,25 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 36533,
-        "nome": "SIMONE MARIA DA COSTA SOARES 71508686068",
-        "valor": 556.3,
-        "mes": "Abril",
-        "prof": "Anna"
+        "cliente": 43333,
+        "nome": "62.816.739 TIAGO DA COSTA BORGES",
+        "valor": 586.25,
+        "mes": "Maio",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 41235,
+        "nome": "TAFAIEL HENRIQUE DAL CASTEL",
+        "valor": 559.8,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 44581,
+        "nome": "BROTHERS CAFETERIA LTDA",
+        "valor": 555.79,
+        "mes": "Junho",
+        "prof": "Ariane"
       },
       {
         "cliente": 2425,
@@ -1022,11 +1435,18 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 41363,
-        "nome": "57.081.732 EVELIN EDUARDA SESTHERAIM",
-        "valor": 536.6,
-        "mes": "Junho",
-        "prof": "Natalia"
+        "cliente": 41852,
+        "nome": "LANCHONETE O SANTO LTDA",
+        "valor": 542.57,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 37577,
+        "nome": "ANDREW TAROUCO MONTIEL",
+        "valor": 537.44,
+        "mes": "Abril",
+        "prof": "Anna"
       },
       {
         "cliente": 35214,
@@ -1034,20 +1454,6 @@
         "valor": 536.37,
         "mes": "Junho",
         "prof": "Ariane"
-      },
-      {
-        "cliente": 18928,
-        "nome": "GIULIANO WROBLESKI DE ALMEIDA",
-        "valor": 536.3,
-        "mes": "Abril",
-        "prof": "Ariane"
-      },
-      {
-        "cliente": 28492,
-        "nome": "KELLI CRISTINA ARAÚJO",
-        "valor": 535.2,
-        "mes": "Abril",
-        "prof": "Tatiana"
       },
       {
         "cliente": 43013,
@@ -1064,25 +1470,32 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 28556,
-        "nome": "FIN INDUSTRIA DE ALIMENTOS LTDA",
-        "valor": 504.72,
+        "cliente": 42836,
+        "nome": "KELLY SOARES BORGES",
+        "valor": 533.3,
         "mes": "Maio",
-        "prof": "Tatiana"
+        "prof": "Ariane"
       },
       {
-        "cliente": 31798,
-        "nome": "49.146.914 GIULLIANO BONNEMBERG CAMARGO DA SILVA",
-        "valor": 503.65,
+        "cliente": 27411,
+        "nome": "CATHERINE KELBERT GASTRONOMIA LTDA",
+        "valor": 529.72,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
+        "cliente": 44928,
+        "nome": "56.356.834 SABRINA VITORIA OLIVEIRA DA SILVA",
+        "valor": 507.65,
+        "mes": "Junho",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 19384,
+        "nome": "DORNELLES & DORNELLES LTDA",
+        "valor": 505.89,
         "mes": "Abril",
         "prof": "Tatiana"
-      },
-      {
-        "cliente": 42559,
-        "nome": "50.494.223 VIVIANE JACQUES GOMES JARDIM",
-        "valor": 503.51,
-        "mes": "Junho",
-        "prof": "Camila"
       },
       {
         "cliente": 34343,
@@ -1099,11 +1512,25 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 30281,
-        "nome": "CARLA FABIANE DE OLIVEIRA ABREU",
-        "valor": 498.82,
+        "cliente": 43357,
+        "nome": "62.199.517 CLAUDIMARA VICENTINA DE CARVALHO BEISE",
+        "valor": 500,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 27660,
+        "nome": "PORTO SUSHI RESTAURANTE LTDA",
+        "valor": 498.9,
         "mes": "Maio",
-        "prof": "Camila"
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 43985,
+        "nome": "62.668.950 ANA PAULA DA SILVA",
+        "valor": 498.02,
+        "mes": "Junho",
+        "prof": "Natalia"
       },
       {
         "cliente": 40966,
@@ -1120,11 +1547,11 @@
         "prof": "Camila"
       },
       {
-        "cliente": 42647,
-        "nome": "63.411.527 LUCIANO GARCIA CARVALHO",
-        "valor": 479.93,
-        "mes": "Abril",
-        "prof": "Anna"
+        "cliente": 40214,
+        "nome": "TAMIRIS MAGALHAES DE OLIVEIRA",
+        "valor": 491.46,
+        "mes": "Junho",
+        "prof": "Camila"
       },
       {
         "cliente": 38812,
@@ -1134,9 +1561,37 @@
         "prof": "Tatiana"
       },
       {
+        "cliente": 44049,
+        "nome": "36.020.214 BRUNA TERESINHA MENDES RENE DA SILVA",
+        "valor": 476.03,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
         "cliente": 30067,
         "nome": "TIAGO DIAS",
         "valor": 473.58,
+        "mes": "Abril",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 40022,
+        "nome": "NEIVA TEREZINHA PEREIRA",
+        "valor": 472.57,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 34219,
+        "nome": "MIRIAN VERARDI DE SOUZA",
+        "valor": 472.51,
+        "mes": "Maio",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 31563,
+        "nome": "48.972.716 ADRIANA LUIZA ELSENBACK DA SILVA",
+        "valor": 471.28,
         "mes": "Abril",
         "prof": "Tatiana"
       },
@@ -1148,18 +1603,18 @@
         "prof": "Camila"
       },
       {
+        "cliente": 42952,
+        "nome": "ANA CLÁUDIA DE SOUZA ANGELO",
+        "valor": 465.59,
+        "mes": "Maio",
+        "prof": "Tatiana"
+      },
+      {
         "cliente": 43936,
         "nome": "61.400.475 VITORIA DOS REIS DA SILVA",
         "valor": 460.28,
         "mes": "Julho",
         "prof": "Camila"
-      },
-      {
-        "cliente": 38768,
-        "nome": "RAYSSA VITÓRIA DE FREITAS SILVA",
-        "valor": 459.33,
-        "mes": "Abril",
-        "prof": "Ariane"
       },
       {
         "cliente": 32987,
@@ -1183,6 +1638,13 @@
         "prof": "Natalia"
       },
       {
+        "cliente": 28192,
+        "nome": "EMILENE DA SILVA RAMOS",
+        "valor": 453.77,
+        "mes": "Junho",
+        "prof": "Natalia"
+      },
+      {
         "cliente": 26900,
         "nome": "MARCELO SPALDING SCHUMACHER",
         "valor": 450.42,
@@ -1190,25 +1652,25 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 43357,
-        "nome": "62.199.517 CLAUDIMARA VICENTINA DE CARVALHO BEISE",
-        "valor": 441.99,
+        "cliente": 44062,
+        "nome": "CAMILA MACHADO ELICKER 00477725066",
+        "valor": 443.68,
         "mes": "Junho",
         "prof": "Tatiana"
       },
       {
-        "cliente": 1346,
-        "nome": "CABO HORN BAR LTDA",
-        "valor": 441.59,
-        "mes": "Maio",
-        "prof": "Ariane"
+        "cliente": 16902,
+        "nome": "26.553.758 JOICY BOTELHO MEDEIROS",
+        "valor": 441.76,
+        "mes": "Junho",
+        "prof": "Camila"
       },
       {
-        "cliente": 25853,
-        "nome": "ROSELE MEDINA GASQUE",
-        "valor": 437.4,
-        "mes": "Maio",
-        "prof": "Camila"
+        "cliente": 34242,
+        "nome": "VALDIR BRITZKE ALVES",
+        "valor": 434.5,
+        "mes": "Julho",
+        "prof": "Tatiana"
       },
       {
         "cliente": 41253,
@@ -1218,31 +1680,10 @@
         "prof": "Camila"
       },
       {
-        "cliente": 28593,
-        "nome": "ANDRÉ LEANDRO SCHNEIDER",
-        "valor": 433.5,
-        "mes": "Maio",
-        "prof": "Tatiana"
-      },
-      {
         "cliente": 36402,
         "nome": "CASSIANE DE SOUZA FIGUEIRA",
         "valor": 429.84,
         "mes": "Julho",
-        "prof": "Camila"
-      },
-      {
-        "cliente": 29748,
-        "nome": "27.694.894 CLAUDETE LAVI MARQUES",
-        "valor": 429.34,
-        "mes": "Abril",
-        "prof": "Ariane"
-      },
-      {
-        "cliente": 41370,
-        "nome": "LERIDA KARINA DA COSTA MORAES",
-        "valor": 426.37,
-        "mes": "Maio",
         "prof": "Camila"
       },
       {
@@ -1267,25 +1708,11 @@
         "prof": "Camila"
       },
       {
-        "cliente": 37802,
-        "nome": "ORY LAUX & CIA LTDA",
-        "valor": 414.5,
-        "mes": "Maio",
-        "prof": "Natalia"
-      },
-      {
         "cliente": 35511,
         "nome": "LUIZ TORALES",
         "valor": 413.4,
         "mes": "Junho",
         "prof": "Tatiana"
-      },
-      {
-        "cliente": 37151,
-        "nome": "54.188.182 NEUZA MARIA NAZARIO DOS SANTOS",
-        "valor": 411.74,
-        "mes": "Junho",
-        "prof": "Natalia"
       },
       {
         "cliente": 20275,
@@ -1295,39 +1722,11 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 34349,
-        "nome": "ELENICE NOGUEIRA DOMINGUES KONRADT 01936202000",
-        "valor": 404.5,
-        "mes": "Maio",
-        "prof": "Camila"
-      },
-      {
-        "cliente": 43917,
-        "nome": "LIMAS MERCADO LTDA",
-        "valor": 402.5,
-        "mes": "Maio",
-        "prof": "Tatiana"
-      },
-      {
         "cliente": 35076,
         "nome": "ALECSANDRO SILVEIRA CRISTOVÃO",
         "valor": 402.1,
         "mes": "Abril",
         "prof": "Tatiana"
-      },
-      {
-        "cliente": 43357,
-        "nome": "62.199.517 CLAUDIMARA VICENTINA DE CARVALHO BEISE",
-        "valor": 401.19,
-        "mes": "Abril",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 24254,
-        "nome": "SUL BEER BAR LTDA",
-        "valor": 400.81,
-        "mes": "Junho",
-        "prof": "Ariane"
       },
       {
         "cliente": 39905,
@@ -1344,46 +1743,53 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 25853,
-        "nome": "ROSELE MEDINA GASQUE",
-        "valor": 389.9,
+        "cliente": 38149,
+        "nome": "CAROLAINE MACHADO",
+        "valor": 383.43,
         "mes": "Junho",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 44200,
+        "nome": "58.961.833 ERICK DA SILVA DUARTE",
+        "valor": 374.42,
+        "mes": "Abril",
+        "prof": "Anna"
+      },
+      {
+        "cliente": 41723,
+        "nome": "28.679.102 MANOEL DIEGO MORAIS GAUTERIO",
+        "valor": 373.23,
+        "mes": "Maio",
         "prof": "Camila"
       },
       {
-        "cliente": 44255,
-        "nome": "63.126.225 REGIS PEREIRA DE LIMA",
-        "valor": 380.73,
-        "mes": "Junho",
-        "prof": "Tatiana"
+        "cliente": 31206,
+        "nome": "KATIA SIMONE LUCAS ROSA",
+        "valor": 368.98,
+        "mes": "Julho",
+        "prof": "Camila"
       },
       {
-        "cliente": 7546,
-        "nome": "CASA DI PAOLO GALETO E GRELHADOS BENTO EIRELI",
-        "valor": 369.95,
-        "mes": "Junho",
-        "prof": "Tatiana"
+        "cliente": 43992,
+        "nome": "SUZANA MOTTA BRAGA PACHECO",
+        "valor": 361.25,
+        "mes": "Maio",
+        "prof": "Camila"
       },
       {
-        "cliente": 43855,
-        "nome": "KAUE SILVA",
-        "valor": 369.55,
-        "mes": "Abril",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 40650,
-        "nome": "MASTER PIZZA PIZZARIA LTDA",
-        "valor": 351.83,
+        "cliente": 13483,
+        "nome": "JUCA LANCHES LTDA ME",
+        "valor": 357.75,
         "mes": "Abril",
         "prof": "Tatiana"
       },
       {
-        "cliente": 25124,
-        "nome": "AIRTON J.C. DE FARIAS",
-        "valor": 349.55,
-        "mes": "Junho",
-        "prof": "Tatiana"
+        "cliente": 27148,
+        "nome": "LUCILENE BATISTA DE OLIVEIRA",
+        "valor": 351.57,
+        "mes": "Abril",
+        "prof": "Camila"
       },
       {
         "cliente": 34261,
@@ -1400,13 +1806,6 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 31627,
-        "nome": "ELAINE PEREIRA DA SILVA",
-        "valor": 338.95,
-        "mes": "Maio",
-        "prof": "Natalia"
-      },
-      {
         "cliente": 22815,
         "nome": "DOMENICO FOOD LTDA",
         "valor": 334,
@@ -1414,39 +1813,11 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 43985,
-        "nome": "62.668.950 ANA PAULA DA SILVA",
-        "valor": 331.95,
-        "mes": "Junho",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 44062,
-        "nome": "CAMILA MACHADO ELICKER 00477725066",
-        "valor": 325.31,
-        "mes": "Abril",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 41276,
-        "nome": "JANA RICARDO DE PAULA",
-        "valor": 322.65,
-        "mes": "Maio",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 39891,
-        "nome": "PITANGA ESCOLA DE EDUCAÇÃO INFANTIL LTDA",
-        "valor": 322.33,
+        "cliente": 39761,
+        "nome": "MÍNIMERCADO PAI E FILHO",
+        "valor": 309.95,
         "mes": "Abril",
         "prof": "Ariane"
-      },
-      {
-        "cliente": 37969,
-        "nome": "55.863.802 FRANCIELI RIBEIRO GOSS",
-        "valor": 320.25,
-        "mes": "Maio",
-        "prof": "Tatiana"
       },
       {
         "cliente": 26746,
@@ -1456,20 +1827,6 @@
         "prof": "Cristielen"
       },
       {
-        "cliente": 41737,
-        "nome": "MÔNICA DIAS DA SILVA",
-        "valor": 307.36,
-        "mes": "Maio",
-        "prof": "Camila"
-      },
-      {
-        "cliente": 28819,
-        "nome": "JOSE CARLOS DE OLIVEIRA",
-        "valor": 304.54,
-        "mes": "Abril",
-        "prof": "Anna"
-      },
-      {
         "cliente": 43804,
         "nome": "34.933.492 LUIS FERNANDO SILVA HENRIQUE",
         "valor": 303.68,
@@ -1477,32 +1834,11 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 40237,
-        "nome": "50.531.220 DOUGLAS CARVALHO GARCIA DA SILVA",
-        "valor": 301.46,
-        "mes": "Abril",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 40926,
-        "nome": "JOSIENE SILVA MESQUITA",
-        "valor": 301.35,
-        "mes": "Abril",
-        "prof": "Anna"
-      },
-      {
         "cliente": 28233,
         "nome": "EVALDO SOUZA DE OLIVEIRA 66786240097",
         "valor": 297.59,
         "mes": "Maio",
         "prof": "Natalia"
-      },
-      {
-        "cliente": 42952,
-        "nome": "ANA CLÁUDIA DE SOUZA ANGELO",
-        "valor": 295.14,
-        "mes": "Maio",
-        "prof": "Tatiana"
       },
       {
         "cliente": 40184,
@@ -1533,11 +1869,11 @@
         "prof": "Anna"
       },
       {
-        "cliente": 31563,
-        "nome": "48.972.716 ADRIANA LUIZA ELSENBACK DA SILVA",
-        "valor": 281.83,
-        "mes": "Abril",
-        "prof": "Tatiana"
+        "cliente": 36355,
+        "nome": "JORDANA MOREIRA DE ARAUJO",
+        "valor": 279.45,
+        "mes": "Julho",
+        "prof": "Camila"
       },
       {
         "cliente": 38884,
@@ -1551,13 +1887,6 @@
         "nome": "GISLAINE LOPES 00680937056",
         "valor": 278,
         "mes": "Maio",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 44062,
-        "nome": "CAMILA MACHADO ELICKER 00477725066",
-        "valor": 275.35,
-        "mes": "Junho",
         "prof": "Tatiana"
       },
       {
@@ -1585,20 +1914,6 @@
         "cliente": 42602,
         "nome": "BISTRO GAIA COZINHA CRIATIVA LTDA",
         "valor": 267.45,
-        "mes": "Abril",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 19384,
-        "nome": "DORNELLES & DORNELLES LTDA",
-        "valor": 266.94,
-        "mes": "Abril",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 39205,
-        "nome": "MIATTO CAFE LTDA",
-        "valor": 266.92,
         "mes": "Abril",
         "prof": "Tatiana"
       },
@@ -1645,32 +1960,25 @@
         "prof": "Tatiana"
       },
       {
+        "cliente": 45020,
+        "nome": "JUNIOR DE BRITO DOS SANTOS",
+        "valor": 252.72,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 41862,
+        "nome": "ANGELICA BLANGER JORDON",
+        "valor": 252.51,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
         "cliente": 40921,
         "nome": "IONE DE FATIMA SANTOS ROSA",
         "valor": 251.4,
         "mes": "Maio",
         "prof": "Ariane"
-      },
-      {
-        "cliente": 40022,
-        "nome": "NEIVA TEREZINHA PEREIRA",
-        "valor": 249.45,
-        "mes": "Abril",
-        "prof": "Anna"
-      },
-      {
-        "cliente": 27660,
-        "nome": "PORTO SUSHI RESTAURANTE LTDA",
-        "valor": 249.45,
-        "mes": "Maio",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 34219,
-        "nome": "MIRIAN VERARDI DE SOUZA",
-        "valor": 249.12,
-        "mes": "Maio",
-        "prof": "Camila"
       },
       {
         "cliente": 2010,
@@ -1680,46 +1988,11 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 41852,
-        "nome": "LANCHONETE O SANTO LTDA",
-        "valor": 248.75,
-        "mes": "Abril",
-        "prof": "Tatiana"
-      },
-      {
         "cliente": 34545,
         "nome": "ANDRESSA VARGAS DE AZEVEDO",
         "valor": 247.61,
         "mes": "Abril",
         "prof": "Anna"
-      },
-      {
-        "cliente": 40214,
-        "nome": "TAMIRIS MAGALHAES DE OLIVEIRA",
-        "valor": 245.45,
-        "mes": "Junho",
-        "prof": "Camila"
-      },
-      {
-        "cliente": 35902,
-        "nome": "ROBERTA GRAZIANE DA SILVA",
-        "valor": 244.59,
-        "mes": "Abril",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 44665,
-        "nome": "SANDRA MARIA GEHLEN",
-        "valor": 241.87,
-        "mes": "Maio",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 12978,
-        "nome": "CAFE DA PRAIA RESTAURANTE E CAFETERIA LTDA",
-        "valor": 238.95,
-        "mes": "Abril",
-        "prof": "Camila"
       },
       {
         "cliente": 42939,
@@ -1736,13 +2009,6 @@
         "prof": "Cristielen"
       },
       {
-        "cliente": 43333,
-        "nome": "62.816.739 TIAGO DA COSTA BORGES",
-        "valor": 231.55,
-        "mes": "Maio",
-        "prof": "Cristielen"
-      },
-      {
         "cliente": 42963,
         "nome": "40.199.704 GUILHERME PERES LEAL",
         "valor": 231.22,
@@ -1750,46 +2016,11 @@
         "prof": "Anna"
       },
       {
-        "cliente": 32009,
-        "nome": "CLAUDETE MLLER ENGELMANN",
-        "valor": 230.45,
-        "mes": "Abril",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 21387,
-        "nome": "JULIO CESAR VIANA PRATES 43984363087",
-        "valor": 230,
-        "mes": "Junho",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 44581,
-        "nome": "BROTHERS CAFETERIA LTDA",
-        "valor": 228.74,
-        "mes": "Junho",
-        "prof": "Ariane"
-      },
-      {
-        "cliente": 38600,
-        "nome": "ELIVONE DA SILVA FORTE",
-        "valor": 228.36,
-        "mes": "Abril",
-        "prof": "Anna"
-      },
-      {
-        "cliente": 33755,
-        "nome": "ANDERSON PADILHA DOS SANTOS",
-        "valor": 226.86,
-        "mes": "Maio",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 2738,
-        "nome": "BAR E LANCHERIA REALEZA EIRELI",
-        "valor": 225.71,
-        "mes": "Abril",
-        "prof": "Ariane"
+        "cliente": 44563,
+        "nome": "PD ASSADOS LTDA",
+        "valor": 224.15,
+        "mes": "Julho",
+        "prof": "Cristielen"
       },
       {
         "cliente": 34219,
@@ -1806,13 +2037,6 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 41862,
-        "nome": "ANGELICA BLANGER JORDON",
-        "valor": 219.65,
-        "mes": "Abril",
-        "prof": "Tatiana"
-      },
-      {
         "cliente": 43346,
         "nome": "57.732.143 CARINA APARECIDA BORGES",
         "valor": 219.29,
@@ -1827,13 +2051,6 @@
         "prof": "Camila"
       },
       {
-        "cliente": 44200,
-        "nome": "58.961.833 ERICK DA SILVA DUARTE",
-        "valor": 211.97,
-        "mes": "Abril",
-        "prof": "Anna"
-      },
-      {
         "cliente": 25071,
         "nome": "JISIANE DA SILVA FONSECA",
         "valor": 211.05,
@@ -1841,11 +2058,11 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 38149,
-        "nome": "CAROLAINE MACHADO",
-        "valor": 210.79,
-        "mes": "Junho",
-        "prof": "Cristielen"
+        "cliente": 37875,
+        "nome": "56.252.908 JESSICA MARTINS HAGAT BAEHR",
+        "valor": 208.28,
+        "mes": "Julho",
+        "prof": "Tatiana"
       },
       {
         "cliente": 33080,
@@ -1862,38 +2079,10 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 44928,
-        "nome": "56.356.834 SABRINA VITORIA OLIVEIRA DA SILVA",
-        "valor": 202.43,
-        "mes": "Junho",
-        "prof": "Cristielen"
-      },
-      {
-        "cliente": 41723,
-        "nome": "28.679.102 MANOEL DIEGO MORAIS GAUTERIO",
-        "valor": 201.58,
-        "mes": "Maio",
-        "prof": "Camila"
-      },
-      {
-        "cliente": 44270,
-        "nome": "49.363.694 ANTONIO GELSON DE OLIVEIRA ARAUJO",
-        "valor": 201.28,
-        "mes": "Abril",
-        "prof": "Natalia"
-      },
-      {
         "cliente": 29084,
         "nome": "NADIA GOMES BITTENCOURT ZEFERINO",
         "valor": 201.15,
         "mes": "Junho",
-        "prof": "Camila"
-      },
-      {
-        "cliente": 27148,
-        "nome": "LUCILENE BATISTA DE OLIVEIRA",
-        "valor": 199.77,
-        "mes": "Abril",
         "prof": "Camila"
       },
       {
@@ -1904,6 +2093,13 @@
         "prof": "Tatiana"
       },
       {
+        "cliente": 11480,
+        "nome": "PAULINHO SIRENA",
+        "valor": 198.85,
+        "mes": "Julho",
+        "prof": "Camila"
+      },
+      {
         "cliente": 43131,
         "nome": "63.837.950 LUCAS SANTOS CRUZ",
         "valor": 198.65,
@@ -1911,16 +2107,16 @@
         "prof": "Ariane"
       },
       {
+        "cliente": 43285,
+        "nome": "47.447.476 MATHEUS JARDIM MESQUITA",
+        "valor": 197.95,
+        "mes": "Julho",
+        "prof": "Camila"
+      },
+      {
         "cliente": 41058,
         "nome": "JOÃO BATISTA PEREIRA DA SILVA",
         "valor": 195.95,
-        "mes": "Abril",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 41418,
-        "nome": "ANDRÉ REY MOLLER",
-        "valor": 189.34,
         "mes": "Abril",
         "prof": "Natalia"
       },
@@ -1974,41 +2170,6 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 42836,
-        "nome": "KELLY SOARES BORGES",
-        "valor": 179.75,
-        "mes": "Maio",
-        "prof": "Ariane"
-      },
-      {
-        "cliente": 27411,
-        "nome": "CATHERINE KELBERT GASTRONOMIA LTDA",
-        "valor": 179.43,
-        "mes": "Junho",
-        "prof": "Ariane"
-      },
-      {
-        "cliente": 39622,
-        "nome": "ANDREW SILVA DE MELO",
-        "valor": 178.95,
-        "mes": "Abril",
-        "prof": "Anna"
-      },
-      {
-        "cliente": 28192,
-        "nome": "EMILENE DA SILVA RAMOS",
-        "valor": 178.95,
-        "mes": "Junho",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 13483,
-        "nome": "JUCA LANCHES LTDA ME",
-        "valor": 177.9,
-        "mes": "Abril",
-        "prof": "Tatiana"
-      },
-      {
         "cliente": 41967,
         "nome": "62.638.466 LUANA TAIS DA ROCHA RIBEIRO",
         "valor": 177.86,
@@ -2037,13 +2198,6 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 37577,
-        "nome": "ANDREW TAROUCO MONTIEL",
-        "valor": 175.37,
-        "mes": "Abril",
-        "prof": "Anna"
-      },
-      {
         "cliente": 41721,
         "nome": "KARINA DE SOUZA LIMA",
         "valor": 174.08,
@@ -2051,11 +2205,11 @@
         "prof": "Camila"
       },
       {
-        "cliente": 43992,
-        "nome": "SUZANA MOTTA BRAGA PACHECO",
-        "valor": 172.55,
-        "mes": "Maio",
-        "prof": "Camila"
+        "cliente": 42952,
+        "nome": "ANA CLÁUDIA DE SOUZA ANGELO",
+        "valor": 170.45,
+        "mes": "Julho",
+        "prof": "Tatiana"
       },
       {
         "cliente": 37910,
@@ -2063,13 +2217,6 @@
         "valor": 170.38,
         "mes": "Abril",
         "prof": "Anna"
-      },
-      {
-        "cliente": 16902,
-        "nome": "26.553.758 JOICY BOTELHO MEDEIROS",
-        "valor": 168.9,
-        "mes": "Junho",
-        "prof": "Camila"
       },
       {
         "cliente": 39094,
@@ -2090,6 +2237,13 @@
         "nome": "BRUNO TELLES CAMARGO",
         "valor": 165.8,
         "mes": "Junho",
+        "prof": "Cristielen"
+      },
+      {
+        "cliente": 44912,
+        "nome": "DTV COMERCIO DE CARNES LTDA",
+        "valor": 165.03,
+        "mes": "Julho",
         "prof": "Cristielen"
       },
       {
@@ -2128,6 +2282,13 @@
         "prof": "Cristielen"
       },
       {
+        "cliente": 39127,
+        "nome": "57.087.406 RODRIGO RAMOS FORTUNATO",
+        "valor": 159.14,
+        "mes": "Junho",
+        "prof": "Ariane"
+      },
+      {
         "cliente": 44138,
         "nome": "57.274.207 BRUNA NASCIMENTO SILVA",
         "valor": 158.69,
@@ -2147,30 +2308,9 @@
         "valor": 151.8,
         "mes": "Junho",
         "prof": "Cristielen"
-      },
-      {
-        "cliente": 39761,
-        "nome": "MÍNIMERCADO PAI E FILHO",
-        "valor": 150,
-        "mes": "Abril",
-        "prof": "Ariane"
-      },
-      {
-        "cliente": 44049,
-        "nome": "36.020.214 BRUNA TERESINHA MENDES RENE DA SILVA",
-        "valor": 147.8,
-        "mes": "Abril",
-        "prof": "Anna"
-      },
-      {
-        "cliente": 34899,
-        "nome": "RESTAURANTE SAN GENNARO LTDA",
-        "valor": 0,
-        "mes": "Junho",
-        "prof": "Tatiana"
       }
     ]
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-23T18:53:29.536Z"
+  "updatedAt": "2026-07-23T19:48:43.235Z"
 }

@@ -92,49 +92,49 @@ console.log('Linhas na aba: ' + rawFat.length);
 var MONTHS = ['Abril', 'Maio', 'Junho', 'Julho'];
 var monthNums = [4, 5, 6, 7];
 
-// Build faturamentoClientes from the sheet, refreshed from base_8026
+// Build faturamentoClientes from the sheet (nova estrutura: A=TELEVENDEDORA, B=CODCLI, C=MES)
+// Acumula faturamento do mes de referencia ate Julho
 var faturamentoClientesArr = [];
-var atualizados = 0, naoEncontrados = 0;
+var encontrados = 0, semFat = 0;
 
 for (var fi = 1; fi < rawFat.length; fi++) {
   var row = rawFat[fi];
-  if (!row || !row[0]) continue;
+  if (!row || (!row[0] && row[0] !== 0)) continue;
   var prof = String(row[0]).trim();
   var codcli = String(row[1]).trim();
-  var mesNome = String(row[4] || '').trim();
+  var mesNome = String(row[2] || '').trim();
   var mesNum = MES_NUM[mesNome];
 
-  if (!mesNum || MONTHS.indexOf(mesNome) < 0) continue;
+  if (!mesNum || mesNum < 4 || mesNum > 7) continue;
 
-  // Look up fresh faturamento from base_8026
-  var fatAtual = 0;
+  // Acumula faturamento do mes de referencia ate Julho
+  var somaFat = 0;
   var nomeCliente = '';
-  if (fatIndex[codcli] && fatIndex[codcli][mesNum]) {
-    fatAtual = fatIndex[codcli][mesNum].fat;
-    nomeCliente = fatIndex[codcli][mesNum].nome;
-    atualizados++;
-  } else {
-    // Keep original value from sheet
-    fatAtual = parseFloat(row[3]) || 0;
-    nomeCliente = String(row[2] || '').trim();
-    naoEncontrados++;
+  for (var m = mesNum; m <= 7; m++) {
+    if (fatIndex[codcli] && fatIndex[codcli][m]) {
+      somaFat += fatIndex[codcli][m].fat;
+      if (!nomeCliente) nomeCliente = fatIndex[codcli][m].nome;
+    }
   }
 
-  if (fatAtual > 0) {
+  if (somaFat > 0) {
     faturamentoClientesArr.push({
       cliente: parseInt(codcli) || 0,
       nome: nomeCliente,
-      valor: Math.round(fatAtual * 100) / 100,
+      valor: Math.round(somaFat * 100) / 100,
       mes: mesNome,
       prof: prof
     });
+    encontrados++;
+  } else {
+    semFat++;
   }
 }
 
 faturamentoClientesArr.sort(function (a, b) { return b.valor - a.valor; });
 
-console.log('  Clientes atualizados da base: ' + atualizados);
-console.log('  Mantidos da planilha (não encontrados): ' + naoEncontrados);
+console.log('  Clientes com faturamento: ' + encontrados);
+console.log('  Sem faturamento na base: ' + semFat);
 console.log('  Total faturamentoClientes: ' + faturamentoClientesArr.length);
 
 console.log('[3/4] Construindo data.json...');

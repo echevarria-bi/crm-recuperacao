@@ -4,22 +4,22 @@
       "indicadores": [
         {
           "label": "Faturamento Total",
-          "Abril": 590214.51,
-          "Maio": 649864.94,
+          "Abril": 824521.82,
+          "Maio": 649714.46,
           "Junho": 778038.96,
           "Julho": 861367.5
         },
         {
           "label": "Positivação (Clientes Únicos)",
-          "Abril": 349,
+          "Abril": 470,
           "Maio": 426,
           "Junho": 451,
           "Julho": 364
         },
         {
           "label": "Ticket Médio",
-          "Abril": 1691.16,
-          "Maio": 1525.5,
+          "Abril": 1754.3,
+          "Maio": 1525.15,
           "Junho": 1725.14,
           "Julho": 2366.39
         }
@@ -69,6 +69,11 @@
           "Junho": 413.6,
           "Julho": 61057.13,
           "Total": 61470.73
+        },
+        {
+          "profissional": "Anna",
+          "Abril": 234307.32,
+          "Total": 234156.84
         }
       ],
       "recuperadosPorProf": [
@@ -137,6 +142,17 @@
           "Junho REAL": 1,
           "Julho META": 48,
           "Julho REAL": 48
+        },
+        {
+          "profissional": "Anna",
+          "Abril META": 121,
+          "Abril REAL": 121,
+          "Maio META": 0,
+          "Maio REAL": 0,
+          "Junho META": 0,
+          "Junho REAL": 0,
+          "Julho META": 0,
+          "Julho REAL": 0
         }
       ]
     },
@@ -190,6 +206,14 @@
             "pct": 100,
             "dias": [],
             "faturamento": 413.6
+          },
+          {
+            "profissional": "Anna",
+            "meta": 0,
+            "realizado": 0,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 0
           }
         ],
         "total": {
@@ -261,16 +285,24 @@
             "pct": 100,
             "dias": [],
             "faturamento": 0
+          },
+          {
+            "profissional": "Anna",
+            "meta": 121,
+            "realizado": 121,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 234307.32
           }
         ],
         "total": {
           "profissional": "Total",
-          "meta": 349,
-          "realizado": 349,
+          "meta": 470,
+          "realizado": 470,
           "pct": 100,
           "dias": []
         },
-        "faturamentoGeral": 590214.51,
+        "faturamentoGeral": 824521.8300000001,
         "dayNums": []
       },
       "metaContatos": {
@@ -332,6 +364,14 @@
             "pct": 100,
             "dias": [],
             "faturamento": 0
+          },
+          {
+            "profissional": "Anna",
+            "meta": 0,
+            "realizado": 0,
+            "pct": 100,
+            "dias": [],
+            "faturamento": -150.48
           }
         ],
         "total": {
@@ -341,7 +381,7 @@
           "pct": 100,
           "dias": []
         },
-        "faturamentoGeral": 649864.94,
+        "faturamentoGeral": 649714.46,
         "dayNums": []
       },
       "metaContatos": {
@@ -403,6 +443,14 @@
             "pct": 100,
             "dias": [],
             "faturamento": 61057.13
+          },
+          {
+            "profissional": "Anna",
+            "meta": 0,
+            "realizado": 0,
+            "pct": 100,
+            "dias": [],
+            "faturamento": 0
           }
         ],
         "total": {
@@ -425,7 +473,7 @@
       "rcaExterno": null
     },
     "profissionais": {},
-    "faturamentoTotal": 4577222.85,
+    "faturamentoTotal": 5875463.14,
     "faturamentoClientes": [
       {
         "cliente": 44093,
@@ -2089,5 +2137,5 @@
     ]
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-23T18:24:57.779Z"
+  "updatedAt": "2026-07-23T18:41:30.229Z"
 }

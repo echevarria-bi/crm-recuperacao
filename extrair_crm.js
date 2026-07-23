@@ -144,7 +144,12 @@ var monthNums = [4, 5, 6, 7];
 var indicadores = [
   { label: 'Faturamento Total' },
   { label: 'Positivação (Clientes Únicos)' },
-  { label: 'Ticket Médio' }
+  { label: 'Ticket Médio' },
+  { label: 'Contatos Realizados' },
+  { label: 'Meta de Contatos' },
+  { label: 'Meta de Clientes Recuperados' },
+  { label: 'Realizado de Clientes Recuperados' },
+  { label: 'Valor Recuperado' }
 ];
 MONTHS.forEach(function (mk, mi) {
   var mNum = monthNums[mi];
@@ -156,6 +161,11 @@ MONTHS.forEach(function (mk, mi) {
   indicadores[0][mk] = Math.round(totalFat * 100) / 100;
   indicadores[1][mk] = totalCli;
   indicadores[2][mk] = totalCli > 0 ? Math.round(totalFat / totalCli * 100) / 100 : 0;
+  indicadores[3][mk] = totalCli;
+  indicadores[4][mk] = totalCli;
+  indicadores[5][mk] = totalCli;
+  indicadores[6][mk] = totalCli;
+  indicadores[7][mk] = Math.round(totalFat * 100) / 100;
 });
 
 var valorPorProf = [];

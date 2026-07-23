@@ -22,6 +22,41 @@
           "Maio": 1525.15,
           "Junho": 1725.14,
           "Julho": 2366.39
+        },
+        {
+          "label": "Contatos Realizados",
+          "Abril": 470,
+          "Maio": 426,
+          "Junho": 451,
+          "Julho": 364
+        },
+        {
+          "label": "Meta de Contatos",
+          "Abril": 470,
+          "Maio": 426,
+          "Junho": 451,
+          "Julho": 364
+        },
+        {
+          "label": "Meta de Clientes Recuperados",
+          "Abril": 470,
+          "Maio": 426,
+          "Junho": 451,
+          "Julho": 364
+        },
+        {
+          "label": "Realizado de Clientes Recuperados",
+          "Abril": 470,
+          "Maio": 426,
+          "Junho": 451,
+          "Julho": 364
+        },
+        {
+          "label": "Valor Recuperado",
+          "Abril": 824521.82,
+          "Maio": 649714.46,
+          "Junho": 778038.96,
+          "Julho": 861367.5
         }
       ],
       "valorPorProf": [
@@ -2137,5 +2172,5 @@
     ]
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-23T18:41:30.229Z"
+  "updatedAt": "2026-07-23T18:53:29.536Z"
 }

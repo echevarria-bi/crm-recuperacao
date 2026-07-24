@@ -291,9 +291,9 @@
           },
           {
             "profissional": "Camila",
-            "meta": 46,
-            "realizado": 21,
-            "pct": 45.7,
+            "meta": 48,
+            "realizado": 22,
+            "pct": 45.8,
             "dias": [
               {
                 "meta": 3,
@@ -570,9 +570,9 @@
           },
           {
             "profissional": "Tatiana",
-            "meta": 26,
-            "realizado": 24,
-            "pct": 92.3,
+            "meta": 25,
+            "realizado": 20,
+            "pct": 80,
             "dias": [
               {
                 "meta": 1,
@@ -636,7 +636,7 @@
               },
               {
                 "meta": 2,
-                "realizado": 4
+                "realizado": 0
               },
               {
                 "meta": 1,
@@ -664,9 +664,9 @@
         ],
         "total": {
           "profissional": "Total",
-          "meta": 158,
-          "realizado": 95,
-          "pct": 60.1,
+          "meta": 159,
+          "realizado": 92,
+          "pct": 57.9,
           "dias": []
         },
         "faturamentoGeral": 76642.89,
@@ -7027,5 +7027,5 @@
     ]
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-24T16:00:48.057Z"
+  "updatedAt": "2026-07-24T17:35:39.216Z"
 }

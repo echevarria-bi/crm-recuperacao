@@ -109,18 +109,24 @@ MONTHS.forEach(function (mk) {
   if (!ws) { console.log('  Aba "' + sn + '" não encontrada'); metaRealPorMes[mk] = { meta: 0, realizado: 0 }; return; }
   var data = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
 
-  // Meta/Realizado total (row 9 = index 8)
-  var row9 = data[8] || [];
-  var meta = parseInt(row9[1]) || 0;
-  var realizado = parseInt(row9[2]) || 0;
-  metaRealPorMes[mk] = { meta: meta, realizado: realizado };
-
   // Parse da matriz META RECUPERACAO
   var recRow = -1;
   for (var r = 0; r < data.length; r++) {
     var c = String((data[r] && data[r][0]) || '').trim().toUpperCase();
     if (c === 'META RECUPERACAO' || c === 'META RECUPERAÇÃO') { recRow = r; break; }
   }
+
+  // Meta/Realizado total — find first "Total" row after recRow
+  var totalIdx = -1;
+  if (recRow >= 0) {
+    for (var ti = recRow + 1; ti < data.length; ti++) {
+      if (data[ti] && String(data[ti][0]).trim() === 'Total') { totalIdx = ti; break; }
+    }
+  }
+  var row9 = totalIdx >= 0 ? data[totalIdx] : [];
+  var meta = parseInt(row9[1]) || 0;
+  var realizado = parseInt(row9[2]) || 0;
+  metaRealPorMes[mk] = { meta: meta, realizado: realizado };
   var matriz = { dayNums: [], profissionais: [] };
   if (recRow >= 0) {
     // Day numbers from the same row as "META RECUPERACAO" (recRow), cols 4,6,8,...

@@ -93,6 +93,7 @@ var MONTHS = ['Abril', 'Maio', 'Junho', 'Julho'];
 var monthNums = [4, 5, 6, 7];
 
 // Ler Meta/Realizado de cada aba Painel Geral (B9=Meta, C9=Realizado)
+// E parsing completo da matriz META RECUPERACAO (profissionais, dias, meta/real por dia)
 var painelSheets = {
   'Abril': 'Painel Geral - Abril',
   'Maio': 'Painel Geral - Maio ',
@@ -100,17 +101,59 @@ var painelSheets = {
   'Julho': 'Painel Geral - Julho'
 };
 var metaRealPorMes = {};
+var painelMatrizes = {};
+
 MONTHS.forEach(function (mk) {
   var sn = painelSheets[mk];
   var ws = wbPainel.Sheets[sn];
   if (!ws) { console.log('  Aba "' + sn + '" não encontrada'); metaRealPorMes[mk] = { meta: 0, realizado: 0 }; return; }
   var data = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+
+  // Meta/Realizado total (row 9 = index 8)
   var row9 = data[8] || [];
   var meta = parseInt(row9[1]) || 0;
   var realizado = parseInt(row9[2]) || 0;
   metaRealPorMes[mk] = { meta: meta, realizado: realizado };
-  console.log('  ' + mk + ': Meta=' + meta + ' Realizado=' + realizado);
+
+  // Parse da matriz META RECUPERACAO
+  var recRow = -1;
+  for (var r = 0; r < data.length; r++) {
+    var c = String((data[r] && data[r][0]) || '').trim().toUpperCase();
+    if (c === 'META RECUPERACAO' || c === 'META RECUPERAÇÃO') { recRow = r; break; }
+  }
+  var matriz = { dayNums: [], profissionais: [] };
+  if (recRow >= 0) {
+    // Day numbers from the same row as "META RECUPERACAO" (recRow), cols 4,6,8,...
+    var dayRow = data[recRow] || [];
+    for (var dc = 4; dc < dayRow.length; dc += 2) {
+      var dv = dayRow[dc];
+      if (dv !== '' && dv !== undefined && dv !== null) matriz.dayNums.push(parseInt(dv) || matriz.dayNums.length + 1);
+    }
+    // Profissionais from rows 4+ (recRow+2 = header, recRow+3..)
+    var profStart = recRow + 2;
+    for (var ri = profStart; ri < data.length; ri++) {
+      var row = data[ri];
+      if (!row || !row[0]) continue;
+      var name = String(row[0]).trim();
+      if (name === 'Total' || name === '' || name.indexOf('Conversão') >= 0 || name.indexOf('conversão') >= 0 || name.indexOf('Excedente') >= 0 || name.indexOf('GAP') >= 0) break;
+      var prof = { profissional: name, meta: parseInt(row[1]) || 0, realizado: parseInt(row[2]) || 0, pct: 0, dias: [], faturamento: 0 };
+      prof.pct = prof.meta > 0 ? Math.round(prof.realizado / prof.meta * 1000) / 10 : 0;
+      // Dias: pares Meta/Real a partir da coluna 4
+      for (var di = 0; di < matriz.dayNums.length; di++) {
+        var metaCol = 4 + di * 2;
+        var realCol = 5 + di * 2;
+        var dMeta = parseInt(row[metaCol]) || 0;
+        var dReal = parseInt(row[realCol]) || 0;
+        prof.dias.push({ meta: dMeta, realizado: dReal });
+      }
+      matriz.profissionais.push(prof);
+    }
+  }
+  painelMatrizes[mk] = matriz;
+  console.log('  ' + mk + ': Meta=' + meta + ' Realizado=' + realizado + ' | ' + matriz.profissionais.length + ' profissionais, ' + matriz.dayNums.length + ' dias');
 });
+
+console.log('Linhas na aba: ' + rawFat.length);
 
 // Build faturamentoClientes from the sheet (nova estrutura: A=TELEVENDEDORA, B=CODCLI, C=MES)
 // 1 linha por cliente por mes com faturamento real daquele mes
@@ -243,22 +286,39 @@ Object.keys(nomesUsados).sort().forEach(function (prof) {
   recuperadosPorProf.push(entry);
 });
 
-// Build painel por mes usando Meta/Realizado das abas Painel Geral + faturamento da aba FATURAMENTO RECUPERACAO
+// Build painel por mes usando dados da matriz META RECUPERACAO + faturamento da base_8026
 function buildPainelMonth(mesNome) {
   var mNum = MES_NUM[mesNome];
   var pr = metaRealPorMes[mesNome] || { meta: 0, realizado: 0 };
+  var mat = painelMatrizes[mesNome] || { dayNums: [], profissionais: [] };
+
+  // Enriquecer profissionais da matriz com faturamento da base_8026
   var profs = [];
-  var totalFat = 0;
-  Object.keys(nomesUsados).sort().forEach(function (prof) {
-    var fat = (profFat[prof] && profFat[prof][mNum]) || 0;
-    fat = Math.round(fat * 100) / 100;
-    var cli = (profCli[prof] && profCli[prof][mNum]) || 0;
-    profs.push({ profissional: prof, meta: cli, realizado: cli, pct: cli > 0 ? 100 : 0, dias: [], faturamento: fat });
-    totalFat += fat;
+  mat.profissionais.forEach(function (mp) {
+    var fat = 0;
+    // Buscar faturamento por nome base (antes de " - ")
+    var baseName = mp.profissional.split(' - ')[0].trim();
+    if (profFat[baseName]) {
+      fat = profFat[baseName][mNum] || 0;
+    }
+    profs.push({
+      profissional: mp.profissional,
+      meta: mp.meta,
+      realizado: mp.realizado,
+      pct: mp.pct,
+      dias: mp.dias,
+      faturamento: Math.round(fat * 100) / 100
+    });
   });
+
   var pct = pr.meta > 0 ? Math.round(pr.realizado / pr.meta * 1000) / 10 : 0;
   return {
-    recuperacao: { profissionais: profs, total: { profissional: 'Total', meta: pr.meta, realizado: pr.realizado, pct: pct, dias: [] }, faturamentoGeral: Math.round(totalFat * 100) / 100, dayNums: [] },
+    recuperacao: {
+      profissionais: profs,
+      total: { profissional: 'Total', meta: pr.meta, realizado: pr.realizado, pct: pct, dias: [] },
+      faturamentoGeral: Math.round(profs.reduce(function (s, p) { return s + p.faturamento; }, 0) * 100) / 100,
+      dayNums: mat.dayNums
+    },
     metaContatos: { profissionais: [], total: null },
     motivos: [], inatividade: [], motivosDiarios: [], rcaExterno: null
   };

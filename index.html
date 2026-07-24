@@ -1016,60 +1016,7 @@
       html += '</tbody></table></div></div>';
       }
 
-      // -- Daily section for this month --
-      var totalPG = pg.recuperacao.total;
-      var totReal = 0, totMeta = 0;
-      for (var pi2 = 0; pi2 < pg.recuperacao.profissionais.length; pi2++) {
-        var pp = pg.recuperacao.profissionais[pi2];
-        totReal += pp.realizado||0;
-        totMeta += pp.meta||0;
-      }
-      if (totReal === 0 && totalPG) { totReal = totalPG.realizado||0; }
-      if (totMeta === 0 && totalPG) { totMeta = totalPG.meta||0; }
-      var days = pg.recuperacao.dayNums || [1,2,3,5,8,9,10,11,12,15,16,17,18,19,22,23,24,25,26,29,30];
-      html += '<div class="chart-box"><h2>Acompanhamento Di\u00E1rio <span class="sub">&rarr; Recupera\u00E7\u00E3o em ' + monthName + '</span></h2><div class="table-wrap"><table><thead><tr><th rowspan="2" style="vertical-align:middle">Televendedora</th><th rowspan="2" style="vertical-align:middle;text-align:center" title="Percentual de atingimento da meta">%</th><th rowspan="2" style="vertical-align:middle;text-align:center" title="Total acumulado de clientes recuperados">Acum.</th>';
-      for (var di = 0; di < days.length; di++) {
-        html += '<th colspan="2" style="text-align:center;min-width:44px">Dia ' + days[di] + '</th>';
-      }
-      html += '</tr><tr>';
-      for (var di = 0; di < days.length; di++) {
-        html += '<th style="text-align:center;font-size:9px;width:20px" class="meta-color">M</th><th style="text-align:center;font-size:9px;width:20px" class="realizado-color">R</th>';
-      }
-      html += '</tr></thead><tbody>';
-      for (var i = 0; i < pg.recuperacao.profissionais.length; i++) {
-        var p = pg.recuperacao.profissionais[i];
-        var bg = i%2===0?'#0b0d14':'#11131c';
-        var jMeta = p.meta || 0;
-        var jReal = p.realizado || 0;
-        var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
-        var pctStr = jPct.toFixed(1);
-        var pctColor = jPct >= 100 ? '#34d399' : jPct >= 80 ? '#fbbf24' : '#f87171';
-        var acum = p.realizado || 0;
-        html += '<tr style="background:'+bg+'"><td style="font-weight:600;color:#fcd34d">'+icn('user',12)+' '+p.profissional+'</td><td style="text-align:center;font-weight:700;color:'+pctColor+'">'+pctStr+'%</td><td style="text-align:center;font-weight:700">'+acum+'</td>';
-        for (var di = 0; di < days.length; di++) {
-          var v = (p.dias && p.dias[di]) ? p.dias[di] : null;
-          var mVal = v?v.meta:0;
-          var rVal = v?v.realizado:0;
-          var atingiuMeta = rVal >= mVal && mVal > 0;
-          var cor = atingiuMeta ? '#34d399' : rVal > 0 ? '#fbbf24' : '#4a4d6e';
-          html += '<td style="text-align:center;font-size:11px;color:#6b7280">'+(mVal>0?mVal:'-')+'</td><td style="text-align:center;font-size:13px;font-weight:700;color:'+cor+'">'+(rVal>0?rVal:'-')+'</td>';
-        }
-        html += '</tr>';
-      }
-      // Total row for daily
-      html += '<tr class="tot-row"><td>'+icn('users',12)+' Total</td><td style="text-align:center;font-weight:700;color:'+(totMeta>0&&totReal/totMeta*100>=100?'#34d399':totMeta>0&&totReal/totMeta*100>=80?'#fbbf24':'#f87171')+'">'+(totMeta>0?(totReal/totMeta*100).toFixed(1):'0.0')+'%</td><td style="text-align:center;font-weight:700">'+totReal+'</td>';
-      for (var di = 0; di < days.length; di++) {
-        // Calculate total meta and real for this day across all professionals
-        var tM = 0, tR = 0;
-        for (var pi = 0; pi < pg.recuperacao.profissionais.length; pi++) {
-          var p = pg.recuperacao.profissionais[pi];
-          var v = (p.dias && p.dias[di]) ? p.dias[di] : null;
-          if (v) { tM += v.meta||0; tR += v.realizado||0; }
-        }
-        var aMeta = tM>0?'#34d399':'#4a4d6e';
-        html += '<td style="text-align:center;font-size:11px;color:#6b7280">'+(tM>0?tM:'-')+'</td><td style="text-align:center;font-size:13px;font-weight:700;color:'+aMeta+'">'+(tR>0?tR:'-')+'</td>';
-      }
-      html += '</tr></tbody></table></div></div>';
+      var days = pg.recuperacao.dayNums || [];
 
       // Trend chart for this month
       html += '<div class="chart-box"><h2>Tend\u00EAncia Di\u00E1ria <span class="sub">&rarr; Meta, Realizado e Acumulado (' + monthName + ')</span></h2><canvas id="chartTendencia' + monthName + '" style="max-height:220px"></canvas></div>';
@@ -1127,8 +1074,8 @@
           var acc = [], acum = 0;
           for (var di = 0; di < totals.length; di++) { acum += totals[di]; acc.push(acum); }
           var lastAcum = acc.length > 0 ? acc[acc.length-1] : 0;
-          if (lastAcum > 0 && Math.abs(lastAcum - totReal) > 0.5) {
-            var scale = totReal / lastAcum;
+          if (lastAcum > 0 && Math.abs(lastAcum - totalReal) > 0.5) {
+            var scale = totalReal / lastAcum;
             for (var si = 0; si < acc.length; si++) acc[si] = Math.round(acc[si] * scale);
           }
           new Chart(document.getElementById('chartTendencia' + monthName), {
@@ -1252,29 +1199,26 @@
       } catch(e) { return false; }
     }
 
-    // Initialize: try localStorage first (user's last upload), then remote as fallback
-    if (!restaurarStorage()) {
-      fetchRemoteData().then(function(remote) {
-        if (allData) return;
-        if (remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral) {
-          allData = remote.data;
-          document.getElementById('areaInicial').parentElement.style.display = 'none';
-          var fn = remote.fileName || 'Arquivo remoto';
-          var ts = remote.updatedAt ? new Date(remote.updatedAt) : new Date();
-          document.getElementById('footer').style.display = 'block';
-          document.getElementById('footer').innerHTML = '<strong>' + fn + '</strong> &middot; ' + ts.toLocaleDateString('pt-BR') + ' às ' + ts.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recuperação';
-          initTabs();
-          switchTab('resumo');
-          document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
-          mostrarTokenBtn();
-        } else {
-          document.getElementById('areaInicial').style.display = 'flex';
-        }
-      });
-    } else {
-      document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
-      mostrarTokenBtn();
-    }
+    // Initialize: always fetch fresh data.json, no localStorage
+    localStorage.removeItem('crmData');
+    localStorage.removeItem('crmFileName');
+    localStorage.removeItem('crmTimestamp');
+    fetchRemoteData().then(function(remote) {
+      if (remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral) {
+        allData = remote.data;
+        document.getElementById('areaInicial').parentElement.style.display = 'none';
+        var fn = remote.fileName || 'data.json';
+        var ts = remote.updatedAt ? new Date(remote.updatedAt) : new Date();
+        document.getElementById('footer').style.display = 'block';
+        document.getElementById('footer').innerHTML = '<strong>' + fn + '</strong> &middot; ' + ts.toLocaleDateString('pt-BR') + ' \u00E0s ' + ts.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recupera\u00E7\u00E3o';
+        initTabs();
+        switchTab('resumo');
+        document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
+        mostrarTokenBtn();
+      } else {
+        document.getElementById('areaInicial').style.display = 'flex';
+      }
+    });
   </script>
 </body>
 </html>

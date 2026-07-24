@@ -1094,36 +1094,57 @@
 
 
     function renderClientes() {
-      var clientes = allData.faturamentoClientes || [];
+      var clientesArr = allData.faturamentoClientes || [];
       var detalhes = allData.clientesDetalhes || {};
-      var grandTotal = clientes.reduce(function(s,c){return s+(c.valor||0);},0);
-      var maxVal = clientes.length > 0 ? Math.max.apply(null, clientes.map(function(c){return c.valor||0;})) : 1;
 
-      if (clientes.length === 0) {
+      if (Object.keys(detalhes).length === 0) {
         document.getElementById('dashContent').innerHTML = '<div class="chart-box"><h2>Recupera\u00E7\u00E3o por Cliente <span class="sub">&rarr; FATURAMENTO RECUPERACAO</span></h2><div style="text-align:center;padding:40px;color:#6b7280">Nenhum dado dispon\u00EDvel. Fa\u00E7a o upload do Excel para carregar.</div></div>';
         return;
       }
 
+      // Agregar faturamento por cliente (soma todos os meses)
+      var fatPorCliente = {};
+      clientesArr.forEach(function(c) {
+        var id = String(c.cliente);
+        if (!fatPorCliente[id]) fatPorCliente[id] = { valor: 0, prof: c.prof, nome: c.nome, meses: {} };
+        fatPorCliente[id].valor += c.valor || 0;
+        fatPorCliente[id].meses[c.mes] = (fatPorCliente[id].meses[c.mes] || 0) + (c.valor || 0);
+      });
+
+      // Construir lista unica de clientes a partir do clientesDetalhes
+      var lista = [];
+      var grandTotal = 0;
+      var maxVal = 1;
+      for (var id in detalhes) {
+        var d = detalhes[id];
+        var fat = fatPorCliente[id] || { valor: 0, prof: '', nome: '', meses: {} };
+        var totalFat = Math.round(fat.valor * 100) / 100;
+        grandTotal += totalFat;
+        var nome = fat.nome || (d.detalhes && d.detalhes[0] ? d.detalhes[0].produto : '');
+        lista.push({ id: id, nome: nome, prof: fat.prof, compras: d.comprasAposRecuperacao || 0, recuperadoEm: d.recuperadoEm, mesRefNum: d.mesRefNum, valor: totalFat, meses: fat.meses });
+      }
+      lista.sort(function(a, b) { return b.valor - a.valor; });
+      if (lista.length > 0) maxVal = Math.max.apply(null, lista.map(function(c) { return c.valor; }));
+
       var profList = [];
-      clientes.forEach(function(c){if (profList.indexOf(c.prof) < 0) profList.push(c.prof);});
+      lista.forEach(function(c) { if (profList.indexOf(c.prof) < 0) profList.push(c.prof); });
       profList.sort();
+
       var html = '<div class="chart-box"><h2>FATURAMENTO RECUPERACAO <span class="sub">&rarr; Raio-X completo de clientes</span></h2>';
       html += '<div style="margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap"><input type="text" id="filtroId" placeholder="Filtrar por ID do cliente..." style="flex:1;min-width:180px;max-width:260px;background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px;color:#e1e7ef;font-size:14px;outline:none" autofocus>';
       html += '<select id="filtroProf" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px;color:#e1e7ef;font-size:14px;outline:none"><option value="">Televendedora: Todas</option>';
       for (var pi = 0; pi < profList.length; pi++) html += '<option value="' + profList[pi] + '">' + profList[pi] + '</option>';
       html += '</select>';
-      html += '<select id="filtroMes" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px;color:#e1e7ef;font-size:14px;outline:none"><option value="">M\u00EAs: Todos</option><option value="Abril">Abril</option><option value="Maio">Maio</option><option value="Junho">Junho</option><option value="Julho">Julho</option></select></div>';
-      html += '<div class="table-wrap"><table><thead><tr><th class="col-ranking">#</th><th style="color:#6b7280;font-size:12px">ID</th><th>Nome do Cliente</th><th class="text-right" style="color:#f59e0b;font-size:12px">Compras</th><th style="color:#6b7280;font-size:12px">Televendedora</th><th class="text-right" style="color:#34d399">Valor</th><th style="text-align:center;color:#6b7280;font-size:12px">M\u00EAs</th><th style="min-width:70px;color:#6b7280;font-size:12px">Peso</th></tr></thead><tbody id="tbodyClientes">';
-      for (var i = 0; i < clientes.length; i++) {
-        var c = clientes[i];
-        var d = detalhes[String(c.cliente)] || {};
-        var compras = d.comprasAposRecuperacao || 0;
-        var mesCol = c.mes === 'Junho' ? '#34d399' : (c.mes === 'Julho' ? '#f59e0b' : (c.mes === 'Maio' ? '#60a5fa' : '#a78bfa'));
-        var barW = ((c.valor||0) / maxVal * 100);
-        var clickStyle = compras > 0 ? 'cursor:pointer' : '';
-        html += '<tr data-id="' + c.cliente + '" data-nome="' + (c.nome||'').toLowerCase() + '" data-mes="'+c.mes+'" data-prof="' + c.prof + '" data-cli="' + c.cliente + '" class="cli-row" style="'+clickStyle+'"><td class="col-ranking">' + (i+1) + '</td><td style="color:#6b7280;font-size:12px">' + c.cliente + '</td><td style="font-weight:600;color:#fcd34d">' + (c.nome || '') + '</td><td class="text-right" style="font-size:12px;color:#f59e0b">' + (compras > 0 ? compras : '<span style="color:#4a4d6e">0</span>') + '</td><td style="font-size:12px;color:#9ca3af">' + c.prof + '</td><td class="text-right" style="font-weight:600;color:#34d399">' + fmtCurr(c.valor||0) + '</td><td style="text-align:center"><span style="font-size:12px;padding:2px 8px;border-radius:4px;background:'+mesCol+'22;color:'+mesCol+';font-weight:600">' + c.mes + '</span></td><td style="padding:6px 8px"><div style="height:10px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:'+Math.min(barW,100)+'%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
+      html += '<select id="filtroMes" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px;color:#e1e7ef;font-size:14px;outline:none"><option value="">M\u00EAs Recupera\u00E7\u00E3o: Todos</option><option value="Abril">Abril</option><option value="Maio">Maio</option><option value="Junho">Junho</option><option value="Julho">Julho</option></select></div>';
+      html += '<div class="table-wrap"><table><thead><tr><th class="col-ranking">#</th><th style="color:#6b7280;font-size:12px">ID</th><th>Nome do Cliente</th><th class="text-right" style="color:#f59e0b;font-size:12px">Compras</th><th style="color:#6b7280;font-size:12px">Televendedora</th><th style="color:#6b7280;font-size:12px">Recuperado em</th><th class="text-right" style="color:#34d399">Valor Total</th><th style="min-width:70px;color:#6b7280;font-size:12px">Peso</th></tr></thead><tbody id="tbodyClientes">';
+      for (var i = 0; i < lista.length; i++) {
+        var c = lista[i];
+        var barW = (maxVal > 0) ? (c.valor / maxVal * 100) : 0;
+        var clickStyle = c.compras > 0 ? 'cursor:pointer' : '';
+        var mesCol = c.recuperadoEm === 'Junho' ? '#34d399' : (c.recuperadoEm === 'Julho' ? '#f59e0b' : (c.recuperadoEm === 'Maio' ? '#60a5fa' : '#a78bfa'));
+        html += '<tr data-id="' + c.id + '" data-nome="' + (c.nome || '').toLowerCase() + '" data-prof="' + c.prof + '" data-mes="' + c.recuperadoEm + '" data-cli="' + c.id + '" class="cli-row" style="' + clickStyle + '"><td class="col-ranking">' + (i + 1) + '</td><td style="color:#6b7280;font-size:12px">' + c.id + '</td><td style="font-weight:600;color:#fcd34d">' + (c.nome || '') + '</td><td class="text-right" style="font-size:12px;color:#f59e0b">' + (c.compras > 0 ? c.compras : '<span style="color:#4a4d6e">0</span>') + '</td><td style="font-size:12px;color:#9ca3af">' + c.prof + '</td><td style="text-align:center"><span style="font-size:12px;padding:2px 8px;border-radius:4px;background:' + mesCol + '22;color:' + mesCol + ';font-weight:600">' + (c.recuperadoEm || '-') + '</span></td><td class="text-right" style="font-weight:600;color:#34d399">' + fmtCurr(c.valor) + '</td><td style="padding:6px 8px"><div style="height:10px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:' + Math.min(barW, 100) + '%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
       }
-      html += '</tbody><tfoot class="tot-row"><tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total Geral</td><td class="text-right" style="color:#f59e0b;font-weight:700">'+clientes.length+'</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(grandTotal) + '</td><td style="text-align:center"></td><td></td></tr></tfoot></table></div></div>';
+      html += '</tbody><tfoot class="tot-row"><tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total Geral</td><td class="text-right" style="color:#f59e0b;font-weight:700">' + lista.length + '</td><td style="color:#4a4d6e">-</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(grandTotal) + '</td><td></td></tr></tfoot></table></div></div>';
 
       document.getElementById('dashContent').innerHTML = html;
 
@@ -1146,20 +1167,19 @@
             r.style.display = show ? '' : 'none';
             if (show) {
               count++;
-              var valStr = r.cells[5] ? r.cells[5].textContent.replace(/[R$\s.]/g,'').replace(',','.') : '0';
+              var valStr = r.cells[6] ? r.cells[6].textContent.replace(/[R$\s.]/g, '').replace(',', '.') : '0';
               total += parseFloat(valStr) || 0;
             }
           }
           var tfoot = document.querySelector('#tbodyClientes + tfoot');
           if (tfoot) {
-            tfoot.innerHTML = '<tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total'+(idQ||profQ||mesQ?' (filtrado)':' Geral')+'</td><td class="text-right" style="color:#f59e0b;font-weight:700">'+count+'</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(total) + '</td><td style="text-align:center"></td><td></td></tr>';
+            tfoot.innerHTML = '<tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total' + (idQ || profQ || mesQ ? ' (filtrado)' : ' Geral') + '</td><td class="text-right" style="color:#f59e0b;font-weight:700">' + count + '</td><td style="color:#4a4d6e">-</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(total) + '</td><td></td></tr>';
           }
         }
         if (idF) { idF.addEventListener('input', applyFilters); idF.focus(); }
         if (profF) profF.addEventListener('change', applyFilters);
         if (mesF) mesF.addEventListener('change', applyFilters);
 
-        // Click-to-expand client details
         var cliRows = document.querySelectorAll('.cli-row');
         for (var ci = 0; ci < cliRows.length; ci++) {
           cliRows[ci].addEventListener('click', function() {

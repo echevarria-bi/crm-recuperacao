@@ -32,6 +32,7 @@ var currentMonth = now.getUTCMonth() + 1;
 
 // Index: fatIndex[codcli][mesNum] = total fat
 var fatIndex = {};
+var purchaseIndex = {}; // purchaseIndex[codcli] = [{data, produto, qtde, punit, valor, frete, numnota, fornecedor, codfilial, codusur, mes}]
 var sellerMonth = {};
 var sellerTotal = {};
 var globalClientes = {};
@@ -62,6 +63,24 @@ for (var ri = 1; ri < raw.length; ri++) {
   if (!fatIndex[codcli]) fatIndex[codcli] = {};
   if (!fatIndex[codcli][mes]) fatIndex[codcli][mes] = { fat: 0, nome: nome };
   fatIndex[codcli][mes].fat += fat;
+
+  // Detailed purchase index (all clients, all sellers)
+  if (!purchaseIndex[codcli]) purchaseIndex[codcli] = [];
+  var dataFmt = dt.getUTCFullYear() + '-' + String(dt.getUTCMonth()+1).padStart(2,'0') + '-' + String(dt.getUTCDate()).padStart(2,'0');
+  purchaseIndex[codcli].push({
+    data: dataFmt,
+    dia: dt.getUTCDate(),
+    mes: mes,
+    produto: String(r[5] || '').trim(),
+    qtde: parseFloat(r[7]) || 0,
+    punit: parseFloat(r[8]) || 0,
+    valor: Math.round(fat * 100) / 100,
+    frete: parseFloat(r[10]) || 0,
+    numnota: String(r[3] || '').trim(),
+    fornecedor: String(r[26] || '').trim(),
+    codfilial: String(r[0] || '').trim(),
+    codusur: codusur
+  });
 
   // Seller monthly data
   if (ACTIVE.indexOf(codusur) >= 0) {
@@ -197,6 +216,50 @@ for (var fi = 1; fi < rawFat.length; fi++) {
 }
 
 faturamentoClientesArr.sort(function (a, b) { return b.valor - a.valor; });
+
+// Build purchase details per client: unique purchase days AFTER recovery month
+// and full purchase details for click-to-expand
+var clientesDetalhes = {};
+var seenClients = {}; // track unique client+prof+mesRef combos
+for (var fi2 = 1; fi2 < rawFat.length; fi2++) {
+  var row2 = rawFat[fi2];
+  if (!row2 || (!row2[0] && row2[0] !== 0)) continue;
+  var prof2 = String(row2[0]).trim();
+  var codcli2 = String(row2[1]).trim();
+  var mesNome2 = String(row2[2] || '').trim();
+  var mesRef = MES_NUM[mesNome2];
+  if (!mesRef || mesRef < 4 || mesRef > 7) continue;
+
+  var key = codcli2 + '_' + prof2 + '_' + mesRef;
+  if (seenClients[key]) continue;
+  seenClients[key] = 1;
+
+  var purchases = purchaseIndex[codcli2] || [];
+  // Use earliest recovery month if client appears multiple times
+  var mesRefFinal = mesRef;
+  if (clientesDetalhes[codcli2] && clientesDetalhes[codcli2].mesRefNum < mesRefFinal) {
+    mesRefFinal = clientesDetalhes[codcli2].mesRefNum;
+  }
+  var afterRecovery = purchases.filter(function (p) { return p.mes >= mesRefFinal; });
+  var uniqueDays = {};
+  afterRecovery.forEach(function (p) {
+    var dk = p.mes + '_' + p.dia;
+    if (!uniqueDays[dk]) uniqueDays[dk] = { data: p.data, valor: 0, itens: 0 };
+    uniqueDays[dk].valor += p.valor;
+    uniqueDays[dk].itens++;
+  });
+  var uniqueDayCount = Object.keys(uniqueDays).length;
+
+  clientesDetalhes[codcli2] = {
+    comprasAposRecuperacao: uniqueDayCount,
+    recuperadoEm: MES_NOMES[mesRefFinal],
+    mesRefNum: mesRefFinal,
+    detalhes: afterRecovery.map(function (p) {
+      return { data: p.data, mes: MES_NOMES[p.mes], produto: p.produto, qtde: p.qtde, punit: p.punit, valor: p.valor, numnota: p.numnota, fornecedor: p.fornecedor };
+    }),
+    diasCompra: Object.keys(uniqueDays).map(function (dk) { return uniqueDays[dk]; }).sort(function (a,b) { return a.data > b.data ? 1 : -1; })
+  };
+}
 
 console.log('  Linhas com faturamento > 0: ' + encontrados);
 console.log('  Linhas com faturamento = 0: ' + semFat);
@@ -342,7 +405,8 @@ var output = {
     painelJulho: buildPainelMonth('Julho'),
     profissionais: {},
     faturamentoTotal: faturamentoTotal,
-    faturamentoClientes: faturamentoClientesArr
+    faturamentoClientes: faturamentoClientesArr,
+    clientesDetalhes: clientesDetalhes
   },
   fileName: 'base_8026_2026.xlsx',
   updatedAt: new Date().toISOString()

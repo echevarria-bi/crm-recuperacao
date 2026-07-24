@@ -180,6 +180,22 @@ MONTHS.forEach(function (mk) {
 
 console.log('Linhas na aba: ' + rawFat.length);
 
+// Pre-deduplicate: for same client+prof, keep only earliest recovery month
+var earliestRecovery = {}; // key: codcli_prof → earliest mesNum
+for (var fi = 1; fi < rawFat.length; fi++) {
+  var row = rawFat[fi];
+  if (!row || (!row[0] && row[0] !== 0)) continue;
+  var prof = String(row[0]).trim();
+  var codcli = String(row[1]).trim();
+  var mesNome = String(row[2] || '').trim();
+  var mesNum = MES_NUM[mesNome];
+  if (!mesNum || mesNum < 4 || mesNum > 7) continue;
+  var key = codcli + '_' + prof;
+  if (!earliestRecovery[key] || mesNum < earliestRecovery[key]) {
+    earliestRecovery[key] = mesNum;
+  }
+}
+
 // Build faturamentoClientes from the sheet (nova estrutura: A=TELEVENDEDORA, B=CODCLI, C=MES)
 // 1 linha por cliente por mes com faturamento real daquele mes
 var faturamentoClientesArr = [];
@@ -194,6 +210,10 @@ for (var fi = 1; fi < rawFat.length; fi++) {
   var mesNum = MES_NUM[mesNome];
 
   if (!mesNum || mesNum < 4 || mesNum > 7) continue;
+
+  // Skip if this is not the earliest recovery for this client+prof
+  var key = codcli + '_' + prof;
+  if (earliestRecovery[key] !== mesNum) continue;
 
   // 1 entrada por mes do mesRef ate Julho
   var nomeCliente = '';

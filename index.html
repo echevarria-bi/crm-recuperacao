@@ -1171,9 +1171,11 @@
         else if (c.diasSemCompra >= 40) flagIcon = ' <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#eab308;vertical-align:middle"></span>';
         var diasColor = c.diasSemCompra >= 90 ? '#ef4444' : (c.diasSemCompra >= 45 ? '#ef4444' : (c.diasSemCompra >= 40 ? '#eab308' : '#9ca3af'));
         var diasStatus = c.diasSemCompra >= 90 ? 'critico' : (c.diasSemCompra >= 45 ? 'risco' : (c.diasSemCompra >= 40 ? 'atencao' : 'ok'));
-        html += '<tr data-id="' + c.id + '" data-nome="' + (c.nome || '').toLowerCase() + '" data-prof="' + c.prof + '" data-mes="' + c.recuperadoEm + '" data-dias="' + diasStatus + '" data-cli="' + c.id + '" class="cli-row" style="' + clickStyle + '">' + '<td class="col-ranking">' + (i + 1) + '</td><td style="color:#6b7280;font-size:12px">' + c.id + '</td><td style="font-weight:600;color:#fcd34d">' + (c.nome || '') + '</td><td class="text-right" style="font-size:12px;color:#f59e0b">' + (c.compras > 0 ? c.compras : '<span style="color:#4a4d6e">0</span>') + '</td><td style="font-size:12px;color:#9ca3af">' + c.prof + '</td><td style="text-align:center"><span style="font-size:12px;padding:2px 8px;border-radius:4px;background:' + mesCol + '22;color:' + mesCol + ';font-weight:600">' + (c.recuperadoEm || '-') + '</span></td><td class="text-right" style="font-weight:600;color:#34d399">' + fmtCurr(c.valor) + '</td><td class="text-right" style="font-size:12px;color:' + diasColor + ';font-weight:600">' + (c.diasSemCompra >= 0 ? c.diasSemCompra : '-') + flagIcon + '</td><td style="padding:6px 8px"><div style="height:10px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:' + Math.min(barW, 100) + '%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
+        html += '<tr data-id="' + c.id + '" data-nome="' + (c.nome || '').toLowerCase() + '" data-prof="' + c.prof + '" data-mes="' + c.recuperadoEm + '" data-dias="' + diasStatus + '" data-compras="' + c.compras + '" data-cli="' + c.id + '" class="cli-row" style="' + clickStyle + '">' + '<td class="col-ranking">' + (i + 1) + '</td><td style="color:#6b7280;font-size:12px">' + c.id + '</td><td style="font-weight:600;color:#fcd34d">' + (c.nome || '') + '</td><td class="text-right" style="font-size:12px;color:#f59e0b">' + (c.compras > 0 ? c.compras : '<span style="color:#4a4d6e">0</span>') + '</td><td style="font-size:12px;color:#9ca3af">' + c.prof + '</td><td style="text-align:center"><span style="font-size:12px;padding:2px 8px;border-radius:4px;background:' + mesCol + '22;color:' + mesCol + ';font-weight:600">' + (c.recuperadoEm || '-') + '</span></td><td class="text-right" style="font-weight:600;color:#34d399">' + fmtCurr(c.valor) + '</td><td class="text-right" style="font-size:12px;color:' + diasColor + ';font-weight:600">' + (c.diasSemCompra >= 0 ? c.diasSemCompra : '-') + flagIcon + '</td><td style="padding:6px 8px"><div style="height:10px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:' + Math.min(barW, 100) + '%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
       }
-      html += '</tbody><tfoot class="tot-row"><tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total Geral</td><td class="text-right" style="color:#f59e0b;font-weight:700">' + lista.length + '</td><td style="color:#4a4d6e">-</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(grandTotal) + '</td><td style="color:#4a4d6e">-</td><td></td></tr></tfoot></table></div></div>';
+      var totalCompras = lista.reduce(function(s, c) { return s + c.compras; }, 0);
+      html += '</tbody><tfoot class="tot-row"><tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total Geral</td><td class="text-right" style="color:#f59e0b;font-weight:700">' + totalCompras + '</td><td style="color:#4a4d6e">-</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(grandTotal) + '</td><td style="color:#4a4d6e">-</td><td></td></tr></tfoot></table>';
+      html += '<div style="margin-top:8px;font-size:12px;color:#6b7280">' + lista.length + ' clientes listados acima</div></div></div>';
 
       document.getElementById('dashContent').innerHTML = html;
 
@@ -1188,7 +1190,7 @@
           var mesQ = mesF ? mesF.value : '';
           var diasQ = diasF ? diasF.value : '';
           var rows = document.querySelectorAll('#tbodyClientes tr');
-          var total = 0, count = 0;
+          var total = 0, count = 0, totalC = 0;
           var hasFilter = idQ || profQ || mesQ || diasQ;
           for (var ri = 0; ri < rows.length; ri++) {
             var r = rows[ri];
@@ -1200,14 +1202,17 @@
             r.style.display = show ? '' : 'none';
             if (show) {
               count++;
+              totalC += parseInt(r.getAttribute('data-compras')) || 0;
               var valStr = r.cells[6] ? r.cells[6].textContent.replace(/[R$\s.]/g, '').replace(',', '.') : '0';
               total += parseFloat(valStr) || 0;
             }
           }
           var tfoot = document.querySelector('#tbodyClientes + tfoot');
           if (tfoot) {
-            tfoot.innerHTML = '<tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total' + (hasFilter ? ' (filtrado)' : ' Geral') + '</td><td class="text-right" style="color:#f59e0b;font-weight:700">' + count + '</td><td style="color:#4a4d6e">-</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(total) + '</td><td style="color:#4a4d6e">-</td><td></td></tr>';
+            tfoot.innerHTML = '<tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total' + (hasFilter ? ' (filtrado)' : ' Geral') + '</td><td class="text-right" style="color:#f59e0b;font-weight:700">' + totalC + '</td><td style="color:#4a4d6e">-</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(total) + '</td><td style="color:#4a4d6e">-</td><td></td></tr>';
           }
+          var sub = document.querySelector('#tbodyClientes').parentElement.nextElementSibling;
+          if (sub) sub.textContent = count + ' clientes listados acima';
         }
         if (idF) { idF.addEventListener('input', applyFilters); idF.focus(); }
         if (profF) profF.addEventListener('change', applyFilters);

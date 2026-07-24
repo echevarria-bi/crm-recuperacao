@@ -237,7 +237,7 @@ for (var p in profFat) {
 }
 for (var m in totalFatPorMes) totalFatPorMes[m] = Math.round(totalFatPorMes[m] * 100) / 100;
 
-// Indicadores baseados na aba FATURAMENTO RECUPERACAO
+// Indicadores baseados na aba FATURAMENTO RECUPERACAO + Painel Geral
 var indicadores = [
   { label: 'Faturamento Total' },
   { label: 'Positivação (Clientes Únicos)' },
@@ -252,13 +252,14 @@ MONTHS.forEach(function (mk, mi) {
   var mNum = monthNums[mi];
   var tf = totalFatPorMes[mNum] || 0;
   var tc = totalCliPorMes[mNum] || 0;
+  var pr = metaRealPorMes[mk] || { meta: 0, realizado: 0 };
   indicadores[0][mk] = tf;
   indicadores[1][mk] = tc;
   indicadores[2][mk] = tc > 0 ? Math.round(tf / tc * 100) / 100 : 0;
-  indicadores[3][mk] = tc;
-  indicadores[4][mk] = tc;
-  indicadores[5][mk] = tc;
-  indicadores[6][mk] = tc;
+  indicadores[3][mk] = pr.realizado;
+  indicadores[4][mk] = pr.meta;
+  indicadores[5][mk] = pr.meta;
+  indicadores[6][mk] = pr.realizado;
   indicadores[7][mk] = tf;
 });
 
@@ -279,18 +280,18 @@ Object.keys(nomesUsados).sort().forEach(function (prof) {
   valorPorProf.push(entry);
 });
 
-// Recuperados por profissional
-var recuperadosPorProf = [];
-Object.keys(nomesUsados).sort().forEach(function (prof) {
-  var entry = { profissional: prof };
-  MONTHS.forEach(function (mk, mi) {
-    var mNum = monthNums[mi];
-    var cli = (profCli[prof] && profCli[prof][mNum]) || 0;
-    entry[mk + ' META'] = cli;
-    entry[mk + ' REAL'] = cli;
+// Recuperados por profissional — usar dados reais do Painel Geral (matriz)
+var recuperadosPorProf = {};
+MONTHS.forEach(function (mk) {
+  var mat = painelMatrizes[mk] || { profissionais: [] };
+  mat.profissionais.forEach(function (mp) {
+    var baseName = mp.profissional.split(' - ')[0].trim();
+    if (!recuperadosPorProf[baseName]) recuperadosPorProf[baseName] = { profissional: baseName };
+    recuperadosPorProf[baseName][mk + ' META'] = mp.meta;
+    recuperadosPorProf[baseName][mk + ' REAL'] = mp.realizado;
   });
-  recuperadosPorProf.push(entry);
 });
+var recuperadosPorProfArr = Object.keys(recuperadosPorProf).sort().map(function (k) { return recuperadosPorProf[k]; });
 
 // Build painel por mes usando dados da matriz META RECUPERACAO + faturamento da base_8026
 function buildPainelMonth(mesNome) {
@@ -334,7 +335,7 @@ var faturamentoTotal = Math.round(faturamentoClientesArr.reduce(function (s, c) 
 
 var output = {
   data: {
-    evolucaoMeses: { indicadores: indicadores, valorPorProf: valorPorProf, recuperadosPorProf: recuperadosPorProf },
+    evolucaoMeses: { indicadores: indicadores, valorPorProf: valorPorProf, recuperadosPorProf: recuperadosPorProfArr },
     painelGeral: buildPainelMonth('Junho'),
     painelAbril: buildPainelMonth('Abril'),
     painelMaio: buildPainelMonth('Maio'),

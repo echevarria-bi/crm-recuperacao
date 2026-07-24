@@ -26,30 +26,30 @@
         {
           "label": "Contatos Realizados",
           "Abril": 73,
-          "Maio": 127,
-          "Junho": 219,
-          "Julho": 265
+          "Maio": 54,
+          "Junho": 92,
+          "Julho": 34
         },
         {
           "label": "Meta de Contatos",
-          "Abril": 73,
-          "Maio": 127,
-          "Junho": 219,
-          "Julho": 265
+          "Abril": 214,
+          "Maio": 162,
+          "Junho": 159,
+          "Julho": 161
         },
         {
           "label": "Meta de Clientes Recuperados",
-          "Abril": 73,
-          "Maio": 127,
-          "Junho": 219,
-          "Julho": 265
+          "Abril": 214,
+          "Maio": 162,
+          "Junho": 159,
+          "Julho": 161
         },
         {
           "label": "Realizado de Clientes Recuperados",
           "Abril": 73,
-          "Maio": 127,
-          "Junho": 219,
-          "Julho": 265
+          "Maio": 54,
+          "Junho": 92,
+          "Julho": 34
         },
         {
           "label": "Valor Recuperado",
@@ -116,79 +116,58 @@
       "recuperadosPorProf": [
         {
           "profissional": "Anna",
-          "Abril META": 20,
-          "Abril REAL": 20,
-          "Maio META": 20,
-          "Maio REAL": 20,
-          "Junho META": 20,
-          "Junho REAL": 20,
-          "Julho META": 20,
-          "Julho REAL": 20
+          "Abril META": 72,
+          "Abril REAL": 20
         },
         {
           "profissional": "Ariane",
-          "Abril META": 11,
+          "Abril META": 39,
           "Abril REAL": 11,
-          "Maio META": 21,
-          "Maio REAL": 21,
-          "Junho META": 37,
-          "Junho REAL": 37,
+          "Maio META": 30,
+          "Maio REAL": 10,
+          "Junho META": 31,
+          "Junho REAL": 16,
           "Julho META": 42,
-          "Julho REAL": 42
+          "Julho REAL": 5
         },
         {
           "profissional": "Camila",
-          "Abril META": 3,
+          "Abril META": 44,
           "Abril REAL": 3,
-          "Maio META": 21,
-          "Maio REAL": 21,
-          "Junho META": 43,
-          "Junho REAL": 43,
-          "Julho META": 60,
-          "Julho REAL": 60
-        },
-        {
-          "profissional": "Cristielen",
-          "Abril META": 0,
-          "Abril REAL": 0,
-          "Maio META": 3,
-          "Maio REAL": 3,
-          "Junho META": 10,
-          "Junho REAL": 10,
-          "Julho META": 16,
+          "Maio META": 50,
+          "Maio REAL": 18,
+          "Junho META": 48,
+          "Junho REAL": 22,
+          "Julho META": 43,
           "Julho REAL": 16
         },
         {
-          "profissional": "Natalia",
-          "Abril META": 17,
-          "Abril REAL": 17,
+          "profissional": "Cristielen",
           "Maio META": 26,
-          "Maio REAL": 26,
-          "Junho META": 53,
-          "Junho REAL": 53,
-          "Julho META": 53,
-          "Julho REAL": 53
+          "Maio REAL": 3,
+          "Junho META": 25,
+          "Junho REAL": 7,
+          "Julho META": 31,
+          "Julho REAL": 3
+        },
+        {
+          "profissional": "Natália",
+          "Abril META": 37,
+          "Abril REAL": 17,
+          "Maio META": 33,
+          "Maio REAL": 9,
+          "Junho META": 30,
+          "Junho REAL": 27
         },
         {
           "profissional": "Tatiana",
           "Abril META": 22,
           "Abril REAL": 22,
-          "Maio META": 36,
-          "Maio REAL": 36,
-          "Junho META": 56,
-          "Junho REAL": 56,
-          "Julho META": 73,
-          "Julho REAL": 73
-        },
-        {
-          "profissional": "Tatiana Litoral",
-          "Abril META": 0,
-          "Abril REAL": 0,
-          "Maio META": 0,
-          "Maio REAL": 0,
-          "Junho META": 0,
-          "Junho REAL": 0,
-          "Julho META": 1,
+          "Maio META": 23,
+          "Maio REAL": 14,
+          "Junho META": 25,
+          "Junho REAL": 20,
+          "Julho META": 23,
           "Julho REAL": 1
         }
       ]
@@ -7027,5 +7006,5 @@
     ]
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-24T17:35:39.216Z"
+  "updatedAt": "2026-07-24T17:46:48.537Z"
 }

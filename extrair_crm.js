@@ -81,9 +81,9 @@ for (var ri = 1; ri < raw.length; ri++) {
 }
 
 // ============================================================
-// 2. Ler Painel CRM - Junho.xlsx → aba FATURAMENTO RECUPERACAO
+// 2. Ler Painel CRM - Junho.xlsx → aba FATURAMENTO RECUPERACAO + Painel Geral
 // ============================================================
-console.log('[2/4] Lendo FATURAMENTO RECUPERACAO do Painel CRM...');
+console.log('[2/4] Lendo FATURAMENTO RECUPERACAO e Painel Geral...');
 var wbPainel = XLSX.readFile(PAINEL);
 var wsFat = wbPainel.Sheets['FATURAMENTO RECUPERACAO'];
 var rawFat = XLSX.utils.sheet_to_json(wsFat, { header: 1, defval: '' });
@@ -91,6 +91,26 @@ console.log('Linhas na aba: ' + rawFat.length);
 
 var MONTHS = ['Abril', 'Maio', 'Junho', 'Julho'];
 var monthNums = [4, 5, 6, 7];
+
+// Ler Meta/Realizado de cada aba Painel Geral (B9=Meta, C9=Realizado)
+var painelSheets = {
+  'Abril': 'Painel Geral - Abril',
+  'Maio': 'Painel Geral - Maio ',
+  'Junho': 'Painel Geral - Junho',
+  'Julho': 'Painel Geral - Julho'
+};
+var metaRealPorMes = {};
+MONTHS.forEach(function (mk) {
+  var sn = painelSheets[mk];
+  var ws = wbPainel.Sheets[sn];
+  if (!ws) { console.log('  Aba "' + sn + '" não encontrada'); metaRealPorMes[mk] = { meta: 0, realizado: 0 }; return; }
+  var data = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+  var row9 = data[8] || [];
+  var meta = parseInt(row9[1]) || 0;
+  var realizado = parseInt(row9[2]) || 0;
+  metaRealPorMes[mk] = { meta: meta, realizado: realizado };
+  console.log('  ' + mk + ': Meta=' + meta + ' Realizado=' + realizado);
+});
 
 // Build faturamentoClientes from the sheet (nova estrutura: A=TELEVENDEDORA, B=CODCLI, C=MES)
 // 1 linha por cliente por mes com faturamento real daquele mes
@@ -223,19 +243,22 @@ Object.keys(nomesUsados).sort().forEach(function (prof) {
   recuperadosPorProf.push(entry);
 });
 
-// Build painel por mes (acumulado a partir do mes de referencia)
-function buildPainelMonth(mesRef) {
+// Build painel por mes usando Meta/Realizado das abas Painel Geral + faturamento da aba FATURAMENTO RECUPERACAO
+function buildPainelMonth(mesNome) {
+  var mNum = MES_NUM[mesNome];
+  var pr = metaRealPorMes[mesNome] || { meta: 0, realizado: 0 };
   var profs = [];
-  var totalMeta = 0, totalReal = 0, totalFat = 0;
+  var totalFat = 0;
   Object.keys(nomesUsados).sort().forEach(function (prof) {
-    var fat = (profFat[prof] && profFat[prof][mesRef]) || 0;
-    var cli = (profCli[prof] && profCli[prof][mesRef]) || 0;
+    var fat = (profFat[prof] && profFat[prof][mNum]) || 0;
     fat = Math.round(fat * 100) / 100;
+    var cli = (profCli[prof] && profCli[prof][mNum]) || 0;
     profs.push({ profissional: prof, meta: cli, realizado: cli, pct: cli > 0 ? 100 : 0, dias: [], faturamento: fat });
-    totalMeta += cli; totalReal += cli; totalFat += fat;
+    totalFat += fat;
   });
+  var pct = pr.meta > 0 ? Math.round(pr.realizado / pr.meta * 1000) / 10 : 0;
   return {
-    recuperacao: { profissionais: profs, total: { profissional: 'Total', meta: totalMeta, realizado: totalReal, pct: totalMeta > 0 ? 100 : 0, dias: [] }, faturamentoGeral: Math.round(totalFat * 100) / 100, dayNums: [] },
+    recuperacao: { profissionais: profs, total: { profissional: 'Total', meta: pr.meta, realizado: pr.realizado, pct: pct, dias: [] }, faturamentoGeral: Math.round(totalFat * 100) / 100, dayNums: [] },
     metaContatos: { profissionais: [], total: null },
     motivos: [], inatividade: [], motivosDiarios: [], rcaExterno: null
   };
@@ -246,10 +269,10 @@ var faturamentoTotal = Math.round(faturamentoClientesArr.reduce(function (s, c) 
 var output = {
   data: {
     evolucaoMeses: { indicadores: indicadores, valorPorProf: valorPorProf, recuperadosPorProf: recuperadosPorProf },
-    painelGeral: buildPainelMonth(6),
-    painelAbril: buildPainelMonth(4),
-    painelMaio: buildPainelMonth(5),
-    painelJulho: buildPainelMonth(7),
+    painelGeral: buildPainelMonth('Junho'),
+    painelAbril: buildPainelMonth('Abril'),
+    painelMaio: buildPainelMonth('Maio'),
+    painelJulho: buildPainelMonth('Julho'),
     profissionais: {},
     faturamentoTotal: faturamentoTotal,
     faturamentoClientes: faturamentoClientesArr

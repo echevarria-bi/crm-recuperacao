@@ -7,56 +7,56 @@
           "Abril": 49565.53,
           "Maio": 66319.38,
           "Junho": 118021.85,
-          "Julho": 117350.94
+          "Julho": 124271.99
         },
         {
           "label": "Positivação (Clientes Únicos)",
           "Abril": 73,
           "Maio": 127,
           "Junho": 219,
-          "Julho": 264
+          "Julho": 265
         },
         {
           "label": "Ticket Médio",
           "Abril": 678.98,
           "Maio": 522.2,
           "Junho": 538.91,
-          "Julho": 444.51
+          "Julho": 468.95
         },
         {
           "label": "Contatos Realizados",
           "Abril": 73,
           "Maio": 127,
           "Junho": 219,
-          "Julho": 264
+          "Julho": 265
         },
         {
           "label": "Meta de Contatos",
           "Abril": 73,
           "Maio": 127,
           "Junho": 219,
-          "Julho": 264
+          "Julho": 265
         },
         {
           "label": "Meta de Clientes Recuperados",
           "Abril": 73,
           "Maio": 127,
           "Junho": 219,
-          "Julho": 264
+          "Julho": 265
         },
         {
           "label": "Realizado de Clientes Recuperados",
           "Abril": 73,
           "Maio": 127,
           "Junho": 219,
-          "Julho": 264
+          "Julho": 265
         },
         {
           "label": "Valor Recuperado",
           "Abril": 49565.53,
           "Maio": 66319.38,
           "Junho": 118021.85,
-          "Julho": 117350.94
+          "Julho": 124271.99
         }
       ],
       "valorPorProf": [
@@ -73,43 +73,44 @@
           "Abril": 6711.68,
           "Maio": 11453.31,
           "Junho": 20326.16,
-          "Julho": 19805.66,
-          "Total": 58296.81
+          "Julho": 20138.72,
+          "Total": 58629.87
         },
         {
           "profissional": "Camila",
           "Abril": 606.18,
           "Maio": 11561.6,
           "Junho": 14245.95,
-          "Julho": 17012.32,
-          "Total": 43426.05
+          "Julho": 18551.36,
+          "Total": 44965.09
         },
         {
           "profissional": "Cristielen",
           "Maio": 1370.55,
           "Junho": 2805.31,
-          "Julho": 4119.59,
-          "Total": 8295.45
+          "Julho": 4493.84,
+          "Total": 8669.7
         },
         {
           "profissional": "Natalia",
           "Abril": 20892.43,
           "Maio": 15933.78,
           "Junho": 40283.32,
-          "Julho": 44755.03,
-          "Total": 121864.56
+          "Julho": 45139.81,
+          "Total": 122249.34
         },
         {
           "profissional": "Tatiana",
           "Abril": 15507.7,
           "Maio": 22965.75,
           "Junho": 39265.47,
-          "Julho": 30470.09,
-          "Total": 108209.01
+          "Julho": 34591.98,
+          "Total": 112330.9
         },
         {
           "profissional": "Tatiana Litoral",
-          "Total": 0
+          "Julho": 168.03,
+          "Total": 168.03
         }
       ],
       "recuperadosPorProf": [
@@ -154,8 +155,8 @@
           "Maio REAL": 3,
           "Junho META": 10,
           "Junho REAL": 10,
-          "Julho META": 15,
-          "Julho REAL": 15
+          "Julho META": 16,
+          "Julho REAL": 16
         },
         {
           "profissional": "Natalia",
@@ -254,9 +255,9 @@
         ],
         "total": {
           "profissional": "Total",
-          "meta": 219,
-          "realizado": 219,
-          "pct": 100,
+          "meta": 159,
+          "realizado": 92,
+          "pct": 57.9,
           "dias": []
         },
         "faturamentoGeral": 118021.85,
@@ -333,9 +334,9 @@
         ],
         "total": {
           "profissional": "Total",
-          "meta": 73,
+          "meta": 214,
           "realizado": 73,
-          "pct": 100,
+          "pct": 34.1,
           "dias": []
         },
         "faturamentoGeral": 49565.53,
@@ -412,9 +413,9 @@
         ],
         "total": {
           "profissional": "Total",
-          "meta": 127,
-          "realizado": 127,
-          "pct": 100,
+          "meta": 162,
+          "realizado": 54,
+          "pct": 33.3,
           "dias": []
         },
         "faturamentoGeral": 66319.38,
@@ -446,7 +447,7 @@
             "realizado": 42,
             "pct": 100,
             "dias": [],
-            "faturamento": 19805.66
+            "faturamento": 20138.72
           },
           {
             "profissional": "Camila",
@@ -454,15 +455,15 @@
             "realizado": 60,
             "pct": 100,
             "dias": [],
-            "faturamento": 17012.32
+            "faturamento": 18551.36
           },
           {
             "profissional": "Cristielen",
-            "meta": 15,
-            "realizado": 15,
+            "meta": 16,
+            "realizado": 16,
             "pct": 100,
             "dias": [],
-            "faturamento": 4119.59
+            "faturamento": 4493.84
           },
           {
             "profissional": "Natalia",
@@ -470,7 +471,7 @@
             "realizado": 53,
             "pct": 100,
             "dias": [],
-            "faturamento": 44755.03
+            "faturamento": 45139.81
           },
           {
             "profissional": "Tatiana",
@@ -478,7 +479,7 @@
             "realizado": 73,
             "pct": 100,
             "dias": [],
-            "faturamento": 30470.09
+            "faturamento": 34591.98
           },
           {
             "profissional": "Tatiana Litoral",
@@ -486,17 +487,17 @@
             "realizado": 1,
             "pct": 100,
             "dias": [],
-            "faturamento": 0
+            "faturamento": 168.03
           }
         ],
         "total": {
           "profissional": "Total",
-          "meta": 264,
-          "realizado": 264,
-          "pct": 100,
+          "meta": 161,
+          "realizado": 34,
+          "pct": 21.1,
           "dias": []
         },
-        "faturamentoGeral": 117350.94,
+        "faturamentoGeral": 124271.99,
         "dayNums": []
       },
       "metaContatos": {
@@ -509,7 +510,7 @@
       "rcaExterno": null
     },
     "profissionais": {},
-    "faturamentoTotal": 351257.7,
+    "faturamentoTotal": 358178.75,
     "faturamentoClientes": [
       {
         "cliente": 44093,
@@ -820,6 +821,13 @@
         "prof": "Tatiana"
       },
       {
+        "cliente": 27813,
+        "nome": "LUCIANE TERESINHA BORGES 83405240034",
+        "valor": 1480.5,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
         "cliente": 32981,
         "nome": "DAIANE FESTINALLI & CIA LTDA",
         "valor": 1461.71,
@@ -946,6 +954,13 @@
         "prof": "Natalia"
       },
       {
+        "cliente": 24254,
+        "nome": "SUL BEER BAR LTDA",
+        "valor": 1094.92,
+        "mes": "Julho",
+        "prof": "Ariane"
+      },
+      {
         "cliente": 41105,
         "nome": "12.683.141 CATLEN CHAIANA DA SILVA TEIXE",
         "valor": 1058,
@@ -993,6 +1008,13 @@
         "valor": 979.6,
         "mes": "Junho",
         "prof": "Tatiana"
+      },
+      {
+        "cliente": 30929,
+        "nome": "NICK SOUZA FARIAS",
+        "valor": 961.4,
+        "mes": "Julho",
+        "prof": "Camila"
       },
       {
         "cliente": 41808,
@@ -1205,11 +1227,11 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 24254,
-        "nome": "SUL BEER BAR LTDA",
-        "valor": 761.86,
+        "cliente": 40979,
+        "nome": "BENDITO SABOR LTDA",
+        "valor": 753.36,
         "mes": "Julho",
-        "prof": "Ariane"
+        "prof": "Tatiana"
       },
       {
         "cliente": 44255,
@@ -1271,6 +1293,13 @@
         "cliente": 40085,
         "nome": "59.185.770 ISRAEL ZIMMERMANN",
         "valor": 716.41,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 31798,
+        "nome": "49.146.914 GIULLIANO BONNEMBERG CAMARGO DA SILVA",
+        "valor": 716,
         "mes": "Julho",
         "prof": "Tatiana"
       },
@@ -1427,6 +1456,13 @@
         "valor": 649,
         "mes": "Abril",
         "prof": "Tatiana"
+      },
+      {
+        "cliente": 38428,
+        "nome": "LUCAS SOARES HOMEM",
+        "valor": 640.35,
+        "mes": "Julho",
+        "prof": "Camila"
       },
       {
         "cliente": 30889,
@@ -1632,6 +1668,13 @@
         "prof": "Natalia"
       },
       {
+        "cliente": 44665,
+        "nome": "SANDRA MARIA GEHLEN",
+        "valor": 520.93,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
         "cliente": 21387,
         "nome": "JULIO CESAR VIANA PRATES 43984363087",
         "valor": 515.27,
@@ -1758,6 +1801,13 @@
         "prof": "Anna"
       },
       {
+        "cliente": 39205,
+        "nome": "MIATTO CAFE LTDA",
+        "valor": 479.85,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
         "cliente": 38812,
         "nome": "DANIEL JOSE OLIVEIRA DE OLIVEIRA",
         "valor": 477.9,
@@ -1835,18 +1885,18 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 38428,
-        "nome": "LUCAS SOARES HOMEM",
-        "valor": 458.8,
-        "mes": "Julho",
-        "prof": "Camila"
-      },
-      {
         "cliente": 35203,
         "nome": "INDUSTRIA DE ALIMENTOS DU VALLE LTDA",
         "valor": 458.59,
         "mes": "Maio",
         "prof": "Natalia"
+      },
+      {
+        "cliente": 41737,
+        "nome": "MÔNICA DIAS DA SILVA",
+        "valor": 456.06,
+        "mes": "Julho",
+        "prof": "Camila"
       },
       {
         "cliente": 41377,
@@ -2092,6 +2142,13 @@
         "valor": 390.97,
         "mes": "Julho",
         "prof": "Anna"
+      },
+      {
+        "cliente": 38149,
+        "nome": "CAROLAINE MACHADO",
+        "valor": 390.29,
+        "mes": "Julho",
+        "prof": "Cristielen"
       },
       {
         "cliente": 25853,
@@ -2752,13 +2809,6 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 39205,
-        "nome": "MIATTO CAFE LTDA",
-        "valor": 242.55,
-        "mes": "Julho",
-        "prof": "Tatiana"
-      },
-      {
         "cliente": 44665,
         "nome": "SANDRA MARIA GEHLEN",
         "valor": 241.87,
@@ -2850,6 +2900,13 @@
         "prof": "Natalia"
       },
       {
+        "cliente": 41058,
+        "nome": "JOÃO BATISTA PEREIRA DA SILVA",
+        "valor": 225.9,
+        "mes": "Julho",
+        "prof": "Natalia"
+      },
+      {
         "cliente": 2738,
         "nome": "BAR E LANCHERIA REALEZA EIRELI",
         "valor": 225.71,
@@ -2862,13 +2919,6 @@
         "valor": 224.15,
         "mes": "Julho",
         "prof": "Cristielen"
-      },
-      {
-        "cliente": 41737,
-        "nome": "MÔNICA DIAS DA SILVA",
-        "valor": 223.72,
-        "mes": "Julho",
-        "prof": "Camila"
       },
       {
         "cliente": 34219,
@@ -2892,11 +2942,25 @@
         "prof": "Anna"
       },
       {
+        "cliente": 15850,
+        "nome": "PMA COMERCIO DE BEBIDAS LTDA",
+        "valor": 222.35,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
         "cliente": 42652,
         "nome": "60.267.140 KESIA TELLES RODRIGUES CHAVES",
         "valor": 221.73,
         "mes": "Junho",
         "prof": "Ariane"
+      },
+      {
+        "cliente": 43612,
+        "nome": "CRIS NUNES",
+        "valor": 220.9,
+        "mes": "Julho",
+        "prof": "Tatiana"
       },
       {
         "cliente": 41862,
@@ -2946,13 +3010,6 @@
         "valor": 210.42,
         "mes": "Junho",
         "prof": "Camila"
-      },
-      {
-        "cliente": 44665,
-        "nome": "SANDRA MARIA GEHLEN",
-        "valor": 210.11,
-        "mes": "Julho",
-        "prof": "Tatiana"
       },
       {
         "cliente": 37875,
@@ -3214,6 +3271,20 @@
         "prof": "Ariane"
       },
       {
+        "cliente": 13483,
+        "nome": "JUCA LANCHES LTDA ME",
+        "valor": 177.8,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
+        "cliente": 13483,
+        "nome": "JUCA LANCHES LTDA ME",
+        "valor": 177.8,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
         "cliente": 36491,
         "nome": "SILVANA TOMAZ",
         "valor": 175.95,
@@ -3263,25 +3334,11 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 31798,
-        "nome": "49.146.914 GIULLIANO BONNEMBERG CAMARGO DA SILVA",
-        "valor": 174.94,
-        "mes": "Julho",
-        "prof": "Tatiana"
-      },
-      {
         "cliente": 41721,
         "nome": "KARINA DE SOUZA LIMA",
         "valor": 174.08,
         "mes": "Julho",
         "prof": "Camila"
-      },
-      {
-        "cliente": 38149,
-        "nome": "CAROLAINE MACHADO",
-        "valor": 172.64,
-        "mes": "Julho",
-        "prof": "Cristielen"
       },
       {
         "cliente": 43992,
@@ -3347,6 +3404,13 @@
         "prof": "Tatiana"
       },
       {
+        "cliente": 28561,
+        "nome": "ANA MARIA DA SILVA FARIAS",
+        "valor": 168.03,
+        "mes": "Julho",
+        "prof": "Tatiana Litoral"
+      },
+      {
         "cliente": 39094,
         "nome": "JAQUELINE DA SILVA",
         "valor": 167.79,
@@ -3393,6 +3457,13 @@
         "nome": "LUANA POGORZELSKI WEBER",
         "valor": 164.75,
         "mes": "Junho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 42764,
+        "nome": "ELAINE LANYS BAR",
+        "valor": 163.75,
+        "mes": "Julho",
         "prof": "Camila"
       },
       {
@@ -3445,6 +3516,13 @@
         "prof": "Ariane"
       },
       {
+        "cliente": 40237,
+        "nome": "50.531.220 DOUGLAS CARVALHO GARCIA DA SILVA",
+        "valor": 158.88,
+        "mes": "Julho",
+        "prof": "Natalia"
+      },
+      {
         "cliente": 44138,
         "nome": "57.274.207 BRUNA NASCIMENTO SILVA",
         "valor": 158.69,
@@ -3464,6 +3542,13 @@
         "valor": 156.91,
         "mes": "Maio",
         "prof": "Camila"
+      },
+      {
+        "cliente": 44124,
+        "nome": "CAFETERIA E RESTAURANTE VIVA SABOR LTDA",
+        "valor": 156.6,
+        "mes": "Julho",
+        "prof": "Cristielen"
       },
       {
         "cliente": 27148,
@@ -3596,13 +3681,6 @@
         "nome": "JUCA LANCHES LTDA ME",
         "valor": 0,
         "mes": "Maio",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 13483,
-        "nome": "JUCA LANCHES LTDA ME",
-        "valor": 0,
-        "mes": "Julho",
         "prof": "Tatiana"
       },
       {
@@ -4040,13 +4118,6 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 40237,
-        "nome": "50.531.220 DOUGLAS CARVALHO GARCIA DA SILVA",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Natalia"
-      },
-      {
         "cliente": 43855,
         "nome": "KAUE SILVA",
         "valor": 0,
@@ -4163,13 +4234,6 @@
         "nome": "JOÃO BATISTA PEREIRA DA SILVA",
         "valor": 0,
         "mes": "Junho",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 41058,
-        "nome": "JOÃO BATISTA PEREIRA DA SILVA",
-        "valor": 0,
-        "mes": "Julho",
         "prof": "Natalia"
       },
       {
@@ -4348,13 +4412,6 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 27813,
-        "nome": "LUCIANE TERESINHA BORGES 83405240034",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Tatiana"
-      },
-      {
         "cliente": 10095,
         "nome": "F T M COMERCIO DE BEBIDAS LTDA",
         "valor": 0,
@@ -4434,13 +4491,6 @@
       {
         "cliente": 40650,
         "nome": "MASTER PIZZA PIZZARIA LTDA",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 13483,
-        "nome": "JUCA LANCHES LTDA ME",
         "valor": 0,
         "mes": "Julho",
         "prof": "Tatiana"
@@ -4602,13 +4652,6 @@
       {
         "cliente": 38358,
         "nome": "PEDRO A VON MUHLEN & CIA LTDA",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Camila"
-      },
-      {
-        "cliente": 30929,
-        "nome": "NICK SOUZA FARIAS",
         "valor": 0,
         "mes": "Julho",
         "prof": "Camila"
@@ -5153,13 +5196,6 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 40979,
-        "nome": "BENDITO SABOR LTDA",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Tatiana"
-      },
-      {
         "cliente": 27076,
         "nome": "CARLOS EDUARDO SCHMITT",
         "valor": 0,
@@ -5192,13 +5228,6 @@
         "nome": "PMA COMERCIO DE BEBIDAS LTDA",
         "valor": 0,
         "mes": "Junho",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 15850,
-        "nome": "PMA COMERCIO DE BEBIDAS LTDA",
-        "valor": 0,
-        "mes": "Julho",
         "prof": "Tatiana"
       },
       {
@@ -5265,35 +5294,14 @@
         "prof": "Camila"
       },
       {
-        "cliente": 42764,
-        "nome": "",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Camila"
-      },
-      {
         "cliente": 44407,
         "nome": "",
         "valor": 0,
         "mes": "Julho",
         "prof": "Cristielen"
-      },
-      {
-        "cliente": 43612,
-        "nome": "",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 28561,
-        "nome": "",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Tatiana Litoral"
       }
     ]
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-23T20:04:32.523Z"
+  "updatedAt": "2026-07-24T13:53:11.058Z"
 }

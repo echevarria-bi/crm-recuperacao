@@ -1157,7 +1157,8 @@
       html += '<select id="filtroProf" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px;color:#e1e7ef;font-size:14px;outline:none"><option value="">Televendedora: Todas</option>';
       for (var pi = 0; pi < profList.length; pi++) html += '<option value="' + profList[pi] + '">' + profList[pi] + '</option>';
       html += '</select>';
-      html += '<select id="filtroMes" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px;color:#e1e7ef;font-size:14px;outline:none"><option value="">M\u00EAs Recupera\u00E7\u00E3o: Todos</option><option value="Abril">Abril</option><option value="Maio">Maio</option><option value="Junho">Junho</option><option value="Julho">Julho</option></select></div>';
+      html += '<select id="filtroMes" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px;color:#e1e7ef;font-size:14px;outline:none"><option value="">M\u00EAs Recupera\u00E7\u00E3o: Todos</option><option value="Abril">Abril</option><option value="Maio">Maio</option><option value="Junho">Junho</option><option value="Julho">Julho</option></select>';
+      html += '<select id="filtroDias" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px;color:#e1e7ef;font-size:14px;outline:none"><option value="">Status: Todos</option><option value="ok">OK (40+ dias)</option><option value="atencao">Aten\u00E7\u00E3o (40-44)</option><option value="risco">Risco (45-89)</option><option value="critico">Cr\u00EDtico (90+)</option></select></div>';
       html += '<div class="table-wrap"><table><thead><tr><th class="col-ranking">#</th><th style="color:#6b7280;font-size:12px">ID</th><th>Nome do Cliente</th><th class="text-right" style="color:#f59e0b;font-size:12px">Compras</th><th style="color:#6b7280;font-size:12px">Televendedora</th><th style="color:#6b7280;font-size:12px">Recuperado em</th><th class="text-right" style="color:#34d399">Valor Total</th><th class="text-right" style="color:#6b7280;font-size:12px">Dias s/ Compra</th><th style="min-width:70px;color:#6b7280;font-size:12px">Peso</th></tr></thead><tbody id="tbodyClientes">';
       for (var i = 0; i < lista.length; i++) {
         var c = lista[i];
@@ -1169,7 +1170,8 @@
         else if (c.diasSemCompra >= 45) flagIcon = ' <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ef4444;vertical-align:middle"></span>';
         else if (c.diasSemCompra >= 40) flagIcon = ' <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#eab308;vertical-align:middle"></span>';
         var diasColor = c.diasSemCompra >= 90 ? '#ef4444' : (c.diasSemCompra >= 45 ? '#ef4444' : (c.diasSemCompra >= 40 ? '#eab308' : '#9ca3af'));
-        html += '<tr data-id="' + c.id + '" data-nome="' + (c.nome || '').toLowerCase() + '" data-prof="' + c.prof + '" data-mes="' + c.recuperadoEm + '" data-cli="' + c.id + '" class="cli-row" style="' + clickStyle + '"><td class="col-ranking">' + (i + 1) + '</td><td style="color:#6b7280;font-size:12px">' + c.id + '</td><td style="font-weight:600;color:#fcd34d">' + (c.nome || '') + '</td><td class="text-right" style="font-size:12px;color:#f59e0b">' + (c.compras > 0 ? c.compras : '<span style="color:#4a4d6e">0</span>') + '</td><td style="font-size:12px;color:#9ca3af">' + c.prof + '</td><td style="text-align:center"><span style="font-size:12px;padding:2px 8px;border-radius:4px;background:' + mesCol + '22;color:' + mesCol + ';font-weight:600">' + (c.recuperadoEm || '-') + '</span></td><td class="text-right" style="font-weight:600;color:#34d399">' + fmtCurr(c.valor) + '</td><td class="text-right" style="font-size:12px;color:' + diasColor + ';font-weight:600">' + (c.diasSemCompra >= 0 ? c.diasSemCompra : '-') + flagIcon + '</td><td style="padding:6px 8px"><div style="height:10px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:' + Math.min(barW, 100) + '%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
+        var diasStatus = c.diasSemCompra >= 90 ? 'critico' : (c.diasSemCompra >= 45 ? 'risco' : (c.diasSemCompra >= 40 ? 'atencao' : 'ok'));
+        html += '<tr data-id="' + c.id + '" data-nome="' + (c.nome || '').toLowerCase() + '" data-prof="' + c.prof + '" data-mes="' + c.recuperadoEm + '" data-dias="' + diasStatus + '" data-cli="' + c.id + '" class="cli-row" style="' + clickStyle + '">' + '<td class="col-ranking">' + (i + 1) + '</td><td style="color:#6b7280;font-size:12px">' + c.id + '</td><td style="font-weight:600;color:#fcd34d">' + (c.nome || '') + '</td><td class="text-right" style="font-size:12px;color:#f59e0b">' + (c.compras > 0 ? c.compras : '<span style="color:#4a4d6e">0</span>') + '</td><td style="font-size:12px;color:#9ca3af">' + c.prof + '</td><td style="text-align:center"><span style="font-size:12px;padding:2px 8px;border-radius:4px;background:' + mesCol + '22;color:' + mesCol + ';font-weight:600">' + (c.recuperadoEm || '-') + '</span></td><td class="text-right" style="font-weight:600;color:#34d399">' + fmtCurr(c.valor) + '</td><td class="text-right" style="font-size:12px;color:' + diasColor + ';font-weight:600">' + (c.diasSemCompra >= 0 ? c.diasSemCompra : '-') + flagIcon + '</td><td style="padding:6px 8px"><div style="height:10px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:' + Math.min(barW, 100) + '%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
       }
       html += '</tbody><tfoot class="tot-row"><tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total Geral</td><td class="text-right" style="color:#f59e0b;font-weight:700">' + lista.length + '</td><td style="color:#4a4d6e">-</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(grandTotal) + '</td><td style="color:#4a4d6e">-</td><td></td></tr></tfoot></table></div></div>';
 
@@ -1179,18 +1181,22 @@
         var idF = document.getElementById('filtroId');
         var profF = document.getElementById('filtroProf');
         var mesF = document.getElementById('filtroMes');
+        var diasF = document.getElementById('filtroDias');
         function applyFilters() {
           var idQ = idF ? idF.value.toLowerCase() : '';
           var profQ = profF ? profF.value : '';
           var mesQ = mesF ? mesF.value : '';
+          var diasQ = diasF ? diasF.value : '';
           var rows = document.querySelectorAll('#tbodyClientes tr');
           var total = 0, count = 0;
+          var hasFilter = idQ || profQ || mesQ || diasQ;
           for (var ri = 0; ri < rows.length; ri++) {
             var r = rows[ri];
             var matchId = !idQ || String(r.getAttribute('data-id')).indexOf(idQ) >= 0;
             var matchProf = !profQ || r.getAttribute('data-prof') === profQ;
             var matchMes = !mesQ || r.getAttribute('data-mes') === mesQ;
-            var show = matchId && matchProf && matchMes;
+            var matchDias = !diasQ || r.getAttribute('data-dias') === diasQ;
+            var show = matchId && matchProf && matchMes && matchDias;
             r.style.display = show ? '' : 'none';
             if (show) {
               count++;
@@ -1200,12 +1206,13 @@
           }
           var tfoot = document.querySelector('#tbodyClientes + tfoot');
           if (tfoot) {
-            tfoot.innerHTML = '<tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total' + (idQ || profQ || mesQ ? ' (filtrado)' : ' Geral') + '</td><td class="text-right" style="color:#f59e0b;font-weight:700">' + count + '</td><td style="color:#4a4d6e">-</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(total) + '</td><td></td></tr>';
+            tfoot.innerHTML = '<tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total' + (hasFilter ? ' (filtrado)' : ' Geral') + '</td><td class="text-right" style="color:#f59e0b;font-weight:700">' + count + '</td><td style="color:#4a4d6e">-</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(total) + '</td><td style="color:#4a4d6e">-</td><td></td></tr>';
           }
         }
         if (idF) { idF.addEventListener('input', applyFilters); idF.focus(); }
         if (profF) profF.addEventListener('change', applyFilters);
         if (mesF) mesF.addEventListener('change', applyFilters);
+        if (diasF) diasF.addEventListener('change', applyFilters);
 
         var cliRows = document.querySelectorAll('.cli-row');
         for (var ci = 0; ci < cliRows.length; ci++) {

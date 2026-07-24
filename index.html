@@ -1165,7 +1165,7 @@
         var clickStyle = c.compras > 0 ? 'cursor:pointer' : '';
         var mesCol = c.recuperadoEm === 'Junho' ? '#34d399' : (c.recuperadoEm === 'Julho' ? '#f59e0b' : (c.recuperadoEm === 'Maio' ? '#60a5fa' : '#a78bfa'));
         var flagIcon = '';
-        if (c.diasSemCompra >= 90) flagIcon = ' &#x26A0;&#xFE0F;';
+        if (c.diasSemCompra >= 90) flagIcon = ' &#x1F6A8;';
         else if (c.diasSemCompra >= 45) flagIcon = ' <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ef4444;vertical-align:middle"></span>';
         else if (c.diasSemCompra >= 40) flagIcon = ' <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#eab308;vertical-align:middle"></span>';
         var diasColor = c.diasSemCompra >= 90 ? '#ef4444' : (c.diasSemCompra >= 45 ? '#ef4444' : (c.diasSemCompra >= 40 ? '#eab308' : '#9ca3af'));

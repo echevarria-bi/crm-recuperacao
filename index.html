@@ -89,7 +89,6 @@
       <input type="password" id="tokenInput" placeholder="Token GitHub" onkeydown="if(event.key==='Enter')setToken(this.value)" style="width:100px;background:#11131c;border:1px solid #1e1b4b;border-radius:6px;padding:5px 10px;color:#e1e7ef;font-size:13px;outline:none;display:none">
       <button onclick="setToken(document.getElementById('tokenInput').value)" id="btnSalvarToken" style="display:none"></button>
       <button onclick="var i=document.getElementById('tokenInput');i.style.display='';i.focus();this.style.display='none'" id="btnConfigToken" style="background:transparent;border:1px solid #4a4d6e;color:#9ca3af;padding:5px 12px;border-radius:6px;font-size:12px;cursor:pointer;display:none">&#128274; Token</button>
-      <button onclick="novoArquivo()" style="background:#1e1b4b;border:1px solid #78350f;color:#fcd34d;padding:8px 18px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:none" id="btnNovoArquivo">&#128193; Novo arquivo</button>
     </div>
   </header>
   <div class="container" id="app">
@@ -229,7 +228,6 @@
         initTabs();
         switchTab('resumo');
         salvarStorage();
-        document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
         mostrarTokenBtn();
         saveRemoteData({ data: allData, fileName: fn, updatedAt: new Date().toISOString() }, fn).then(function(ok) {
           document.getElementById('statusFile').textContent = ok ? 'Salvo no repositório' : 'Erro ao salvar no repositório';
@@ -302,7 +300,6 @@
           initTabs();
           switchTab('resumo');
           salvarStorage();
-          document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
           mostrarTokenBtn();
           saveRemoteData({ data: allData, fileName: file.name, updatedAt: new Date().toISOString() }, file.name).then(function(ok) {
             document.getElementById('statusFile').textContent = ok ? 'Salvo no repositório' : 'Erro ao salvar no repositório';
@@ -316,17 +313,7 @@
       reader.readAsArrayBuffer(file);
     }
 
-    function novoArquivo() {
-      localStorage.removeItem('crmData');
-      localStorage.removeItem('crmFileName');
-      localStorage.removeItem('crmTimestamp');
-      document.getElementById('areaInicial').parentElement.style.display = 'block';
-      document.getElementById('areaInicial').innerHTML = '<div style="font-size:48px;margin-bottom:12px;opacity:.5">📂</div><div style="font-size:16px;color:#9ca3af;font-weight:500">Clique para selecionar o arquivo Excel</div><div style="font-size:13px;color:#4a4d6e;margin-top:4px">Painel CRM - Junho.xlsx (com aba EVOLUCAO DOS MESES)</div>';
-      document.getElementById('tabsContainer').innerHTML = '';
-      document.getElementById('dashContent').innerHTML = '';
-      document.getElementById('footer').style.display = 'none';
-      allData = null;
-    }
+
 
     function parseAllSheets(wb, baseMonth) {
       baseMonth = baseMonth || 'Junho';
@@ -1327,7 +1314,6 @@
         document.getElementById('footer').innerHTML = '<strong>' + fn + '</strong> &middot; ' + ts.toLocaleDateString('pt-BR') + ' \u00E0s ' + ts.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + ' &middot; Painel de Recupera\u00E7\u00E3o';
         initTabs();
         switchTab('resumo');
-        document.getElementById('btnNovoArquivo').style.display = 'inline-flex';
         mostrarTokenBtn();
       } else {
         document.getElementById('areaInicial').style.display = 'flex';

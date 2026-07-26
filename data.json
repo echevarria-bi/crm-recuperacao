@@ -7,7 +7,7 @@
           "Abril": 49565.53,
           "Maio": 66319.38,
           "Junho": 107920.17,
-          "Julho": 113187.94
+          "Julho": 112989.99
         },
         {
           "label": "Positivação (Clientes Únicos)",
@@ -21,7 +21,7 @@
           "Abril": 678.98,
           "Maio": 522.2,
           "Junho": 516.36,
-          "Julho": 458.25
+          "Julho": 457.45
         },
         {
           "label": "Contatos Realizados",
@@ -56,7 +56,7 @@
           "Abril": 49565.53,
           "Maio": 66319.38,
           "Junho": 107920.17,
-          "Julho": 113187.94
+          "Julho": 112989.99
         }
       ],
       "valorPorProf": [
@@ -81,8 +81,8 @@
           "Abril": 606.18,
           "Maio": 11561.6,
           "Junho": 13856.05,
-          "Julho": 18014.06,
-          "Total": 44037.89
+          "Julho": 17816.11,
+          "Total": 43839.94
         },
         {
           "profissional": "Cristielen",
@@ -1863,7 +1863,7 @@
                 "realizado": 0
               }
             ],
-            "faturamento": 18014.06
+            "faturamento": 17816.11
           },
           {
             "profissional": "Cristielen - VALE DOS SINOS",
@@ -2176,7 +2176,7 @@
           "pct": 21.1,
           "dias": []
         },
-        "faturamentoGeral": 103338.94,
+        "faturamentoGeral": 103140.99,
         "dayNums": [
           1,
           2,
@@ -2213,7 +2213,7 @@
       "rcaExterno": null
     },
     "profissionais": {},
-    "faturamentoTotal": 336993.02,
+    "faturamentoTotal": 336795.07,
     "faturamentoClientes": [
       {
         "cliente": 44093,
@@ -4666,13 +4666,6 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 43285,
-        "nome": "47.447.476 MATHEUS JARDIM MESQUITA",
-        "valor": 197.95,
-        "mes": "Julho",
-        "prof": "Camila"
-      },
-      {
         "cliente": 41058,
         "nome": "JOÃO BATISTA PEREIRA DA SILVA",
         "valor": 195.95,
@@ -6796,6 +6789,13 @@
       {
         "cliente": 38760,
         "nome": "",
+        "valor": 0,
+        "mes": "Julho",
+        "prof": "Camila"
+      },
+      {
+        "cliente": 43285,
+        "nome": "47.447.476 MATHEUS JARDIM MESQUITA",
         "valor": 0,
         "mes": "Julho",
         "prof": "Camila"
@@ -23624,10 +23624,20 @@
         ]
       },
       "43285": {
-        "comprasAposRecuperacao": 1,
+        "comprasAposRecuperacao": 2,
         "recuperadoEm": "Julho",
         "mesRefNum": 7,
         "detalhes": [
+          {
+            "data": "2026-07-24",
+            "mes": "Julho",
+            "produto": "FRU ACAI TRAD CAIXA 10 KG POLPANORTE CG",
+            "qtde": -1,
+            "punit": -177.95,
+            "valor": -177.95,
+            "numnota": "1446594",
+            "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
           {
             "data": "2026-07-21",
             "mes": "Julho",
@@ -23637,6 +23647,16 @@
             "valor": 177.95,
             "numnota": "1444864",
             "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-24",
+            "mes": "Julho",
+            "produto": "DOC FAROFA DE PACOCA 1,01KG DAAL SC",
+            "qtde": -1,
+            "punit": -20,
+            "valor": -20,
+            "numnota": "1446594",
+            "fornecedor": "BOKADA ALIMENTOS LTDA"
           },
           {
             "data": "2026-07-21",
@@ -23653,6 +23673,11 @@
           {
             "data": "2026-07-21",
             "valor": 197.95,
+            "itens": 2
+          },
+          {
+            "data": "2026-07-24",
+            "valor": -197.95,
             "itens": 2
           }
         ]
@@ -26906,5 +26931,5 @@
     }
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-24T19:59:44.274Z"
+  "updatedAt": "2026-07-26T21:31:02.592Z"
 }

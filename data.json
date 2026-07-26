@@ -6,15 +6,15 @@
           "label": "Clientes Ativos",
           "Abril": 73,
           "Maio": 127,
-          "Junho": 209,
-          "Julho": 247
+          "Junho": 207,
+          "Julho": 245
         },
         {
           "label": "Ticket Médio",
           "Abril": 678.98,
           "Maio": 522.2,
-          "Junho": 516.36,
-          "Julho": 457.45
+          "Junho": 520.57,
+          "Julho": 460.56
         },
         {
           "label": "Meta de Contatos",
@@ -34,8 +34,8 @@
           "label": "Valor Recuperado",
           "Abril": 49565.53,
           "Maio": 66319.38,
-          "Junho": 107920.17,
-          "Julho": 112989.99
+          "Junho": 107757.72,
+          "Julho": 112838.19
         }
       ],
       "valorPorProf": [
@@ -59,16 +59,16 @@
           "profissional": "Camila",
           "Abril": 606.18,
           "Maio": 11561.6,
-          "Junho": 13856.05,
+          "Junho": 13693.6,
           "Julho": 17816.11,
-          "Total": 43839.94
+          "Total": 43677.49
         },
         {
           "profissional": "Cristielen",
           "Maio": 1370.55,
           "Junho": 2805.31,
-          "Julho": 4493.84,
-          "Total": 8669.7
+          "Julho": 4342.04,
+          "Total": 8517.9
         },
         {
           "profissional": "Natalia",
@@ -338,7 +338,7 @@
                 "realizado": 0
               }
             ],
-            "faturamento": 13856.05
+            "faturamento": 13693.6
           },
           {
             "profissional": "Cristielen",
@@ -627,7 +627,7 @@
           "pct": 57.9,
           "dias": []
         },
-        "faturamentoGeral": 106824.53,
+        "faturamentoGeral": 106662.08,
         "dayNums": [
           1,
           2,
@@ -1943,7 +1943,7 @@
                 "realizado": 0
               }
             ],
-            "faturamento": 4493.84
+            "faturamento": 4342.04
           },
           {
             "profissional": "Tatiana - SERRA",
@@ -2155,7 +2155,7 @@
           "pct": 21.1,
           "dias": []
         },
-        "faturamentoGeral": 71834.93,
+        "faturamentoGeral": 71683.13,
         "dayNums": [
           1,
           2,
@@ -2192,7 +2192,7 @@
       "rcaExterno": null
     },
     "profissionais": {},
-    "faturamentoTotal": 336795.07,
+    "faturamentoTotal": 336480.82,
     "faturamentoClientes": [
       {
         "cliente": 44093,
@@ -4995,13 +4995,6 @@
         "prof": "Anna"
       },
       {
-        "cliente": 44200,
-        "nome": "58.961.833 ERICK DA SILVA DUARTE",
-        "valor": 162.45,
-        "mes": "Junho",
-        "prof": "Camila"
-      },
-      {
         "cliente": 39761,
         "nome": "MÍNIMERCADO PAI E FILHO",
         "valor": 159.95,
@@ -5063,13 +5056,6 @@
         "valor": 151.8,
         "mes": "Julho",
         "prof": "Camila"
-      },
-      {
-        "cliente": 27148,
-        "nome": "LUCILENE BATISTA DE OLIVEIRA",
-        "valor": 151.8,
-        "mes": "Julho",
-        "prof": "Cristielen"
       },
       {
         "cliente": 39761,
@@ -5966,20 +5952,6 @@
         "valor": 0,
         "mes": "Julho",
         "prof": "Tatiana"
-      },
-      {
-        "cliente": 44200,
-        "nome": "58.961.833 ERICK DA SILVA DUARTE",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Camila"
-      },
-      {
-        "cliente": 27148,
-        "nome": "",
-        "valor": 0,
-        "mes": "Junho",
-        "prof": "Cristielen"
       },
       {
         "cliente": 39905,
@@ -26910,5 +26882,5 @@
     }
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-26T22:11:55.358Z"
+  "updatedAt": "2026-07-26T22:25:25.842Z"
 }

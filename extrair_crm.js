@@ -180,19 +180,17 @@ MONTHS.forEach(function (mk) {
 
 console.log('Linhas na aba: ' + rawFat.length);
 
-// Pre-deduplicate: for same client+prof, keep only earliest recovery month
-var earliestRecovery = {}; // key: codcli_prof → earliest mesNum
+// Pre-deduplicate: for same client (regardless of prof), keep only earliest recovery month
+var earliestRecovery = {}; // key: codcli → earliest mesNum
 for (var fi = 1; fi < rawFat.length; fi++) {
   var row = rawFat[fi];
   if (!row || (!row[0] && row[0] !== 0)) continue;
-  var prof = String(row[0]).trim();
   var codcli = String(row[1]).trim();
   var mesNome = String(row[2] || '').trim();
   var mesNum = MES_NUM[mesNome];
   if (!mesNum || mesNum < 4 || mesNum > 7) continue;
-  var key = codcli + '_' + prof;
-  if (!earliestRecovery[key] || mesNum < earliestRecovery[key]) {
-    earliestRecovery[key] = mesNum;
+  if (!earliestRecovery[codcli] || mesNum < earliestRecovery[codcli]) {
+    earliestRecovery[codcli] = mesNum;
   }
 }
 
@@ -211,9 +209,8 @@ for (var fi = 1; fi < rawFat.length; fi++) {
 
   if (!mesNum || mesNum < 4 || mesNum > 7) continue;
 
-  // Skip if this is not the earliest recovery for this client+prof
-  var key = codcli + '_' + prof;
-  if (earliestRecovery[key] !== mesNum) continue;
+  // Skip if this is not the earliest recovery for this client (regardless of prof)
+  if (earliestRecovery[codcli] !== mesNum) continue;
 
   // 1 entrada por mes do mesRef ate Julho
   var nomeCliente = '';

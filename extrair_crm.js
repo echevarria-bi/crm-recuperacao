@@ -322,12 +322,9 @@ for (var m in totalFatPorMes) totalFatPorMes[m] = Math.round(totalFatPorMes[m] *
 
 // Indicadores baseados na aba FATURAMENTO RECUPERACAO + Painel Geral
 var indicadores = [
-  { label: 'Faturamento Total' },
-  { label: 'Positivação (Clientes Únicos)' },
+  { label: 'Clientes Ativos' },
   { label: 'Ticket Médio' },
-  { label: 'Contatos Realizados' },
   { label: 'Meta de Contatos' },
-  { label: 'Meta de Clientes Recuperados' },
   { label: 'Realizado de Clientes Recuperados' },
   { label: 'Valor Recuperado' }
 ];
@@ -336,14 +333,11 @@ MONTHS.forEach(function (mk, mi) {
   var tf = totalFatPorMes[mNum] || 0;
   var tc = totalCliPorMes[mNum] || 0;
   var pr = metaRealPorMes[mk] || { meta: 0, realizado: 0 };
-  indicadores[0][mk] = tf;
-  indicadores[1][mk] = tc;
-  indicadores[2][mk] = tc > 0 ? Math.round(tf / tc * 100) / 100 : 0;
+  indicadores[0][mk] = tc;
+  indicadores[1][mk] = tc > 0 ? Math.round(tf / tc * 100) / 100 : 0;
+  indicadores[2][mk] = pr.meta;
   indicadores[3][mk] = pr.realizado;
-  indicadores[4][mk] = pr.meta;
-  indicadores[5][mk] = pr.meta;
-  indicadores[6][mk] = pr.realizado;
-  indicadores[7][mk] = tf;
+  indicadores[4][mk] = tf;
 });
 
 // Valor por profissional (acumulado a partir do mes de referencia)
@@ -386,10 +380,39 @@ function buildPainelMonth(mesNome) {
   var profs = [];
   mat.profissionais.forEach(function (mp) {
     var fat = 0;
-    // Buscar faturamento por nome base (antes de " - ")
+    // Buscar faturamento por nome, com normalização de acentos
+    // Prioridade: 1) fullName completo, 2) fullName sem " - ", 3) baseName
     var baseName = mp.profissional.split(' - ')[0].trim();
-    if (profFat[baseName]) {
-      fat = profFat[baseName][mNum] || 0;
+    var fullName = mp.profissional.trim();
+    var baseNameNorm = baseName.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    var fullNameNorm = fullName.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    var shortNameNorm = fullName.replace(/\s*-\s*/g, ' ').trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    var found = false;
+    // 1) Try exact full name
+    for (var pk in profFat) {
+      if (pk.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() === fullNameNorm) {
+        fat = profFat[pk][mNum] || 0; found = true; break;
+      }
+    }
+    // 2) Try short name (remove " - " separator, e.g. "Tatiana - LITORAL" → "Tatiana LITORAL")
+    if (!found) {
+      for (var pk in profFat) {
+        if (pk.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() === shortNameNorm) {
+          fat = profFat[pk][mNum] || 0; found = true; break;
+        }
+      }
+    }
+    // 3) Try base name
+    if (!found) {
+      if (profFat[baseName]) {
+        fat = profFat[baseName][mNum] || 0;
+      } else {
+        for (var pk in profFat) {
+          if (pk.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() === baseNameNorm) {
+            fat = profFat[pk][mNum] || 0; break;
+          }
+        }
+      }
     }
     profs.push({
       profissional: mp.profissional,

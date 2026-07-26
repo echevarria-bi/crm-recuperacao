@@ -3,14 +3,7 @@
     "evolucaoMeses": {
       "indicadores": [
         {
-          "label": "Faturamento Total",
-          "Abril": 49565.53,
-          "Maio": 66319.38,
-          "Junho": 107920.17,
-          "Julho": 112989.99
-        },
-        {
-          "label": "Positivação (Clientes Únicos)",
+          "label": "Clientes Ativos",
           "Abril": 73,
           "Maio": 127,
           "Junho": 209,
@@ -24,21 +17,7 @@
           "Julho": 457.45
         },
         {
-          "label": "Contatos Realizados",
-          "Abril": 73,
-          "Maio": 54,
-          "Junho": 92,
-          "Julho": 34
-        },
-        {
           "label": "Meta de Contatos",
-          "Abril": 214,
-          "Maio": 162,
-          "Junho": 159,
-          "Julho": 161
-        },
-        {
-          "label": "Meta de Clientes Recuperados",
           "Abril": 214,
           "Maio": 162,
           "Junho": 159,
@@ -545,7 +524,7 @@
                 "realizado": 4
               }
             ],
-            "faturamento": 0
+            "faturamento": 32825.81
           },
           {
             "profissional": "Tatiana",
@@ -648,7 +627,7 @@
           "pct": 57.9,
           "dias": []
         },
-        "faturamentoGeral": 73998.72,
+        "faturamentoGeral": 106824.53,
         "dayNums": [
           1,
           2,
@@ -1039,7 +1018,7 @@
                 "realizado": 0
               }
             ],
-            "faturamento": 0
+            "faturamento": 20892.43
           },
           {
             "profissional": "Tatiana",
@@ -1138,7 +1117,7 @@
           "pct": 34.1,
           "dias": []
         },
-        "faturamentoGeral": 28673.1,
+        "faturamentoGeral": 49565.53,
         "dayNums": [
           1,
           2,
@@ -1528,7 +1507,7 @@
                 "realizado": 2
               }
             ],
-            "faturamento": 0
+            "faturamento": 15933.78
           },
           {
             "profissional": "Tatiana",
@@ -1627,7 +1606,7 @@
           "pct": 33.3,
           "dias": []
         },
-        "faturamentoGeral": 47351.21,
+        "faturamentoGeral": 63284.99,
         "dayNums": [
           4,
           5,
@@ -2166,7 +2145,7 @@
                 "realizado": 0
               }
             ],
-            "faturamento": 31474.09
+            "faturamento": 168.03
           }
         ],
         "total": {
@@ -2176,7 +2155,7 @@
           "pct": 21.1,
           "dias": []
         },
-        "faturamentoGeral": 103140.99,
+        "faturamentoGeral": 71834.93,
         "dayNums": [
           1,
           2,
@@ -26931,5 +26910,5 @@
     }
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-26T21:31:02.592Z"
+  "updatedAt": "2026-07-26T22:11:55.358Z"
 }

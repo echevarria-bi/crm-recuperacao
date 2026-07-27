@@ -121,6 +121,7 @@ var painelSheets = {
 };
 var metaRealPorMes = {};
 var painelMatrizes = {};
+var contatosPorMes = {};
 
 MONTHS.forEach(function (mk) {
   var sn = painelSheets[mk];
@@ -130,9 +131,11 @@ MONTHS.forEach(function (mk) {
 
   // Parse da matriz META RECUPERACAO
   var recRow = -1;
+  var contRow = -1;
   for (var r = 0; r < data.length; r++) {
     var c = String((data[r] && data[r][0]) || '').trim().toUpperCase();
-    if (c === 'META RECUPERACAO' || c === 'META RECUPERAÇÃO') { recRow = r; break; }
+    if (c === 'META RECUPERACAO' || c === 'META RECUPERAÇÃO') { recRow = r; }
+    if (c.indexOf('META CONTATOS') >= 0) { contRow = r; }
   }
 
   // Meta/Realizado total — find first "Total" row after recRow
@@ -146,6 +149,31 @@ MONTHS.forEach(function (mk) {
   var meta = parseInt(row9[1]) || 0;
   var realizado = parseInt(row9[2]) || 0;
   metaRealPorMes[mk] = { meta: meta, realizado: realizado };
+
+  // META CONTATOS — parse profissionais + Total
+  var contProfArr = [];
+  var contTotalObj = null;
+  if (contRow >= 0) {
+    var cr = contRow + 2;
+    while (cr < data.length) {
+      var row = data[cr];
+      if (!row || !row[0]) { cr++; continue; }
+      var name = String(row[0]).trim();
+      if (!name || name === 'Total') {
+        if (name === 'Total') contTotalObj = { profissional: 'Total', meta: parseInt(row[1]) || 0, realizado: parseInt(row[2]) || 0, pct: (parseInt(row[1]) > 0 ? Math.round(parseInt(row[2]) / parseInt(row[1]) * 1000) / 10 : 0) };
+        break;
+      }
+      var pMeta = parseInt(row[1]) || 0;
+      var pReal = parseInt(row[2]) || 0;
+      contProfArr.push({ profissional: name, meta: pMeta, realizado: pReal, pct: pMeta > 0 ? Math.round(pReal / pMeta * 1000) / 10 : 0 });
+      cr++;
+    }
+  }
+  contatosPorMes[mk] = {
+    profissionais: contProfArr,
+    total: contTotalObj || { profissional: 'Total', meta: 0, realizado: 0, pct: 0 }
+  };
+
   var matriz = { dayNums: [], profissionais: [] };
   if (recRow >= 0) {
     // Day numbers from the same row as "META RECUPERACAO" (recRow), cols 4,6,8,...
@@ -175,7 +203,9 @@ MONTHS.forEach(function (mk) {
     }
   }
   painelMatrizes[mk] = matriz;
+  var ctt = contatosPorMes[mk];
   console.log('  ' + mk + ': Meta=' + meta + ' Realizado=' + realizado + ' | ' + matriz.profissionais.length + ' profissionais, ' + matriz.dayNums.length + ' dias');
+  console.log('  ' + mk + ' META CONTATOS: Meta=' + ctt.total.meta + ' Realizado=' + ctt.total.realizado + ' | ' + ctt.profissionais.length + ' profissionais');
 });
 
 console.log('Linhas na aba: ' + rawFat.length);
@@ -323,18 +353,23 @@ var indicadores = [
   { label: 'Ticket Médio' },
   { label: 'Meta de Contatos' },
   { label: 'Realizado de Clientes Recuperados' },
-  { label: 'Valor Recuperado' }
+  { label: 'Valor Recuperado' },
+  { label: 'Realizado de Contatos' },
+  { label: 'Meta de Recuperados' }
 ];
 MONTHS.forEach(function (mk, mi) {
   var mNum = monthNums[mi];
   var tf = totalFatPorMes[mNum] || 0;
   var tc = totalCliPorMes[mNum] || 0;
   var pr = metaRealPorMes[mk] || { meta: 0, realizado: 0 };
+  var ct = (contatosPorMes[mk] || {}).total || { meta: 0, realizado: 0 };
   indicadores[0][mk] = tc;
   indicadores[1][mk] = tc > 0 ? Math.round(tf / tc * 100) / 100 : 0;
-  indicadores[2][mk] = pr.meta;
+  indicadores[2][mk] = ct.meta;
   indicadores[3][mk] = pr.realizado;
   indicadores[4][mk] = tf;
+  indicadores[5][mk] = ct.realizado;
+  indicadores[6][mk] = pr.meta;
 });
 
 // Valor por profissional (acumulado a partir do mes de referencia)
@@ -429,7 +464,7 @@ function buildPainelMonth(mesNome) {
       faturamentoGeral: Math.round(profs.reduce(function (s, p) { return s + p.faturamento; }, 0) * 100) / 100,
       dayNums: mat.dayNums
     },
-    metaContatos: { profissionais: [], total: null },
+    metaContatos: { profissionais: (contatosPorMes[mesNome] || {}).profissionais || [], total: (contatosPorMes[mesNome] || {}).total || null },
     motivos: [], inatividade: [], motivosDiarios: [], rcaExterno: null
   };
 }

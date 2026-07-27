@@ -718,9 +718,9 @@
           var mk = mesesArr[mi];
           var conv = 0, mc = 0, mr = 0, rr = 0, vr = 0;
           for (var ii = 0; ii < evo.indicadores.length; ii++) {
-            if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados') conv = evo.indicadores[ii][mk] || 0;
+            if (evo.indicadores[ii].label === 'Realizado de Contatos') conv = evo.indicadores[ii][mk] || 0;
             if (evo.indicadores[ii].label === 'Meta de Contatos') mc = evo.indicadores[ii][mk] || 0;
-            if (evo.indicadores[ii].label === 'Meta de Contatos') mr = evo.indicadores[ii][mk] || 0;
+            if (evo.indicadores[ii].label === 'Meta de Recuperados') mr = evo.indicadores[ii][mk] || 0;
             if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' && evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) rr = evo.indicadores[ii][mk] || 0;
             if (evo.indicadores[ii].label === 'Valor Recuperado' && evo.indicadores[ii].label.indexOf('%') < 0) vr = evo.indicadores[ii][mk] || 0;
           }

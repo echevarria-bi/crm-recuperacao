@@ -18,17 +18,17 @@
         },
         {
           "label": "Meta de Contatos",
-          "Abril": 214,
-          "Maio": 162,
-          "Junho": 159,
-          "Julho": 161
+          "Abril": 1074,
+          "Maio": 1623,
+          "Junho": 1750,
+          "Julho": 1250
         },
         {
           "label": "Realizado de Clientes Recuperados",
           "Abril": 73,
           "Maio": 54,
           "Junho": 92,
-          "Julho": 34
+          "Julho": 52
         },
         {
           "label": "Valor Recuperado",
@@ -36,6 +36,20 @@
           "Maio": 66319.38,
           "Junho": 107757.72,
           "Julho": 112838.19
+        },
+        {
+          "label": "Realizado de Contatos",
+          "Abril": 1003,
+          "Maio": 1701,
+          "Junho": 1729,
+          "Julho": 780
+        },
+        {
+          "label": "Meta de Recuperados",
+          "Abril": 214,
+          "Maio": 162,
+          "Junho": 159,
+          "Julho": 161
         }
       ],
       "valorPorProf": [
@@ -107,7 +121,7 @@
           "Junho META": 31,
           "Junho REAL": 16,
           "Julho META": 42,
-          "Julho REAL": 5
+          "Julho REAL": 9
         },
         {
           "profissional": "Camila",
@@ -118,7 +132,7 @@
           "Junho META": 48,
           "Junho REAL": 22,
           "Julho META": 43,
-          "Julho REAL": 16
+          "Julho REAL": 20
         },
         {
           "profissional": "Cristielen",
@@ -127,7 +141,7 @@
           "Junho META": 25,
           "Junho REAL": 7,
           "Julho META": 31,
-          "Julho REAL": 3
+          "Julho REAL": 6
         },
         {
           "profissional": "Natália",
@@ -653,8 +667,44 @@
         ]
       },
       "metaContatos": {
-        "profissionais": [],
-        "total": null
+        "profissionais": [
+          {
+            "profissional": "Ariane",
+            "meta": 350,
+            "realizado": 373,
+            "pct": 106.6
+          },
+          {
+            "profissional": "Camila",
+            "meta": 350,
+            "realizado": 350,
+            "pct": 100
+          },
+          {
+            "profissional": "Cristielen",
+            "meta": 350,
+            "realizado": 342,
+            "pct": 97.7
+          },
+          {
+            "profissional": "Natália",
+            "meta": 350,
+            "realizado": 385,
+            "pct": 110
+          },
+          {
+            "profissional": "Tatiana",
+            "meta": 350,
+            "realizado": 279,
+            "pct": 79.7
+          }
+        ],
+        "total": {
+          "profissional": "Total",
+          "meta": 1750,
+          "realizado": 1729,
+          "pct": 98.8
+        }
       },
       "motivos": [],
       "inatividade": [],
@@ -1142,8 +1192,44 @@
         ]
       },
       "metaContatos": {
-        "profissionais": [],
-        "total": null
+        "profissionais": [
+          {
+            "profissional": "Anna",
+            "meta": 360,
+            "realizado": 295,
+            "pct": 81.9
+          },
+          {
+            "profissional": "Ariane",
+            "meta": 197,
+            "realizado": 185,
+            "pct": 93.9
+          },
+          {
+            "profissional": "Camila",
+            "meta": 218,
+            "realizado": 218,
+            "pct": 100
+          },
+          {
+            "profissional": "Natália",
+            "meta": 187,
+            "realizado": 190,
+            "pct": 101.6
+          },
+          {
+            "profissional": "Tatiana",
+            "meta": 112,
+            "realizado": 115,
+            "pct": 102.7
+          }
+        ],
+        "total": {
+          "profissional": "Total",
+          "meta": 1074,
+          "realizado": 1003,
+          "pct": 93.4
+        }
       },
       "motivos": [],
       "inatividade": [],
@@ -1631,8 +1717,44 @@
         ]
       },
       "metaContatos": {
-        "profissionais": [],
-        "total": null
+        "profissionais": [
+          {
+            "profissional": "Ariane",
+            "meta": 299,
+            "realizado": 275,
+            "pct": 92
+          },
+          {
+            "profissional": "Cristielen",
+            "meta": 257,
+            "realizado": 344,
+            "pct": 133.9
+          },
+          {
+            "profissional": "Camila",
+            "meta": 508,
+            "realizado": 510,
+            "pct": 100.4
+          },
+          {
+            "profissional": "Natália",
+            "meta": 326,
+            "realizado": 331,
+            "pct": 101.5
+          },
+          {
+            "profissional": "Tatiana",
+            "meta": 233,
+            "realizado": 241,
+            "pct": 103.4
+          }
+        ],
+        "total": {
+          "profissional": "Total",
+          "meta": 1623,
+          "realizado": 1701,
+          "pct": 104.8
+        }
       },
       "motivos": [],
       "inatividade": [],
@@ -1645,8 +1767,8 @@
           {
             "profissional": "Ariane - POA",
             "meta": 42,
-            "realizado": 5,
-            "pct": 11.9,
+            "realizado": 9,
+            "pct": 21.4,
             "dias": [
               {
                 "meta": 2,
@@ -1702,7 +1824,7 @@
               },
               {
                 "meta": 2,
-                "realizado": 0
+                "realizado": 2
               },
               {
                 "meta": 2,
@@ -1710,7 +1832,7 @@
               },
               {
                 "meta": 2,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "meta": 2,
@@ -1718,7 +1840,7 @@
               },
               {
                 "meta": 2,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "meta": 2,
@@ -1746,8 +1868,8 @@
           {
             "profissional": "Camila - SUL",
             "meta": 43,
-            "realizado": 16,
-            "pct": 37.2,
+            "realizado": 20,
+            "pct": 46.5,
             "dias": [
               {
                 "meta": 2,
@@ -1767,7 +1889,7 @@
               },
               {
                 "meta": 2,
-                "realizado": 1
+                "realizado": 2
               },
               {
                 "meta": 2,
@@ -1815,7 +1937,11 @@
               },
               {
                 "meta": 2,
-                "realizado": 2
+                "realizado": 1
+              },
+              {
+                "meta": 2,
+                "realizado": 1
               },
               {
                 "meta": 2,
@@ -1823,19 +1949,15 @@
               },
               {
                 "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 2,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "meta": 1,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "meta": 1,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "meta": 1,
@@ -1847,8 +1969,8 @@
           {
             "profissional": "Cristielen - VALE DOS SINOS",
             "meta": 31,
-            "realizado": 3,
-            "pct": 9.7,
+            "realizado": 6,
+            "pct": 19.4,
             "dias": [
               {
                 "meta": 2,
@@ -1916,7 +2038,11 @@
               },
               {
                 "meta": 1,
-                "realizado": 0
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
               },
               {
                 "meta": 1,
@@ -1924,11 +2050,7 @@
               },
               {
                 "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
+                "realizado": 1
               },
               {
                 "meta": 1,
@@ -1948,8 +2070,8 @@
           {
             "profissional": "Tatiana - SERRA",
             "meta": 22,
-            "realizado": 9,
-            "pct": 40.9,
+            "realizado": 16,
+            "pct": 72.7,
             "dias": [
               {
                 "meta": 1,
@@ -2009,7 +2131,7 @@
               },
               {
                 "meta": 1,
-                "realizado": 2
+                "realizado": 5
               },
               {
                 "meta": 1,
@@ -2017,7 +2139,7 @@
               },
               {
                 "meta": 1,
-                "realizado": 0
+                "realizado": 4
               },
               {
                 "meta": 1,
@@ -2151,8 +2273,8 @@
         "total": {
           "profissional": "Total",
           "meta": 161,
-          "realizado": 34,
-          "pct": 21.1,
+          "realizado": 52,
+          "pct": 32.3,
           "dias": []
         },
         "faturamentoGeral": 71683.13,
@@ -2183,8 +2305,44 @@
         ]
       },
       "metaContatos": {
-        "profissionais": [],
-        "total": null
+        "profissionais": [
+          {
+            "profissional": "Ariane - POA",
+            "meta": 250,
+            "realizado": 169,
+            "pct": 67.6
+          },
+          {
+            "profissional": "Camila - SUL",
+            "meta": 250,
+            "realizado": 160,
+            "pct": 64
+          },
+          {
+            "profissional": "Cristielen - VALE DOS SINOS",
+            "meta": 250,
+            "realizado": 200,
+            "pct": 80
+          },
+          {
+            "profissional": "Tatiana - SERRA",
+            "meta": 250,
+            "realizado": 151,
+            "pct": 60.4
+          },
+          {
+            "profissional": "Tatiana - LITORAL",
+            "meta": 250,
+            "realizado": 100,
+            "pct": 40
+          }
+        ],
+        "total": {
+          "profissional": "Total",
+          "meta": 1250,
+          "realizado": 780,
+          "pct": 62.4
+        }
       },
       "motivos": [],
       "inatividade": [],
@@ -26963,15 +27121,10 @@
           "mes": "Julho",
           "clientes": 55,
           "faturamento": 63471.22
-        },
-        {
-          "mes": "Total",
-          "clientes": 396,
-          "faturamento": 609024.3799999999
         }
       ]
     }
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-27T02:09:38.762Z"
+  "updatedAt": "2026-07-27T02:59:22.628Z"
 }

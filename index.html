@@ -710,46 +710,6 @@
       return allData.painelGeral.recuperacao.profissionais;
     }
 
-    function criarChartsResumo(evo, mesesArr) {
-      try {
-        var labels = mesesArr;
-        var convData = [], contMeta = [], recupMeta = [], recupReal = [], valorData = [];
-        for (var mi = 0; mi < mesesArr.length; mi++) {
-          var mk = mesesArr[mi];
-          var conv = 0, mc = 0, mr = 0, rr = 0, vr = 0;
-          for (var ii = 0; ii < evo.indicadores.length; ii++) {
-            if (evo.indicadores[ii].label === 'Realizado de Contatos') conv = evo.indicadores[ii][mk] || 0;
-            if (evo.indicadores[ii].label === 'Meta de Contatos') mc = evo.indicadores[ii][mk] || 0;
-            if (evo.indicadores[ii].label === 'Meta de Recuperados') mr = evo.indicadores[ii][mk] || 0;
-            if (evo.indicadores[ii].label === 'Realizado de Clientes Recuperados' && evo.indicadores[ii].label.indexOf('Meta') < 0 && evo.indicadores[ii].label.indexOf('%') < 0) rr = evo.indicadores[ii][mk] || 0;
-            if (evo.indicadores[ii].label === 'Valor Recuperado' && evo.indicadores[ii].label.indexOf('%') < 0) vr = evo.indicadores[ii][mk] || 0;
-          }
-          convData.push(conv);
-          contMeta.push(mc);
-          recupMeta.push(mr);
-          recupReal.push(rr);
-          valorData.push(vr);
-        }
-        var c1 = document.getElementById('chartEvolucao1');
-        var c2 = document.getElementById('chartEvolucao2');
-        if (c1 && typeof Chart !== 'undefined') new Chart(c1, {
-          type:'bar', data:{labels:labels, datasets:[
-            {label:'Contatos Realizados (Televendas)',data:convData,backgroundColor:'#a78bfa',borderRadius:4},
-            {label:'Meta Contatos (Televendas)',data:contMeta,backgroundColor:'#78350f',borderRadius:4}
-          ]},
-          options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{anchor:'end',align:'end',color:'#9ca3af',font:{size:10,weight:'bold'},offset:0},legend:{position:'bottom',labels:{color:'#9ca3af',padding:10,boxWidth:10,font:{size:11}}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}
-        });
-        if (c2 && typeof Chart !== 'undefined') new Chart(c2, {
-          type:'bar', data:{labels:labels, datasets:[
-            {label:'Meta Recuperados (Televendas)',data:recupMeta,backgroundColor:'#78350f',borderRadius:4},
-            {label:'Realizado Recuperados (Televendas)',data:recupReal,backgroundColor:'#34d399',borderRadius:4}
-          ]},
-          options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{color:'#9ca3af',font:{size:9,weight:'bold'},anchor:'end',align:'end'},legend:{position:'bottom',labels:{color:'#9ca3af',padding:10,boxWidth:10,font:{size:11}}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}
-        });
-      } catch(e) { console.error(e); }
-      try { lucide.createIcons(); } catch(e) {}
-    }
-
     function renderResumo() {
       var evo = allData.evolucaoMeses;
       var pg = allData.painelGeral;
@@ -820,12 +780,6 @@
       html += '<div class="card" style="border-color:#78350f;background:linear-gradient(135deg,#1a0f0a,#1f1015)"><div class="label" style="color:#f59e0b">' + icn('users',12) + ' RCA Externo</div><div class="value" style="font-size:34px;color:#f0f2f8">' + rcaTotalClientes + ' <span style="font-size:14px;color:#6b7280;font-weight:400">clientes</span></div><div class="sub" style="font-size:22px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(rcaTotalFaturamento) + '</div><div style="font-size:11px;color:#6b7280;margin-top:4px">' + (totalGeralClientes > 0 ? Math.round(rcaTotalClientes / totalGeralClientes * 100) : 0) + '% do total</div></div>';
       html += '</div>';
 
-      // CHARTS
-      html += '<div class="grid-2">';
-      html += '<div class="chart-box"><h2>Contatos Realizados (Televendas) <span class="sub">&rarr; Evolu\u00E7\u00E3o mensal de contatos vs meta</span></h2><canvas id="chartEvolucao1" style="max-height:220px"></canvas></div>';
-      html += '<div class="chart-box"><h2>Recuperados (Televendas) <span class="sub">&rarr; Meta x Realizado por m\u00EAs</span></h2><canvas id="chartEvolucao2" style="max-height:220px"></canvas></div>';
-      html += '</div>';
-
       // VALOR POR PROFISSIONAL
       if (evo.valorPorProf.length > 0) {
         var vpSorted = evo.valorPorProf.slice().sort(function(a,b){return (b.Total||0)-(a.Total||0);});
@@ -890,8 +844,6 @@
 
       
       document.getElementById('dashContent').innerHTML = html;
-
-      setTimeout(function() { criarChartsResumo(evo, mesesArr); }, 100);
     }
 
     function renderMonth(monthName) {

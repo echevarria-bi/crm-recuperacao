@@ -790,12 +790,15 @@
         }
       }
 
-      // RCA Externo totals from matriz
+      // RCA Externo totals from matriz (skip header "Mês" and "Total" row)
       var rcaTotalClientes = 0, rcaTotalFaturamento = 0;
       var rcaMatriz = allData.rcaExterno && allData.rcaExterno.matriz ? allData.rcaExterno.matriz : [];
+      var rcaMesesValidos = ['Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
       for (var rmi = 0; rmi < rcaMatriz.length; rmi++) {
-        rcaTotalClientes += rcaMatriz[rmi].clientes || 0;
-        rcaTotalFaturamento += rcaMatriz[rmi].faturamento || 0;
+        if (rcaMesesValidos.indexOf(rcaMatriz[rmi].mes) >= 0) {
+          rcaTotalClientes += rcaMatriz[rmi].clientes || 0;
+          rcaTotalFaturamento += rcaMatriz[rmi].faturamento || 0;
+        }
       }
       var totalGeralClientes = recupTotal + rcaTotalClientes;
       var totalGeralFaturamento = fatGeraluramento + rcaTotalFaturamento;

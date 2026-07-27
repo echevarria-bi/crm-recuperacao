@@ -670,6 +670,7 @@
     function parseCurrency(v) { if (v===''||v===undefined||v===null) return 0; if (typeof v==='number') return v; return parseFloat(String(v).replace(/R\$\s*/gi,'').replace(/\./g,'').replace(',','.').trim())||0; }
     function parseDias(row, startCol, dayNums) { var dias=[]; for (var c=startCol; c+1<row.length; c+=2) { var di = (c-startCol)/2; dias.push({dia: dayNums&&dayNums[di]?dayNums[di]:di+1, meta:parseNum(row[c]), realizado:parseNum(row[c+1])}); } return dias; }
     function fmtCurr(v) { if (v==null||isNaN(v)) return '-'; return 'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+    function fmtDate(s) { if (!s || s.length < 10) return s; var p = s.split('-'); return p[2]+'/'+p[1]+'/'+p[0]; }
     var icn = function(n,s){s=s||14; return '<i data-lucide="'+n+'" style="display:inline-block;width:'+s+'px;height:'+s+'px;vertical-align:middle;stroke:currentColor;stroke-width:2;flex-shrink:0;margin-right:4px"></i>';};
 
     function initTabs() {
@@ -1244,14 +1245,14 @@
       inner += '<div style="margin-bottom:16px"><h3 style="color:#9ca3af;font-size:13px;margin-bottom:8px">COMPRAS</h3>';
       inner += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
       dias.forEach(function(dia) {
-        inner += '<div style="background:#1a1d2e;border:1px solid #1e1b4b;border-radius:6px;padding:6px 10px;font-size:12px"><span style="color:#9ca3af">'+dia.data+'</span> <span style="color:#34d399;font-weight:600">'+fmtCurr(dia.valor)+'</span> <span style="color:#6b7280">('+dia.itens+' itens)</span></div>';
+        inner += '<div style="background:#1a1d2e;border:1px solid #1e1b4b;border-radius:6px;padding:6px 10px;font-size:12px"><span style="color:#9ca3af">'+fmtDate(dia.data)+'</span> <span style="color:#34d399;font-weight:600">'+fmtCurr(dia.valor)+'</span> <span style="color:#6b7280">('+dia.itens+' itens)</span></div>';
       });
       inner += '</div></div>';
 
       inner += '<div><h3 style="color:#9ca3af;font-size:13px;margin-bottom:8px">DETALHES DAS COMPRAS</h3>';
       inner += '<div class="table-wrap"><table><thead><tr><th style="color:#6b7280;font-size:11px">Data</th><th style="color:#6b7280;font-size:11px">M\u00EAs</th><th style="color:#6b7280;font-size:11px">Produto</th><th style="color:#6b7280;font-size:11px;text-align:right">Qtde</th><th style="color:#6b7280;font-size:11px;text-align:right">P.Unit</th><th style="color:#6b7280;font-size:11px;text-align:right">Valor</th><th style="color:#6b7280;font-size:11px">N.F.</th><th style="color:#6b7280;font-size:11px">Fornecedor</th></tr></thead><tbody>';
       detalhes.forEach(function(dd) {
-        inner += '<tr><td style="font-size:11px;color:#9ca3af">'+dd.data+'</td><td style="font-size:11px;color:#9ca3af">'+dd.mes+'</td><td style="font-size:11px;color:#e1e7ef">'+dd.produto+'</td><td style="font-size:11px;color:#9ca3af;text-align:right">'+(dd.qtde||0)+'</td><td style="font-size:11px;color:#9ca3af;text-align:right">'+fmtCurr(dd.punit||0)+'</td><td style="font-size:11px;color:#34d399;font-weight:600;text-align:right">'+fmtCurr(dd.valor||0)+'</td><td style="font-size:11px;color:#6b7280">'+dd.numnota+'</td><td style="font-size:11px;color:#6b7280">'+dd.fornecedor+'</td></tr>';
+        inner += '<tr><td style="font-size:11px;color:#9ca3af">'+fmtDate(dd.data)+'</td><td style="font-size:11px;color:#9ca3af">'+dd.mes+'</td><td style="font-size:11px;color:#e1e7ef">'+dd.produto+'</td><td style="font-size:11px;color:#9ca3af;text-align:right">'+(dd.qtde||0)+'</td><td style="font-size:11px;color:#9ca3af;text-align:right">'+fmtCurr(dd.punit||0)+'</td><td style="font-size:11px;color:#34d399;font-weight:600;text-align:right">'+fmtCurr(dd.valor||0)+'</td><td style="font-size:11px;color:#6b7280">'+dd.numnota+'</td><td style="font-size:11px;color:#6b7280">'+dd.fornecedor+'</td></tr>';
       });
       inner += '</tbody></table></div></div>';
 

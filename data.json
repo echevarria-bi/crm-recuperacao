@@ -14,7 +14,7 @@
           "Abril": 678.98,
           "Maio": 522.2,
           "Junho": 520.57,
-          "Julho": 460.56
+          "Julho": 477.41
         },
         {
           "label": "Meta de Contatos",
@@ -35,7 +35,7 @@
           "Abril": 49565.53,
           "Maio": 66319.38,
           "Junho": 107757.72,
-          "Julho": 112838.19
+          "Julho": 116965.59
         },
         {
           "label": "Realizado de Contatos",
@@ -89,8 +89,8 @@
           "Abril": 20892.43,
           "Maio": 15933.78,
           "Junho": 32825.81,
-          "Julho": 39966.81,
-          "Total": 109618.83
+          "Julho": 44094.21,
+          "Total": 113746.23
         },
         {
           "profissional": "Tatiana",
@@ -2358,7 +2358,7 @@
       "rcaExterno": null
     },
     "profissionais": {},
-    "faturamentoTotal": 336480.82,
+    "faturamentoTotal": 340608.22,
     "faturamentoClientes": [
       {
         "cliente": 44093,
@@ -2434,6 +2434,13 @@
         "cliente": 41645,
         "nome": "56.058.941 TAIS COSTA DE OLIVEIRA SILVA",
         "valor": 5581,
+        "mes": "Julho",
+        "prof": "Natalia"
+      },
+      {
+        "cliente": 37802,
+        "nome": "ORY LAUX & CIA LTDA",
+        "valor": 5363.1,
         "mes": "Julho",
         "prof": "Natalia"
       },
@@ -2709,13 +2716,6 @@
         "valor": 1258,
         "mes": "Junho",
         "prof": "Camila"
-      },
-      {
-        "cliente": 37802,
-        "nome": "ORY LAUX & CIA LTDA",
-        "valor": 1235.7,
-        "mes": "Julho",
-        "prof": "Natalia"
       },
       {
         "cliente": 41377,
@@ -15355,7 +15355,7 @@
         ]
       },
       "37802": {
-        "comprasAposRecuperacao": 4,
+        "comprasAposRecuperacao": 5,
         "recuperadoEm": "Maio",
         "mesRefNum": 5,
         "detalhes": [
@@ -15418,6 +15418,26 @@
             "valor": 248.7,
             "numnota": "1440217",
             "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-26",
+            "mes": "Julho",
+            "produto": "FRU ACAI TRAD CAIXA 10 KG POLPANORTE CG",
+            "qtde": 2,
+            "punit": 153.29,
+            "valor": 306.58,
+            "numnota": "1446726",
+            "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-26",
+            "mes": "Julho",
+            "produto": "BOV FILE COSTELA (ENTRECOT) PLENA  RF",
+            "qtde": 95.76,
+            "punit": 39.9,
+            "valor": 3820.82,
+            "numnota": "1446726",
+            "fornecedor": "PLENA ALIMENTOS S/A"
           }
         ],
         "diasCompra": [
@@ -15439,6 +15459,11 @@
           {
             "data": "2026-07-07",
             "valor": 1235.7,
+            "itens": 2
+          },
+          {
+            "data": "2026-07-26",
+            "valor": 4127.400000000001,
             "itens": 2
           }
         ]
@@ -27134,5 +27159,5 @@
     }
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-27T03:14:54.298Z"
+  "updatedAt": "2026-07-27T12:13:48.553Z"
 }

@@ -159,9 +159,17 @@
           "Maio META": 23,
           "Maio REAL": 14,
           "Junho META": 25,
-          "Junho REAL": 20,
+          "Junho REAL": 20
+        },
+        {
+          "profissional": "Tatiana - LITORAL",
           "Julho META": 23,
           "Julho REAL": 1
+        },
+        {
+          "profissional": "Tatiana - SERRA",
+          "Julho META": 22,
+          "Julho REAL": 16
         }
       ]
     },
@@ -27126,5 +27134,5 @@
     }
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-27T02:59:22.628Z"
+  "updatedAt": "2026-07-27T03:14:54.298Z"
 }

@@ -927,10 +927,12 @@
         var name = p.profissional;
         var jMeta = p.meta || 0;
         var jReal = p.realizado || 0;
-        // Match base name (before " - ") against VALOR RECUPERADO POR MÊS
+        // Match faturamento: try full name first, then " - " removed, then base name
+        var fullNameKey = name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+        var shortNameKey = name.replace(/\s*-\s*/g,' ').trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
         var baseName = name.split(' - ')[0].trim();
         var baseKey = baseName.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-        var jFat = fatLookup[baseKey] || 0;
+        var jFat = fatLookup[fullNameKey] || fatLookup[shortNameKey] || fatLookup[baseKey] || 0;
         var jPct = jMeta > 0 ? (jReal / jMeta * 100) : 0;
         profsData.push({
           profissional: name,

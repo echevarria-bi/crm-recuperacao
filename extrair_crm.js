@@ -390,14 +390,24 @@ Object.keys(nomesUsados).sort().forEach(function (prof) {
 });
 
 // Recuperados por profissional — usar dados reais do Painel Geral (matriz)
+// Detect when same month has multiple profs with same baseName (e.g., Tatiana - SERRA + Tatiana - LITORAL)
 var recuperadosPorProf = {};
 MONTHS.forEach(function (mk) {
   var mat = painelMatrizes[mk] || { profissionais: [] };
+  // First pass: detect baseName collisions within this month
+  var baseNameCount = {};
   mat.profissionais.forEach(function (mp) {
-    var baseName = mp.profissional.split(' - ')[0].trim();
-    if (!recuperadosPorProf[baseName]) recuperadosPorProf[baseName] = { profissional: baseName };
-    recuperadosPorProf[baseName][mk + ' META'] = mp.meta;
-    recuperadosPorProf[baseName][mk + ' REAL'] = mp.realizado;
+    var bn = mp.profissional.split(' - ')[0].trim();
+    baseNameCount[bn] = (baseNameCount[bn] || 0) + 1;
+  });
+  // Second pass: use full name for collisions, base name otherwise
+  mat.profissionais.forEach(function (mp) {
+    var fullName = mp.profissional.trim();
+    var baseName = fullName.split(' - ')[0].trim();
+    var key = baseNameCount[baseName] > 1 ? fullName : baseName;
+    if (!recuperadosPorProf[key]) recuperadosPorProf[key] = { profissional: key };
+    recuperadosPorProf[key][mk + ' META'] = mp.meta;
+    recuperadosPorProf[key][mk + ' REAL'] = mp.realizado;
   });
 });
 var recuperadosPorProfArr = Object.keys(recuperadosPorProf).sort().map(function (k) { return recuperadosPorProf[k]; });

@@ -26946,7 +26946,7 @@
         },
         {
           "mes": "Abril",
-          "clientes": 168,
+          "clientes": 170,
           "faturamento": 265032.0999999999
         },
         {
@@ -26961,8 +26961,8 @@
         },
         {
           "mes": "Julho",
-          "clientes": 0,
-          "faturamento": 0
+          "clientes": 55,
+          "faturamento": 63471.22
         },
         {
           "mes": "Total",
@@ -26973,5 +26973,5 @@
     }
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-27T02:03:18.609Z"
+  "updatedAt": "2026-07-27T02:09:38.762Z"
 }

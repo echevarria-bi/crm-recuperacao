@@ -434,6 +434,34 @@ function buildPainelMonth(mesNome) {
   };
 }
 
+// ============================================================
+// 5. Ler aba RCA EXTERNO — coluna A (CODCLI) + matriz H-J
+// ============================================================
+console.log('\n[5/5] Lendo aba RCA EXTERNO...');
+var wbPainel = XLSX.readFile(PAINEL);
+var wsRcaExt = wbPainel.Sheets['RCA EXTERNO'];
+var rcaExternoCodclis = [];
+var rcaExternoMatriz = [];
+if (wsRcaExt) {
+  var rawRcaExt = XLSX.utils.sheet_to_json(wsRcaExt, { header: 1, defval: '' });
+  for (var ri = 0; ri < rawRcaExt.length; ri++) {
+    var rr = rawRcaExt[ri];
+    // Coluna A: CODCLI
+    if (ri >= 1 && rr[0] !== '' && rr[0] !== null && rr[0] !== undefined) {
+      rcaExternoCodclis.push(String(rr[0]).trim());
+    }
+    // Colunas H-J: matriz
+    if (rr[7] !== '' && rr[7] !== null && rr[7] !== undefined) {
+      rcaExternoMatriz.push({ mes: String(rr[7]).trim(), clientes: parseFloat(rr[8]) || 0, faturamento: parseFloat(rr[9]) || 0 });
+    }
+  }
+} else {
+  console.log('  Aba RCA EXTERNO não encontrada!');
+}
+console.log('  CODCLI externos: ' + rcaExternoCodclis.length);
+console.log('  Matriz: ' + rcaExternoMatriz.length + ' linhas');
+rcaExternoMatriz.forEach(function(m) { console.log('    ' + m.mes + ': ' + m.clientes + ' clientes | R$ ' + (m.faturamento || 0).toFixed(2)); });
+
 var faturamentoTotal = Math.round(faturamentoClientesArr.reduce(function (s, c) { return s + c.valor; }, 0) * 100) / 100;
 
 var output = {
@@ -446,7 +474,8 @@ var output = {
     profissionais: {},
     faturamentoTotal: faturamentoTotal,
     faturamentoClientes: faturamentoClientesArr,
-    clientesDetalhes: clientesDetalhes
+    clientesDetalhes: clientesDetalhes,
+    rcaExterno: { codclis: rcaExternoCodclis, matriz: rcaExternoMatriz }
   },
   fileName: 'base_8026_2026.xlsx',
   updatedAt: new Date().toISOString()

@@ -966,6 +966,22 @@
       }
       html += '</div>';
 
+      // RCA Externo — BigNumber por mês
+      var rcaMatriz = allData.rcaExterno && allData.rcaExterno.matriz ? allData.rcaExterno.matriz : [];
+      if (rcaMatriz.length > 0) {
+        var rcaMeses = rcaMatriz.filter(function(m) { return m.mes !== 'Mês' && m.mes !== 'Total'; });
+        html += '<div style="display:flex;gap:14px;margin-bottom:22px;flex-wrap:wrap">';
+        rcaMeses.forEach(function(m) {
+          var isEmpty = !m.clientes && !m.faturamento;
+          html += '<div class="card" style="flex:1;min-width:160px;border-color:#78350f;background:linear-gradient(135deg,#1a0f0a,#1f1015)' + (isEmpty ? ';opacity:.4' : '') + '">';
+          html += '<div class="label" style="color:#f59e0b">\u{1F4CA} ' + m.mes + ' <span style="color:#6b7280;font-size:11px;text-transform:none">(RCA Externo)</span></div>';
+          html += '<div class="value" style="font-size:22px;color:#f0f2f8">' + (m.clientes || 0) + ' <span style="font-size:13px;color:#6b7280;font-weight:400">clientes</span></div>';
+          html += '<div class="sub" style="font-size:16px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(m.faturamento || 0) + '</div>';
+          html += '</div>';
+        });
+        html += '</div>';
+      }
+
       html += '<div style="display:flex;gap:18px;margin-bottom:18px;flex-wrap:wrap;font-size:13px;color:#6b7280;align-items:center"><span>Legenda:</span><span><span class="badge badge-green">Batida ✓</span> ≥100%</span><span><span class="badge badge-yellow">Parcial &#9888;</span> 80–99%</span><span><span class="badge badge-red">Abaixo &#128308;</span> &lt;80%</span></div>';
 
       html += '<div class="chart-box"><h2>Desempenho por Televendedora <span class="sub">&rarr; Recupera\u00E7\u00E3o de clientes em ' + monthName + '</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th style="text-align:center">Status</th><th class="text-right meta-color" title="Meta de clientes recuperados">Meta</th><th class="text-right realizado-color" title="Clientes recuperados até o momento">Realizado</th><th class="text-right" title="Percentual de atingimento da meta">%</th><th class="text-right" title="Valor total faturado">Faturamento</th></tr></thead><tbody>';

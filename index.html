@@ -814,9 +814,10 @@
       html += '<span style="font-size:14px;color:#34d399;font-weight:600">\u25cf Internos (Televendas): ' + recupTotal + ' clientes \u00B7 ' + fmtCurr(fatGeraluramento) + '</span>';
       html += '<span style="font-size:14px;color:#f59e0b;font-weight:600">\u25cf Externos (RCA): ' + rcaTotalClientes + ' clientes \u00B7 ' + fmtCurr(rcaTotalFaturamento) + '</span>';
       html += '</div></div>';
-      html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px">';
-      html += '<div class="card"><div class="label">' + icn('users',12) + ' Clientes Recuperados (Televendas)</div><div class="value" style="font-size:36px">' + recupTotal + '</div></div>';
-      html += '<div class="card"><div class="label">' + icn('dollar-sign',12) + ' Faturamento Total Televendas</div><div class="value" style="font-size:36px">' + fmtCurr(fatGeraluramento) + '</div></div>';
+      html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px">';
+      html += '<div class="card" style="border-color:#f59e0b44;background:linear-gradient(135deg,#1a1520,#1f1d2b)"><div class="label" style="color:#f59e0b;font-weight:700">' + icn('bar-chart-3',12) + ' Total Geral</div><div class="value" style="font-size:34px;color:#f0f2f8">' + totalGeralClientes + ' <span style="font-size:14px;color:#6b7280;font-weight:400">clientes</span></div><div class="sub" style="font-size:22px;font-weight:700;color:#fbbf24;margin-top:2px">' + fmtCurr(totalGeralFaturamento) + '</div></div>';
+      html += '<div class="card"><div class="label">' + icn('users',12) + ' Televendas</div><div class="value" style="font-size:34px">' + recupTotal + ' <span style="font-size:14px;color:#6b7280;font-weight:400">clientes</span></div><div class="sub" style="font-size:22px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(fatGeraluramento) + '</div><div style="font-size:11px;color:#6b7280;margin-top:4px">' + (totalGeralClientes > 0 ? Math.round(recupTotal / totalGeralClientes * 100) : 0) + '% do total</div></div>';
+      html += '<div class="card" style="border-color:#78350f;background:linear-gradient(135deg,#1a0f0a,#1f1015)"><div class="label" style="color:#f59e0b">' + icn('users',12) + ' RCA Externo</div><div class="value" style="font-size:34px;color:#f0f2f8">' + rcaTotalClientes + ' <span style="font-size:14px;color:#6b7280;font-weight:400">clientes</span></div><div class="sub" style="font-size:22px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(rcaTotalFaturamento) + '</div><div style="font-size:11px;color:#6b7280;margin-top:4px">' + (totalGeralClientes > 0 ? Math.round(rcaTotalClientes / totalGeralClientes * 100) : 0) + '% do total</div></div>';
       html += '</div>';
 
       // CHARTS
@@ -965,21 +966,6 @@
         html += '<div class="card" style="border-color:#78350f;background:linear-gradient(135deg,#1a0f0a,#1f1015)"><div class="label" style="color:#f59e0b">\u{1F465} RCA Externo</div><div class="value" style="font-size:24px">' + pg.rcaExterno.totalClientes + ' clientes</div><div class="sub" style="font-size:18px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(pg.rcaExterno.totalFaturamento) + '</div></div>';
       }
       html += '</div>';
-
-      // RCA Externo — BigNumber do mês atual
-      var rcaMatriz = allData.rcaExterno && allData.rcaExterno.matriz ? allData.rcaExterno.matriz : [];
-      var rcaMes = null;
-      for (var rm = 0; rm < rcaMatriz.length; rm++) {
-        if (rcaMatriz[rm].mes === monthName) { rcaMes = rcaMatriz[rm]; break; }
-      }
-      if (rcaMes && (rcaMes.clientes > 0 || rcaMes.faturamento > 0)) {
-        html += '<div class="card" style="border-color:#78350f;background:linear-gradient(135deg,#1a0f0a,#1f1015);margin-bottom:22px">';
-        html += '<div class="label" style="color:#f59e0b">\u{1F4CA} RCA Externo — ' + monthName + '</div>';
-        html += '<div style="display:flex;gap:24px;align-items:baseline">';
-        html += '<div class="value" style="font-size:28px;color:#f0f2f8">' + (rcaMes.clientes || 0) + ' <span style="font-size:13px;color:#6b7280;font-weight:400">clientes recuperados</span></div>';
-        html += '<div class="sub" style="font-size:22px;font-weight:700;color:#34d399">' + fmtCurr(rcaMes.faturamento || 0) + '</div>';
-        html += '</div></div>';
-      }
 
       html += '<div style="display:flex;gap:18px;margin-bottom:18px;flex-wrap:wrap;font-size:13px;color:#6b7280;align-items:center"><span>Legenda:</span><span><span class="badge badge-green">Batida ✓</span> ≥100%</span><span><span class="badge badge-yellow">Parcial &#9888;</span> 80–99%</span><span><span class="badge badge-red">Abaixo &#128308;</span> &lt;80%</span></div>';
 

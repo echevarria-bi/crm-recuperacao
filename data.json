@@ -14,7 +14,7 @@
           "Abril": 678.98,
           "Maio": 522.2,
           "Junho": 520.57,
-          "Julho": 477.41
+          "Julho": 492.62
         },
         {
           "label": "Meta de Contatos",
@@ -35,7 +35,7 @@
           "Abril": 49565.53,
           "Maio": 66319.38,
           "Junho": 107757.72,
-          "Julho": 116965.59
+          "Julho": 120690.76
         },
         {
           "label": "Realizado de Contatos",
@@ -66,8 +66,8 @@
           "Abril": 6711.68,
           "Maio": 11453.31,
           "Junho": 19663.45,
-          "Julho": 17882.86,
-          "Total": 55711.3
+          "Julho": 18474.32,
+          "Total": 56302.76
         },
         {
           "profissional": "Camila",
@@ -89,16 +89,16 @@
           "Abril": 20892.43,
           "Maio": 15933.78,
           "Junho": 32825.81,
-          "Julho": 44094.21,
-          "Total": 113746.23
+          "Julho": 46775.5,
+          "Total": 116427.52
         },
         {
           "profissional": "Tatiana",
           "Abril": 15507.7,
           "Maio": 22965.75,
           "Junho": 37673.91,
-          "Julho": 31474.09,
-          "Total": 107621.45
+          "Julho": 31926.51,
+          "Total": 108073.87
         },
         {
           "profissional": "Tatiana Litoral",
@@ -1871,7 +1871,7 @@
                 "realizado": 0
               }
             ],
-            "faturamento": 17882.86
+            "faturamento": 18474.32
           },
           {
             "profissional": "Camila - SUL",
@@ -2174,7 +2174,7 @@
                 "realizado": 0
               }
             ],
-            "faturamento": 31474.09
+            "faturamento": 31926.51
           },
           {
             "profissional": "Tatiana - LITORAL",
@@ -2285,7 +2285,7 @@
           "pct": 32.3,
           "dias": []
         },
-        "faturamentoGeral": 71683.13,
+        "faturamentoGeral": 72727.01,
         "dayNums": [
           1,
           2,
@@ -2358,7 +2358,7 @@
       "rcaExterno": null
     },
     "profissionais": {},
-    "faturamentoTotal": 340608.22,
+    "faturamentoTotal": 344333.39,
     "faturamentoClientes": [
       {
         "cliente": 44093,
@@ -2403,6 +2403,13 @@
         "prof": "Tatiana"
       },
       {
+        "cliente": 41645,
+        "nome": "56.058.941 TAIS COSTA DE OLIVEIRA SILVA",
+        "valor": 7743.09,
+        "mes": "Julho",
+        "prof": "Natalia"
+      },
+      {
         "cliente": 40561,
         "nome": "BEAR ICE GELO EM CUBOS LTDA",
         "valor": 7224.1,
@@ -2429,13 +2436,6 @@
         "valor": 6276.41,
         "mes": "Abril",
         "prof": "Tatiana"
-      },
-      {
-        "cliente": 41645,
-        "nome": "56.058.941 TAIS COSTA DE OLIVEIRA SILVA",
-        "valor": 5581,
-        "mes": "Julho",
-        "prof": "Natalia"
       },
       {
         "cliente": 37802,
@@ -2494,6 +2494,13 @@
         "prof": "Natalia"
       },
       {
+        "cliente": 41105,
+        "nome": "12.683.141 CATLEN CHAIANA DA SILVA TEIXE",
+        "valor": 2680.4,
+        "mes": "Julho",
+        "prof": "Natalia"
+      },
+      {
         "cliente": 38862,
         "nome": "MADU FOODS LTDA",
         "valor": 2598.88,
@@ -2527,13 +2534,6 @@
         "valor": 2254.8,
         "mes": "Abril",
         "prof": "Ariane"
-      },
-      {
-        "cliente": 41105,
-        "nome": "12.683.141 CATLEN CHAIANA DA SILVA TEIXE",
-        "valor": 2161.2,
-        "mes": "Julho",
-        "prof": "Natalia"
       },
       {
         "cliente": 20828,
@@ -3362,6 +3362,13 @@
         "prof": "Anna"
       },
       {
+        "cliente": 39891,
+        "nome": "PITANGA ESCOLA DE EDUCAÇÃO INFANTIL LTDA",
+        "valor": 554.06,
+        "mes": "Julho",
+        "prof": "Ariane"
+      },
+      {
         "cliente": 2425,
         "nome": "MOACIR DOMINGOS MOCELLIN",
         "valor": 546.6,
@@ -3691,6 +3698,13 @@
         "prof": "Ariane"
       },
       {
+        "cliente": 2010,
+        "nome": "CONFEITARIA ZONA SUL LTDA",
+        "valor": 438,
+        "mes": "Julho",
+        "prof": "Ariane"
+      },
+      {
         "cliente": 25853,
         "nome": "ROSELE MEDINA GASQUE",
         "valor": 437.4,
@@ -3856,13 +3870,6 @@
         "nome": "SUL BEER BAR LTDA",
         "valor": 400.81,
         "mes": "Junho",
-        "prof": "Ariane"
-      },
-      {
-        "cliente": 39891,
-        "nome": "PITANGA ESCOLA DE EDUCAÇÃO INFANTIL LTDA",
-        "valor": 400.6,
-        "mes": "Julho",
         "prof": "Ariane"
       },
       {
@@ -4221,6 +4228,13 @@
         "valor": 287.23,
         "mes": "Junho",
         "prof": "Camila"
+      },
+      {
+        "cliente": 41852,
+        "nome": "LANCHONETE O SANTO LTDA",
+        "valor": 283.55,
+        "mes": "Julho",
+        "prof": "Tatiana"
       },
       {
         "cliente": 28847,
@@ -5068,6 +5082,13 @@
         "valor": 168.9,
         "mes": "Junho",
         "prof": "Camila"
+      },
+      {
+        "cliente": 29827,
+        "nome": "JOTANIL COMERCIO DE ALIMENTOS LTDA",
+        "valor": 168.87,
+        "mes": "Julho",
+        "prof": "Tatiana"
       },
       {
         "cliente": 44062,
@@ -6050,13 +6071,6 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 41852,
-        "nome": "LANCHONETE O SANTO LTDA",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Tatiana"
-      },
-      {
         "cliente": 41862,
         "nome": "ANGELICA BLANGER JORDON",
         "valor": 0,
@@ -6456,13 +6470,6 @@
         "prof": "Tatiana"
       },
       {
-        "cliente": 29827,
-        "nome": "JOTANIL COMERCIO DE ALIMENTOS LTDA",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Tatiana"
-      },
-      {
         "cliente": 32789,
         "nome": "CRISTIANE TELES VIEIRA LTDA",
         "valor": 0,
@@ -6516,13 +6523,6 @@
         "nome": "CONFEITARIA ZONA SUL LTDA",
         "valor": 0,
         "mes": "Junho",
-        "prof": "Ariane"
-      },
-      {
-        "cliente": 2010,
-        "nome": "CONFEITARIA ZONA SUL LTDA",
-        "valor": 0,
-        "mes": "Julho",
         "prof": "Ariane"
       },
       {
@@ -7145,7 +7145,7 @@
         ]
       },
       "2010": {
-        "comprasAposRecuperacao": 1,
+        "comprasAposRecuperacao": 2,
         "recuperadoEm": "Maio",
         "mesRefNum": 5,
         "detalhes": [
@@ -7158,12 +7158,27 @@
             "valor": 248.95,
             "numnota": "1420149",
             "fornecedor": "AV09 COMÉRCIO EXTERIOR S.A."
+          },
+          {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "PES FILE PANGA S/G CX AMAREL NINEFISH CG",
+            "qtde": 20,
+            "punit": 21.9,
+            "valor": 438,
+            "numnota": "1447211",
+            "fornecedor": "AV09 COMÉRCIO EXTERIOR S.A."
           }
         ],
         "diasCompra": [
           {
             "data": "2026-05-05",
             "valor": 248.95,
+            "itens": 1
+          },
+          {
+            "data": "2026-07-28",
+            "valor": 438,
             "itens": 1
           }
         ]
@@ -11545,7 +11560,7 @@
         ]
       },
       "29827": {
-        "comprasAposRecuperacao": 1,
+        "comprasAposRecuperacao": 2,
         "recuperadoEm": "Junho",
         "mesRefNum": 6,
         "detalhes": [
@@ -11578,12 +11593,47 @@
             "valor": 18.18,
             "numnota": "1434968",
             "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-27",
+            "mes": "Julho",
+            "produto": "DOC FAROFA DE PACOCA 1,01KG DAAL SC",
+            "qtde": 4,
+            "punit": 13.29,
+            "valor": 56.48,
+            "numnota": "1446904",
+            "fornecedor": "BOKADA ALIMENTOS LTDA"
+          },
+          {
+            "data": "2026-07-27",
+            "mes": "Julho",
+            "produto": "DOC AMENDOIM TRITURADO 1,01KG DAAL SC",
+            "qtde": 2,
+            "punit": 16.9,
+            "valor": 35.91,
+            "numnota": "1446904",
+            "fornecedor": "BOKADA ALIMENTOS LTDA"
+          },
+          {
+            "data": "2026-07-27",
+            "mes": "Julho",
+            "produto": "DOC CHOCOCANDY CONF COLORID 450G DORI SC",
+            "qtde": 4,
+            "punit": 17.99,
+            "valor": 76.48,
+            "numnota": "1446904",
+            "fornecedor": "DORI ALIMENTOS S.A."
           }
         ],
         "diasCompra": [
           {
             "data": "2026-06-19",
             "valor": 265.15,
+            "itens": 3
+          },
+          {
+            "data": "2026-07-27",
+            "valor": 168.87,
             "itens": 3
           }
         ]
@@ -17498,7 +17548,7 @@
         ]
       },
       "39891": {
-        "comprasAposRecuperacao": 5,
+        "comprasAposRecuperacao": 6,
         "recuperadoEm": "Abril",
         "mesRefNum": 4,
         "detalhes": [
@@ -17663,6 +17713,16 @@
             "fornecedor": "GONCALVES & TORTOLA S/A"
           },
           {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "FGO COXA C/S INDIV CANCAO CG",
+            "qtde": 5.45,
+            "punit": 7.79,
+            "valor": 45.4,
+            "numnota": "1447274",
+            "fornecedor": "GONCALVES & TORTOLA S/A"
+          },
+          {
             "data": "2026-07-10",
             "mes": "Julho",
             "produto": "BOV MOIDA I CALLEGARO CG",
@@ -17683,6 +17743,16 @@
             "fornecedor": "GONCALVES & TORTOLA S/A"
           },
           {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "FGO FILE PEITO INDIV CANCAO CG",
+            "qtde": 5.1,
+            "punit": 13.98,
+            "valor": 76.25,
+            "numnota": "1447274",
+            "fornecedor": "GONCALVES & TORTOLA S/A"
+          },
+          {
             "data": "2026-07-10",
             "mes": "Julho",
             "produto": "FGO COXA DA ASA INDIV MAIS FRANGO CG",
@@ -17690,6 +17760,16 @@
             "punit": 10.9,
             "valor": 43.6,
             "numnota": "1441740",
+            "fornecedor": "MAIS FRANGO MIRAGUAI LTDA"
+          },
+          {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "FGO COXA DA ASA INDIV MAIS FRANGO CG",
+            "qtde": 2.5,
+            "punit": 11.9,
+            "valor": 31.81,
+            "numnota": "1447274",
             "fornecedor": "MAIS FRANGO MIRAGUAI LTDA"
           }
         ],
@@ -17718,6 +17798,11 @@
             "data": "2026-07-10",
             "valor": 400.6,
             "itens": 4
+          },
+          {
+            "data": "2026-07-28",
+            "valor": 153.46,
+            "itens": 3
           }
         ]
       },
@@ -19339,7 +19424,7 @@
         ]
       },
       "41105": {
-        "comprasAposRecuperacao": 5,
+        "comprasAposRecuperacao": 6,
         "recuperadoEm": "Abril",
         "mesRefNum": 4,
         "detalhes": [
@@ -19402,6 +19487,16 @@
             "valor": 629,
             "numnota": "1444565",
             "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "FRU ACAI TRAD 5L ORIGEM CG",
+            "qtde": 8,
+            "punit": 64.9,
+            "valor": 519.2,
+            "numnota": "1447075",
+            "fornecedor": "N. ZEPPONE & CIA LTDA"
           }
         ],
         "diasCompra": [
@@ -19428,6 +19523,11 @@
           {
             "data": "2026-07-21",
             "valor": 629,
+            "itens": 1
+          },
+          {
+            "data": "2026-07-28",
+            "valor": 519.2,
             "itens": 1
           }
         ]
@@ -21192,7 +21292,7 @@
         ]
       },
       "41645": {
-        "comprasAposRecuperacao": 6,
+        "comprasAposRecuperacao": 7,
         "recuperadoEm": "Maio",
         "mesRefNum": 5,
         "detalhes": [
@@ -21285,6 +21385,26 @@
             "valor": 1887,
             "numnota": "1444553",
             "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "FRU ACAI TRAD 5L ORIGEM CG",
+            "qtde": 34,
+            "punit": 61.9,
+            "valor": 2104.6,
+            "numnota": "1447065",
+            "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "BOV FILE COSTELA (ENTRECOT) BOI BRASI RF",
+            "qtde": 1.34,
+            "punit": 42.9,
+            "valor": 57.49,
+            "numnota": "1447065",
+            "fornecedor": "INDUSTRIA E COMERCIO DE CARNES E DERIVAD"
           }
         ],
         "diasCompra": [
@@ -21317,6 +21437,11 @@
             "data": "2026-07-21",
             "valor": 1887,
             "itens": 1
+          },
+          {
+            "data": "2026-07-28",
+            "valor": 2162.0899999999997,
+            "itens": 2
           }
         ]
       },
@@ -21892,7 +22017,7 @@
         ]
       },
       "41852": {
-        "comprasAposRecuperacao": 2,
+        "comprasAposRecuperacao": 3,
         "recuperadoEm": "Abril",
         "mesRefNum": 4,
         "detalhes": [
@@ -21935,6 +22060,26 @@
             "valor": 144.8,
             "numnota": "1423496",
             "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "FRU CREME DE CUPUACU 3,4KG POLPANORTE CG",
+            "qtde": 3,
+            "punit": 47.9,
+            "valor": 148.93,
+            "numnota": "1447032",
+            "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "FRU ACAI TRAD 5 KG ZERO POLPANORTE CG",
+            "qtde": 1,
+            "punit": 129.9,
+            "valor": 134.62,
+            "numnota": "1447032",
+            "fornecedor": "N. ZEPPONE & CIA LTDA"
           }
         ],
         "diasCompra": [
@@ -21946,6 +22091,11 @@
           {
             "data": "2026-05-14",
             "valor": 293.82000000000005,
+            "itens": 2
+          },
+          {
+            "data": "2026-07-28",
+            "valor": 283.55,
             "itens": 2
           }
         ]
@@ -27159,5 +27309,5 @@
     }
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-27T12:13:48.553Z"
+  "updatedAt": "2026-07-28T11:37:57.158Z"
 }

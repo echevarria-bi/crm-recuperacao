@@ -14,7 +14,7 @@
           "Abril": 678.98,
           "Maio": 522.2,
           "Junho": 520.57,
-          "Julho": 492.62
+          "Julho": 502.95
         },
         {
           "label": "Meta de Contatos",
@@ -35,7 +35,7 @@
           "Abril": 49565.53,
           "Maio": 66319.38,
           "Junho": 107757.72,
-          "Julho": 120690.76
+          "Julho": 123223.74
         },
         {
           "label": "Realizado de Contatos",
@@ -66,39 +66,39 @@
           "Abril": 6711.68,
           "Maio": 11453.31,
           "Junho": 19663.45,
-          "Julho": 18474.32,
-          "Total": 56302.76
+          "Julho": 18826.27,
+          "Total": 56654.71
         },
         {
           "profissional": "Camila",
           "Abril": 606.18,
           "Maio": 11561.6,
           "Junho": 13693.6,
-          "Julho": 17816.11,
-          "Total": 43677.49
+          "Julho": 18972.7,
+          "Total": 44834.08
         },
         {
           "profissional": "Cristielen",
           "Maio": 1370.55,
           "Junho": 2805.31,
-          "Julho": 4342.04,
-          "Total": 8517.9
+          "Julho": 4838.98,
+          "Total": 9014.84
         },
         {
           "profissional": "Natalia",
           "Abril": 20892.43,
           "Maio": 15933.78,
           "Junho": 32825.81,
-          "Julho": 46775.5,
-          "Total": 116427.52
+          "Julho": 46953.45,
+          "Total": 116605.47
         },
         {
           "profissional": "Tatiana",
           "Abril": 15507.7,
           "Maio": 22965.75,
           "Junho": 37673.91,
-          "Julho": 31926.51,
-          "Total": 108073.87
+          "Julho": 32276.06,
+          "Total": 108423.42
         },
         {
           "profissional": "Tatiana Litoral",
@@ -1871,7 +1871,7 @@
                 "realizado": 0
               }
             ],
-            "faturamento": 18474.32
+            "faturamento": 18826.27
           },
           {
             "profissional": "Camila - SUL",
@@ -1972,7 +1972,7 @@
                 "realizado": 1
               }
             ],
-            "faturamento": 17816.11
+            "faturamento": 18972.7
           },
           {
             "profissional": "Cristielen - VALE DOS SINOS",
@@ -2073,7 +2073,7 @@
                 "realizado": 0
               }
             ],
-            "faturamento": 4342.04
+            "faturamento": 4838.98
           },
           {
             "profissional": "Tatiana - SERRA",
@@ -2174,7 +2174,7 @@
                 "realizado": 0
               }
             ],
-            "faturamento": 31926.51
+            "faturamento": 32276.06
           },
           {
             "profissional": "Tatiana - LITORAL",
@@ -2285,7 +2285,7 @@
           "pct": 36,
           "dias": []
         },
-        "faturamentoGeral": 72727.01,
+        "faturamentoGeral": 75082.04,
         "dayNums": [
           1,
           2,
@@ -2358,7 +2358,7 @@
       "rcaExterno": null
     },
     "profissionais": {},
-    "faturamentoTotal": 344333.39,
+    "faturamentoTotal": 346866.37,
     "faturamentoClientes": [
       {
         "cliente": 44093,
@@ -2662,6 +2662,13 @@
         "prof": "Tatiana"
       },
       {
+        "cliente": 24254,
+        "nome": "SUL BEER BAR LTDA",
+        "valor": 1446.87,
+        "mes": "Julho",
+        "prof": "Ariane"
+      },
+      {
         "cliente": 44093,
         "nome": "DIOVANI DA SILVA",
         "valor": 1433.17,
@@ -2767,13 +2774,6 @@
         "prof": "Natalia"
       },
       {
-        "cliente": 24254,
-        "nome": "SUL BEER BAR LTDA",
-        "valor": 1094.92,
-        "mes": "Julho",
-        "prof": "Ariane"
-      },
-      {
         "cliente": 41105,
         "nome": "12.683.141 CATLEN CHAIANA DA SILVA TEIXE",
         "valor": 1058,
@@ -2851,11 +2851,25 @@
         "prof": "Camila"
       },
       {
+        "cliente": 41370,
+        "nome": "LERIDA KARINA DA COSTA MORAES",
+        "valor": 936.38,
+        "mes": "Julho",
+        "prof": "Camila"
+      },
+      {
         "cliente": 44345,
         "nome": "44.109.137 EZEQUIEL DOS SANTOS",
         "valor": 910.91,
         "mes": "Abril",
         "prof": "Natalia"
+      },
+      {
+        "cliente": 44685,
+        "nome": "64.556.231 ANGELITA XAVIER DA SILVA",
+        "valor": 896.77,
+        "mes": "Julho",
+        "prof": "Camila"
       },
       {
         "cliente": 10376,
@@ -3059,13 +3073,6 @@
         "valor": 732.91,
         "mes": "Junho",
         "prof": "Cristielen"
-      },
-      {
-        "cliente": 41370,
-        "nome": "LERIDA KARINA DA COSTA MORAES",
-        "valor": 730.15,
-        "mes": "Julho",
-        "prof": "Camila"
       },
       {
         "cliente": 29080,
@@ -3285,6 +3292,13 @@
         "prof": "Natalia"
       },
       {
+        "cliente": 25124,
+        "nome": "AIRTON J.C. DE FARIAS",
+        "valor": 614.2,
+        "mes": "Julho",
+        "prof": "Tatiana"
+      },
+      {
         "cliente": 20828,
         "nome": "NATHALIA SOUZA TASSONI",
         "valor": 599.91,
@@ -3341,6 +3355,13 @@
         "prof": "Tatiana"
       },
       {
+        "cliente": 44928,
+        "nome": "56.356.834 SABRINA VITORIA OLIVEIRA DA SILVA",
+        "valor": 576.16,
+        "mes": "Julho",
+        "prof": "Cristielen"
+      },
+      {
         "cliente": 39891,
         "nome": "PITANGA ESCOLA DE EDUCAÇÃO INFANTIL LTDA",
         "valor": 570,
@@ -3381,6 +3402,13 @@
         "valor": 544.22,
         "mes": "Maio",
         "prof": "Natalia"
+      },
+      {
+        "cliente": 31206,
+        "nome": "KATIA SIMONE LUCAS ROSA",
+        "valor": 541.42,
+        "mes": "Julho",
+        "prof": "Camila"
       },
       {
         "cliente": 41363,
@@ -3528,13 +3556,6 @@
         "valor": 497.4,
         "mes": "Junho",
         "prof": "Natalia"
-      },
-      {
-        "cliente": 44685,
-        "nome": "64.556.231 ANGELITA XAVIER DA SILVA",
-        "valor": 495.3,
-        "mes": "Julho",
-        "prof": "Camila"
       },
       {
         "cliente": 7029,
@@ -3929,6 +3950,13 @@
         "prof": "Ariane"
       },
       {
+        "cliente": 23621,
+        "nome": "MARCOS OLIVEIRA RODRIGUES",
+        "valor": 376.45,
+        "mes": "Julho",
+        "prof": "Camila"
+      },
+      {
         "cliente": 7546,
         "nome": "CASA DI PAOLO GALETO E GRELHADOS BENTO EIRELI",
         "valor": 369.95,
@@ -3948,13 +3976,6 @@
         "valor": 369.55,
         "mes": "Abril",
         "prof": "Natalia"
-      },
-      {
-        "cliente": 31206,
-        "nome": "KATIA SIMONE LUCAS ROSA",
-        "valor": 368.98,
-        "mes": "Julho",
-        "prof": "Camila"
       },
       {
         "cliente": 39891,
@@ -4144,13 +4165,6 @@
         "valor": 306.35,
         "mes": "Maio",
         "prof": "Ariane"
-      },
-      {
-        "cliente": 44928,
-        "nome": "56.356.834 SABRINA VITORIA OLIVEIRA DA SILVA",
-        "valor": 305.22,
-        "mes": "Julho",
-        "prof": "Cristielen"
       },
       {
         "cliente": 28819,
@@ -4374,13 +4388,6 @@
         "nome": "JOTANIL COMERCIO DE ALIMENTOS LTDA",
         "valor": 265.15,
         "mes": "Junho",
-        "prof": "Tatiana"
-      },
-      {
-        "cliente": 25124,
-        "nome": "AIRTON J.C. DE FARIAS",
-        "valor": 264.65,
-        "mes": "Julho",
         "prof": "Tatiana"
       },
       {
@@ -4627,6 +4634,13 @@
         "valor": 226.86,
         "mes": "Maio",
         "prof": "Natalia"
+      },
+      {
+        "cliente": 34645,
+        "nome": "BRUNO TELLES CAMARGO",
+        "valor": 226,
+        "mes": "Julho",
+        "prof": "Cristielen"
       },
       {
         "cliente": 41058,
@@ -4963,6 +4977,13 @@
         "valor": 178.95,
         "mes": "Junho",
         "prof": "Cristielen"
+      },
+      {
+        "cliente": 28233,
+        "nome": "EVALDO SOUZA DE OLIVEIRA 66786240097",
+        "valor": 177.95,
+        "mes": "Julho",
+        "prof": "Natalia"
       },
       {
         "cliente": 13483,
@@ -6211,13 +6232,6 @@
         "prof": "Ariane"
       },
       {
-        "cliente": 23621,
-        "nome": "MARCOS OLIVEIRA RODRIGUES",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Camila"
-      },
-      {
         "cliente": 44106,
         "nome": "47.829.257 CAROLINE DE OLIVEIRA FIGUEIRO",
         "valor": 0,
@@ -6512,13 +6526,6 @@
         "prof": "Cristielen"
       },
       {
-        "cliente": 34645,
-        "nome": "BRUNO TELLES CAMARGO",
-        "valor": 0,
-        "mes": "Julho",
-        "prof": "Cristielen"
-      },
-      {
         "cliente": 2010,
         "nome": "CONFEITARIA ZONA SUL LTDA",
         "valor": 0,
@@ -6747,13 +6754,6 @@
         "nome": "EVALDO SOUZA DE OLIVEIRA 66786240097",
         "valor": 0,
         "mes": "Junho",
-        "prof": "Natalia"
-      },
-      {
-        "cliente": 28233,
-        "nome": "EVALDO SOUZA DE OLIVEIRA 66786240097",
-        "valor": 0,
-        "mes": "Julho",
         "prof": "Natalia"
       },
       {
@@ -9202,7 +9202,7 @@
         ]
       },
       "23621": {
-        "comprasAposRecuperacao": 1,
+        "comprasAposRecuperacao": 2,
         "recuperadoEm": "Junho",
         "mesRefNum": 6,
         "detalhes": [
@@ -9215,6 +9215,26 @@
             "valor": 273.19,
             "numnota": "1430540",
             "fornecedor": "MAIS FRANGO MIRAGUAI LTDA"
+          },
+          {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "LAT NATA BALDE 3KG PETRY RF",
+            "qtde": 1,
+            "punit": 66.9,
+            "valor": 68.71,
+            "numnota": "1447698",
+            "fornecedor": "LATICINIOS PETRY LTDA"
+          },
+          {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "FGO FILE PEITO INDIV CANCAO CG",
+            "qtde": 20,
+            "punit": 14.98,
+            "valor": 307.74,
+            "numnota": "1447698",
+            "fornecedor": "GONCALVES & TORTOLA S/A"
           }
         ],
         "diasCompra": [
@@ -9222,11 +9242,16 @@
             "data": "2026-06-05",
             "valor": 273.19,
             "itens": 1
+          },
+          {
+            "data": "2026-07-29",
+            "valor": 376.45,
+            "itens": 2
           }
         ]
       },
       "24254": {
-        "comprasAposRecuperacao": 4,
+        "comprasAposRecuperacao": 5,
         "recuperadoEm": "Junho",
         "mesRefNum": 6,
         "detalhes": [
@@ -9399,6 +9424,16 @@
             "valor": 235.03,
             "numnota": "1446485",
             "fornecedor": "ALIMENTOS MODERNOS S.A."
+          },
+          {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "VEG BATATA TRAD 9MM 2KG BUTLER CG",
+            "qtde": 36,
+            "punit": 9.5,
+            "valor": 351.95,
+            "numnota": "1447776",
+            "fornecedor": "ALIMENTOS MODERNOS S.A."
           }
         ],
         "diasCompra": [
@@ -9421,6 +9456,11 @@
             "data": "2026-07-24",
             "valor": 333.06,
             "itens": 2
+          },
+          {
+            "data": "2026-07-29",
+            "valor": 351.95,
+            "itens": 1
           }
         ]
       },
@@ -9513,7 +9553,7 @@
         ]
       },
       "25124": {
-        "comprasAposRecuperacao": 2,
+        "comprasAposRecuperacao": 3,
         "recuperadoEm": "Junho",
         "mesRefNum": 6,
         "detalhes": [
@@ -9536,6 +9576,16 @@
             "valor": 264.65,
             "numnota": "1442571",
             "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "FRU ACAI TRAD 5 KG POLPANORTE CG",
+            "qtde": 4,
+            "punit": 84.9,
+            "valor": 349.55,
+            "numnota": "1447500",
+            "fornecedor": "N. ZEPPONE & CIA LTDA"
           }
         ],
         "diasCompra": [
@@ -9547,6 +9597,11 @@
           {
             "data": "2026-07-15",
             "valor": 264.65,
+            "itens": 1
+          },
+          {
+            "data": "2026-07-29",
+            "valor": 349.55,
             "itens": 1
           }
         ]
@@ -10545,7 +10600,7 @@
         ]
       },
       "28233": {
-        "comprasAposRecuperacao": 1,
+        "comprasAposRecuperacao": 2,
         "recuperadoEm": "Maio",
         "mesRefNum": 5,
         "detalhes": [
@@ -10558,12 +10613,27 @@
             "valor": 297.59,
             "numnota": "1420486",
             "fornecedor": "GONCALVES & TORTOLA S/A"
+          },
+          {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "FRU CREME DE CUPUACU 3,4KG POLPANORTE CG",
+            "qtde": 3,
+            "punit": 56,
+            "valor": 177.95,
+            "numnota": "1447562",
+            "fornecedor": "N. ZEPPONE & CIA LTDA"
           }
         ],
         "diasCompra": [
           {
             "data": "2026-05-06",
             "valor": 297.59,
+            "itens": 1
+          },
+          {
+            "data": "2026-07-29",
+            "valor": 177.95,
             "itens": 1
           }
         ]
@@ -12022,7 +12092,7 @@
         ]
       },
       "31206": {
-        "comprasAposRecuperacao": 2,
+        "comprasAposRecuperacao": 3,
         "recuperadoEm": "Julho",
         "mesRefNum": 7,
         "detalhes": [
@@ -12067,6 +12137,16 @@
             "fornecedor": "N. ZEPPONE & CIA LTDA"
           },
           {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "FRU ACAI TRAD TODA HORA 5L ORIGEM CG",
+            "qtde": 3,
+            "punit": 46.5,
+            "valor": 148.05,
+            "numnota": "1447466",
+            "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
             "data": "2026-07-16",
             "mes": "Julho",
             "produto": "LAT COMPOSTO DE ACAI 1KG PIATTOLAC SC",
@@ -12074,6 +12154,16 @@
             "punit": 22.99,
             "valor": 48.44,
             "numnota": "1443765",
+            "fornecedor": "PIATTO INDUSTRIA E COMERCIO DE ALIMENTOS"
+          },
+          {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "LAT COMPOSTO DE ACAI 1KG PIATTOLAC SC",
+            "qtde": 1,
+            "punit": 22.99,
+            "valor": 24.39,
+            "numnota": "1447466",
             "fornecedor": "PIATTO INDUSTRIA E COMERCIO DE ALIMENTOS"
           }
         ],
@@ -12086,6 +12176,11 @@
           {
             "data": "2026-07-16",
             "valor": 195.43,
+            "itens": 2
+          },
+          {
+            "data": "2026-07-28",
+            "valor": 172.44,
             "itens": 2
           }
         ]
@@ -14193,7 +14288,7 @@
         ]
       },
       "34645": {
-        "comprasAposRecuperacao": 1,
+        "comprasAposRecuperacao": 2,
         "recuperadoEm": "Junho",
         "mesRefNum": 6,
         "detalhes": [
@@ -14206,6 +14301,26 @@
             "valor": 165.8,
             "numnota": "1438106",
             "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "EMB PRESUNTO FAT PROGRESSO  RF",
+            "qtde": 3,
+            "punit": 24.5,
+            "valor": 76.88,
+            "numnota": "1447590",
+            "fornecedor": "MILANESE INDUSTRIA DE ALIMENTOS LTDA"
+          },
+          {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "LAT QJO MUSSARELA FAT PETRY RF",
+            "qtde": 4.15,
+            "punit": 34.35,
+            "valor": 149.12,
+            "numnota": "1447590",
+            "fornecedor": "LATICINIOS PETRY LTDA"
           }
         ],
         "diasCompra": [
@@ -14213,6 +14328,11 @@
             "data": "2026-06-30",
             "valor": 165.8,
             "itens": 1
+          },
+          {
+            "data": "2026-07-29",
+            "valor": 226,
+            "itens": 2
           }
         ]
       },
@@ -20172,7 +20292,7 @@
         ]
       },
       "41370": {
-        "comprasAposRecuperacao": 8,
+        "comprasAposRecuperacao": 9,
         "recuperadoEm": "Maio",
         "mesRefNum": 5,
         "detalhes": [
@@ -20487,6 +20607,16 @@
             "fornecedor": "LAR COOPERATIVA AGROINDUSTRIAL"
           },
           {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "FGO SOBRECOXA INDIV FRIATO CG",
+            "qtde": 3,
+            "punit": 9.39,
+            "valor": 29.59,
+            "numnota": "1447665",
+            "fornecedor": "FLAMIL COMERCIO, TRANSPORTE RODOVIARIO E"
+          },
+          {
             "data": "2026-07-01",
             "mes": "Julho",
             "produto": "FGO FILE PEITO INDIV CANCAO CG",
@@ -20607,6 +20737,16 @@
             "fornecedor": "BEBIDAS GRASSI DO BRASIL LTDA"
           },
           {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "BOV LAGARTO PLENA CG",
+            "qtde": 1.95,
+            "punit": 36.5,
+            "valor": 74.78,
+            "numnota": "1447665",
+            "fornecedor": "PLENA ALIMENTOS S/A"
+          },
+          {
             "data": "2026-07-08",
             "mes": "Julho",
             "produto": "BOV FRALDA PUL SELECT RF",
@@ -20624,6 +20764,16 @@
             "punit": 35.9,
             "valor": 183.35,
             "numnota": "1442705",
+            "fornecedor": "MINERVA S.A"
+          },
+          {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "BOV FRALDA PUL PRO RF",
+            "qtde": 2.7,
+            "punit": 35.9,
+            "valor": 101.86,
+            "numnota": "1447665",
             "fornecedor": "MINERVA S.A"
           }
         ],
@@ -20667,6 +20817,11 @@
             "data": "2026-07-15",
             "valor": 371.23,
             "itens": 5
+          },
+          {
+            "data": "2026-07-29",
+            "valor": 206.23000000000002,
+            "itens": 3
           }
         ]
       },
@@ -26838,7 +26993,7 @@
         ]
       },
       "44685": {
-        "comprasAposRecuperacao": 2,
+        "comprasAposRecuperacao": 3,
         "recuperadoEm": "Julho",
         "mesRefNum": 7,
         "detalhes": [
@@ -26861,6 +27016,26 @@
             "valor": 291.35,
             "numnota": "1444287",
             "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "FRU ACAI TRAD TODA HORA 5L ORIGEM CG",
+            "qtde": 7,
+            "punit": 47.5,
+            "valor": 332.5,
+            "numnota": "1447374",
+            "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
+            "data": "2026-07-28",
+            "mes": "Julho",
+            "produto": "LAT COMPOSTO DE ACAI 1KG PIATTOLAC SC",
+            "qtde": 3,
+            "punit": 22.99,
+            "valor": 68.97,
+            "numnota": "1447374",
+            "fornecedor": "PIATTO INDUSTRIA E COMERCIO DE ALIMENTOS"
           }
         ],
         "diasCompra": [
@@ -26873,6 +27048,11 @@
             "data": "2026-07-20",
             "valor": 291.35,
             "itens": 1
+          },
+          {
+            "data": "2026-07-28",
+            "valor": 401.47,
+            "itens": 2
           }
         ]
       },
@@ -27004,7 +27184,7 @@
         ]
       },
       "44928": {
-        "comprasAposRecuperacao": 2,
+        "comprasAposRecuperacao": 3,
         "recuperadoEm": "Junho",
         "mesRefNum": 6,
         "detalhes": [
@@ -27069,6 +27249,26 @@
             "fornecedor": "PLENA ALIMENTOS S/A"
           },
           {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "MER MARGARINA POTE 500GR C/S DORIANA RF",
+            "qtde": 2,
+            "punit": 9.5,
+            "valor": 19.72,
+            "numnota": "1447660",
+            "fornecedor": "SEARA ALIMENTOS LTDA"
+          },
+          {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "FRU ACAI TRAD CAIXA 10 KG POLPANORTE CG",
+            "qtde": 1,
+            "punit": 167.5,
+            "valor": 173.9,
+            "numnota": "1447660",
+            "fornecedor": "N. ZEPPONE & CIA LTDA"
+          },
+          {
             "data": "2026-07-10",
             "mes": "Julho",
             "produto": "FGO FILE PEITO INDIV CANCAO CG",
@@ -27077,6 +27277,16 @@
             "valor": 27.45,
             "numnota": "1441559",
             "fornecedor": "GONCALVES & TORTOLA S/A"
+          },
+          {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "DOC FAROFA DE PACOCA 1,01KG DAAL SC",
+            "qtde": 1,
+            "punit": 14.55,
+            "valor": 15.1,
+            "numnota": "1447660",
+            "fornecedor": "BOKADA ALIMENTOS LTDA"
           },
           {
             "data": "2026-07-10",
@@ -27096,6 +27306,16 @@
             "punit": 10.99,
             "valor": 68.16,
             "numnota": "1441559",
+            "fornecedor": "M D A COMERCIO E TRANSPORTES DE CEREAIS"
+          },
+          {
+            "data": "2026-07-29",
+            "mes": "Julho",
+            "produto": "VEG BATATA 9MM PCT 2KG OURO DA TERRA CG",
+            "qtde": 6,
+            "punit": 9.99,
+            "valor": 62.22,
+            "numnota": "1447660",
             "fornecedor": "M D A COMERCIO E TRANSPORTES DE CEREAIS"
           },
           {
@@ -27129,6 +27349,11 @@
             "data": "2026-07-10",
             "valor": 305.22,
             "itens": 5
+          },
+          {
+            "data": "2026-07-29",
+            "valor": 270.94,
+            "itens": 4
           }
         ]
       },
@@ -27309,5 +27534,5 @@
     }
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-28T12:41:01.873Z"
+  "updatedAt": "2026-07-29T12:10:56.628Z"
 }

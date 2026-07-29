@@ -13,28 +13,28 @@
   <script src="https://echevarria-bi.github.io/crm-recuperacao/xlsx.full.min.js"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0b0d14;color:#e1e7ef;font-size:15px}
-    header{background:linear-gradient(135deg,#11131c,#1a1d27);border-bottom:1px solid #1e1b4b;padding:24px 36px;display:flex;align-items:center;flex-wrap:wrap;gap:10px}
-    header h1{font-size:26px;font-weight:700;background:linear-gradient(135deg,#f59e0b,#fb923c,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.5px}
-    .container{max-width:1300px;margin:0 auto;padding:28px 36px}
-    .upload-area{display:block;border:2px dashed #1e1b4b;border-radius:16px;padding:64px;text-align:center;background:linear-gradient(135deg,#11131c,#1a1d27);cursor:pointer;transition:.3s}
-    .upload-area:hover{border-color:#f59e0b;background:linear-gradient(135deg,#151830,#1e2030)}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#111;color:#eee;font-size:15px}
+    header{background:#1a1a2e;border-bottom:2px solid #f59e0b;padding:16px 24px;display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+    header h1{font-size:26px;font-weight:700;color:#f59e0b;letter-spacing:.5px}
+    .container{max-width:1400px;margin:0 auto;padding:24px 28px}
+    .upload-area{display:block;border:2px dashed rgba(255,255,255,0.06);border-radius:16px;padding:64px;text-align:center;background:linear-gradient(135deg,#1a1a2e,#16213e);cursor:pointer;transition:.3s}
+    .upload-area:hover{border-color:#f59e0b;background:linear-gradient(135deg,#1a1a2e,#1e2030)}
     .top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:14px}
     .top-bar .info{font-size:14px;color:#4a4d6e}
     .top-bar label{color:#9ca3af;font-size:14px;font-weight:500}
-    .tabs-group{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:12px;padding:9px 14px;margin-bottom:26px;flex-wrap:wrap}
+    .tabs-group{display:flex;align-items:center;gap:12px;background:#0d0d1a;border:1px solid #333;border-radius:12px;padding:9px 14px;margin-bottom:26px;flex-wrap:wrap}
     .tabs{display:flex;align-items:center;gap:4px}
     .tab-divider{width:1px;height:32px;background:linear-gradient(to bottom,transparent,#4a4d6e,transparent);margin:0 8px;flex-shrink:0}
     .tab-btn{padding:10px 22px;border:none;border-radius:8px;background:transparent;color:#6b7280;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:7px;white-space:nowrap;letter-spacing:.2px}
-    .tab-btn:hover{color:#e1e7ef;background:rgba(255,255,255,.04)}
+    .tab-btn:hover{color:#eee;background:rgba(255,255,255,.04)}
     .tab-btn.active{color:#fcd34d;background:linear-gradient(135deg,rgba(120,53,15,.35),rgba(69,25,3,.35));border:1px solid rgba(245,158,11,.3);box-shadow:0 0 14px rgba(245,158,11,.07)}
-    .tab-month{color:#4a4d6e;padding:8px 16px;font-size:13px;text-transform:uppercase;letter-spacing:.8px;font-weight:700}
-    .tab-month:hover{color:#c4c9d4;background:rgba(255,255,255,.03)}
-    .tab-month.active{color:#a78bfa;background:transparent;border:none;border-bottom:2.5px solid #a78bfa;border-radius:0;padding:8px 16px 4.5px;box-shadow:none}
+    .tab-month{color:#666;padding:14px 28px;font-size:14px;text-transform:uppercase;letter-spacing:.8px;font-weight:600}
+    .tab-month:hover{color:#eee;background:rgba(255,255,255,.03)}
+    .tab-month.active{color:#f59e0b;background:transparent;border:none;border-bottom:2.5px solid #f59e0b;border-radius:0;padding:14px 28px;box-shadow:none}
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
-    .card{background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:14px;padding:24px 28px;transition:.2s}
-    .card:hover{border-color:#f59e0b;transform:translateY(-1px);box-shadow:0 4px 20px rgba(245,158,11,.08)}
-    .card .label{font-size:13px;color:#6b7280;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:5px}
+    .card{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:22px 24px 18px;position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s}
+    .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3);border-color:rgba(255,255,255,0.06)}
+    .card .label{font-size:13px;color:#9ca3af;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:5px}
     .card .value{font-size:30px;font-weight:800;margin-top:4px;color:#f0f2f8;line-height:1.2}
     .card .sub{font-size:13px;color:#d1d5db;margin-top:6px}
     .var-up{color:#34d399}
@@ -50,33 +50,33 @@
     .grid-5 .card,.cards .card{display:flex;flex-direction:column;justify-content:center}
     .grid-5 .card .value,.cards .card .value{margin-top:0}
     @media(max-width:768px){.grid-2,.grid-4,.grid-5,.cards{grid-template-columns:1fr}.container{padding:18px}}
-    .chart-box{background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #1e1b4b;border-radius:14px;padding:24px;margin-bottom:22px;transition:.2s}
-    .chart-box:hover{border-color:#78350f}
-    .chart-box h2{font-size:14px;font-weight:700;margin-bottom:16px;color:#fcd34d;text-transform:uppercase;letter-spacing:.7px;padding-left:12px;border-left:3px solid #f59e0b}
-    .chart-box h2 .sub{font-size:13px;color:#d1d5db;font-weight:400;text-transform:none;letter-spacing:0}
+    .chart-box{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:24px;margin-bottom:24px}
+    .chart-box:hover{border-color:rgba(245,158,11,0.3)}
+    .chart-box h2{font-size:16px;font-weight:700;margin-bottom:14px;color:#fcd34d;text-transform:uppercase;letter-spacing:.7px}
+    .chart-box h2 .sub{font-size:14px;color:#aaa;font-weight:400;text-transform:none;letter-spacing:0}
     table{width:100%;border-collapse:collapse;font-size:15px}
-    th{padding:12px 14px;text-align:left;font-weight:600;color:#f59e0b;font-size:12px;text-transform:uppercase;letter-spacing:.5px;background:#11131c;border-bottom:1px solid #1e1b4b}
-    td{padding:11px 14px;text-align:left;border-bottom:1px solid #11131c;color:#c4c9d4;font-variant-numeric:tabular-nums}
-    tbody tr:hover{background:#151830!important}
-    tbody tr:nth-child(even){background:#0f1119}
-    .table-wrap{max-height:500px;overflow-y:auto;overflow-x:auto;border:1px solid #1e1b4b;border-radius:10px}
-    .table-wrap thead th{position:sticky;top:0;z-index:3;background:#0b0d14;box-shadow:0 1px 0 #1e1b4b}
-    .table-wrap tbody .tot-row td{position:sticky;bottom:0;z-index:2;background:#151830!important;box-shadow:0 -1px 0 #f59e0b}
-    .table-wrap tfoot.tot-row td{position:sticky;bottom:0;z-index:2;background:#151830!important;box-shadow:0 -1px 0 #f59e0b}
+    th{padding:12px 14px;text-align:left;font-weight:600;color:#f59e0b;font-size:12px;text-transform:uppercase;letter-spacing:.5px;background:#111;border-bottom:1px solid #333}
+    td{padding:11px 14px;text-align:left;border-bottom:1px solid #1a1a2e;color:#ccc;font-variant-numeric:tabular-nums}
+    tbody tr:hover{background:rgba(255,255,255,0.05)!important}
+    tbody tr:nth-child(even){background:rgba(255,255,255,0.02)}
+    .table-wrap{max-height:500px;overflow-y:auto;overflow-x:auto;border:1px solid #333;border-radius:10px}
+    .table-wrap thead th{position:sticky;top:0;z-index:3;background:#111;box-shadow:0 1px 0 #333}
+    .table-wrap tbody .tot-row td{position:sticky;bottom:0;z-index:2;background:#1a1a2e!important;box-shadow:0 -1px 0 #f59e0b}
+    .table-wrap tfoot.tot-row td{position:sticky;bottom:0;z-index:2;background:#1a1a2e!important;box-shadow:0 -1px 0 #f59e0b}
     .text-right{text-align:right}
     .text-center{text-align:center}
-    .tot-row td{background:#151830!important;border-top:2px solid #f59e0b;font-weight:700}
+    .tot-row td{background:#1a1a2e!important;border-top:2px solid #f59e0b;font-weight:700}
     .badge{padding:3px 12px;border-radius:4px;font-size:12px;font-weight:700;display:inline-block}
     .badge-green{background:rgba(52,211,153,.15);color:#34d399}
     .badge-red{background:rgba(239,68,68,.15);color:#f87171}
     .badge-yellow{background:rgba(245,158,11,.15);color:#fbbf24}
-    .pct-bar{height:10px;background:#1e1b4b;border-radius:4px;overflow:hidden;margin-top:6px}
+    .pct-bar{height:10px;background:#333;border-radius:4px;overflow:hidden;margin-top:6px}
     .pct-bar-fill{height:100%;border-radius:4px;min-width:2px}
-    .spinner{display:inline-block;width:18px;height:18px;border:2px solid #1e1b4b;border-top-color:#f59e0b;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+    .spinner{display:inline-block;width:18px;height:18px;border:2px solid #333;border-top-color:#f59e0b;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
     @keyframes spin{to{transform:rotate(360deg)}}
-    footer{text-align:center;padding:18px 24px;font-size:13px;color:#4a4d6e;border-top:1px solid #1e1b4b;margin-top:28px}
-    footer strong{color:#6b7280}
-    @media print{body{background:#fff!important;color:#000!important}header,nav,.top-bar,.tabs,.upload-area,#inputArquivo,footer{display:none!important}.container{max-width:100%!important;padding:0!important}.chart-box{background:#fff!important;border:1px solid #ddd!important;break-inside:avoid}.chart-box h2{color:#333!important;border-left-color:#f59e0b!important}.card{background:#f8f8f8!important;border:1px solid #ccc!important}.card .label{color:#666!important}.card .value{color:#000!important}th{color:#000!important;background:#f0f0f0!important}td{color:#333!important;border-color:#ddd!important}.tot-row td{background:#e8e8e8!important}@page{size:landscape;margin:8mm}}
+    footer{text-align:center;padding:16px;font-size:13px;color:#555;border-top:1px solid #1a1a2e;margin-top:28px}
+    footer strong{color:#666}
+    @media print{body{background:#fff!important;color:#000!important}header,nav,.top-bar,.tabs,.upload-area,#inputArquivo,footer{display:none!important}.container{max-width:100%!important;padding:0!important}.chart-box{background:#fff!important;border:1px solid #ddd!important;break-inside:avoid}.chart-box h2{color:#333!important;border-left:none}.card{background:#f8f8f8!important;border:1px solid #ccc!important}.card .label{color:#666!important}.card .value{color:#000!important}th{color:#000!important;background:#f0f0f0!important}td{color:#333!important;border-color:#ddd!important}.tot-row td{background:#e8e8e8!important}@page{size:landscape;margin:8mm}}
   </style>
 </head>
 <body>
@@ -86,7 +86,7 @@
     <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
       <span id="statusFile" style="font-size:13px;color:#6b7280"></span>
       <span id="tokenStatus" style="font-size:12px;color:#6b7280"></span>
-      <input type="password" id="tokenInput" placeholder="Token GitHub" onkeydown="if(event.key==='Enter')setToken(this.value)" style="width:100px;background:#11131c;border:1px solid #1e1b4b;border-radius:6px;padding:5px 10px;color:#e1e7ef;font-size:13px;outline:none;display:none">
+      <input type="password" id="tokenInput" placeholder="Token GitHub" onkeydown="if(event.key==='Enter')setToken(this.value)" style="width:100px;background:#1a1a2e;border:1px solid #333;border-radius:6px;padding:5px 10px;color:#eee;font-size:13px;outline:none;display:none">
       <button onclick="setToken(document.getElementById('tokenInput').value)" id="btnSalvarToken" style="display:none"></button>
       <button onclick="var i=document.getElementById('tokenInput');i.style.display='';i.focus();this.style.display='none'" id="btnConfigToken" style="background:transparent;border:1px solid #4a4d6e;color:#9ca3af;padding:5px 12px;border-radius:6px;font-size:12px;cursor:pointer;display:none">&#128274; Token</button>
     </div>
@@ -763,21 +763,21 @@
       var totalGeralClientes = recupTotal + rcaTotalClientes;
       var totalGeralFaturamento = fatGeraluramento + rcaTotalFaturamento;
 
-      html += '<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:24px;padding:22px 28px;background:linear-gradient(135deg,#11131c,#1a1d27);border:1px solid #f59e0b44;border-radius:16px;box-shadow:0 2px 20px rgba(245,158,11,0.08)">';
+      html += '<div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:24px;padding:22px 28px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid rgba(245,158,11,0.3);border-radius:16px;box-shadow:0 2px 20px rgba(245,158,11,0.08)">';
       html += '<span style="font-weight:700;font-size:14px;color:#f59e0b;text-transform:uppercase;letter-spacing:.6px;display:flex;align-items:center;gap:5px">' + icn('bar-chart-3',16) + ' Acumulado Recuperados</span>';
       html += '<div style="width:1px;height:34px;background:linear-gradient(to bottom,transparent,#4a4d6e,transparent)"></div>';
       html += '<span style="font-size:32px;font-weight:800;color:#f0f2f8">' + totalGeralClientes + ' <span style="font-size:14px;color:#6b7280;font-weight:500">clientes</span></span>';
       html += '<span style="font-size:28px;color:#4a4d6e;font-weight:200">|</span>';
       html += '<span style="font-size:32px;font-weight:800;color:#fbbf24">' + fmtCurr(totalGeralFaturamento) + '</span>';
       html += '<span style="flex:1;min-width:12px"></span>';
-      html += '<div style="display:flex;gap:16px;padding:10px 20px;background:#151830;border:1px solid #1e1b4b;border-radius:10px;flex-wrap:wrap">';
+      html += '<div style="display:flex;gap:16px;padding:10px 20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;flex-wrap:wrap">';
       html += '<span style="font-size:14px;color:#34d399;font-weight:600">\u25cf Internos (Televendas): ' + recupTotal + ' clientes \u00B7 ' + fmtCurr(fatGeraluramento) + '</span>';
       html += '<span style="font-size:14px;color:#f59e0b;font-weight:600">\u25cf Externos (RCA): ' + rcaTotalClientes + ' clientes \u00B7 ' + fmtCurr(rcaTotalFaturamento) + '</span>';
       html += '</div></div>';
       html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px">';
       html += '<div class="card" style="border-color:#f59e0b44;background:linear-gradient(135deg,#1a1520,#1f1d2b)"><div class="label" style="color:#f59e0b;font-weight:700">' + icn('bar-chart-3',12) + ' Total Geral</div><div class="value" style="font-size:34px;color:#f0f2f8">' + totalGeralClientes + ' <span style="font-size:14px;color:#6b7280;font-weight:400">clientes</span></div><div class="sub" style="font-size:22px;font-weight:700;color:#fbbf24;margin-top:2px">' + fmtCurr(totalGeralFaturamento) + '</div></div>';
       html += '<div class="card"><div class="label">' + icn('users',12) + ' Televendas</div><div class="value" style="font-size:34px">' + recupTotal + ' <span style="font-size:14px;color:#6b7280;font-weight:400">clientes</span></div><div class="sub" style="font-size:22px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(fatGeraluramento) + '</div><div style="font-size:11px;color:#6b7280;margin-top:4px">' + (totalGeralClientes > 0 ? Math.round(recupTotal / totalGeralClientes * 100) : 0) + '% do total</div></div>';
-      html += '<div class="card" style="border-color:#78350f;background:linear-gradient(135deg,#1a0f0a,#1f1015)"><div class="label" style="color:#f59e0b">' + icn('users',12) + ' RCA Externo</div><div class="value" style="font-size:34px;color:#f0f2f8">' + rcaTotalClientes + ' <span style="font-size:14px;color:#6b7280;font-weight:400">clientes</span></div><div class="sub" style="font-size:22px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(rcaTotalFaturamento) + '</div><div style="font-size:11px;color:#6b7280;margin-top:4px">' + (totalGeralClientes > 0 ? Math.round(rcaTotalClientes / totalGeralClientes * 100) : 0) + '% do total</div></div>';
+      html += '<div class="card" style="border-color:rgba(245,158,11,0.3)"><div class="label" style="color:#f59e0b">' + icn('users',12) + ' RCA Externo</div><div class="value" style="font-size:34px;color:#f0f2f8">' + rcaTotalClientes + ' <span style="font-size:14px;color:#6b7280;font-weight:400">clientes</span></div><div class="sub" style="font-size:22px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(rcaTotalFaturamento) + '</div><div style="font-size:11px;color:#6b7280;margin-top:4px">' + (totalGeralClientes > 0 ? Math.round(rcaTotalClientes / totalGeralClientes * 100) : 0) + '% do total</div></div>';
       html += '</div>';
 
       // VALOR POR PROFISSIONAL
@@ -923,7 +923,7 @@
       html += '<div class="card"><div class="label">&#x1F4B0; Total Recuperado Televendas</div><div class="value">' + fmtCurr(fatGeral) + '</div></div>';
       html += '<div class="card"><div class="label">' + (totalPct >= 100 ? '&#9989;' : '&#10060;') + ' % Atingido Televendas</div><div class="value">' + totalPct.toFixed(1) + '%</div></div>';
       if (hasRCA) {
-        html += '<div class="card" style="border-color:#78350f;background:linear-gradient(135deg,#1a0f0a,#1f1015)"><div class="label" style="color:#f59e0b">' + icn('users',12) + ' RCA Externo &mdash; ' + monthName + '</div><div class="value" style="font-size:24px">' + (rcaMesData.clientes || 0) + ' <span style="font-size:13px;color:#6b7280;font-weight:400">clientes</span></div><div class="sub" style="font-size:18px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(rcaMesData.faturamento || 0) + '</div></div>';
+        html += '<div class="card"><div class="label" style="color:#f59e0b">' + icn('users',12) + ' RCA Externo &mdash; ' + monthName + '</div><div class="value" style="font-size:24px">' + (rcaMesData.clientes || 0) + ' <span style="font-size:13px;color:#6b7280;font-weight:400">clientes</span></div><div class="sub" style="font-size:18px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(rcaMesData.faturamento || 0) + '</div></div>';
       }
       html += '</div>';
 
@@ -932,13 +932,13 @@
       html += '<div class="chart-box"><h2>Desempenho por Televendedora <span class="sub">&rarr; Recupera\u00E7\u00E3o de clientes em ' + monthName + '</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th style="text-align:center">Status</th><th class="text-right meta-color" title="Meta de clientes recuperados">Meta</th><th class="text-right realizado-color" title="Clientes recuperados até o momento">Realizado</th><th class="text-right" title="Percentual de atingimento da meta">%</th><th class="text-right" title="Valor total faturado">Faturamento</th></tr></thead><tbody>';
       for (var i = 0; i < profsData.length; i++) {
         var p = profsData[i];
-        var bg = i%2===0?'#0b0d14':'#11131c';
+        var bg = i%2===0?'transparent':'rgba(255,255,255,0.02)';
         var recPct = p.pct;
         var recColor = recPct >= 100 ? '#34d399' : recPct >= 80 ? '#fbbf24' : '#f87171';
         var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
-        html += '<tr style="background:'+bg+'"><td class="col-ranking">'+medal+(i+1)+'</td><td style="font-weight:600;color:#fcd34d">'+icn('user',14)+' '+p.profissional+'</td><td style="text-align:center">'+badge(recPct)+'</td><td class="text-right meta-color">'+p.meta+'</td><td class="text-right realizado-color" style="font-weight:700">'+p.realizado+'</td><td class="text-right" style="font-weight:700;color:'+recColor+'"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span>'+recPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#1e1b4b;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(recPct,100)+'%;background:'+recColor+';border-radius:3px;min-width:2px"></div></div></div></td><td class="text-right realizado-color" style="font-weight:700">'+fmtCurr(p.faturamento)+'</td></tr>';
+        html += '<tr style="background:'+bg+'"><td class="col-ranking">'+medal+(i+1)+'</td><td style="font-weight:600;color:#fcd34d">'+icn('user',14)+' '+p.profissional+'</td><td style="text-align:center">'+badge(recPct)+'</td><td class="text-right meta-color">'+p.meta+'</td><td class="text-right realizado-color" style="font-weight:700">'+p.realizado+'</td><td class="text-right" style="font-weight:700;color:'+recColor+'"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span>'+recPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#333;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(recPct,100)+'%;background:'+recColor+';border-radius:3px;min-width:2px"></div></div></div></td><td class="text-right realizado-color" style="font-weight:700">'+fmtCurr(p.faturamento)+'</td></tr>';
       }
-      html += '<tr class="tot-row"><td class="col-ranking"></td><td>'+icn('users',14)+' Total</td><td style="text-align:center">'+badge(totalPct)+'</td><td class="text-right meta-color">'+totalMeta+'</td><td class="text-right realizado-color">'+totalReal+'</td><td class="text-right" style="font-weight:700;color:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+'"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span>'+totalPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#1e1b4b;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(totalPct,100)+'%;background:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+';border-radius:3px;min-width:2px"></div></div></div></td><td class="text-right realizado-color" style="font-weight:700">'+fmtCurr(fatGeral)+'</td></tr>';
+      html += '<tr class="tot-row"><td class="col-ranking"></td><td>'+icn('users',14)+' Total</td><td style="text-align:center">'+badge(totalPct)+'</td><td class="text-right meta-color">'+totalMeta+'</td><td class="text-right realizado-color">'+totalReal+'</td><td class="text-right" style="font-weight:700;color:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+'"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span>'+totalPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#333;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(totalPct,100)+'%;background:'+(totalPct>=100?'#34d399':totalPct>=80?'#fbbf24':'#f87171')+';border-radius:3px;min-width:2px"></div></div></div></td><td class="text-right realizado-color" style="font-weight:700">'+fmtCurr(fatGeral)+'</td></tr>';
       html += '</tbody></table></div></div>';
 
       // CONTATOS table
@@ -959,7 +959,7 @@
           var cPct = cp.pct > 0 ? cp.pct : (cMeta > 0 ? (cReal/cMeta*100) : 0);
           var cColor = cPct >= 100 ? '#34d399' : cPct >= 80 ? '#fbbf24' : '#f87171';
           var cMedal = ci === 0 ? '&#x1F947; ' : ci === 1 ? '&#x1F948; ' : ci === 2 ? '&#x1F949; ' : '';
-          html += '<tr style="background:'+(ci%2===0?'#0b0d14':'#11131c')+'"><td class="col-ranking">'+cMedal+(ci+1)+'</td><td style="font-weight:600;color:#fcd34d">'+icn('user',14)+' '+cp.profissional+'</td><td style="text-align:center">'+badge(cPct)+'</td><td class="text-right meta-color">'+cMeta+'</td><td class="text-right realizado-color" style="font-weight:700">'+cReal+'</td><td class="text-right" style="font-weight:700;color:'+cColor+'"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span>'+cPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#1e1b4b;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(cPct,100)+'%;background:'+cColor+';border-radius:3px;min-width:2px"></div></div></div></td></tr>';
+          html += '<tr style="background:'+(ci%2===0?'transparent':'rgba(255,255,255,0.02)')+'"><td class="col-ranking">'+cMedal+(ci+1)+'</td><td style="font-weight:600;color:#fcd34d">'+icn('user',14)+' '+cp.profissional+'</td><td style="text-align:center">'+badge(cPct)+'</td><td class="text-right meta-color">'+cMeta+'</td><td class="text-right realizado-color" style="font-weight:700">'+cReal+'</td><td class="text-right" style="font-weight:700;color:'+cColor+'"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span>'+cPct.toFixed(1)+'%</span><div style="width:40px;height:6px;background:#333;border-radius:3px;overflow:hidden;flex-shrink:0"><div style="height:100%;width:'+Math.min(cPct,100)+'%;background:'+cColor+';border-radius:3px;min-width:2px"></div></div></div></td></tr>';
         }
         html += '<tr class="tot-row"><td class="col-ranking"></td><td>'+icn('users',14)+' Total</td><td style="text-align:center">'+badge(contTotalPct)+'</td><td class="text-right meta-color">'+(contTotal.meta||0)+'</td><td class="text-right realizado-color" style="font-weight:700">'+(contTotal.realizado||0)+'</td><td class="text-right" style="font-weight:700;color:'+(contTotalPct>=100?'#34d399':contTotalPct>=80?'#fbbf24':'#f87171')+'">'+contTotalPct.toFixed(1)+'%</td></tr>';
       html += '</tbody></table></div></div>';
@@ -979,7 +979,7 @@
         for (var i = 0; i < entries.length; i++) {
           var e = entries[i];
           var isTot = e.label === 'Total';
-          h += '<tr'+(isTot?' class="tot-row"':(i%2===0?'':' style="background:#11131c"'))+'><td style="font-weight:600'+(isTot?'':'')+'">'+e.label+'</td>';
+          h += '<tr'+(isTot?' class="tot-row"':(i%2===0?'':' style="background:rgba(255,255,255,0.02)"'))+'><td style="font-weight:600'+(isTot?'':'')+'">'+e.label+'</td>';
           for (var c = 0; c < cols.length; c++) h += '<td class="text-right">'+(e[cols[c]]||0)+'</td>';
           h += '</tr>';
         }
@@ -998,15 +998,15 @@
         try {
           new Chart(document.getElementById('chartRecProf'), {
             type:'bar', data:{labels:profsData.map(function(p){return p.profissional;}), datasets:[
-              {label:'Meta',data:profsData.map(function(p){return p.meta;}),backgroundColor:'#78350f',borderRadius:4},
+              {label:'Meta',data:profsData.map(function(p){return p.meta;}),backgroundColor:'rgba(245,158,11,0.3)',borderRadius:4},
               {label:'Realizado',data:profsData.map(function(p){return p.realizado;}),backgroundColor:'#f59e0b',borderRadius:4}
             ]},
-            options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{color:'#9ca3af',font:{size:9,weight:'bold'},anchor:'end',align:'end'},legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'}}}}
+            options:{responsive:true,layout:{padding:{top:18}},plugins:{datalabels:{color:'#9ca3af',font:{size:9,weight:'bold'},anchor:'end',align:'end'},legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#333',titleColor:'#fcd34d',bodyColor:'#eee',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280'},grid:{color:'#333'}},y:{beginAtZero:true,ticks:{color:'#6b7280'},grid:{color:'#333'}}}}
           });
           var pcts = profsData.map(function(p){return Math.round(p.pct*10)/10;});
           new Chart(document.getElementById('chartRecPct'), {
-            type:'doughnut', data:{labels:profsData.map(function(p,i){return p.profissional+' — '+pcts[i]+'%';}), datasets:[{data:pcts.map(function(p){return Math.max(p,1);}),backgroundColor:['#f59e0b','#fb923c','#f97316','#34d399','#a78bfa'],borderColor:'#0b0d14',borderWidth:2}]},
-            options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{color:'#fff',font:{size:12,weight:'bold'},anchor:'center',align:'center',formatter:function(v,ctx){return pcts[ctx.dataIndex]+'%';}},legend:{position:'left',labels:{color:'#9ca3af',padding:14,boxWidth:12,font:{size:12,weight:'bold'},usePointStyle:true},align:'center'},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false},title:{display:false}},cutout:'60%'}
+            type:'doughnut', data:{labels:profsData.map(function(p,i){return p.profissional+' — '+pcts[i]+'%';}), datasets:[{data:pcts.map(function(p){return Math.max(p,1);}),backgroundColor:['#f59e0b','#fb923c','#f97316','#34d399','#a78bfa'],borderColor:'#111',borderWidth:2}]},
+            options:{responsive:true,maintainAspectRatio:false,plugins:{datalabels:{color:'#fff',font:{size:12,weight:'bold'},anchor:'center',align:'center',formatter:function(v,ctx){return pcts[ctx.dataIndex]+'%';}},legend:{position:'left',labels:{color:'#9ca3af',padding:14,boxWidth:12,font:{size:12,weight:'bold'},usePointStyle:true},align:'center'},tooltip:{backgroundColor:'#333',titleColor:'#fcd34d',bodyColor:'#eee',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false},title:{display:false}},cutout:'60%'}
           });
           // Daily trend chart per month
           var diasLabels = days.map(function(d){return 'Dia '+d;});
@@ -1033,7 +1033,7 @@
               {label:'Realizado',data:totals,borderColor:'#fbbf24',backgroundColor:'transparent',tension:.3,borderDash:[5,4],pointRadius:3,pointBackgroundColor:'#fbbf24'},
               {label:'Acumulado',data:acc,borderColor:'#34d399',backgroundColor:'#34d39922',fill:true,tension:.4,borderWidth:3,pointRadius:3,pointBackgroundColor:'#34d399',yAxisID:'y1'}
             ]},
-            options:{responsive:true,plugins:{datalabels:{display:false},legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#1e1b4b',titleColor:'#fcd34d',bodyColor:'#e1e7ef',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280',maxRotation:45},grid:{color:'#1e1b4b'}},y:{beginAtZero:true,position:'left',ticks:{color:'#6b7280'},grid:{color:'#1e1b4b'},title:{display:true,text:'Di\u00E1rio',color:'#6b7280'}},y1:{position:'right',beginAtZero:true,ticks:{color:'#6b7280'},grid:{display:false},title:{display:true,text:'Acumulado',color:'#6b7280'}}}}
+            options:{responsive:true,plugins:{datalabels:{display:false},legend:{position:'bottom',labels:{color:'#9ca3af',padding:12,boxWidth:12}},tooltip:{backgroundColor:'#333',titleColor:'#fcd34d',bodyColor:'#eee',borderColor:'#f59e0b',borderWidth:1,mode:'index',intersect:false}},scales:{x:{ticks:{color:'#6b7280',maxRotation:45},grid:{color:'#333'}},y:{beginAtZero:true,position:'left',ticks:{color:'#6b7280'},grid:{color:'#333'},title:{display:true,text:'Di\u00E1rio',color:'#6b7280'}},y1:{position:'right',beginAtZero:true,ticks:{color:'#6b7280'},grid:{display:false},title:{display:true,text:'Acumulado',color:'#6b7280'}}}}
           });
           } catch(e) {}
       }, 100);
@@ -1102,12 +1102,12 @@
       profList.sort();
 
       var html = '<div class="chart-box"><h2>FATURAMENTO RECUPERACAO <span class="sub">&rarr; Raio-X completo de clientes</span></h2>';
-      html += '<div style="margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap"><input type="text" id="filtroId" placeholder="Filtrar por ID do cliente..." style="flex:1;min-width:180px;max-width:260px;background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px;color:#e1e7ef;font-size:14px;outline:none" autofocus>';
-      html += '<select id="filtroProf" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px;color:#e1e7ef;font-size:14px;outline:none"><option value="">Televendedora: Todas</option>';
+      html += '<div style="margin-bottom:14px;display:flex;gap:10px;flex-wrap:wrap"><input type="text" id="filtroId" placeholder="Filtrar por ID do cliente..." style="flex:1;min-width:180px;max-width:260px;background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:10px 14px;color:#eee;font-size:14px;outline:none" autofocus>';
+      html += '<select id="filtroProf" style="background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:10px 14px;color:#eee;font-size:14px;outline:none"><option value="">Televendedora: Todas</option>';
       for (var pi = 0; pi < profList.length; pi++) html += '<option value="' + profList[pi] + '">' + profList[pi] + '</option>';
       html += '</select>';
-      html += '<select id="filtroMes" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px;color:#e1e7ef;font-size:14px;outline:none"><option value="">M\u00EAs Recupera\u00E7\u00E3o: Todos</option><option value="Abril">Abril</option><option value="Maio">Maio</option><option value="Junho">Junho</option><option value="Julho">Julho</option></select>';
-      html += '<select id="filtroDias" style="background:#11131c;border:1px solid #1e1b4b;border-radius:8px;padding:10px 14px;color:#e1e7ef;font-size:14px;outline:none"><option value="">Status: Todos</option><option value="ok">OK (40+ dias)</option><option value="atencao">Aten\u00E7\u00E3o (40-44)</option><option value="risco">Risco (45-89)</option><option value="critico">Cr\u00EDtico (90+)</option></select></div>';
+      html += '<select id="filtroMes" style="background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:10px 14px;color:#eee;font-size:14px;outline:none"><option value="">M\u00EAs Recupera\u00E7\u00E3o: Todos</option><option value="Abril">Abril</option><option value="Maio">Maio</option><option value="Junho">Junho</option><option value="Julho">Julho</option></select>';
+      html += '<select id="filtroDias" style="background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:10px 14px;color:#eee;font-size:14px;outline:none"><option value="">Status: Todos</option><option value="ok">OK (40+ dias)</option><option value="atencao">Aten\u00E7\u00E3o (40-44)</option><option value="risco">Risco (45-89)</option><option value="critico">Cr\u00EDtico (90+)</option></select></div>';
       html += '<div class="table-wrap"><table><thead><tr><th class="col-ranking">#</th><th style="color:#6b7280;font-size:12px">ID</th><th>Nome do Cliente</th><th class="text-right" style="color:#f59e0b;font-size:12px">Compras</th><th style="color:#6b7280;font-size:12px">Televendedora</th><th style="color:#6b7280;font-size:12px">Recuperado em</th><th class="text-right" style="color:#34d399">Valor Total</th><th class="text-right" style="color:#6b7280;font-size:12px">Dias s/ Compra</th><th style="min-width:70px;color:#6b7280;font-size:12px">Peso</th></tr></thead><tbody id="tbodyClientes">';
       for (var i = 0; i < lista.length; i++) {
         var c = lista[i];
@@ -1120,7 +1120,7 @@
         else if (c.diasSemCompra >= 40) flagIcon = ' <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#eab308;vertical-align:middle"></span>';
         var diasColor = c.diasSemCompra >= 90 ? '#ef4444' : (c.diasSemCompra >= 45 ? '#ef4444' : (c.diasSemCompra >= 40 ? '#eab308' : '#9ca3af'));
         var diasStatus = c.diasSemCompra >= 90 ? 'critico' : (c.diasSemCompra >= 45 ? 'risco' : (c.diasSemCompra >= 40 ? 'atencao' : 'ok'));
-        html += '<tr data-id="' + c.id + '" data-nome="' + (c.nome || '').toLowerCase() + '" data-prof="' + c.prof + '" data-mes="' + c.recuperadoEm + '" data-dias="' + diasStatus + '" data-compras="' + c.compras + '" data-cli="' + c.id + '" class="cli-row" style="' + clickStyle + '">' + '<td class="col-ranking">' + (i + 1) + '</td><td style="color:#6b7280;font-size:12px">' + c.id + '</td><td style="font-weight:600;color:#fcd34d">' + (c.nome || '') + '</td><td class="text-right" style="font-size:12px;color:#f59e0b">' + (c.compras > 0 ? c.compras : '<span style="color:#4a4d6e">0</span>') + '</td><td style="font-size:12px;color:#9ca3af">' + c.prof + '</td><td style="text-align:center"><span style="font-size:12px;padding:2px 8px;border-radius:4px;background:' + mesCol + '22;color:' + mesCol + ';font-weight:600">' + (c.recuperadoEm || '-') + '</span></td><td class="text-right" style="font-weight:600;color:#34d399">' + fmtCurr(c.valor) + '</td><td class="text-right" style="font-size:12px;color:' + diasColor + ';font-weight:600">' + (c.diasSemCompra >= 0 ? c.diasSemCompra : '-') + flagIcon + '</td><td style="padding:6px 8px"><div style="height:10px;background:#1e1b4b;border-radius:4px;overflow:hidden"><div style="height:100%;width:' + Math.min(barW, 100) + '%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
+        html += '<tr data-id="' + c.id + '" data-nome="' + (c.nome || '').toLowerCase() + '" data-prof="' + c.prof + '" data-mes="' + c.recuperadoEm + '" data-dias="' + diasStatus + '" data-compras="' + c.compras + '" data-cli="' + c.id + '" class="cli-row" style="' + clickStyle + '">' + '<td class="col-ranking">' + (i + 1) + '</td><td style="color:#6b7280;font-size:12px">' + c.id + '</td><td style="font-weight:600;color:#fcd34d">' + (c.nome || '') + '</td><td class="text-right" style="font-size:12px;color:#f59e0b">' + (c.compras > 0 ? c.compras : '<span style="color:#4a4d6e">0</span>') + '</td><td style="font-size:12px;color:#9ca3af">' + c.prof + '</td><td style="text-align:center"><span style="font-size:12px;padding:2px 8px;border-radius:4px;background:' + mesCol + '22;color:' + mesCol + ';font-weight:600">' + (c.recuperadoEm || '-') + '</span></td><td class="text-right" style="font-weight:600;color:#34d399">' + fmtCurr(c.valor) + '</td><td class="text-right" style="font-size:12px;color:' + diasColor + ';font-weight:600">' + (c.diasSemCompra >= 0 ? c.diasSemCompra : '-') + flagIcon + '</td><td style="padding:6px 8px"><div style="height:10px;background:#333;border-radius:4px;overflow:hidden"><div style="height:100%;width:' + Math.min(barW, 100) + '%;background:#f59e0b;border-radius:4px"></div></div></td></tr>';
       }
       var totalCompras = lista.reduce(function(s, c) { return s + c.compras; }, 0);
       html += '</tbody><tfoot class="tot-row"><tr><td class="col-ranking"></td><td style="color:#4a4d6e">-</td><td style="font-weight:700;color:#fcd34d">Total Geral</td><td class="text-right" style="color:#f59e0b;font-weight:700">' + totalCompras + '</td><td style="color:#4a4d6e">-</td><td style="color:#4a4d6e">-</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(grandTotal) + '</td><td style="color:#4a4d6e">-</td><td></td></tr></tfoot></table>';
@@ -1193,7 +1193,7 @@
       var detalhes = det.detalhes || [];
       var totalGeral = detalhes.reduce(function(s,d){return s+(d.valor||0);},0);
 
-      var inner = '<div style="background:#11131c;border:1px solid #1e1b4b;border-radius:12px;max-width:800px;width:95%;max-height:85vh;overflow-y:auto;padding:24px">';
+      var inner = '<div style="background:#1a1a2e;border:1px solid #333;border-radius:12px;max-width:800px;width:95%;max-height:85vh;overflow-y:auto;padding:24px">';
       inner += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h2 style="color:#fcd34d;margin:0;font-size:18px">Cliente #'+cliId+' — Recuperado em '+det.recuperadoEm+'</h2>';
       inner += '<button id="closeModalCli" style="background:none;border:none;color:#6b7280;font-size:24px;cursor:pointer">&times;</button></div>';
 
@@ -1206,14 +1206,14 @@
       inner += '<div style="margin-bottom:16px"><h3 style="color:#9ca3af;font-size:13px;margin-bottom:8px">COMPRAS</h3>';
       inner += '<div style="display:flex;gap:6px;flex-wrap:wrap">';
       dias.forEach(function(dia) {
-        inner += '<div style="background:#1a1d2e;border:1px solid #1e1b4b;border-radius:6px;padding:6px 10px;font-size:12px"><span style="color:#9ca3af">'+fmtDate(dia.data)+'</span> <span style="color:#34d399;font-weight:600">'+fmtCurr(dia.valor)+'</span> <span style="color:#6b7280">('+dia.itens+' itens)</span></div>';
+        inner += '<div style="background:#16213e;border:1px solid #333;border-radius:6px;padding:6px 10px;font-size:12px"><span style="color:#9ca3af">'+fmtDate(dia.data)+'</span> <span style="color:#34d399;font-weight:600">'+fmtCurr(dia.valor)+'</span> <span style="color:#6b7280">('+dia.itens+' itens)</span></div>';
       });
       inner += '</div></div>';
 
       inner += '<div><h3 style="color:#9ca3af;font-size:13px;margin-bottom:8px">DETALHES DAS COMPRAS</h3>';
       inner += '<div class="table-wrap"><table><thead><tr><th style="color:#6b7280;font-size:11px">Data</th><th style="color:#6b7280;font-size:11px">M\u00EAs</th><th style="color:#6b7280;font-size:11px">Produto</th><th style="color:#6b7280;font-size:11px;text-align:right">Qtde</th><th style="color:#6b7280;font-size:11px;text-align:right">P.Unit</th><th style="color:#6b7280;font-size:11px;text-align:right">Valor</th><th style="color:#6b7280;font-size:11px">N.F.</th><th style="color:#6b7280;font-size:11px">Fornecedor</th></tr></thead><tbody>';
       detalhes.forEach(function(dd) {
-        inner += '<tr><td style="font-size:11px;color:#9ca3af">'+fmtDate(dd.data)+'</td><td style="font-size:11px;color:#9ca3af">'+dd.mes+'</td><td style="font-size:11px;color:#e1e7ef">'+dd.produto+'</td><td style="font-size:11px;color:#9ca3af;text-align:right">'+(dd.qtde||0)+'</td><td style="font-size:11px;color:#9ca3af;text-align:right">'+fmtCurr(dd.punit||0)+'</td><td style="font-size:11px;color:#34d399;font-weight:600;text-align:right">'+fmtCurr(dd.valor||0)+'</td><td style="font-size:11px;color:#6b7280">'+dd.numnota+'</td><td style="font-size:11px;color:#6b7280">'+dd.fornecedor+'</td></tr>';
+        inner += '<tr><td style="font-size:11px;color:#9ca3af">'+fmtDate(dd.data)+'</td><td style="font-size:11px;color:#9ca3af">'+dd.mes+'</td><td style="font-size:11px;color:#eee">'+dd.produto+'</td><td style="font-size:11px;color:#9ca3af;text-align:right">'+(dd.qtde||0)+'</td><td style="font-size:11px;color:#9ca3af;text-align:right">'+fmtCurr(dd.punit||0)+'</td><td style="font-size:11px;color:#34d399;font-weight:600;text-align:right">'+fmtCurr(dd.valor||0)+'</td><td style="font-size:11px;color:#6b7280">'+dd.numnota+'</td><td style="font-size:11px;color:#6b7280">'+dd.fornecedor+'</td></tr>';
       });
       inner += '</tbody></table></div></div>';
 

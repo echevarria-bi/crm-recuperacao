@@ -92,7 +92,7 @@
     </div>
   </header>
   <div class="container" id="app">
-    <div style="position:relative;width:100%">
+    <div style="position:relative;width:100%;display:none" id="uploadWrapper">
       <input type="file" id="inputArquivo" accept=".xlsx,.xls" multiple style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:5;font-size:0" onchange="try{if(this.files&&this.files.length){if(typeof processMultipleFiles==='function')processMultipleFiles(this.files);else document.getElementById('areaInicial').innerHTML='<div style=color:#f87171;font-size:13px>Erro: processMultipleFiles nao definido (_scriptExec='+(window._scriptExec||'false')+')</div>'}}catch(e){document.getElementById('areaInicial').innerHTML='<div style=color:#f87171;font-size:13px>Erro: '+e.message+'</div>';console.error(e)}">
       <div class="upload-area" id="areaInicial" ondragover="this.classList.add('dragover');event.preventDefault()" ondragleave="this.classList.remove('dragover')" ondrop="event.preventDefault();this.classList.remove('dragover');if(event.dataTransfer.files[0])processFile(event.dataTransfer.files[0])">
         <div style="font-size:48px;margin-bottom:12px;opacity:.5">📂</div>
@@ -1576,7 +1576,6 @@
     fetchRemoteData().then(function(remote) {
       if (remote && remote.data && remote.data.evolucaoMeses && remote.data.painelGeral) {
         allData = remote.data;
-        document.getElementById('areaInicial').parentElement.style.display = 'none';
         var fn = remote.fileName || 'data.json';
         var ts = remote.updatedAt ? new Date(remote.updatedAt) : new Date();
         document.getElementById('footer').style.display = 'block';
@@ -1585,6 +1584,7 @@
         switchTab('resumo');
         mostrarTokenBtn();
       } else {
+        document.getElementById('uploadWrapper').style.display = '';
         document.getElementById('areaInicial').style.display = 'flex';
       }
     });

@@ -837,7 +837,7 @@
             vpRows+='<td class="text-right" style="font-weight:600;color:#34d399;font-size:14px">'+fmtCurr(pTotal)+'</td></tr>';
           });
         });
-        html += '<div class="chart-box"><h2>Valor Recuperado por Mês (Televendas) <span class="sub">&rarr; Faturamento por televendedora em cada mês — clique na região para detalhe</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking"></th><th>Região / Televendedora</th><th class="text-right">Abril</th><th class="text-right">Maio</th><th class="text-right">Junho</th><th class="text-right">Julho</th><th class="text-right">Total</th></tr></thead><tbody>' + vpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[0]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[1]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[2]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[3]) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(vpGrandTot) + '</td></tr></tbody></table></div></div>';
+        var vpHtml = '<div class="chart-box"><h2>Valor Recuperado por Mês (Televendas) <span class="sub">&rarr; Faturamento por televendedora em cada mês — clique na região para detalhe</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking"></th><th>Região / Televendedora</th><th class="text-right">Abril</th><th class="text-right">Maio</th><th class="text-right">Junho</th><th class="text-right">Julho</th><th class="text-right">Total</th></tr></thead><tbody>' + vpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[0]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[1]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[2]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[3]) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(vpGrandTot) + '</td></tr></tbody></table></div></div>';
       }
 
       // RECUPERADOS POR PROFISSIONAL (from RECUPERADOS POR RCA)
@@ -863,29 +863,35 @@
         for (var i = 0; i < rpSorted.length; i++) {
           var p = rpSorted[i];
           var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
-          rpRows += '<tr><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600">' + p.profissional + '</td>';
+          rpRows += '<tr><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600;font-size:13px">' + p.profissional + '</td>';
           for (var pi = 0; pi < rpPairs.length; pi++) {
             var mv = p[rpPairs[pi].meta];
             var rv = p[rpPairs[pi].real];
             var gap = (rv||0) - (mv||0);
             var gapColor = gap >= 0 ? '#34d399' : '#f87171';
-            rpRows += '<td class="text-right meta-color">'+(mv!==undefined?mv:'')+'</td><td class="text-right realizado-color">'+(rv!==undefined?rv:'')+'</td><td class="text-right col-gap" style="color:'+gapColor+'">'+(gap>0?'+':'')+gap+'</td>';
+            rpRows += '<td class="text-right meta-color" style="font-size:12px;padding:6px 4px">'+(mv!==undefined?mv:'')+'</td><td class="text-right realizado-color" style="font-size:12px;padding:6px 4px">'+(rv!==undefined?rv:'')+'</td><td class="text-right col-gap" style="font-size:11px;padding:6px 4px;color:'+gapColor+'">'+(gap>0?'+':'')+gap+'</td>';
           }
           rpRows += '</tr>';
         }
-        var rpHtml = '<div class="chart-box"><h2>Recuperados por Televendedora <span class="sub">&rarr; Qtdade de clientes recuperados</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th>';
+        var rpHtml = '<div class="chart-box"><h2>Recuperados por Televendedora <span class="sub">&rarr; Qtdade de clientes recuperados</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking" style="font-size:12px">Ranking</th><th style="font-size:12px">Televendedora</th>';
         for (var pi = 0; pi < rpPairs.length; pi++) {
-          rpHtml += '<th class="text-right meta-color" title="Meta de clientes recuperados">'+rpPairs[pi].meta+'</th><th class="text-right realizado-color" title="Clientes efetivamente recuperados">'+rpPairs[pi].real+'</th><th class="text-right col-gap" style="color:#6b7280;font-size:12px" title="Diferença: Realizado − Meta">Gap</th>';
+          var mesLabel = rpPairs[pi].meta.replace(' META','');
+          rpHtml += '<th class="text-right" style="font-size:11px;padding:6px 4px" title="Meta de clientes recuperados">'+mesLabel+'<br><span style="color:#6b7280">Meta</span></th><th class="text-right" style="font-size:11px;padding:6px 4px" title="Clientes efetivamente recuperados">'+mesLabel+'<br><span style="color:#10b981">Real</span></th><th class="text-right" style="font-size:10px;padding:6px 4px;color:#6b7280" title="Diferença: Realizado − Meta">Gap</th>';
         }
         var rpTotals = '';
         for (var rpi = 0; rpi < rpPairs.length; rpi++) {
           var tMeta = 0, tReal = 0;
           for (var ri2 = 0; ri2 < rpSorted.length; ri2++) { tMeta += rpSorted[ri2][rpPairs[rpi].meta]||0; tReal += rpSorted[ri2][rpPairs[rpi].real]||0; }
           var tGap = tReal - tMeta;
-          rpTotals += '<td class="text-right meta-color" style="font-weight:700">'+tMeta+'</td><td class="text-right realizado-color" style="font-weight:700">'+tReal+'</td><td class="text-right col-gap" style="color:'+(tGap>=0?'#34d399':'#f87171')+'">'+(tGap>0?'+':'')+tGap+'</td>';
+          rpTotals += '<td class="text-right" style="font-size:12px;padding:6px 4px;font-weight:700;color:#6b7280">'+tMeta+'</td><td class="text-right" style="font-size:12px;padding:6px 4px;font-weight:700;color:#10b981">'+tReal+'</td><td class="text-right" style="font-size:11px;padding:6px 4px;font-weight:700;color:'+(tGap>=0?'#34d399':'#f87171')+'">'+(tGap>0?'+':'')+tGap+'</td>';
         }
-        rpHtml += '</tr></thead><tbody>' + rpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td>'+rpTotals+'</tr></tbody></table></div></div>';
+        rpHtml += '</tr></thead><tbody>' + rpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700;font-size:13px">Total</td>'+rpTotals+'</tr></tbody></table></div></div>';
         html += rpHtml;
+      }
+
+      // VALOR POR PROFISSIONAL (appended after recuperados)
+      if (evo.valorPorProf.length > 0) {
+        html += vpHtml;
       }
 
       

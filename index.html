@@ -683,6 +683,7 @@
       h += '</div><div class="tab-divider"></div><div class="tabs">';
       h += '<button class="tab-btn' + (activeTab==='resumo'?' active':'') + '" data-tab="resumo">' + icn('layout-dashboard',12) + ' Resumo</button>';
       h += '<button class="tab-btn' + (activeTab==='clientes'?' active':'') + '" data-tab="clientes">' + icn('table-2',12) + ' Clientes</button>';
+      h += '<button class="tab-btn' + (activeTab==='analise'?' active':'') + '" data-tab="analise">' + icn('bar-chart-3',12) + ' Análise</button>';
       h += '</div></div>';
       var tc = document.getElementById('tabsContainer');
       if (tc) tc.innerHTML = h;
@@ -704,17 +705,27 @@
       else if (tab === 'junho') renderMonth('Junho');
       else if (tab === 'julho') renderMonth('Julho');
       else if (tab === 'clientes') renderClientes();
+      else if (tab === 'analise') renderAnalise();
     }
 
     function getFilteredProfs() {
       return allData.painelGeral.recuperacao.profissionais;
     }
 
+    var mesesArr = ['Abril','Maio','Junho','Julho'];
+    // Rotação real de profissionais por região (meses 4-7)
+    var regiaoRotacao = {
+      'Região Metropolitana': {Abril:['Ariane'], Maio:['Ariane'], Junho:['Ariane'], Julho:['Ariane']},
+      'Região Sul':           {Abril:['Anna'], Maio:['Anna','Camila'], Junho:['Camila'], Julho:['Camila']},
+      'Serra':                {Abril:['Tatiana'], Maio:['Tatiana'], Junho:['Tatiana'], Julho:['Tatiana']},
+      'Litoral':              {Abril:['Camila'], Maio:['Cristielen'], Junho:['Cristielen','Tatiana Litoral'], Julho:['Tatiana Litoral']},
+      'Vale dos Sinos':       {Abril:['Natalia'], Maio:['Natalia'], Junho:['Natalia'], Julho:['Cristielen','Natalia']}
+    };
+
     function renderResumo() {
       var evo = allData.evolucaoMeses;
       var pg = allData.painelGeral;
       var profs = pg.recuperacao.profissionais;
-      var mesesArr = ['Abril','Maio','Junho','Julho'];
       var html = '';
 
       var contatoData = [], recupData = [], fatData = [];
@@ -780,15 +791,8 @@
       html += '<div class="card" style="border-color:rgba(245,158,11,0.3)"><div class="label" style="color:#f59e0b">' + icn('users',12) + ' RCA Externo</div><div class="value" style="font-size:34px;color:#f0f2f8">' + rcaTotalClientes + ' <span style="font-size:14px;color:#6b7280;font-weight:400">clientes</span></div><div class="sub" style="font-size:22px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(rcaTotalFaturamento) + '</div><div style="font-size:11px;color:#6b7280;margin-top:4px">' + (totalGeralClientes > 0 ? Math.round(rcaTotalClientes / totalGeralClientes * 100) : 0) + '% do total</div></div>';
       html += '</div>';
 
-      // VALOR POR PROFISSIONAL com agrupamento por região (accordion)
+      // VALOR POR PROFISSIONAL com agrupamento por região (accordion com rotação REAL)
       if (evo.valorPorProf.length > 0) {
-        var regProf = [
-          {regiao:'Região Metropolitana', profs:['Ariane']},
-          {regiao:'Região Sul',           profs:['Anna','Camila']},
-          {regiao:'Serra',               profs:['Tatiana']},
-          {regiao:'Litoral',             profs:['Tatiana Litoral']},
-          {regiao:'Vale dos Sinos',      profs:['Natalia','Cristielen']}
-        ];
         var vpLookup={};
         evo.valorPorProf.forEach(function(p){var k=p.profissional.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();vpLookup[k]=p;});
         function profData(nome){
@@ -805,39 +809,57 @@
         var vpRows='';
         var vpColTotais=[0,0,0,0];
         var vpGrandTot=0;
-        regProf.forEach(function(r){
-          var profs=r.profs.filter(function(n){return profData(n);});
-          if(!profs.length)return;
-          var regTotal=0;
+        var regOrdem=['Região Metropolitana','Região Sul','Serra','Litoral','Vale dos Sinos'];
+        regOrdem.forEach(function(reg){
+          var rot = regiaoRotacao[reg];
+          // Collect unique professionals across all months for this region
+          var profsSet = {};
+          meses.forEach(function(m){(rot[m]||[]).forEach(function(n){profsSet[n]=1;});});
+          var profs = Object.keys(profsSet).filter(function(n){return profData(n);});
+          if (!profs.length) return;
+
+          // Calculate per-month region sum based on who was in that region each month
           var regMeses=[0,0,0,0];
-          profs.forEach(function(nome){
-            var p=profData(nome);
-            meses.forEach(function(m,mi){
-              var v=p&&p[m]?p[m]:0;
-              regMeses[mi]+=v;
-              regTotal+=v;
+          var regTotal=0;
+          meses.forEach(function(m,mi){
+            var sum=0;
+            (rot[m]||[]).forEach(function(n){
+              var p=profData(n);
+              if(p&&p[m]) sum+=p[m];
             });
+            regMeses[mi]=sum;
+            regTotal+=sum;
           });
           meses.forEach(function(m,mi){vpColTotais[mi]+=regMeses[mi];});
           vpGrandTot+=regTotal;
+
           vpRows+='<tr class="vr-head" onclick="toggleValRec(this)" style="cursor:pointer">'+
-            '<td colspan="2" style="font-weight:700;border-left:3px solid #555"><span class="vr-arrow" style="display:inline-block;width:16px;font-size:12px;color:#888;margin-right:4px">▶</span>'+r.regiao+'</td>';
+            '<td colspan="2" style="font-weight:700;border-left:3px solid #555"><span class="vr-arrow" style="display:inline-block;width:16px;font-size:12px;color:#888;margin-right:4px">▶</span>'+reg+'</td>';
           regMeses.forEach(function(v){vpRows+='<td class="text-right realizado-color" style="font-weight:600">'+fmtCurr(v)+'</td>';});
           vpRows+='<td class="text-right" style="color:#fbbf24;font-weight:700">'+fmtCurr(regTotal)+'</td></tr>';
+
           profs.forEach(function(nome){
             var p=profData(nome);
             var pTotal=0;
             vpRows+='<tr class="vr-detail" style="display:none"><td class="col-ranking"></td>'+
               '<td style="padding-left:32px;color:#c4c9d4">'+nome+'</td>';
             meses.forEach(function(m){
-              var v=p&&p[m]?p[m]:0;
-              pTotal+=v;
-              vpRows+='<td class="text-right realizado-color" style="font-weight:400;font-size:14px;color:#9ca3af">'+(v?fmtCurr(v):'-')+'</td>';
+              // Only show value for months when this professional was in this region
+              var naRegiao = rot[m] && rot[m].indexOf(nome) >= 0;
+              if (naRegiao && p && p[m]) {
+                var v=p[m];
+                pTotal+=v;
+                vpRows+='<td class="text-right realizado-color" style="font-weight:400;font-size:14px;color:#9ca3af">'+fmtCurr(v)+'</td>';
+              } else if (naRegiao) {
+                vpRows+='<td class="text-right" style="color:#555;font-size:14px">0</td>';
+              } else {
+                vpRows+='<td class="text-right" style="color:#4a4d6e;font-size:14px">—</td>';
+              }
             });
             vpRows+='<td class="text-right" style="font-weight:600;color:#34d399;font-size:14px">'+fmtCurr(pTotal)+'</td></tr>';
           });
         });
-        var vpHtml = '<div class="chart-box"><h2>Valor Recuperado por Mês (Televendas) <span class="sub">&rarr; Faturamento por televendedora em cada mês — clique na região para detalhe</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking"></th><th>Região / Televendedora</th><th class="text-right">Abril</th><th class="text-right">Maio</th><th class="text-right">Junho</th><th class="text-right">Julho</th><th class="text-right">Total</th></tr></thead><tbody>' + vpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[0]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[1]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[2]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[3]) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(vpGrandTot) + '</td></tr></tbody></table></div></div>';
+        var vpHtml = '<div class="chart-box"><h2>Valor Recuperado por Mês (Televendas) <span class="sub">&rarr; Faturamento por região com rotação de vendedores — clique na região para detalhe</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking"></th><th>Região / Televendedora</th><th class="text-right">Abril</th><th class="text-right">Maio</th><th class="text-right">Junho</th><th class="text-right">Julho</th><th class="text-right">Total</th></tr></thead><tbody>' + vpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[0]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[1]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[2]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[3]) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(vpGrandTot) + '</td></tr></tbody></table></div></div>';
       }
 
       // RECUPERADOS POR PROFISSIONAL (from RECUPERADOS POR RCA)
@@ -1274,6 +1296,239 @@
       document.body.appendChild(modal);
       modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
       document.getElementById('closeModalCli').addEventListener('click', function() { modal.remove(); });
+    }
+
+    function renderAnalise() {
+      var cd = allData.clientesDetalhes || {};
+      var fc = allData.faturamentoClientes || [];
+      var mesesLista = ['Abril','Maio','Junho','Julho'];
+      var numMeses = {Abril:4, Maio:5, Junho:6, Julho:7};
+
+      var profPorCliente = {}, nomePorCliente = {}, valorPorCliente = {};
+      fc.forEach(function(f) {
+        var cid = String(f.cliente);
+        if (!profPorCliente[cid] || numMeses[f.mes] < numMeses[profPorCliente[cid].mes])
+          profPorCliente[cid] = {prof: f.prof, mes: f.mes};
+        if (!nomePorCliente[cid] && f.nome && f.nome.trim()) nomePorCliente[cid] = f.nome.trim();
+        valorPorCliente[cid] = (valorPorCliente[cid]||0) + f.valor;
+      });
+
+      // Default region per professional (fallback)
+      var regProfDefault = {
+        'Ariane':'Região Metropolitana','Anna':'Região Sul','Camila':'Região Sul',
+        'Tatiana':'Serra','Tatiana Litoral':'Litoral','Natalia':'Vale dos Sinos','Cristielen':'Vale dos Sinos'
+      };
+      // Rotation-aware: which region was a professional in during a given month? (mesNum 4-7)
+      function regiaoPorProfMes(prof, mesNum) {
+        var nomeMes = mesesArr[mesNum - 4] || mesNum;
+        if (typeof nomeMes === 'number') return regProfDefault[prof] || '-';
+        var found = [];
+        for (var r in regiaoRotacao) {
+          var arr = regiaoRotacao[r][nomeMes] || [];
+          if (arr.indexOf(prof) >= 0) found.push(r);
+        }
+        if (found.length === 1) return found[0];
+        return regProfDefault[prof] || '-';
+      }
+
+      var todos = [];
+      Object.keys(cd).forEach(function(cid) {
+        var d = cd[cid];
+        var prof = (profPorCliente[cid]||{}).prof || '-';
+        var mesNum = d.mesRefNum || 0;
+        var reg = regiaoPorProfMes(prof, mesNum);
+        if (reg === '-' && regProfDefault[prof]) reg = regProfDefault[prof];
+        var valor = valorPorCliente[cid] || 0;
+        var compras = d.comprasAposRecuperacao || 0;
+        var mesRef = d.recuperadoEm || '-';
+
+        var voltou = 0, primCompraPos = null;
+        if (d.diasCompra) {
+          for (var di = 0; di < d.diasCompra.length; di++) {
+            var dt = d.diasCompra[di].data;
+            var mc = parseInt(dt.substring(5,7));
+            if (mc > mesNum) { voltou = 1; if (!primCompraPos) primCompraPos = dt; }
+          }
+        }
+
+        var ultData = null;
+        if (d.diasCompra && d.diasCompra.length) {
+          for (var di = d.diasCompra.length-1; di >= 0; di--)
+            if (!ultData || d.diasCompra[di].data > ultData) ultData = d.diasCompra[di].data;
+        }
+        var diasSemCompra = -1;
+        if (ultData) diasSemCompra = Math.floor((new Date() - new Date(ultData+'T00:00:00'))/(1000*60*60*24));
+
+        var diasAteRecompra = -1;
+        if (voltou && primCompraPos && d.recuperadoEm) {
+          var dtRec = new Date('2026-'+('0'+(mesNum+1))+'-01T00:00:00');
+          var dtPrim = new Date(primCompraPos+'T00:00:00');
+          diasAteRecompra = Math.floor((dtPrim - dtRec)/(1000*60*60*24));
+        }
+
+        var gaps = [];
+        if (d.diasCompra && d.diasCompra.length >= 2) {
+          var sorted = d.diasCompra.slice().sort(function(a,b){return a.data.localeCompare(b.data);});
+          for (var gi = 1; gi < sorted.length; gi++) {
+            var d1 = new Date(sorted[gi-1].data+'T00:00:00');
+            var d2 = new Date(sorted[gi].data+'T00:00:00');
+            gaps.push(Math.floor((d2-d1)/(1000*60*60*24)));
+          }
+        }
+        var avgGap = gaps.length ? gaps.reduce(function(s,g){return s+g;},0)/gaps.length : 0;
+        var stdGap = 0;
+        if (gaps.length >= 2) {
+          var m = avgGap;
+          stdGap = Math.sqrt(gaps.reduce(function(s,g){return s+(g-m)*(g-m);},0)/gaps.length);
+        }
+
+        todos.push({cid:cid, nome:nomePorCliente[cid]||cid, prof:prof, regiao:reg, valor:valor, compras:compras, mes:mesRef, mesNum:mesNum, voltou:voltou, diasSemCompra:diasSemCompra, diasAteRecompra:diasAteRecompra, ultData:ultData, codcli:cid, gaps:gaps, avgGap:avgGap, stdGap:stdGap});
+      });
+
+      function fmtCurrBr(n) { return 'R$ ' + (n||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+      var html = '';
+
+      // ===== FILA PRIORITÁRIA =====
+      var fila = todos.filter(function(t){
+        return !t.voltou || (t.diasSemCompra >= 30 && t.diasSemCompra < 60);
+      }).sort(function(a,b){
+        var scoreA = a.valor * (a.diasSemCompra >= 0 ? Math.min(a.diasSemCompra/90,1) : 0.5);
+        var scoreB = b.valor * (b.diasSemCompra >= 0 ? Math.min(b.diasSemCompra/90,1) : 0.5);
+        return scoreB - scoreA;
+      });
+
+      var totalOneDoneValor = todos.filter(function(t){return !t.voltou;}).reduce(function(s,t){return s+t.valor;},0);
+      var totalReinc = todos.filter(function(t){return t.compras>=3;}).length;
+      var retencaoGeral = todos.length ? (todos.filter(function(t){return t.voltou;}).length / todos.length * 100) : 0;
+
+      html += '<div style="margin-bottom:20px;display:flex;gap:12px;flex-wrap:wrap">';
+      var totalOneDoneCount = todos.filter(function(t){return !t.voltou;}).length;
+      html += '<div style="flex:1;min-width:200px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #333;border-radius:12px;padding:18px 20px"><div style="color:#9ca3af;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.5px">&#9888; Clientes sem Recompra</div><div style="font-size:32px;font-weight:800;color:#f87171;margin-top:4px">'+fmtCurrBr(totalOneDoneValor)+'</div><div style="font-size:14px;color:#888;margin-top:4px">Faturamento hist\u00F3rico de <strong style="color:#f87171">'+totalOneDoneCount+'</strong> clientes que compraram no m\u00EAs de recupera\u00E7\u00E3o e nunca mais voltaram</div></div>';
+      html += '<div style="flex:1;min-width:200px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #333;border-radius:12px;padding:18px 20px"><div style="color:#9ca3af;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.5px">&#128200; Retenção Geral</div><div style="font-size:32px;font-weight:800;color:'+(retencaoGeral>=50?'#34d399':(retencaoGeral>=30?'#fbbf24':'#f87171'))+';margin-top:4px">'+retencaoGeral.toFixed(1)+'%</div><div style="font-size:14px;color:#888;margin-top:4px">'+(todos.length?todos.filter(function(t){return t.voltou;}).length:'0')+' de '+todos.length+' clientes voltaram</div></div>';
+      html += '<div style="flex:1;min-width:200px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #333;border-radius:12px;padding:18px 20px"><div style="color:#9ca3af;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.5px">&#128142; Alta Reincidência</div><div style="font-size:32px;font-weight:800;color:#60a5fa;margin-top:4px">'+totalReinc+'</div><div style="font-size:14px;color:#888;margin-top:4px">Clientes com 3+ compras pós-recuperação</div></div>';
+      html += '<div style="flex:1;min-width:200px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid #333;border-radius:12px;padding:18px 20px"><div style="color:#9ca3af;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.5px">&#128222; Prioridade de Contato</div><div style="font-size:32px;font-weight:800;color:#f59e0b;margin-top:4px">'+fila.length+'</div><div style="font-size:14px;color:#888;margin-top:4px">Clientes para ligar hoje</div></div>';
+      html += '</div>';
+
+      // ===== PRIORITY CALL LIST =====
+      var uniqRegioes = {};
+      todos.forEach(function(t){if(t.regiao&&t.regiao!=='-')uniqRegioes[t.regiao]=1;});
+      var regioesLista = Object.keys(uniqRegioes).sort();
+       html += '<div class="chart-box" style="border-left:3px solid #f59e0b"><h2>&#128222; Fila Prioritária <span class="sub">&rarr; Quem ligar hoje — alto valor que parou ou está perdendo ritmo</span></h2>'+
+  '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center">'+
+   '<select id="filtroFilaDias" style="background:#1a1d2e;border:1px solid #333;border-radius:6px;padding:6px 10px;color:#c4c9d4;font-size:13px"><option value="">Todos dias</option><option value="0-15">0-15 dias</option><option value="16-39">16-39 dias</option><option value="40-44">40-44 dias</option><option value="45-89">45-89 dias</option><option value="90-120">90-120 dias</option></select>'+
+  '<select id="filtroFilaRegiao" style="background:#1a1d2e;border:1px solid #333;border-radius:6px;padding:6px 10px;color:#c4c9d4;font-size:13px"><option value="">Todas regiões</option>'+regioesLista.map(function(r){return '<option value="'+r+'">'+r+'</option>';}).join('')+'</select>'+
+  '<select id="filtroFilaStatus" style="background:#1a1d2e;border:1px solid #333;border-radius:6px;padding:6px 10px;color:#c4c9d4;font-size:13px"><option value="">Todos status</option><option value="Alta">Alta</option><option value="Média">Média</option><option value="Baixa">Baixa</option></select>'+
+  '<button id="btnExportFila" style="background:#16213e;border:1px solid #f59e0b44;border-radius:6px;padding:6px 14px;color:#f59e0b;font-size:13px;cursor:pointer;font-weight:600">&#8595; Exportar CSV</button>'+
+  '<span id="filaCount" style="font-size:13px;color:#6b7280;margin-left:auto">'+fila.length+' clientes</span></div>'+
+  '<div class="table-wrap" style="max-height:400px"><table id="tblFila"><thead><tr><th style="color:#6b7280;font-size:12px">#</th><th style="color:#6b7280;font-size:12px">Cód.</th><th>Cliente</th><th class="text-right" style="color:#fbbf24">FAT pós Reativ</th><th class="text-right">Dias sem Compra</th><th class="text-right">Compras</th><th>Televendedor</th><th style="color:#9ca3af">Região</th><th>Status</th><th style="width:100px">Prioridade</th></tr></thead><tbody id="tbodyFila">'+
+  fila.slice(0,200).map(function(t,i){
+    var urg=t.diasSemCompra>=45?'Alta':(t.diasSemCompra>=30?'Média':(t.voltou?'Baixa':'Média'));
+    var urgCor=urg==='Alta'?'#ef4444':(urg==='Média'?'#f59e0b':'#6b7280');
+    var barW=100-Math.min(t.diasSemCompra>=0?t.diasSemCompra/90*100:50,100);
+    return '<tr data-cid="'+t.cid+'" data-dias="'+t.diasSemCompra+'" data-regiao="'+t.regiao+'" data-urg="'+urg+'" class="fila-row" style="cursor:pointer">'+
+      '<td style="color:#6b7280;font-size:14px">'+(i+1)+'</td>'+
+      '<td style="color:#6b7280;font-size:13px;font-family:monospace">'+t.codcli+'</td>'+
+      '<td style="font-weight:600">'+t.nome+'</td>'+
+      '<td class="text-right" style="color:#34d399;font-weight:600;white-space:nowrap">R$&nbsp;'+(t.valor||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td>'+
+      '<td class="text-right" style="color:'+(t.diasSemCompra>=45?'#f87171':(t.diasSemCompra>=30?'#eab308':'#9ca3af'))+';font-weight:600">'+(t.diasSemCompra>=0?t.diasSemCompra:'-')+'</td>'+
+      '<td class="text-right" style="color:#f59e0b">'+t.compras+'</td>'+
+      '<td style="color:#9ca3af;font-size:14px">'+t.prof+'</td>'+
+      '<td style="color:#9ca3af;font-size:14px">'+t.regiao+'</td>'+
+      '<td><span class="badge-sm" style="background:'+urgCor+'22;color:'+urgCor+'">'+urg+'</span></td>'+
+      '<td><div style="height:8px;background:#333;border-radius:4px;overflow:hidden"><div style="height:100%;width:'+Math.max(barW,5)+'%;background:'+urgCor+';border-radius:4px"></div></div></td></tr>';
+   }).join('')+'</tbody></table></div><div style="margin-top:8px;font-size:13px;color:#6b7280">&#9654; Prioridade = quanto maior o valor e mais tempo sem comprar, maior a urgência. Clique na linha para ver histórico.</div></div>';
+
+      // ===== FREQUENCIA DE COMPRA =====
+      var freqArr = todos.filter(function(t){ return t.gaps.length >= 3; }).sort(function(a,b){ return a.stdGap - b.stdGap; }).slice(0,15);
+      html += '<div class="chart-box" style="border-left:3px solid #34d399"><h2>&#128200; Frequ\u00EAncia de Compra <span class="sub">&rarr; Padr\u00E3o mais regular entre os ativos</span></h2>'+
+        '<div style="color:#6b7280;font-size:13px;margin-bottom:12px">Clientes com o intervalo de compra mais consistente (menor desvio padr\u00E3o). Ideal para programar contato no momento certo.</div>'+
+        '<div class="table-wrap" style="max-height:320px"><table><thead><tr><th style="color:#6b7280">#</th><th>Cliente</th><th class="text-right" style="color:#34d399">Intervalo M\u00E9dio</th><th class="text-right" style="color:#60a5fa">Desvio Padr\u00E3o</th><th class="text-right">Compras</th><th>Televendedor</th><th style="color:#9ca3af">Regi\u00E3o</th></tr></thead><tbody>'+
+        freqArr.map(function(t,i){
+          var freqLabel = t.avgGap < 20 ? 'A cada ~'+Math.round(t.avgGap)+' dias' : '~'+Math.round(t.avgGap)+' dias';
+          return '<tr class="fila-row" style="cursor:pointer" data-cid="'+t.cid+'">'+
+            '<td style="color:#6b7280">'+(i+1)+'</td>'+
+            '<td style="font-weight:600">'+t.nome+'</td>'+
+            '<td class="text-right" style="color:#34d399;font-weight:600">'+freqLabel+'</td>'+
+            '<td class="text-right" style="color:#60a5fa;font-weight:600">&plusmn;'+Math.round(t.stdGap)+'d</td>'+
+            '<td class="text-right" style="color:#f59e0b">'+(t.gaps.length+1)+'</td>'+
+            '<td style="color:#9ca3af;font-size:14px">'+t.prof+'</td>'+
+            '<td style="color:#9ca3af;font-size:14px">'+t.regiao+'</td></tr>';
+        }).join('')+'</tbody></table></div>'+
+        '<div style="margin-top:8px;font-size:13px;color:#6b7280">\u25B6 Quanto menor o desvio padr\u00E3o, mais previs\u00EDvel \u00E9 a recompra. Use para acionar no timing ideal.</div></div>';
+
+      document.getElementById('dashContent').innerHTML = html;
+
+      // ===== Fila Prioritária: filtros, clique, export =====
+      setTimeout(function() {
+        var diasF = document.getElementById('filtroFilaDias');
+        var regF = document.getElementById('filtroFilaRegiao');
+        var staF = document.getElementById('filtroFilaStatus');
+        function filtrarFila() {
+          var diasV = diasF ? diasF.value : '';
+          var regV = regF ? regF.value : '';
+          var staV = staF ? staF.value : '';
+          var rows = document.querySelectorAll('#tbodyFila tr');
+          var visiveis = 0;
+          rows.forEach(function(r) {
+            var dias = parseInt(r.getAttribute('data-dias')) || -1;
+            var reg = r.getAttribute('data-regiao') || '';
+            var ok = true;
+            if (diasV === '0-15' && (dias<0||dias>15)) ok=false;
+            else if (diasV === '16-39' && (dias<16||dias>39)) ok=false;
+            else if (diasV === '40-44' && (dias<40||dias>44)) ok=false;
+            else if (diasV === '45-89' && (dias<45||dias>89)) ok=false;
+            else if (diasV === '90-120' && (dias<90||dias>120)) ok=false;
+            if (regV && reg !== regV) ok = false;
+            if (staV) { var urgV = r.getAttribute('data-urg')||''; if (urgV !== staV) ok = false; }
+            r.style.display = ok ? '' : 'none';
+            if (ok) visiveis++;
+          });
+          var ct = document.getElementById('filaCount');
+          if (ct) ct.textContent = visiveis + ' clientes';
+        }
+        if (diasF) diasF.addEventListener('change', filtrarFila);
+        if (regF) regF.addEventListener('change', filtrarFila);
+        if (staF) staF.addEventListener('change', filtrarFila);
+
+        // Click handler for client history
+        document.querySelectorAll('#tbodyFila tr.fila-row').forEach(function(r) {
+          r.addEventListener('click', function() {
+            var cid = r.getAttribute('data-cid');
+            var det = cd[cid];
+            if (det) showClienteDetalhe(cid, det);
+          });
+        });
+
+        // Export CSV
+        var btnExp = document.getElementById('btnExportFila');
+        if (btnExp) {
+          btnExp.addEventListener('click', function() {
+            var rows = document.querySelectorAll('#tbodyFila tr');
+            var csv = '\uFEFF#;Cód.;Cliente;FAT pós Reativ;Dias sem Compra;Compras;Televendedor;Região;Status\n';
+            rows.forEach(function(r,idx) {
+              if (r.style.display === 'none') return;
+              var cells = r.querySelectorAll('td');
+              if (cells.length < 9) return;
+              csv += (idx+1)+';';
+              csv += (cells[1].textContent||'')+';';
+              csv += '"'+(cells[2].textContent||'').replace(/"/g,'""')+'";';
+              csv += (cells[3].textContent||'').replace(/[R$\s]/g,'')+';';
+              csv += (cells[4].textContent||'')+';';
+              csv += (cells[5].textContent||'')+';';
+              csv += (cells[6].textContent||'')+';';
+              csv += (cells[7].textContent||'')+';';
+              csv += (cells[8].textContent||'')+'\n';
+            });
+            var blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url; a.download = 'fila_prioritaria.csv';
+            document.body.appendChild(a); a.click();
+            document.body.removeChild(a); URL.revokeObjectURL(url);
+          });
+        }
+      }, 50);
     }
 
     function salvarStorage() {

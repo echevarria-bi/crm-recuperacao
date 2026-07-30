@@ -780,18 +780,64 @@
       html += '<div class="card" style="border-color:rgba(245,158,11,0.3)"><div class="label" style="color:#f59e0b">' + icn('users',12) + ' RCA Externo</div><div class="value" style="font-size:34px;color:#f0f2f8">' + rcaTotalClientes + ' <span style="font-size:14px;color:#6b7280;font-weight:400">clientes</span></div><div class="sub" style="font-size:22px;font-weight:700;color:#34d399;margin-top:2px">' + fmtCurr(rcaTotalFaturamento) + '</div><div style="font-size:11px;color:#6b7280;margin-top:4px">' + (totalGeralClientes > 0 ? Math.round(rcaTotalClientes / totalGeralClientes * 100) : 0) + '% do total</div></div>';
       html += '</div>';
 
-      // VALOR POR PROFISSIONAL
+      // VALOR POR PROFISSIONAL com agrupamento por região (accordion)
       if (evo.valorPorProf.length > 0) {
-        var vpSorted = evo.valorPorProf.slice().sort(function(a,b){return (b.Total||0)-(a.Total||0);});
-        var vpRows = '';
-        for (var i = 0; i < vpSorted.length; i++) {
-          var p = vpSorted[i];
-          var medal = i === 0 ? '&#x1F947; ' : i === 1 ? '&#x1F948; ' : i === 2 ? '&#x1F949; ' : '';
-          vpRows += '<tr><td class="col-ranking">' + medal + (i+1) + '</td><td style="font-weight:600">' + p.profissional + '</td><td class="text-right realizado-color">' + (p.Abril ? fmtCurr(p.Abril) : '-') + '</td><td class="text-right realizado-color">' + (p.Maio ? fmtCurr(p.Maio) : '-') + '</td><td class="text-right realizado-color">' + (p.Junho ? fmtCurr(p.Junho) : '-') + '</td><td class="text-right realizado-color">' + (p.Julho ? fmtCurr(p.Julho) : '-') + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + (p.Total ? fmtCurr(p.Total) : '-') + '</td></tr>';
+        var regProf = [
+          {regiao:'Região Metropolitana', profs:['Ariane']},
+          {regiao:'Região Sul',           profs:['Anna','Camila']},
+          {regiao:'Serra',               profs:['Tatiana']},
+          {regiao:'Litoral',             profs:['Tatiana Litoral']},
+          {regiao:'Vale dos Sinos',      profs:['Natalia','Cristielen']}
+        ];
+        var vpLookup={};
+        evo.valorPorProf.forEach(function(p){var k=p.profissional.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();vpLookup[k]=p;});
+        function profData(nome){
+          var k=nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+          return vpLookup[k];
         }
-        var vpTotA = 0, vpTotM = 0, vpTotJ = 0, vpTotJL = 0, vpTotT = 0;
-        for (var vi = 0; vi < vpSorted.length; vi++) { vpTotA += vpSorted[vi].Abril||0; vpTotM += vpSorted[vi].Maio||0; vpTotJ += vpSorted[vi].Junho||0; vpTotJL += vpSorted[vi].Julho||0; vpTotT += vpSorted[vi].Total||0; }
-        html += '<div class="chart-box"><h2>Valor Recuperado por Mês (Televendas) <span class="sub">&rarr; Faturamento por televendedora em cada mês</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking">Ranking</th><th>Televendedora</th><th class="text-right" title="Valor recuperado em Abril">Abril</th><th class="text-right" title="Valor recuperado em Maio">Maio</th><th class="text-right" title="Valor recuperado em Junho">Junho</th><th class="text-right" title="Valor recuperado em Julho">Julho</th><th class="text-right" title="Valor total recuperado">Total</th></tr></thead><tbody>' + vpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotA) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotM) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotJ) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpTotJL) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(vpTotT) + '</td></tr></tbody></table></div></div>';
+        if(!window.toggleValRec){
+          window.toggleValRec=function(el){
+            var sib=el.nextElementSibling;
+            while(sib&&!sib.classList.contains('vr-head')&&!sib.classList.contains('tot-row')){sib.style.display=sib.style.display==='none'?'':'none';sib=sib.nextElementSibling;}
+            var arr=el.querySelector('.vr-arrow');if(arr)arr.textContent=arr.textContent==='▶'?'▼':'▶';};
+        }
+        var meses=['Abril','Maio','Junho','Julho'];
+        var vpRows='';
+        var vpColTotais=[0,0,0,0];
+        var vpGrandTot=0;
+        regProf.forEach(function(r){
+          var profs=r.profs.filter(function(n){return profData(n);});
+          if(!profs.length)return;
+          var regTotal=0;
+          var regMeses=[0,0,0,0];
+          profs.forEach(function(nome){
+            var p=profData(nome);
+            meses.forEach(function(m,mi){
+              var v=p&&p[m]?p[m]:0;
+              regMeses[mi]+=v;
+              regTotal+=v;
+            });
+          });
+          meses.forEach(function(m,mi){vpColTotais[mi]+=regMeses[mi];});
+          vpGrandTot+=regTotal;
+          vpRows+='<tr class="vr-head" onclick="toggleValRec(this)" style="cursor:pointer">'+
+            '<td colspan="2" style="font-weight:700;border-left:3px solid #555"><span class="vr-arrow" style="display:inline-block;width:16px;font-size:12px;color:#888;margin-right:4px">▶</span>'+r.regiao+'</td>';
+          regMeses.forEach(function(v){vpRows+='<td class="text-right realizado-color" style="font-weight:600">'+fmtCurr(v)+'</td>';});
+          vpRows+='<td class="text-right" style="color:#fbbf24;font-weight:700">'+fmtCurr(regTotal)+'</td></tr>';
+          profs.forEach(function(nome){
+            var p=profData(nome);
+            var pTotal=0;
+            vpRows+='<tr class="vr-detail" style="display:none"><td class="col-ranking"></td>'+
+              '<td style="padding-left:32px;color:#c4c9d4">'+nome+'</td>';
+            meses.forEach(function(m){
+              var v=p&&p[m]?p[m]:0;
+              pTotal+=v;
+              vpRows+='<td class="text-right realizado-color" style="font-weight:400;font-size:14px;color:#9ca3af">'+(v?fmtCurr(v):'-')+'</td>';
+            });
+            vpRows+='<td class="text-right" style="font-weight:600;color:#34d399;font-size:14px">'+fmtCurr(pTotal)+'</td></tr>';
+          });
+        });
+        html += '<div class="chart-box"><h2>Valor Recuperado por Mês (Televendas) <span class="sub">&rarr; Faturamento por televendedora em cada mês — clique na região para detalhe</span></h2><div class="table-wrap"><table><thead><tr><th class="col-ranking"></th><th>Região / Televendedora</th><th class="text-right">Abril</th><th class="text-right">Maio</th><th class="text-right">Junho</th><th class="text-right">Julho</th><th class="text-right">Total</th></tr></thead><tbody>' + vpRows + '<tr class="tot-row"><td class="col-ranking"></td><td style="color:#fcd34d;font-weight:700">Total</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[0]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[1]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[2]) + '</td><td class="text-right realizado-color" style="font-weight:700">' + fmtCurr(vpColTotais[3]) + '</td><td class="text-right" style="color:#fbbf24;font-weight:700">' + fmtCurr(vpGrandTot) + '</td></tr></tbody></table></div></div>';
       }
 
       // RECUPERADOS POR PROFISSIONAL (from RECUPERADOS POR RCA)

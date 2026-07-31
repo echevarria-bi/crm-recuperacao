@@ -28,7 +28,7 @@
           "Abril": 73,
           "Maio": 54,
           "Junho": 92,
-          "Julho": 58
+          "Julho": 161
         },
         {
           "label": "Valor Recuperado",
@@ -42,14 +42,14 @@
           "Abril": 1003,
           "Maio": 1701,
           "Junho": 1729,
-          "Julho": 780
+          "Julho": 911
         },
         {
           "label": "Meta de Recuperados",
           "Abril": 214,
           "Maio": 162,
           "Junho": 159,
-          "Julho": 161
+          "Julho": 0
         }
       ],
       "valorPorProf": [
@@ -120,8 +120,8 @@
           "Maio REAL": 10,
           "Junho META": 31,
           "Junho REAL": 16,
-          "Julho META": 42,
-          "Julho REAL": 9
+          "Julho META": 0,
+          "Julho REAL": 42
         },
         {
           "profissional": "Camila",
@@ -131,8 +131,8 @@
           "Maio REAL": 18,
           "Junho META": 48,
           "Junho REAL": 22,
-          "Julho META": 43,
-          "Julho REAL": 20
+          "Julho META": 0,
+          "Julho REAL": 43
         },
         {
           "profissional": "Cristielen",
@@ -140,8 +140,8 @@
           "Maio REAL": 3,
           "Junho META": 25,
           "Junho REAL": 7,
-          "Julho META": 31,
-          "Julho REAL": 7
+          "Julho META": 0,
+          "Julho REAL": 31
         },
         {
           "profissional": "Natália",
@@ -163,13 +163,13 @@
         },
         {
           "profissional": "Tatiana - LITORAL",
-          "Julho META": 23,
-          "Julho REAL": 3
+          "Julho META": 0,
+          "Julho REAL": 23
         },
         {
           "profissional": "Tatiana - SERRA",
-          "Julho META": 22,
-          "Julho REAL": 19
+          "Julho META": 0,
+          "Julho REAL": 22
         }
       ]
     },
@@ -1774,133 +1774,189 @@
         "profissionais": [
           {
             "profissional": "Ariane - POA",
-            "meta": 42,
-            "realizado": 9,
-            "pct": 21.4,
+            "meta": 0,
+            "realizado": 42,
+            "pct": 0,
             "dias": [
               {
-                "meta": 2,
-                "realizado": 1
+                "meta": 0,
+                "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 1,
+                "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
+              },
+              {
+                "meta": 0,
+                "realizado": 2
               },
               {
                 "meta": 2,
                 "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 1
+                "meta": 1,
+                "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 1
+                "meta": 1,
+                "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
               },
               {
                 "meta": 2,
                 "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 0,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 0,
+                "realizado": 1
               },
               {
                 "meta": 2,
                 "realizado": 1
               },
               {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 2,
+                "meta": 1,
                 "realizado": 1
               },
               {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               }
             ],
             "faturamento": 20210.05
           },
           {
             "profissional": "Camila - SUL",
-            "meta": 43,
-            "realizado": 20,
-            "pct": 46.5,
+            "meta": 0,
+            "realizado": 43,
+            "pct": 0,
             "dias": [
               {
-                "meta": 2,
-                "realizado": 1
+                "meta": 0,
+                "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 0,
+                "realizado": 2
               },
               {
                 "meta": 2,
                 "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 2
               },
               {
                 "meta": 2,
-                "realizado": 1
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 3,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 0,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 2
               },
               {
                 "meta": 2,
+                "realizado": 2
+              },
+              {
+                "meta": 0,
+                "realizado": 2
+              },
+              {
+                "meta": 0,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 0,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 1,
+                "realizado": 2
+              },
+              {
+                "meta": 0,
                 "realizado": 2
               },
               {
@@ -1908,63 +1964,7 @@
                 "realizado": 1
               },
               {
-                "meta": 2,
-                "realizado": 3
-              },
-              {
-                "meta": 2,
-                "realizado": 1
-              },
-              {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 2,
-                "realizado": 1
-              },
-              {
-                "meta": 2,
-                "realizado": 1
-              },
-              {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 2,
-                "realizado": 1
-              },
-              {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 2,
-                "realizado": 1
-              },
-              {
-                "meta": 2,
-                "realizado": 1
-              },
-              {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 2,
-                "realizado": 1
-              },
-              {
-                "meta": 1,
-                "realizado": 1
-              },
-              {
-                "meta": 1,
+                "meta": 3,
                 "realizado": 1
               },
               {
@@ -1976,194 +1976,69 @@
           },
           {
             "profissional": "Cristielen - VALE DOS SINOS",
-            "meta": 31,
-            "realizado": 7,
-            "pct": 22.6,
+            "meta": 0,
+            "realizado": 31,
+            "pct": 0,
             "dias": [
               {
-                "meta": 2,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
+              },
+              {
+                "meta": 0,
+                "realizado": 2
               },
               {
                 "meta": 2,
                 "realizado": 2
               },
               {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 2,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 1
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 1
-              },
-              {
-                "meta": 1,
-                "realizado": 1
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 1
-              },
-              {
-                "meta": 1,
-                "realizado": 1
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              }
-            ],
-            "faturamento": 5490.92
-          },
-          {
-            "profissional": "Tatiana - SERRA",
-            "meta": 22,
-            "realizado": 19,
-            "pct": 86.4,
-            "dias": [
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 1
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 1
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
+                "meta": 0,
                 "realizado": 2
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 2
               },
               {
-                "meta": 1,
+                "meta": 0,
+                "realizado": 2
+              },
+              {
+                "meta": 0,
                 "realizado": 1
               },
               {
-                "meta": 1,
+                "meta": 0,
                 "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
-                "realizado": 5
-              },
-              {
-                "meta": 1,
+                "meta": 0,
                 "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 4
-              },
-              {
-                "meta": 1,
+                "meta": 0,
                 "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
+                "meta": 0,
                 "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
               },
               {
                 "meta": 1,
@@ -2171,6 +2046,131 @@
               },
               {
                 "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              }
+            ],
+            "faturamento": 5490.92
+          },
+          {
+            "profissional": "Tatiana - SERRA",
+            "meta": 0,
+            "realizado": 22,
+            "pct": 0,
+            "dias": [
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 2,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 5,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 4,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 1,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 2,
                 "realizado": 0
               }
             ],
@@ -2178,100 +2178,100 @@
           },
           {
             "profissional": "Tatiana - LITORAL",
-            "meta": 23,
-            "realizado": 3,
-            "pct": 13,
+            "meta": 0,
+            "realizado": 23,
+            "pct": 0,
             "dias": [
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
+              },
+              {
+                "meta": 0,
+                "realizado": 1
               },
               {
                 "meta": 1,
                 "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
+                "meta": 0,
+                "realizado": 1
               },
               {
                 "meta": 1,
                 "realizado": 1
               },
               {
-                "meta": 1,
-                "realizado": 0
-              },
-              {
-                "meta": 1,
+                "meta": 0,
                 "realizado": 1
               }
             ],
@@ -2280,9 +2280,9 @@
         ],
         "total": {
           "profissional": "Total",
-          "meta": 161,
-          "realizado": 58,
-          "pct": 36,
+          "meta": 0,
+          "realizado": 161,
+          "pct": 0,
           "dias": []
         },
         "faturamentoGeral": 80760.07,
@@ -2317,20 +2317,20 @@
           {
             "profissional": "Ariane - POA",
             "meta": 250,
-            "realizado": 169,
-            "pct": 67.6
+            "realizado": 199,
+            "pct": 79.6
           },
           {
             "profissional": "Camila - SUL",
             "meta": 250,
-            "realizado": 160,
-            "pct": 64
+            "realizado": 204,
+            "pct": 81.6
           },
           {
             "profissional": "Cristielen - VALE DOS SINOS",
             "meta": 250,
-            "realizado": 200,
-            "pct": 80
+            "realizado": 257,
+            "pct": 102.8
           },
           {
             "profissional": "Tatiana - SERRA",
@@ -2348,8 +2348,8 @@
         "total": {
           "profissional": "Total",
           "meta": 1250,
-          "realizado": 780,
-          "pct": 62.4
+          "realizado": 911,
+          "pct": 72.9
         }
       },
       "motivos": [],
@@ -28154,5 +28154,5 @@
     }
   },
   "fileName": "base_8026_2026.xlsx",
-  "updatedAt": "2026-07-31T11:14:55.993Z"
+  "updatedAt": "2026-07-31T11:24:27.761Z"
 }
